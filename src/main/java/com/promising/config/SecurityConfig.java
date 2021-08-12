@@ -1,4 +1,4 @@
-package com.community.config;
+package com.promising.config;
 
 import javax.sql.DataSource;
 
