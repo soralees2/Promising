@@ -1,4 +1,4 @@
-package com.community;
+package com.promising;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
