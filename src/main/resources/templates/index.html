@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,16 +9,16 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
-    <link href="../410_layout/css/common_style.css" rel="stylesheet">
-    <link href="../410_layout/css/index.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/common_style.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/index.css}">
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script>
         $(function () {
             $(".heart").on({
                 'click': function () {
-                    var src = ($(this).attr('src') === '../410_layout/images/main/heart1.png')
-                        ? '../410_layout/images/main/heart2.png'
-                        : '../410_layout/images/main/heart1.png';
+                    var src = ($(this).attr('src') === '../images/main/heart1.png')
+                        ? '../images/main/heart2.png'
+                        : '../images/main/heart1.png';
                     $(this).attr('src', src);
                 }
             });
@@ -35,6 +35,11 @@
                 $('body').css({"height":"auto", "overflow":"auto"});
             });
             
+            $("#searchBtn").on("click",function(){
+            	
+            });
+            
+            
         })
     </script>
 </head>
@@ -45,7 +50,7 @@
 				<div class="row">
 					<div class="col-4 col-md-5">
 						<ul class="menu">
-							<li class="search" id="search"><img src="../410_layout/images/ic_search.png" alt=""><span>프로젝트 </span>둘러보기</li>
+							<li class="search" id="search"><img src="../images/ic_search.png" alt=""><span>프로젝트 </span>둘러보기</li>
 							<li class="register"><a href="#">프로젝트 올리기</a></li>
 						</ul>
 					</div>
@@ -78,19 +83,19 @@
                         </div>
                         <div class="carousel-inner">
                             <div class="carousel-item active">
-                                <img src="../410_layout/images/main/carou1.jpg" class="d-block w-100" alt="...">
+                                <img src="../images/main/carou1.jpg" class="d-block w-100" alt="...">
                                 <div class="carousel-caption d-none d-md-block">
                                     <span>쇼핑의 즐거움을 선물하다</span>
                                 </div>
                             </div>
                             <div class="carousel-item">
-                                <img src="../410_layout/images/main/carou2.jpg" class="d-block w-100" alt="...">
+                                <img src="../images/main/carou2.jpg" class="d-block w-100" alt="...">
                                 <div class="carousel-caption d-none d-md-block">
                                     <span>부자 되기 프로젝트</span>
                                 </div>
                             </div>
                             <div class="carousel-item">
-                                <img src="../410_layout/images/main/carou3.jpg" class="d-block w-100" alt="...">
+                                <img src="../images/main/carou3.jpg" class="d-block w-100" alt="...">
                                 <div class="carousel-caption d-none d-md-block">
                                     <span>MZ세대들의 최신 트렌드 다 모았다!</span>
                                 </div>
@@ -118,8 +123,8 @@
                     <div class="col-12 col-md-6 col-xl-3">
                         <div class="card">
                             <div class="imgDiv">
-                                <img src="../410_layout/images/main/card1.jpeg" class="card-img-top" alt="...">
-                                <img src="../410_layout/images/main/heart1.png" width="20" class="heart">
+                                <img src="../images/main/card1.jpeg" class="card-img-top" alt="...">
+                                <img src="../images/main/heart1.png" width="20" class="heart">
                             </div>
                             <div class="card-body">
                                 <div class="writer">
@@ -139,8 +144,8 @@
                     <div class="col-12 col-md-6 col-xl-3">
                         <div class="card">
                             <div class="imgDiv">
-                                <img src="../410_layout/images/main/card1.jpeg" class="card-img-top" alt="...">
-                                <img src="../410_layout/images/main/heart1.png" width="20" class="heart">
+                                <img src="../images/main/card1.jpeg" class="card-img-top" alt="...">
+                                <img src="../images/main/heart1.png" width="20" class="heart">
                             </div>
                             <div class="card-body">
                                 <div class="writer">
@@ -160,8 +165,8 @@
                     <div class="col-12 col-md-6 col-xl-3">
                         <div class="card">
                             <div class="imgDiv">
-                                <img src="../410_layout/images/main/card1.jpeg" class="card-img-top" alt="...">
-                                <img src="../410_layout/images/main/heart1.png" width="20" class="heart">
+                                <img src="../images/main/card1.jpeg" class="card-img-top" alt="...">
+                                <img src="../images/main/heart1.png" width="20" class="heart">
                             </div>
                             <div class="card-body">
                                 <div class="writer">
@@ -181,8 +186,8 @@
                     <div class="col-12 col-md-6 col-xl-3">
                         <div class="card">
                             <div class="imgDiv">
-                                <img src="../410_layout/images/main/card1.jpeg" class="card-img-top" alt="...">
-                                <img src="../410_layout/images/main/heart1.png" width="20" class="heart">
+                                <img src="../images/main/card1.jpeg" class="card-img-top" alt="...">
+                                <img src="../images/main/heart1.png" width="20" class="heart">
                             </div>
                             <div class="card-body">
                                 <div class="writer">
@@ -202,8 +207,8 @@
                     <div class="col-12 col-md-6 col-xl-3">
                         <div class="card">
                             <div class="imgDiv">
-                                <img src="../410_layout/images/main/card1.jpeg" class="card-img-top" alt="...">
-                                <img src="../410_layout/images/main/heart1.png" width="20" class="heart">
+                                <img src="../images/main/card1.jpeg" class="card-img-top" alt="...">
+                                <img src="../images/main/heart1.png" width="20" class="heart">
                             </div>
                             <div class="card-body">
                                 <div class="writer">
@@ -223,8 +228,8 @@
                     <div class="col-12 col-md-6 col-xl-3">
                         <div class="card">
                             <div class="imgDiv">
-                                <img src="../410_layout/images/main/card1.jpeg" class="card-img-top" alt="...">
-                                <img src="../410_layout/images/main/heart1.png" width="20" class="heart">
+                                <img src="../images/main/card1.jpeg" class="card-img-top" alt="...">
+                                <img src="../images/main/heart1.png" width="20" class="heart">
                             </div>
                             <div class="card-body">
                                 <div class="writer">
@@ -244,8 +249,8 @@
                     <div class="col-12 col-md-6 col-xl-3">
                         <div class="card">
                             <div class="imgDiv">
-                                <img src="../410_layout/images/main/card1.jpeg" class="card-img-top" alt="...">
-                                <img src="../410_layout/images/main/heart1.png" width="20" class="heart">
+                                <img src="../images/main/card1.jpeg" class="card-img-top" alt="...">
+                                <img src="../images/main/heart1.png" width="20" class="heart">
                             </div>
                             <div class="card-body">
                                 <div class="writer">
@@ -265,8 +270,8 @@
                     <div class="col-12 col-md-6 col-xl-3">
                         <div class="card">
                             <div class="imgDiv">
-                                <img src="../410_layout/images/main/card1.jpeg" class="card-img-top" alt="...">
-                                <img src="../410_layout/images/main/heart1.png" width="20" class="heart">
+                                <img src="../images/main/card1.jpeg" class="card-img-top" alt="...">
+                                <img src="../images/main/heart1.png" width="20" class="heart">
                             </div>
                             <div class="card-body">
                                 <div class="writer">
@@ -286,8 +291,8 @@
                     <div class="col-12 col-md-6 col-xl-3">
                         <div class="card">
                             <div class="imgDiv">
-                                <img src="../410_layout/images/main/card1.jpeg" class="card-img-top" alt="...">
-                                <img src="../410_layout/images/main/heart1.png" width="20" class="heart">
+                                <img src="../images/main/card1.jpeg" class="card-img-top" alt="...">
+                                <img src="../images/main/heart1.png" width="20" class="heart">
                             </div>
                             <div class="card-body">
                                 <div class="writer">
@@ -307,8 +312,8 @@
                     <div class="col-12 col-md-6 col-xl-3">
                         <div class="card">
                             <div class="imgDiv">
-                                <img src="../410_layout/images/main/card1.jpeg" class="card-img-top" alt="...">
-                                <img src="../410_layout/images/main/heart1.png" width="20" class="heart">
+                                <img src="../images/main/card1.jpeg" class="card-img-top" alt="...">
+                                <img src="../images/main/heart1.png" width="20" class="heart">
                             </div>
                             <div class="card-body">
                                 <div class="writer">
@@ -328,8 +333,8 @@
                     <div class="col-12 col-md-6 col-xl-3">
                         <div class="card">
                             <div class="imgDiv">
-                                <img src="../410_layout/images/main/card1.jpeg" class="card-img-top" alt="...">
-                                <img src="../410_layout/images/main/heart1.png" width="20" class="heart">
+                                <img src="../images/main/card1.jpeg" class="card-img-top" alt="...">
+                                <img src="../images/main/heart1.png" width="20" class="heart">
                             </div>
                             <div class="card-body">
                                 <div class="writer">
@@ -349,8 +354,8 @@
                     <div class="col-12 col-md-6 col-xl-3">
                         <div class="card">
                             <div class="imgDiv">
-                                <img src="../410_layout/images/main/card1.jpeg" class="card-img-top" alt="...">
-                                <img src="../410_layout/images/main/heart1.png" width="20" class="heart">
+                                <img src="../images/main/card1.jpeg" class="card-img-top" alt="...">
+                                <img src="../images/main/heart1.png" width="20" class="heart">
                             </div>
                             <div class="card-body">
                                 <div class="writer">
@@ -392,7 +397,7 @@
                             <input type="text" class="form-control w-100" placeholder="프로젝트를 검색하세요." id="param">
                         </div>
                         <div class="col-2">
-                            <button type="button" class="btn btn-light w-100" id="search">검색</button>
+                            <button type="button" class="btn btn-light w-100" id="searchBtn">검색</button>
                         </div>
                     </div>
                     <div class="project">
