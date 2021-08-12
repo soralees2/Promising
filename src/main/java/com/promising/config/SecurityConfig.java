@@ -17,8 +17,17 @@ import org.springframework.security.web.authentication.rememberme.PersistentToke
 
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+	
+	// remember-me 기억하는 db
+//	create table persistent_logins (
+//			username varchar(64) not null,
+//			series varchar(64) primary key,
+//			token varchar(64) not null,
+//			last_used timestamp not null);
 	@Autowired
 	private DataSource dataSource;
+	@Autowired
+	private MemberDetailService mservice;
 	
 	@Bean
 	public PasswordEncoder passwordEncoder() {
@@ -37,21 +46,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests()
 		.anyRequest().permitAll()
 		.and()
-        .formLogin(); // 7
-//           .loginPage("/login") // 로그인 페이지 링크
-//           .defaultSuccessUrl("/home") // 로그인 성공 후 리다이렉트 주소
-//           .failureUrl("/login")
+        .formLogin() // 7
+           .loginPage("/member/login") // 로그인 페이지 링크
+           .defaultSuccessUrl("/") // 로그인 성공 후 리다이렉트 주소
+           .failureUrl("/member/login");
 //       .and()
 //         .logout().logoutUrl("/logout") // 8
 //           .logoutSuccessUrl("/login") // 로그아웃 성공시 리다이렉트 주소
 //	    .invalidateHttpSession(true); // 세션 날리기
 //			
-//		http.userDetailsService(mservice);
-//			//.antMatchers("/**").permitAll();
-//		http.rememberMe().key("promising")
-//		.userDetailsService(mservice)
-//		.tokenRepository(getJDBCRepository())
-//		.tokenValiditySeconds(60*60*24);
+		http.userDetailsService(mservice);
+			//.antMatchers("/**").permitAll();
+		http.rememberMe().key("promising")
+		.userDetailsService(mservice)
+		.tokenRepository(getJDBCRepository())
+		.tokenValiditySeconds(60*60*24);
 	}
 	private PersistentTokenRepository getJDBCRepository() {
 		JdbcTokenRepositoryImpl repo= new JdbcTokenRepositoryImpl();
@@ -59,9 +68,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		return repo;
 	}
 	
-//	public void configureGlobal(AuthenticationManagerBuilder auth)throws Exception{
-//		auth.userDetailsService(mservice).passwordEncoder(passwordEncoder());
-//	}
+	public void configureGlobal(AuthenticationManagerBuilder auth)throws Exception{
+		auth.userDetailsService(mservice).passwordEncoder(passwordEncoder());
+	}
 //	  @Override
 //	  public void configure(AuthenticationManagerBuilder auth) throws Exception { // 9
 //	    auth.userDetailsService(userService)
