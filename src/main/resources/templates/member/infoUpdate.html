@@ -33,17 +33,15 @@
 	src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <link rel="stylesheet" type="text/css"
 	th:href="@{/css/common_style.css}">
-<link rel="stylesheet" type="text/css"
-	th:href="@{/css/infoUpdate.css}">
-	
-<script type="text/javascript"
-	th:src="@{/js/infoUpdate.js}"></script>
-	
-	
+<link rel="stylesheet" type="text/css" th:href="@{/css/infoUpdate.css}">
+
+<script type="text/javascript" th:src="@{/js/infoUpdate.js}"></script>
+
+<!-- 현재버젼: 큰레이아웃+ slideToggle 완성/ 디테일수정요망: 어떤정보~부분 / 배송지 부분(카카오적용완료) 프론트만수정/DB저장 연동필요 -->
 
 </head>
 
-<!-- 현재버젼: 큰레이아웃+ slideToggle 완성/ 디테일 수정요망: 어떤 정보~부분 / 배송지 부분 수정필요 -->
+<!--  -->
 <body>
 	<div class="wrap">
 		<header id="header">
@@ -52,8 +50,7 @@
 					<div class="col-4 col-md-5">
 						<ul class="menu">
 							<li class="search"><a href="#"><img
-									th:src="@{/images/ic_search.png}"><span>프로젝트
-								</span>둘러보기</a></li>
+									th:src="@{/images/ic_search.png}"><span>프로젝트 </span>둘러보기</a></li>
 							<li class="register"><a href="#">프로젝트 올리기</a></li>
 						</ul>
 					</div>
@@ -269,7 +266,7 @@
 					<!--첫번째 계정 컨텐츠 들어 끝나는지점-->
 
 
-
+					<!--배송주소 모달 -->
 					<div class="tab-pane fade" id="pills-profile" role="tabpanel"
 						aria-labelledby="pills-profile-tab">
 						<h3>배송주소</h3>
@@ -283,7 +280,7 @@
 								<div class="modal-dialog  " role="document">
 									<div class="modal-content">
 
-										<div class="modal-header">
+										<div class="modal-header" id="shippingTitle">
 											<h5>배송지 수정</h5>
 
 											<button type="button" class="close btn" data-dismiss="modal"
@@ -295,45 +292,58 @@
 										<form>
 											<div class="mb-3">
 												<label for="exampleInputEmail1" class="form-label">받는
-													사람</label><br> <input type="name" class="form-control-lg"
-													aria-label=".form-control-lg example"
-													id="exampleInputEmail1">
+													사람</label><br> <input type="text" name="name"
+													class="form-control" aria-label=".form-control-lg example"
+													id="inputReceiverName" placeholder="받는분의 성함을 입력해주세요."
+													required>
 
 											</div>
-
-											<div class="mb-3">
-												<label for="exampleInputPassword1" class="form-label">주소</label>
-												<input type="password" class="form-control"
-													id="exampleInputPassword1">
-												<div class="modifyIcon">
-													<a
-														href="${pageContext.request.contextPath}/../infoUpdate3.html"
-														class="py-2 d-block"><i
-														class="zmdi zmdi-edit zmdi-hc-2x"></i></a>
-												</div>
-											</div>
-
-											<div class="mb-3">
-												<label for="exampleInputPassword1" class="form-label">상세주소</label>
-												<input type="password" class="form-control"
-													id="exampleInputPassword1">
-											</div>
-
 
 											<div class="mb-3">
 												<label for="exampleInputPassword1" class="form-label">받는
-													사람 휴대폰 번호</label> <input type="password" class="form-control"
-													id="exampleInputPassword1">
+													사람 휴대폰 번호</label><br> <input type="text" name="contact"
+													class="form-control" placeholder="받는 분의 연락처를 입력해주세요."
+													id="inputReceiverContact" required>
 											</div>
 
+
+											<div class="mb-3">
+												<label for="address" class="form-label">주소</label><br>
+												<input type="text" name="address1" class="form-control"
+													id="addressScope" placeholder="주소를 입력하세요." required>
+												<div class="modifyIcon">
+													<a href="#" class="py-2 d-block"><i
+														class="zmdi zmdi-search zmdi-hc-2x" id=search></i></a>
+												</div>
+											</div>
+
+
+											<div class="mb-3">
+												<label for="postCode" class="form-label">우편번호</label><br>
+												<input type="text" name="postCode" class="form-control"
+													id="postCode" required placeholder="우편번호를 입력하세요.">
+											</div>
+
+
+
+
+											<div class="mb-3">
+												<label for="addressDetail" class="form-label">상세주소</label><br>
+												<input type="text" name="address2" class="form-control"
+													id="addressDetail" placeholder="상세 주소를 입력하세요." required>
+											</div>
+
+
+
 											<div class="mb-3 form-check">
-												<input type="checkbox" class="form-check-input"
+												<input type="checkbox" name="basic" class="form-check-input"
 													id="exampleCheck1"> <label class="form-check-label"
 													for="exampleCheck1">기본배송지로 등록 </label>
 											</div>
 
 											<div class="modal-footer">
-												<button type="button" class="btn btn-alert">등록 완료</button>
+												<button type="button" class="btn btn-primary center col-12 ">등록
+													완료</button>
 
 											</div>
 
