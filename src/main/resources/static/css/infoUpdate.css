@@ -140,6 +140,12 @@ display: none;
 
 #nameNBlank {
 	display: none;
+	
+}
+
+#nameNBlank #userName{
+	  border-color: #F1F1F1;
+	
 }
 
 #Namesavebutton {
@@ -154,6 +160,10 @@ display: none;
 
 #emailblankNButton {
 	display: none;
+}
+
+#emailblankNButton #userEmail{
+ border-color: #F1F1F1;
 }
 
 .fnt-p1 {
@@ -192,6 +202,11 @@ display: none;
 	color: rgb(39, 163, 255)
 }
 
+.contactmodi input{
+	 border-color: #F1F1F1;
+	 color: #F1F1F1;
+}
+
 #pwblankNButton {
 	display: none;
 }
@@ -212,6 +227,11 @@ margin-top:10px;
 .pwReset #pw{
 	margin-top:10px;
 }
+
+.pwReset input{
+	 border-color: #F1F1F1;
+}
+
 #pwRestBtn{
 	background-color:none;
 	
