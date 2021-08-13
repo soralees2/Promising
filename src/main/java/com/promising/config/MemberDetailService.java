@@ -12,7 +12,7 @@ import com.promising.repository.MemberRepository;
 public class MemberDetailService implements UserDetailsService {
 
 	@Autowired
-	private MemberRepository repo;
+	 MemberRepository repo;
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 	return 
