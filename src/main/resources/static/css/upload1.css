@@ -1,0 +1,464 @@
+.projectupload{
+
+  position: relative;
+  display: block;
+  width: 100%;
+  -webkit-box-flex: 1;
+  flex-grow: 1;
+  background: rgb(255, 255, 255);
+}
+.projectupload>.topbox{
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(
+135deg
+, rgb(50, 193, 181) 0%, rgb(214, 149, 70) 26%, rgb(217, 90, 74) 59%, rgb(120, 42, 131) 100%);
+}
+.topbox>.left{
+  position: absolute;
+    top: 0px;
+    left: 0px;
+    bottom: 0px;
+    width: 30%;
+    min-width: 10rem;
+    height: 100%;
+    background-image:url(/images/project/upload/projectupload1left.png);
+    background-size: cover;
+    background-position: center center;
+    opacity: 0.5;
+}
+.topbox>.right{position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  width: 30%;
+  min-width: 10rem;
+  height: 100%;
+  background-image: url(https://tumblbug-assets.imgix.net/assets/ProjectStart/projectstart-hero-background-right.png);
+  background-size: cover;
+  background-position: center center;
+  opacity: 0.5;}
+  .topbox>.center{
+    position: relative;
+    z-index: 99;
+    padding: 4rem 0px;
+    max-width: 800px;
+    margin: 0px auto;
+  }
+ .center>.madein{
+    background-image: url(/images/project/upload/madein.png);
+    display: block;
+    float: left;
+    width: 18rem;
+    height: 25rem;
+    margin: 0px 4rem 0px 0px;
+    background-size: contain;
+    background-position: center 15%;
+    background-repeat: no-repeat;
+  }
+  .center>.ment{
+    margin: 1rem 0px 1.5rem;
+    font-size: 1.4rem;
+    letter-spacing: -0.01em;
+    color: rgb(255, 255, 255);
+    word-break: keep-all;
+  }
+  .ment>.projecth1{
+    font-size: 3rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.3;
+    word-break: keep-all;
+    margin: 0px 0px 1rem;
+  }
+  .ment>.projectp{
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+  }
+  .ment>button{
+    background-color: rgb(255, 255, 255);
+    color: rgb(216, 105, 73);
+    font-size: 16px;
+    border: 1px solid rgb(255, 255, 255);
+    transition: all 0.2s ease 0s;
+    padding: 0px 24px;
+    margin-right: 14px;
+    height: 46px;
+    margin: 0px 0.25em 0px 0px;
+    border-radius: 0.285714rem;
+    text-transform: none;
+    text-shadow: none;
+    font-weight: bold;
+    line-height: 1em;
+    font-style: normal;
+    text-align: center;
+    text-decoration: none;
+  }
+  .projectupload>.middlebox{
+    position: relative;
+    background-color: rgb(255, 255, 255);
+    text-decoration: none;
+    -webkit-tap-highlight-color: rgba(0,0,0,.1);
+}
+.middlebox>.imgbox{
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  width: 50%;
+  max-width: 50rem;
+  height: 100%;
+  background-image: url(/images/project/upload/middleimg.jpg);
+  background-size: cover;
+  background-position: center center;
+}
+.middleboxcontainer{
+  padding: 5rem 2rem;
+  max-width: 992px;
+  margin: 0px auto;
+}
+.middleboxcontents{
+  width: 50%;
+  margin: 2rem 0px;
+  padding: 0px 4rem 0px 0px;
+  font-size: 1.1rem;
+  word-break: keep-all;
+}
+.middleboxcontents>.middleboxtitle{
+ font-family: 'SF Pro Text', 'Helvetica Neue', 'Segoe UI', Arial, 'NotoSansKR', sans-serif;
+ word-break: keep-all;
+ font-size: 2rem;
+ line-height: 1.5;
+ margin: 0px 0px 2rem;
+}
+.middleboxcontents>p{
+  display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    margin-bottom: 0em;
+}
+.middlebox2{
+  position: relative;
+}
+.middlebox2>.middlebox2container{
+  padding: 4rem 2rem;
+  font-size: 1.1rem;
+  max-width: 992px;
+  margin: 0px auto;
+}
+.middlebox2h1{
+  font-family: 'SF Pro Text', 'Helvetica Neue', 'Segoe UI', Arial, 'NotoSansKR', sans-serif;
+ word-break: keep-all;
+ font-size: 2rem;
+ line-height: 1.5;
+ margin: 0px 0px 2rem;
+
+}
+.middlebox2container>p{
+  display: block;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  margin: 2rem 0px;
+    word-break: keep-all;
+    font-size: 1.1rem;
+}
+.middlebox2container>.guide{
+  display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+    margin: 0px -2rem 2rem;
+    padding: 4rem 2rem;
+    font-size: 1.1rem;
+    max-width: 992px;
+    margin: 0px auto;
+}
+.guide>.guide1{
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0rem 2rem 1rem;
+  text-align: center;
+  flex-basis: 33.333%;
+  word-break: keep-all;
+}
+.guide1img{
+  -webkit-box-flex: 0;
+  flex: 0 0 100%;
+}
+.guide1img>img{
+  display: block;
+  margin: 0px auto;
+  width: 60%;
+}
+.guidecard1{
+  padding-top: 2rem;
+  flex: 0 0 100%;
+  -webkit-box-flex: 0;
+}
+.guidecard1>h4{
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+.guidecard1>p{
+  color: rgb(85, 85, 85);
+    font-size: 1rem;
+    word-break: keep-all;
+}
+.guide2{
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0rem 2rem 1rem;
+  text-align: center;
+  flex-basis: 33.333%;
+  word-break: keep-all;
+}
+.guide2img{
+  -webkit-box-flex: 0;
+  flex: 0 0 100%;
+}
+.guide2img>img{
+  display: block;
+    margin: 0px auto;
+    width: 60%;
+}
+.guidecard2{
+  padding-top: 2rem;
+  flex: 0 0 100%;
+  -webkit-box-flex: 0;
+}
+.guidecard2>h4{
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+.guidecard2>p{
+  color: rgb(85, 85, 85);
+    font-size: 1rem;
+    word-break: keep-all;
+}
+.guide3{
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0rem 2rem 1rem;
+  text-align: center;
+  flex-basis: 33.333%;
+  word-break: keep-all;
+}
+.guide3img{
+  -webkit-box-flex: 0;
+  flex: 0 0 100%;
+}
+.guide3img>img{
+  display: block;
+    margin: 0px auto;
+    width: 60%;
+}
+.guidecard3{
+  padding-top: 2rem;
+  flex: 0 0 100%;
+  -webkit-box-flex: 0;
+}
+.guidecard3>h4{
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+.guidecard3>p{
+  color: rgb(85, 85, 85);
+    font-size: 1rem;
+    word-break: keep-all;
+}
+.guidebtn{
+  margin: 0px -1rem;
+    width: 33.3333%;
+    text-align: center;
+}
+.guidebtn>button{
+  cursor: pointer;
+  display: inline-block;
+  min-height: 1em;
+  outline: none;
+  border: none;
+  vertical-align: baseline;
+  box-shadow: transparent 0px 0px 0px 1px inset, rgb(0 0 0 / 10%) 0px 0em 0px 0px inset;
+  user-select: none;
+  transition: opacity 0.1s ease 0s, background-color 0.1s ease 0s, color 0.1s ease 0s, box-shadow 0.1s ease 0s, background 0.1s ease 0s;
+  -webkit-tap-highlight-color: transparent;
+  margin: 0px 0.25em 0px 0px;
+  border-radius: 0.285714rem;
+  text-transform: none;
+  text-shadow: none;
+  font-weight: bold;
+  line-height: 1em;
+  font-style: normal;
+  text-align: center;
+  text-decoration: none;
+  background-color: rgb(250, 100, 98);
+  color: rgb(255, 255, 255);
+  padding: 1em 1.5em;
+  font-size: 1em;
+  opacity: 1;
+}
+
+
+.personawrap{
+  position: relative;
+  background-color: rgb(255, 255, 255);
+}
+.personacontainer{
+  padding: 4rem 2rem;
+    max-width: 992px;
+    margin: 0px auto;
+}
+.personacontainer>h1{
+  font-family: 'SF Pro Text', 'Helvetica Neue', 'Segoe UI', Arial, 'NotoSansKR', sans-serif;
+  word-break: keep-all;
+  font-size: 2rem;
+  line-height: 1.5;
+  margin: 0px 0px 3rem;
+}
+.cardset{
+  display: flex;
+  -webkit-box-pack: center;
+  justify-content: center;
+  flex-wrap: nowrap;
+  margin: 2rem -2rem;
+}
+.cardset1,.cardset2,.cardset3{   
+  display: flex;
+  flex-direction: column;
+  width: 33.3333%;
+  padding: 0px 2rem;
+}
+.cardset1>h4 ,.cardset2>h4,.cardset3>h4{   
+  font-family: 'SF Pro Text', 'Helvetica Neue', 'Segoe UI', Arial, 'NotoSansKR', sans-serif;
+    font-size: 1.5rem;
+  line-height: 1.5;
+  font-weight: bold;
+  margin-bottom: 1rem;}
+  .personaline1{
+    display: block;
+    background-color: rgb(255, 230, 230);
+    border-radius: 3px;
+    height: 5px;
+  }
+  .personaline2{
+    display: block;
+    background-color: rgb(230, 237, 255);
+    border-radius: 3px;
+    height: 5px;
+  }
+  .personaline3{
+    display: block;
+    background-color: rgb(223, 248, 252);
+    border-radius: 3px;
+    height: 5px;
+  }
+  .cardset1>h5,.cardset2>h5,.cardset3>h5 {
+    font-family: 'SF Pro Text', 'Helvetica Neue', 'Segoe UI', Arial, 'NotoSansKR', sans-serif;
+    font-size: 1.3rem;
+    line-height: 1.6;
+    font-weight: normal;
+    margin-bottom: 1.5rem;
+  }
+  .cardset1>p ,.cardset2>p,.cardset3>{    font-size: 1rem;}
+  .benefitwrap{
+    position: relative;
+  }
+  .benefitcontainer{
+    padding: 4rem 2rem;
+    max-width: 992px;
+    margin: 0px auto;
+  }
+  .benefitcontainer>h2{
+    font-family: 'SF Pro Text', 'Helvetica Neue', 'Segoe UI', Arial, 'NotoSansKR', sans-serif;
+    word-break: keep-all;
+    font-size: 2rem;
+    line-height: 1.5;
+    margin: 0px 0px 2rem;
+  }
+  .benefitcontainer>p{
+    margin: 0em 0em 1em;
+    line-height: 1.7em;
+  }
+  .benefitcardset{
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+    margin: 0px -2rem 2rem;
+  }
+  .bcardset1,.bcardset2,.bcardset3{
+    display: flex;
+    flex-direction: column;
+    width: 33.3333%;
+    padding: 0px 2rem;
+  }
+  .bcardset1>h4,.bcardset2>h4,.bcardset3>h4{
+    font-family: 'SF Pro Text', 'Helvetica Neue', 'Segoe UI', Arial, 'NotoSansKR', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-top: 2rem;
+  }
+  .bcardset1>p,.bcardset2>p,.bcardset3>p{
+    font-size: 1rem;
+    margin: 0em 0em 1em;
+    line-height: 1.7em;
+  }
+  .makewrap{
+    position: relative;
+    background: url(makewrap.png) rgb(255, 255, 255);
+  }
+  .makecontainer{
+    padding: 4rem 0px 3rem;
+    max-width: 992px;
+    margin: 0px auto;
+    text-align: center;
+  }
+  .makecontainer>h2{
+    font-family: 'SF Pro Text', 'Helvetica Neue', 'Segoe UI', Arial, 'NotoSansKR', sans-serif;
+    font-size: 3rem;
+    font-weight: 600;
+    color: rgb(13, 13, 13);
+    line-height: 1.15;
+    word-break: keep-all;
+    margin: 0px;
+  }
+  .makecontainer>p{
+    margin: 2rem 0px;
+    font-size: 1.3rem;
+    color: rgb(61, 61, 61);
+    word-break: keep-all;
+  }
+  .makecontainer>button{
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: inline-block;
+    min-height: 1em;
+    outline: none;
+    border: none;
+    vertical-align: baseline;
+    box-shadow: transparent 0px 0px 0px 1px inset, rgb(0 0 0 / 10%) 0px 0em 0px 0px inset;
+    user-select: none;
+    transition: opacity 0.1s ease 0s, background-color 0.1s ease 0s, color 0.1s ease 0s, box-shadow 0.1s ease 0s, background 0.1s ease 0s;
+    -webkit-tap-highlight-color: transparent;
+    margin: 0px 0.25em 0px 0px;
+    border-radius: 0.285714rem;
+    text-transform: none;
+    text-shadow: none;
+    font-weight: bold;
+    line-height: 1em;
+    font-style: normal;
+    text-align: center;
+    text-decoration: none;
+    background-color: rgb(250, 100, 98);
+    color: rgb(255, 255, 255);
+    padding: 1em 1.5em;
+    font-size: 1em;
+    opacity: 1;
+  }

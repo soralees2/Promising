@@ -48,6 +48,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.and()
         .formLogin() // 7
            .loginPage("/member/login") // 로그인 페이지 링크
+           
            .defaultSuccessUrl("/") // 로그인 성공 후 리다이렉트 주소
            .failureUrl("/member/login");
 //       .and()
