@@ -36,7 +36,8 @@ public class MemberVO {
 		
 		@Column(nullable=false , length= 250)
 		private String password;
-		
+		@Column(nullable=false , length= 30)
+		private String uname;
 		
 		@Column(unique =true,nullable=false , length= 20)
 		private String uphone;

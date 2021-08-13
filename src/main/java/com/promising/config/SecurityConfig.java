@@ -27,7 +27,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private DataSource dataSource;
 	@Autowired
-	private MemberDetailService mservice;
+	 MemberDetailService mservice;
 	
 	@Bean
 	public PasswordEncoder passwordEncoder() {
@@ -44,18 +44,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	{
 		
 		http.authorizeRequests()
+		.antMatchers("/project/auth/**","/member/auth/**").hasRole("BASIC")
 		.anyRequest().permitAll()
 		.and()
         .formLogin() // 7
            .loginPage("/member/login") // 로그인 페이지 링크
            
            .defaultSuccessUrl("/") // 로그인 성공 후 리다이렉트 주소
-           .failureUrl("/member/login");
-//       .and()
-//         .logout().logoutUrl("/logout") // 8
-//           .logoutSuccessUrl("/login") // 로그아웃 성공시 리다이렉트 주소
-//	    .invalidateHttpSession(true); // 세션 날리기
-//			
+           .failureUrl("/member/login")
+       .and()
+         .logout().logoutUrl("/logout") // 8
+           .logoutSuccessUrl("/member/login") // 로그아웃 성공시 리다이렉트 주소
+	    .invalidateHttpSession(true); // 세션 날리기
+			
 		http.userDetailsService(mservice);
 			//.antMatchers("/**").permitAll();
 		http.rememberMe().key("promising")
