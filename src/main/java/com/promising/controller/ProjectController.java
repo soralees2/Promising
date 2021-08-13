@@ -19,5 +19,18 @@ public class ProjectController {
 		
 	}
 
+	@GetMapping("/auth/upload1")
+	public void upload1() {
+		
+	}
+	@GetMapping("/auth/upload2")
+	public void upload2() {
+		
+	}
+	
+	@GetMapping("/complete")
+	public void complete() {
+		
+	}
 
 }

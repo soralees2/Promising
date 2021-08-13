@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promising</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+   <th:block th:replace="fragments/commonHead"></th:block>
+   	<link th:href="@{/css/upload1.css}" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://kit.fontawesome.com/eb24a95ab0.js" crossorigin="anonymous"></script>
+  <script src="/js/upload1.js"></script>
+</head>
+<body>
+  <div class="wrap">
+   <header th:replace="fragments/header.html :: fg-header"></header>
+  <div class="container-fluid">
+    <div class="projectupload">
+      <div class="row topbox">
+      
+        <div class="col-1 col-md-3  left ">
+          
+        </div>
+        <div class="col-10 col-md-6 center">
+         <div class="madein">
+        </div>
+        <div class="ment">
+          <h1 class="projecth1">
+            마음 속 프로젝트 아이디어
+          </h1>
+          <p class="projectp">
+            크라우드펀딩으로 프로젝트를 위한 자금도 모으고,
+든든한 후원자 네트워크도 확보할 수 있습니다.
+          </p>
+          <button class="start">지금 시작</button>
+        </div>
+          
+        </div>
+        <div class="col-1 col-md-3  right">
+          
+        </div>
+       
+      </div>
+
+      <div class="row middlebox">
+        <div class="col-12 col-md-6 imgbox">
+        </div>
+        <div class="col-12 col-md-6 middleboxcontainer">
+          <div class="middleboxcontents">
+            <h1 class="middleboxtitle">
+              Promising에서 펀딩에 성공한
+20,300개 프로젝트와 함께 하세요.
+            </h1>
+            <p>
+              디자인, 영화, 게임, 출판, 요리, 패션, 이벤트 …<br>
+분야를 가릴 것 없이 수많은 창작자와 창업자들의 프로젝트들이 매일같이 올라오는 promising은 한국에서 가장 활성화된 크라우드펀딩 커뮤니티입니다. 지금껏 20,300개 넘는 창조적인 시도들이 120만 명의 후원자를 만나 세상에 나왔습니다.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="row middlebox2">
+        <div class="middlebox2container">
+          <h1 class="middlebox2h1">
+            쉽게 시작할 수 있습니다.
+          </h1>
+          <p>
+            ‘크라우드펀딩’은 어려울지 몰라도 Promising은 어렵지 않습니다. 수익을 내서 현금을 돌려주거나 소유권을 나누는 등의 복잡한 과정도 필요하지 않습니다. 펀딩으로 모은 금액을 통해 만들어낸 제품 또는 특별한 경험 그 자체를 후원자들과 약속하고 공유하면 됩니다.
+          </p>
+          <div class="row guide">
+            <div class="col-12 col-md-4 guide1">
+              <div class="guide1img">
+              <img src="/images/project/upload/guide1.png" alt="">
+            </div>
+            <div class="guidecard1">
+              <h4>
+                프로젝트 올리기
+              </h4>
+              <p>
+                창작 아이디어를 소개하는 프로젝트 페이지를 작성합니다. 후원자들에게 금액대별 특별한 선물들을 약속합니다.
+              </p>
+            </div>
+            </div>
+            <div class="col-12 col-md-4 guide2">
+              <div class="guide2img">
+                <img src="/images/project/upload/guide2.png" alt="">
+              </div>
+              <div class="guidecard2">
+                <h4>편딩 진행하기</h4>
+                <p>정해진 기간 동안 후원자를 모으기 위해 열심히 홍보합니다. 목표 금액을 달성해야만 후원금이 전달됩니다.</p>
+              </div>
+            </div>
+            <div class="col-12 col-md-4 guide3">
+              <div class="guide3img">
+                <img src="/images/project/upload/guide3.png" alt="">
+              </div>
+              <div class="guidecard3">
+                <h4>편딩 진행하기</h4>
+                <p>정해진 기간 동안 후원자를 모으기 위해 열심히 홍보합니다. 목표 금액을 달성해야만 후원금이 전달됩니다.</p>
+              </div>
+            </div>
+          </div>
+          <div class="guidebtn">
+            <button class="start">프로젝트 올리기 시작</button>
+          </div>
+        </div>
+      </div>
+
+     <div class="personawrap">
+       <div class="personacontainer">
+         <h1>
+          누구에게나 열려 있습니다.
+        </h1>
+        <div class="row persona cardset">
+          <div class="col-12 col-md-4 cardset1">
+            <h4>창작자</h4>
+            <div class="personaline1"></div>
+            <h5>평소 몰두했던 작업이나 구상만 하던 창작 아이디어를 본격적인 단계로 발전시킬 기회로 삼아보세요.</h5>
+           <p>
+            시작하는 창작자에게 Promising은 지원금, 공모전 등의 방식들보다 훨씬 자율적이고 독립적으로 나와 내 작업을 알릴 수 있는 새로운 길입니다. 이미 콘텐츠와 팬층을 확보한 작가라면 신선한 기획을 통해 팬들을 만나는 새로운 창구를 열어보는 건 어떨까요?
+           </p>
+          </div>
+          <div class="col-12 col-md-4 cardset2">
+            <h4>브랜드</h4>
+            <div class="personaline2"></div>
+            <h5>초기 비용이나 재고 부담 없이 새로운 제품이나 서비스를 론칭하고 코어 팬 베이스를 확보하세요.</h5>
+           <p>
+            브랜드에 이목을 집중시키는 스토리를 통해 마케팅 효과를 극대화할 수 있습니다. 트렌디하면서도 개인의 취향과 가치가 강조되는 새로운 참여형 소비 창구로 각광받는 Promising에서 모인 후원자들의 신뢰는 일반 이커머스에서보다 훨씬 깊고 오래 가는 팬 베이스가 되어줄 것입니다.
+           </p>
+          </div>
+          <div class="col-12 col-md-4 cardset3">
+            <h4>캠페인</h4>
+            <div class="personaline3"></div>
+            <h5>임팩트 있는 캠페인을 통해 사회적 이슈를 지속가능한 참여와 후원으로 전환시켜보세요.</h5>
+           <p>
+            언론이나 소셜미디어에서 떠오르는 이슈들을 구체적인 행동으로 전환시키는 데에 Promising 프로젝트가 제격입니다. 새롭고 젊은 정치참여·사회운동 방식으로 주목받는 Promising 펀딩으로 더 많은 지지자를 얻고, 사회적 목소리를 증폭시켜보세요.
+           </p>
+          </div>
+        </div>
+
+       </div>
+      </div>   
+
+        <div class="benefitwrap">
+          <div class="benefitcontainer">
+            <h2>창조적인 도전을 잘 아는 사람들이 만듭니다.</h2>
+            <p>11년 전 대학생 두 명이 창작 활동을 위해 직접 서비스를 시작한 이래 Promising의 목표는 늘 하나였습니다. 누구나 쉽고 빠르고 똑똑하게 아이디어를 실현할 수 있도록 창조적인 시도를 위한 기반을 만드는 것. Promising 창작자와 후원자들은 독창적인 시도와 다양성이 존중받는 생태계를 함께 만들어가고 있습니다.</p>
+            <div class="benefitcardset"  >
+              <div class="bcardset1">
+                <h4>낮은 수수료, 빠른 정산</h4>
+                <p>펀딩에 성공한 경우에만 5%의 수수료를 받습니다. 직관적인 프로젝트 작성 도구를 이용해 미리 발생할 수수료와 정산 일정을 계산해 볼 수 있어 첫 프로젝트도 쉽게 계획할 수 있습니다.</p>
+              </div>
+              <div class="bcardset2">
+                <h4>성공을 돕는 리소스</h4>
+                <p>펀딩 시작 전, 각 분야의 생태를 잘 아는 에디터가 프로젝트를 검토하고 피드백을 드립니다. 헬프센터 내 창작자 센터에는 각 단계별 성공을 위한 꼼꼼한 도움말이 준비되어 있습니다.</p>
+              </div>
+              <div class="bcardset3">
+                <h4>확산이 빠른 커뮤니티</h4>
+                <p>후원의 상당 부분이 70만 Promising 커뮤니티와 확장된 소셜네트워크에서 유입됩니다. 데이터에 기초해 스마트한 홍보와 진행을 할 수 있도록 노하우를 지원해 드리겠습니다.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="makewrap">
+          <div class="makecontainer">
+            <h2>
+              프로젝트를 만들어보세요!
+            </h2>
+            <p>직관적인 프로젝트 편집 도구로 곧바로 작성을 시작할 수 있습니다.
+              프로젝트를 제출하면 Promising의 심사를 거쳐 후원자에게 공개됩니다.</p>
+              <button class="start">지금 시작</button>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

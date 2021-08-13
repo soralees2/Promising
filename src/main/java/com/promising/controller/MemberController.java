@@ -43,4 +43,18 @@ public class MemberController {
 		repo.save(vo);
 		return "redirect:/login";
 	}
+	
+	@GetMapping("/mypage")
+	public void mypage() {
+		
+		}
+	
+	
+	
+	@GetMapping("/infoUpdate")
+	public void infoUpdate() {
+		
+		}
+	
+	
 }

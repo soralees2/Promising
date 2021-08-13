@@ -1,0 +1,47 @@
+@charset "utf-8";
+body {
+  overflow-y: hidden;
+}
+.main {
+  margin-top: calc(-10rem + 95px);
+}
+.main .container {
+  height: 100vh;
+  background-image: url("../images/back.png");
+  text-align: center;
+  position:relative;
+  z-index:-1;
+}
+.card {
+  padding-top: 25px;
+  border: none;
+  margin: auto;
+}
+.project {
+  height: 400px;
+}
+.title {
+  padding-top: 20px;
+}
+.title p {
+  font-size: 17px;
+  font-weight: 600;
+}
+.container h2 {
+  font-weight: 700;
+}
+.container p {
+  font-size: 17px;
+  font-weight: 500;
+}
+#toMain {
+  border: none;
+  color: white;
+  background-color: #e15488;
+  padding: 8px;
+  padding-left: 30px;
+  padding-right: 30px;
+  border-radius: 4px;
+  font-size: 20px;
+  font-weight: 600;
+}
