@@ -15,6 +15,7 @@ import com.promising.vo.MemberVO;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
