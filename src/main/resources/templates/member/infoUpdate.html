@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+
+<html lang="ko" xmlns:th="http://thymeleaf.org">
+
+
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Promising</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<link rel="stylesheet"
+	href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
+<link href="../css/common_style.css" rel="stylesheet">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+<link rel="stylesheet" type="text/css" href="../css/infoUp.css">
+<link rel="stylesheet"
+	href="../fonts/material-design-iconic-font.min.css">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="../Js/infoUp.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script
+	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script
+	src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<link rel="stylesheet" type="text/css"
+	th:href="@{/css/common_style.css}">
+<link rel="stylesheet" type="text/css"
+	th:href="@{/css/infoUpdate.css}">
+	
+<script type="text/javascript"
+	th:src="@{/js/infoUpdate.js}"></script>
+	
+	
+
+</head>
+
+<!-- 현재버젼: 큰레이아웃+ slideToggle 완성/ 디테일 수정요망: 어떤 정보~부분 / 배송지 부분 수정필요 -->
+<body>
+	<div class="wrap">
+		<header id="header">
+			<div class="container">
+				<div class="row">
+					<div class="col-4 col-md-5">
+						<ul class="menu">
+							<li class="search"><a href="#"><img
+									th:src="@{/images/ic_search.png}"><span>프로젝트
+								</span>둘러보기</a></li>
+							<li class="register"><a href="#">프로젝트 올리기</a></li>
+						</ul>
+					</div>
+					<div class="col-4 col-md-2">
+						<h1 class="logo">
+							<a href="#">Promising</a>
+						</h1>
+					</div>
+					<div class="col-4 col-md-5">
+						<div class="utils">
+							<a href="#"> <!-- <span>홍길동</span> --> <span>회원가입/로그인</span>
+								<div class="pf_img no"></div>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</header>
+
+
+		<!-- 해당 페이지 클래스명을 적어주세요-->
+		<!-- <div class="container mx-7">
+                <div class="row profileLine">
+                    <div class='col-12 namennavi'>
+                        <input id="profile" type="image" src="../images/dog.jpg">
+                        <div class='nameline'>
+                            <span>Cillian93</span>
+                        </div>
+                        <div class="modifyIcon">    
+                        <a href="${pageContext.request.contextPath}/../infoUpdate2.html" class="py-2 d-block"><i class="zmdi zmdi-edit zmdi-hc-2x"></i></a>
+                    </div>
+                    </div>
+
+             </div>
+            </div> -->
+		<div class="container">
+			<div class=row>
+				<div class="col-md-6 setting">
+					<span>설정</span>
+				</div>
+			</div>
+		</div>
+
+
+
+
+
+		<div class="container">
+			<div class=" row tabline">
+				<ul class="nav nav-pills" id="pills-tab" role="tablist">
+					<li class="nav-item" role="presentation">
+						<button class="nav-link p-3 active" id="pills-home-tab"
+							data-bs-toggle="pill" data-bs-target="#pills-home" type="button"
+							role="tab" aria-controls="pills-home" aria-selected="true">계정</button>
+					</li>
+					<li class="nav-item" role="presentation">
+						<button class="nav-link p-3" id="pills-profile-tab"
+							data-bs-toggle="pill" data-bs-target="#pills-profile"
+							type="button" role="tab" aria-controls="pills-profile"
+							aria-selected="false">배송지</button>
+					</li>
+
+				</ul>
+
+				<hr>
+
+				<div class="tab-content" id="pills-tabContent">
+					<div class="tab-pane fade show active" id="pills-home"
+						role="tabpanel" aria-labelledby="pills-home-tab">
+						<h3>프로필</h3>
+						<div class="modifyScroll">
+							<span><a href="#" id="PromodifyScroll">변경</a></span>
+						</div>
+						<div class='col-sm-4 col-md-4 namennavi'>
+							<div class='col-sm-4 col-md-4 namennavi'>
+								<div
+									class="col-sm-4 col-md-4 settingPageDescBox-bpcmiq-1 cwYHpD">
+									<p class="fnt-p1 tbb-clr-gray-80 fnt-st-bd">어떤 정보가 프로필에
+										공개되나요?</p>
+									<div class="fnt-p3 tbb-clr-gray-60">
+										프로필 사진과, 이름, 사용자 이름, 소개글, 웹사이트 및 회원님과 관련된 프로젝트 등이 프로필 페이지에 공개
+										됩니다. 프라이버시 설정을 활성화하시면 후원한 프로젝트 목록을 숨길 수 있습니다.&nbsp;<span
+											color="sub0180"
+											class="PlainNavLink__Wrapper-sc-9qhsie-0 kZoYUd"> <a
+											href="/u/ciaggpxwysugxuel">내 프로필 바로가기</a></span>
+									</div>
+								</div>
+								<img id="profile" th:src="@{/images/dog.jpg}">
+
+								<div class="fileUploadClass">
+
+									<label class="btn btn-outline-secondary btn-file"
+										id="btn-fileUp"> 파일추가 <input type="file"
+										style="display: none;" id="filebtn"> <!--숨기기-->
+									</label>
+								</div>
+
+								<div class="col-sm-4 col-md-4 " id="uploadDesc">
+									<span> 250X250 픽셀에 최적화 되어있으며, 10Mb 이하의 JPG,GIF,PNG 파일을
+										지원합니다.</span>
+									<button class="btn btn-dark savebutton" id="profileSaveBtn">저장</button>
+								</div>
+
+							</div>
+						</div>
+						<div>
+							<hr>
+						</div>
+
+						<div class="UserName">
+							<div class="modifyScroll">
+								<span><a href="#" id="nameModifyScroll">변경</a></span>
+
+							</div>
+							<h3>이름</h3>
+
+							<h4>정규원</h4>
+							<br>
+							<div id="nameNBlank">
+								<input type="text" class="blank form-control" id="userName"
+									placeholder="이름을 입력하세요.">
+
+								<div class="col-sm-4 col-md-4 uploadcomment">
+									<button class="btn btn-dark Namesavebutton">저장</button>
+								</div>
+							</div>
+
+							<div class="container blankLine">
+
+								<hr>
+
+							</div>
+						</div>
+
+
+
+						<!-- 이메일 시작 -->
+						<div class='col-sm-4 col-md-4 emailnavi'>
+
+							<div class="UserEmail">
+								<div class="modifyScroll">
+									<span><a href="#" id="emailModifyScroll">변경</a></span>
+								</div>
+								<h3>이메일</h3>
+								<h5>kyn00018@naver.com</h5>
+								<br>
+								<div id="emailblankNButton">
+									<input type="text" class="blank form-control"
+										placeholder="이메일을 입력하세요." id="userEmail">
+
+									<div class="col-sm-4 col-md-4 uploadcomment">
+										<button class="btn btn-dark emailSavebutton">인증메일 전송</button>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div>
+							<hr>
+						</div>
+						<!-- 비밀번호 시작 -->
+						<div class='col-sm-4 col-md-4 pwnavi'>
+
+							<div class="UserPw">
+								<div class="modifyScroll">
+									<span><a href="#" id="pwModifyScroll">변경</a></span>
+								</div>
+								<h3>비밀번호</h3>
+								<br>
+							</div>
+						</div>
+
+						<div class="pwReset" id=pwblankNButton>
+							<h6>현재 비밀번호</h6>
+							<input type="text" class="blank form-control"
+								placeholder="현재 비밀번호" id="pw"> <br>
+							<h6>비밀번호가 기억나지 않나요?</h6>
+							<a href="">비밀번호 초기화</a> <br> <br>
+							<div class="pwReset">
+								<h6>변경할 비밀번호</h6>
+								<input type="text" class="blank form-control"
+									placeholder="변경할 비밀번호" id="repw1"><br> <input
+									type="text" class="blank form-control"
+									placeholder="변경할 비밀번호 확인" id="repw2">
+
+							</div>
+
+							<div class="col-sm-4 col-md-4 uploadcomment">
+								<button class="btn btn-dark savebutton" id="pwSaveBtn">저장</button>
+							</div>
+						</div>
+						<hr>
+
+						<!--연락처 시작 -->
+						<div class="modifyScroll">
+							<span><a href="#" id="contactModifyScroll">변경</a></span>
+						</div>
+						<h3>연락처</h3>
+						<div class="contactmodi" id="contactblankNButton">
+							<h4>01026143918</h4>
+							<input type="text" class="blank contactBlank"
+								placeholder="연락처를 입력하세요." id="contact">
+
+
+							<div class="col-sm-4 col-md-4 uploadcomment">
+								<button class="btn btn-dark" id="vertify">인증번호 전송</button>
+							</div>
+
+							<div></div>
+						</div>
+
+					</div>
+					<!--첫번째 계정 컨텐츠 들어 끝나는지점-->
+
+
+
+					<div class="tab-pane fade" id="pills-profile" role="tabpanel"
+						aria-labelledby="pills-profile-tab">
+						<h3>배송주소</h3>
+						<div class="shippingModify">
+
+							<button class="btn btn-primary" type="button" data-toggle="modal"
+								data-target="#example-modal">주소변경</button>
+
+							<div id="example-modal" class="modal modal-center fade  "
+								role="dialog">
+								<div class="modal-dialog  " role="document">
+									<div class="modal-content">
+
+										<div class="modal-header">
+											<h5>배송지 수정</h5>
+
+											<button type="button" class="close btn" data-dismiss="modal"
+												aria-label="Close">
+												<span aria-hidden="true">&times;</span>
+											</button>
+										</div>
+
+										<form>
+											<div class="mb-3">
+												<label for="exampleInputEmail1" class="form-label">받는
+													사람</label><br> <input type="name" class="form-control-lg"
+													aria-label=".form-control-lg example"
+													id="exampleInputEmail1">
+
+											</div>
+
+											<div class="mb-3">
+												<label for="exampleInputPassword1" class="form-label">주소</label>
+												<input type="password" class="form-control"
+													id="exampleInputPassword1">
+												<div class="modifyIcon">
+													<a
+														href="${pageContext.request.contextPath}/../infoUpdate3.html"
+														class="py-2 d-block"><i
+														class="zmdi zmdi-edit zmdi-hc-2x"></i></a>
+												</div>
+											</div>
+
+											<div class="mb-3">
+												<label for="exampleInputPassword1" class="form-label">상세주소</label>
+												<input type="password" class="form-control"
+													id="exampleInputPassword1">
+											</div>
+
+
+											<div class="mb-3">
+												<label for="exampleInputPassword1" class="form-label">받는
+													사람 휴대폰 번호</label> <input type="password" class="form-control"
+													id="exampleInputPassword1">
+											</div>
+
+											<div class="mb-3 form-check">
+												<input type="checkbox" class="form-check-input"
+													id="exampleCheck1"> <label class="form-check-label"
+													for="exampleCheck1">기본배송지로 등록 </label>
+											</div>
+
+											<div class="modal-footer">
+												<button type="button" class="btn btn-alert">등록 완료</button>
+
+											</div>
+
+										</form>
+
+
+
+
+
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="RoundedWrapper__Wrapper-a7usag-0 ckzBmr">
+
+
+							<span>배송지 불러오기 </span>
+
+						</div>
+
+					</div>
+				</div>
+
+
+
+
+
+
+			</div>
+		</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	</div>
+
+
+
+	</div>
+	<!--텝라인 div닫기 -->
+	</div>
+
+	</div>
+	<script>
+
+
+    </script>
+</body>
+
+</html>
