@@ -31,8 +31,6 @@ public class MemberController {
 	public void signup() {
 		
 	}
-	
-	@Transactional
 	@PostMapping("/signup")
 	public String join(MemberVO vo) {
 		MemberRoleVO role = new MemberRoleVO();
