@@ -13,6 +13,11 @@ public class ProjectController {
 	public void detail(Model model) {
 		model.addAttribute("hello", "안녕하세요, 반갑습니다!");
 	}
+	
+	@GetMapping("/list")
+	public void list() {
+		
+	}
 
 
 }

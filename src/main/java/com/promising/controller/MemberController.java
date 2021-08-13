@@ -14,8 +14,6 @@ import com.promising.repository.MemberRepository;
 import com.promising.vo.MemberRoleVO;
 import com.promising.vo.MemberVO;
 
-
-
 @Controller
 @RequestMapping("/member")
 public class MemberController {
@@ -32,7 +30,8 @@ public class MemberController {
 	@GetMapping("/signup")
 	public void signup() {
 		
-		}
+	}
+	
 	@Transactional
 	@PostMapping("/signup")
 	public String join(MemberVO vo) {
