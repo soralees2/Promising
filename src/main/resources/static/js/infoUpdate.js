@@ -109,13 +109,23 @@ $(function () {
 
 
 
-
-
-
-
-
+$("#search").on("click",function(){
+	
+	 new daum.Postcode({
+            oncomplete: function(data) {
+                let roadAddr = data.roadAddress; // 도로명 주소 변수
+                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+               $("#postCode").attr('value', data.zonecode);
+                $("#addressDetail").attr('value',roadAddr);
+                
+            }
+        }).open();//팝업을 띄우려면 오픈만해줘
         
 })
+
+})
+
+
 
 
 
