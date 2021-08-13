@@ -124,7 +124,7 @@
 						<div class="modifyScroll">
 							<span><a href="#" id="PromodifyScroll">변경</a></span>
 						</div>
-						<div class='col-sm-4 col-md-4 namennavi'>
+						<div class='col-sm-4 col-md-4 namennavi' id="nameNaviBlock">
 							<div class='col-sm-4 col-md-4 namennavi'>
 								<div
 									class="col-sm-4 col-md-4 settingPageDescBox-bpcmiq-1 cwYHpD">
@@ -170,11 +170,11 @@
 							<h4>정규원</h4>
 							<br>
 							<div id="nameNBlank">
-								<input type="text" class="blank form-control" id="userName"
+								<input type="text" class="blank form-control-lg" id="userName"
 									placeholder="이름을 입력하세요.">
 
 								<div class="col-sm-4 col-md-4 uploadcomment">
-									<button class="btn btn-dark Namesavebutton">저장</button>
+									<button class="btn btn-dark" id="Namesavebutton">저장</button>
 								</div>
 							</div>
 
@@ -198,11 +198,11 @@
 								<h5>kyn00018@naver.com</h5>
 								<br>
 								<div id="emailblankNButton">
-									<input type="text" class="blank form-control"
+									<input type="text" class="blank form-control-lg"
 										placeholder="이메일을 입력하세요." id="userEmail">
 
 									<div class="col-sm-4 col-md-4 uploadcomment">
-										<button class="btn btn-dark emailSavebutton">인증메일 전송</button>
+										<button class="btn btn-dark " id="emailSavebutton">인증메일 전송</button>
 									</div>
 								</div>
 							</div>
@@ -224,16 +224,20 @@
 						</div>
 
 						<div class="pwReset" id=pwblankNButton>
+							<div class="rememberPw">
 							<h6>현재 비밀번호</h6>
-							<input type="text" class="blank form-control"
+							<input type="text" class="blank form-control-lg"
 								placeholder="현재 비밀번호" id="pw"> <br>
+								
 							<h6>비밀번호가 기억나지 않나요?</h6>
-							<a href="">비밀번호 초기화</a> <br> <br>
+							
+							<button class="btn btn-link" id="pwResetBtn">비밀번호 초기화</button>
+							</div>
 							<div class="pwReset">
 								<h6>변경할 비밀번호</h6>
-								<input type="text" class="blank form-control"
+								<input type="text" class="blank form-control-lg"
 									placeholder="변경할 비밀번호" id="repw1"><br> <input
-									type="text" class="blank form-control"
+									type="text" class="blank form-control-lg"
 									placeholder="변경할 비밀번호 확인" id="repw2">
 
 							</div>
@@ -251,12 +255,12 @@
 						<h3>연락처</h3>
 						<div class="contactmodi" id="contactblankNButton">
 							<h4>01026143918</h4>
-							<input type="text" class="blank contactBlank"
+							<input type="text" class="blank contactBlank form-control-lg"
 								placeholder="연락처를 입력하세요." id="contact">
 
 
 							<div class="col-sm-4 col-md-4 uploadcomment">
-								<button class="btn btn-dark" id="vertify">인증번호 전송</button>
+								<button class="btn btn-dark" id="contactVertify">인증번호 전송</button>
 							</div>
 
 							<div></div>
@@ -272,8 +276,9 @@
 						<h3>배송주소</h3>
 						<div class="shippingModify">
 
-							<button class="btn btn-primary" type="button" data-toggle="modal"
-								data-target="#example-modal">주소변경</button>
+							<button class="btn btn-link " id="addressModifyBtn" type="button"
+								data-toggle="modal" data-target="#example-modal">주소변경</button>
+
 
 							<div id="example-modal" class="modal modal-center fade  "
 								role="dialog">
@@ -289,76 +294,80 @@
 											</button>
 										</div>
 
-										<form>
-											<div class="mb-3">
-												<label for="exampleInputEmail1" class="form-label">받는
-													사람</label><br> <input type="text" name="name"
-													class="form-control" aria-label=".form-control-lg example"
-													id="inputReceiverName" placeholder="받는분의 성함을 입력해주세요."
-													required>
 
-											</div>
+										<div class="modal-body">
 
-											<div class="mb-3">
-												<label for="exampleInputPassword1" class="form-label">받는
-													사람 휴대폰 번호</label><br> <input type="text" name="contact"
-													class="form-control" placeholder="받는 분의 연락처를 입력해주세요."
-													id="inputReceiverContact" required>
-											</div>
+											<form>
+												<div class="mb-3">
+													<label for="exampleInputEmail1" class="form-label">받는
+														사람</label><br> <input type="text" name="name"
+														class="form-control" aria-label=".form-control-lg example"
+														id="inputReceiverName" placeholder="받는분의 성함을 입력해주세요."
+														required>
 
-
-											<div class="mb-3">
-												<label for="address" class="form-label">주소</label><br>
-												<input type="text" name="address1" class="form-control"
-													id="addressScope" placeholder="주소를 입력하세요." required>
-												<div class="modifyIcon">
-													<a href="#" class="py-2 d-block"><i
-														class="zmdi zmdi-search zmdi-hc-2x" id=search></i></a>
 												</div>
-											</div>
+
+												<div class="mb-3">
+													<label for="exampleInputPassword1" class="form-label">받는
+														사람 휴대폰 번호</label><br> <input type="text" name="contact"
+														class="form-control" placeholder="받는 분의 연락처를 입력해주세요."
+														id="inputReceiverContact" required>
+												</div>
 
 
-											<div class="mb-3">
-												<label for="postCode" class="form-label">우편번호</label><br>
-												<input type="text" name="postCode" class="form-control"
-													id="postCode" required placeholder="우편번호를 입력하세요.">
-											</div>
+												<div class="mb-3">
+													<label for="address" class="form-label">주소</label><br>
+													<div class=combination id="addressBoxnIcon">
+														<input type="text" name="address1" class="form-control"
+															id="addressScope" placeholder="주소를 입력하세요." required>
+														<div class="modifyIcon">
+															<a href="#" class="py-2 d-block"><i
+																class="zmdi zmdi-search zmdi-hc-2x" id=search></i></a>
+
+														</div>
+													</div>
+												</div>
 
 
-
-
-											<div class="mb-3">
-												<label for="addressDetail" class="form-label">상세주소</label><br>
-												<input type="text" name="address2" class="form-control"
-													id="addressDetail" placeholder="상세 주소를 입력하세요." required>
-											</div>
-
-
-
-											<div class="mb-3 form-check">
-												<input type="checkbox" name="basic" class="form-check-input"
-													id="exampleCheck1"> <label class="form-check-label"
-													for="exampleCheck1">기본배송지로 등록 </label>
-											</div>
-
-											<div class="modal-footer">
-												<button type="button" class="btn btn-primary center col-12 ">등록
-													완료</button>
-
-											</div>
-
-										</form>
+												<div class="mb-3">
+													<label for="postCode" class="form-label">우편번호</label><br>
+													<input type="text" name="postCode" class="form-control"
+														id="postCode" required placeholder="우편번호를 입력하세요.">
+												</div>
 
 
 
 
+												<div class="mb-3">
+													<label for="addressDetail" class="form-label">상세주소</label><br>
+													<input type="text" name="address2" class="form-control"
+														id="addressDetail" placeholder="상세 주소를 입력하세요." required>
+												</div>
 
+
+
+												<div class="mb-3 form-check">
+													<input type="checkbox" name="basic"
+														class="form-check-input" id="exampleCheck1"> <label
+														class="form-check-label" for="exampleCheck1">기본배송지로
+														등록 </label>
+												</div>
+
+												<div class="modal-footer">
+													<button type="button"
+														class="btn btn-primary center col-12 ">등록 완료</button>
+
+												</div>
+
+											</form>
+										</div>
 									</div>
 								</div>
 							</div>
 						</div>
 
-						<div class="RoundedWrapper__Wrapper-a7usag-0 ckzBmr">
+						<div class="RoundedWrapper__Wrapper-a7usag-0 ckzBmr"
+							id="shippingDataBox">
 
 
 							<span>배송지 불러오기 </span>
@@ -411,9 +420,8 @@
 
 	</div>
 	<script>
-
-
-    </script>
+		
+	</script>
 </body>
 
 </html>
