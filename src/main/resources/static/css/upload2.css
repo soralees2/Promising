@@ -1,0 +1,119 @@
+.pullbox{
+  display: flex;
+  width: 100%;
+  background: rgb(255, 255, 255);
+  -webkit-box-flex: 1;
+  flex-grow: 1;
+  padding-top: 58px;
+}
+.leftcover{
+  display: block;
+  width: 438px;
+  background: url(leftcover.jpg) 0% 0% / cover no-repeat rgb(237, 229, 227);
+}
+.rightcontents{
+  -webkit-box-flex: 1;
+  flex-grow: 1;
+  overflow-y: auto;
+}
+.contentswrap{
+  width: 450px;
+  padding: 40px 0px 63px;
+  margin: 0px auto;
+}
+.mentbox{
+  margin: 0px auto;
+  box-sizing: content-box;
+}
+.mentbox>h2{
+  margin-bottom: 16px;
+    font-weight: 700;
+    font-size: 24px !important;
+    line-height: 36px !important;
+    font-family: NotoSansKR, "SF Pro Text", "Segoe UI", "Helvetica Neue", Arial, sans-serif !important;
+}
+.mentbox>p{
+  font-weight: 400;
+  color: rgb(109, 109, 109);
+  margin-bottom: 32px;
+  font-size: 14px !important;
+  line-height: 24px !important;
+  font-family: NotoSansKR, "SF Pro Text", "Segoe UI", "Helvetica Neue", Arial, sans-serif !important;
+}
+.mentbox>ul{
+  padding: 36px 0px;
+  border-top: 1px solid rgb(239, 239, 239);
+  border-bottom: 1px solid rgb(239, 239, 239);
+  margin: 0px 0px 16px;
+  color: rgb(61, 61, 61);
+  display: block;
+  list-style-type: disc;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  padding-inline-start: 40px;
+}
+.checkul>li{
+  list-style: none;
+  margin-bottom: 14px;
+}
+.checkul>li>label{
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  padding: 0px 0px 0px 29px;
+  color: rgb(61, 61, 61);
+  display: inline-flex;
+}
+label>input{
+  position: absolute;
+  left: 10px;
+  top: 30%;
+  margin: -1px 0px 0px;
+}
+.twobtn{
+  display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+}
+#back{
+  cursor: pointer;
+  display: inline-flex;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  height: 40px;
+  white-space: nowrap;
+  border-radius: 4px;
+  margin: 0px;
+  border: 0px;
+  outline: none;
+  font-weight: normal;
+  box-sizing: border-box;
+  padding: 0px 16px;
+  background-color: transparent;
+  color: rgb(61, 61, 61);
+}
+#next{
+  cursor: pointer;
+  display: inline-flex;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  height: 40px;
+  white-space: nowrap;
+  border-radius: 4px;
+  margin: 0px;
+  border: 0px;
+  outline: none;
+  font-weight: normal;
+  box-sizing: border-box;
+  padding: 0px 16px;
+  background-color: rgb(255, 87, 87);
+  color: rgb(255, 255, 255);
+}
+
+
