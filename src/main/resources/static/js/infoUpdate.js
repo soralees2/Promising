@@ -48,10 +48,10 @@ $(function () {
     $("#nameModifyScroll").on("click", function () {
 
         if($("#nameNBlank").is(":visible")){
-                $("#nameNBlank").slideUp('slow',function(){
+                $("#nameNBlank").slideUp('fast',function(){
                     $("#nameNBlank").css("display", "none");
                 })}else{
-                    $("#nameNBlank").slideDown('slow',function(){
+                    $("#nameNBlank").slideDown('fast',function(){
                     $("#nameNBlank").css("display", "inline-block");
                 })}
     //   if($("#userName").is(":visible")){
@@ -74,10 +74,10 @@ $(function () {
     $("#emailModifyScroll").on("click", function () {
      
         if($("#emailblankNButton").is(":visible")){
-            $("#emailblankNButton").slideUp('slow',function(){
+            $("#emailblankNButton").slideUp('fast',function(){
                 $("#emailblankNButton").css("display", "none");
             })}else{
-                $("#emailblankNButton").slideDown('slow',function(){
+                $("#emailblankNButton").slideDown('fast',function(){
                 $("#emailblankNButton").css("display", "inline-block");
             })}
 
@@ -86,10 +86,10 @@ $(function () {
     $("#pwModifyScroll").on("click", function () {
 
         if($("#pwblankNButton").is(":visible")){
-            $("#pwblankNButton").slideUp('slow',function(){
+            $("#pwblankNButton").slideUp('fast',function(){
                 $("#pwblankNButton").css("display", "none");
             })}else{
-                $("#pwblankNButton").slideDown('slow',function(){
+                $("#pwblankNButton").slideDown('fast',function(){
                 $("#pwblankNButton").css("display", "inline-block");
             })}
 
@@ -99,23 +99,33 @@ $(function () {
 
 
         if($("#contactblankNButton").is(":visible")){
-            $("#contactblankNButton").slideUp('slow',function(){
+            $("#contactblankNButton").slideUp('fast',function(){
                 $("#contactblankNButton").css("display", "none");
             })}else{
-                $("#contactblankNButton").slideDown('slow',function(){
+                $("#contactblankNButton").slideDown('fast',function(){
                 $("#contactblankNButton").css("display", "inline-block");
             })}
         })
 
 
 
-
-
-
-
-
+$("#search").on("click",function(){
+	
+	 new daum.Postcode({
+            oncomplete: function(data) {
+                let roadAddr = data.roadAddress; // 도로명 주소 변수
+                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+               $("#postCode").attr('value', data.zonecode);
+                $("#addressDetail").attr('value',roadAddr);
+                
+            }
+        }).open();//팝업을 띄우려면 오픈만해줘
         
 })
+
+})
+
+
 
 
 
