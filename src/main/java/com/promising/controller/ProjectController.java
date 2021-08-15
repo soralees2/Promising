@@ -17,6 +17,12 @@ public class ProjectController {
 	public void payment(Model model) {
 //		model.addAttribute("hello", "안녕하세요, 반갑습니다!");
 	}
+	
+	@GetMapping("/list")
+	public void list() {
+		
+	}
+
 	@GetMapping("/auth/upload1")
 	public void upload1() {
 		
@@ -25,4 +31,10 @@ public class ProjectController {
 	public void upload2() {
 		
 	}
+	
+	@GetMapping("/complete")
+	public void complete() {
+		
+	}
+
 }

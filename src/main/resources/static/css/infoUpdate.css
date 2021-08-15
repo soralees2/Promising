@@ -56,6 +56,13 @@
 
 #uploadDesc span, #profileSaveBtn {
 	display: none;
+	margin-left: 0px;
+}
+
+#profileSaveBtn {
+	margin-top: 40px; height : 50px;
+	width: 110px;
+	height: 50px;
 }
 
 #uploadDesc span {
@@ -133,6 +140,18 @@ display: none;
 
 #nameNBlank {
 	display: none;
+	
+}
+
+#nameNBlank #userName{
+	  border-color: #F1F1F1;
+	
+}
+
+#Namesavebutton {
+	height: 50px;
+	width: 110px;
+	margin-top: 20px
 }
 
 .modifyScroll #emailModifyScroll {
@@ -143,14 +162,20 @@ display: none;
 	display: none;
 }
 
+#emailblankNButton #userEmail{
+ border-color: #F1F1F1;
+}
+
 .fnt-p1 {
 	font-size: 16px;
 	line-height: 27px;
 	letter-spacing: -0.020em;
 }
 
-.emailSavebutton {
-	width: 120px;
+#emailSavebutton {
+	width: 125px;
+	height: 50px;
+	margin-top:20px;
 }
 
 .uploadcomment span {
@@ -177,6 +202,11 @@ display: none;
 	color: rgb(39, 163, 255)
 }
 
+.contactmodi input{
+	 border-color: #F1F1F1;
+	 color: #F1F1F1;
+}
+
 #pwblankNButton {
 	display: none;
 }
@@ -185,12 +215,57 @@ display: none;
 	margin-left: 0px;
 }
 
+#pwblankNButton h6{
+margin-top:10px;
+}
+.rememberPw #pwResetBtn{
+	margin-top:-44px;
+	margin-left:180px;
+	
+}
+
+.pwReset #pw{
+	margin-top:10px;
+}
+
+.pwReset input{
+	 border-color: #F1F1F1;
+}
+
+#pwRestBtn{
+	background-color:none;
+	
+}
+.pwReset #repw1{
+	margin-top:30px;
+}
+
+.pwReset #repw2{
+margin-top:20px;
+}
+
+
+#pwSaveBtn {
+	height: 50px;
+	width: 110px;
+	margin-top: 40px;
+}
+
+#pwSaveBtn h6{
+	height: 50px;
+	width: 110px;
+	margin-top: 40px;
+}
+
+
 #contactblankNButton {
 	display: none;
 }
 
-#vertify {
+#contactVertify {
+	margin-top: 40px; height : 50px;
 	width: 120px;
+	height: 50px;
 }
 
 .savebutton {
@@ -214,6 +289,14 @@ display: none;
 	position: relative;
 }
 
+.shippingModify #addressModifyBtn {
+	position: absolute;
+	margin-top: 0px;
+	margin-left: 900px;
+	font: dodger-blue;
+	font-style: none;
+}
+
 #addressModify {
 	position: absolute;
 	margin-left: 600px;
@@ -222,7 +305,7 @@ display: none;
 
 .ckzBmr {
 	border-style: solid;
-	border-color: black;
+	margin-top: 45px;
 	margin-left: 0px;
 	margin-right: 0px;
 	width: 1000px;
@@ -232,6 +315,7 @@ display: none;
 	font-size: 16px;
 	line-height: 27px;
 	letter-spacing: -0.02em;
+	margin-left: 0px;
 }
 
 .modal.modal-center {
@@ -239,30 +323,25 @@ display: none;
 }
 
 @media screen {
-	.modal.modal-center:before {display: inline-block;vertical-align: middle;content: " ";height: 20%;}}
-/* 우편번호 조회 버튼 */
- #shippingTitle h5{
-	font-weight:900em;
+	.modal.modal-center:before {
+		display: inline-block;
+		vertical-align: middle;
+		content: " ";
+		height: 20%;
+	}
+}
+/* 우편번호 조회 버튼 시작*/
+#shippingTitle h5 {
+	font-weight: 900em;
 	font-size: 2em;
-	
 }
 
-
-
-#search{
-	position:absolute;
-	margin-left:370px;
-	margin-top:-40px;
-	
-}
-.mb-3{
-	margin-left:20px;
-	margin-top:20px;
+#search {
+	position: absolute;
+	margin-left: 430px;
+	margin-top: -40px;
 }
 
-#inputReceiverName{width:300px;}
-#inputReceiverContact{width:400px;}	
-#addressScope{width:400px;}
-#postCode{width:300px;}
-#addressDetail{width:400px;}
-
+.mb-3 {
+	margin-top: 20px;
+}
