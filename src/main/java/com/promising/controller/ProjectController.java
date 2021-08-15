@@ -11,7 +11,11 @@ public class ProjectController {
 
 	@GetMapping("/detail")
 	public void detail(Model model) {
-		model.addAttribute("hello", "안녕하세요, 반갑습니다!");
+//		model.addAttribute("hello", "안녕하세요, 반갑습니다!");
+	}
+	@GetMapping("/payment")
+	public void payment(Model model) {
+//		model.addAttribute("hello", "안녕하세요, 반갑습니다!");
 	}
 	
 	@GetMapping("/list")
