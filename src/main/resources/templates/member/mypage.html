@@ -5,16 +5,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Promising</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
+   	<th:block th:replace="fragments/commonHead"></th:block>
     <link rel="stylesheet" href="../fonts/material-design-iconic-font.min.css">
     <link rel="stylesheet" type="text/css" th:href="@{/fonts/material-design-iconic-font.min.css}">
     <link href="../css/common_style.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" th:href="@{/css/common_style.css}">
     
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    
+   
 	<link rel="stylesheet" type="text/css" th:href="@{/css/mypage.css}">
      <link rel="stylesheet" type="text/css" th:href="@{/js/mypage.js}">
     
@@ -40,7 +38,7 @@
                     <div class="col-4 col-md-5">
                         <div class="utils">
                             <a href="#">
-                                <!-- <span>홍길동</span> -->
+                                
                                 <span>회원가입/로그인</span>
                                 <div class="pf_img no"></div>
                             </a>
@@ -69,8 +67,6 @@
              </div>
             </div>
                    
-        
-                     
                         <div class="container">
                                 <div class=" row tabline">
                                     <ul class="nav nav-pills" id="pills-tab" role="tablist">
@@ -89,6 +85,15 @@
                                                 data-bs-target="#pills-contact" type="button" role="tab"
                                                 aria-controls="pills-contact" aria-selected="false">올린 프로젝트</button>
                                         </li>
+                                         <li class="nav-item" role="presentation">
+                                         
+                                        <a href="#" th:href="@{/member/qna}" class="py-2 d-block"><button class="nav-link p-3" id="pills-qna-tab" data-bs-toggle="pill"
+                                                data-bs-target="#pills-QnA" type="button" role="tab"
+                                                aria-controls="pills-QnA" aria-selected="false">프로젝트 문의</button></a>
+                                        </li>
+                                        
+                                        
+                                        
                                     </ul>
                        
                         <hr>
@@ -106,6 +111,7 @@
                                         aria-labelledby="pills-contact-tab">
                                         <span>0개의 프로젝트가 있습니다.</span>
                                     </div>
+                                    
                                 </div>
 
 
@@ -113,10 +119,7 @@
                         </div>
              
                     </div>
-<script>
 
-
-</script>
         </body>
 
 </html>
