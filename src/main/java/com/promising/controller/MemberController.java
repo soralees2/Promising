@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.promising.repository.MemberRepository;
@@ -70,7 +69,7 @@ public class MemberController {
 		}
 	
 	
-	@RequestMapping(value="/infoUpdate{userName}",method=RequestMethod.GET)
+	@RequestMapping("/infoUpdate{userName}")
 	public @ResponseBody String nameUpdate(@PathVariable("userName") Long userName,@ModelAttribute("dto")MemberVO vo,Model model,Principal principal) {
 	
 		repo.save(vo);

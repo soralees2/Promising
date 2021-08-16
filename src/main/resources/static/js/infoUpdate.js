@@ -132,19 +132,20 @@ $("#Namesavebutton").on("click",function(){
 	}else{
 		
 		$.ajax({ 
-		anyne:true,
+	
 		url:'/member/infoUpdate{userName}', 
 		type:'post', 
 		data:JSON.stringify(userName),
 		dataType:'text', // 다른 페이지를 처리 후에 결과가 성공일 때 // 비동기식으로 처리를 함 async: false, success:function(data) { var message = data.message;
 		contentType: "application/json; charset=UTF-8",
-		success : function(data) {    
-                alert("비밀번호 변경이 완료되었습니다.");
-                location.href="/member/infoUpdate";
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-                alert("ERROR : " + textStatus + " : " + errorThrown);
-            }        
+		beforeSend: function (jqXHR, settings) {
+		var header = $("meta[name='_csrf_header']").attr("content");
+		var token = $("meta[name='_csrf']").attr("content");
+		jqXHR.setRequestHeader(header, token);
+					} 
+					}).done(function(){
+					  console.log("성공");
+		
         })
     }
     

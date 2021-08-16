@@ -384,25 +384,25 @@
 							<dl>
 								<dt>받는사람</dt>
 								<dd>
-									<input type="text" class="form-control" readonly placeholder="작성자닉네임">
+									<input type="text" class="form-control" id="receiver" value="" readonly placeholder="작성자닉네임">
 								</dd>
 								<dt>문의내용</dt>
 								<dd>
-									<select class="form-select">
+									<select class="form-select" id="qna_category">
 										<option value="">문의유형</option>
-										<option value="">선물/후원</option>
-										<option value="">프로젝트</option>
-										<option value="">수령자 정보</option>
-										<option value="">배송</option>
-										<option value="">기타</option>
+										<option value="선물/후원">선물/후원</option>
+										<option value="프로젝트">프로젝트</option>
+										<option value="수령자 정보">수령자 정보</option>
+										<option value="배송">배송</option>
+										<option value="기타">기타</option>
 									</select>
 								</dd>
 							</dl>
-							<textarea class="form-control" rows="5" col="20" placeholder="프로젝트 진행자에게 문의하고 싶은 내용을 적어주세요."></textarea>
+							<textarea class="form-control" id="qna_contents" rows="5" col="20" placeholder="프로젝트 진행자에게 문의하고 싶은 내용을 적어주세요."></textarea>
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-							<button type="button" class="btn btn-primary">등록 하기</button>
+							<button type="button" class="btn btn-primary" id="addQnaBtn">등록 하기</button>
 						</div>
 					</div>
 				</div>
@@ -530,15 +530,21 @@
 			
 			
 			// 문의하기 
-			let pno = /*[[${vo.pno}]]*/
-			$("#addCommunityBtn").on('click', function(){
-				let title = $("#com_title").val();
-				let contents = $("#com_contents").val();				  
-			 	let obj = { writer:'writer',title: title, contents: contents, project_pno:pno, secret :'N'}
+			$("#addQnaBtn").on('click', function(){
+				let category = $("#qna_category option:selected").val();
+				let contents = $("#qna_contents").val();		
+				let receiver = $("#receiver").val();
+				receiver = "작성자닉네임"
+				console.log("receiver : " + receiver);
+				console.log("category : " + category);
+				console.log("contents : " + contents);
+				
+				
+			 	let obj = { writer:'qnawriter',qnacategory:category, contents: contents, member_username :receiver}
 			  	console.log(JSON.stringify(obj));
 		  		$.ajax({
 		  			type:'post',
-			  		url: '/community/' + obj.project_pno,
+			  		url: '/qna/' + obj.member_username,
 				  	data : JSON.stringify(obj),
 				  	dataType:'json',
 				  	contentType: "application/json",

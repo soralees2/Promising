@@ -25,6 +25,7 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode(of="qnano")
 @Table(name="PR_QNA")
+
 public class QnaVO {   
    
    @Id
@@ -48,3 +49,4 @@ public class QnaVO {
    
    
 }
+
