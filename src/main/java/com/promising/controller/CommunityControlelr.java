@@ -23,14 +23,7 @@ public class CommunityControlelr {
 	@Autowired
 	private CommunityRepository repo;
 	
-//	@PostMapping("/add/{pno}")
-//	public ResponseEntity<Void> addCommunity(@PathVariable("pno")Long pno, @RequestBody CommunityVO vo){
-//		System.out.println("=========================pno : " + pno);
-//		return new ResponseEntity<Void>(HttpStatus.CREATED);
-//	}
-	
 	@PostMapping("/{pno}")
-	//public ResponseEntity<List<CommunityVO>> addCommunity(@PathVariable("pno")Long pno, @RequestBody CommunityVO com){
 	public ResponseEntity<List<CommunityVO>> addCommunity(@PathVariable("pno")Long pno, @RequestBody CommunityVO com){
 		System.out.println("=========================pno : " + pno);
 		System.out.println(com.getContents());
