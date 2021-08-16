@@ -39,7 +39,7 @@ public class MemberController {
 		vo.setPassword(pwEncoder.encode(vo.getPassword()));
 		
 		repo.save(vo);
-		return "redirect:/login";
+		return "redirect:/member/login";
 	}
 	
 	@GetMapping("/mypage")
