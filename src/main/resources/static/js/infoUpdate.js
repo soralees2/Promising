@@ -122,41 +122,63 @@ $("#search").on("click",function(){
         }).open();//팝업을 띄우려면 오픈만해줘
         
 })
-
-$("#Namesavebutton").on("click",function(){
-	var modifyId =$("#userName").val();
 	
-	if(modifyId ==""){
-		alert("바꿀 이름을 입력해주세요.")
+	$("#Namesavebutton").on("click",function(){
+		/*값이 잘가는가?*/
+		let modifyId =$("#userName").val();
 		
-	}else{
+		/*let obj ={"username":username, "address1":address1,"address2":address2,"oriname":oriname,"password":password,"regdate":regdate,"sysname":sysname,"uname":modifyId,"updatedate":updatedate,"uphone":uphone,"upostcode":upostcode}
+		console.log(obj);
+		console.log(modifyId);*/
 		
-		$.ajax({ 
+		
+		if(modifyId ==""){
+			alert("바꿀 이름을 입력해주세요.")
+			
+		}else{
+	$.ajax({
+	type:'POST',
+	 url: 'member/infoUpdate',
+	data : {uname:modifyId},
+	dataType:'json',
+	contentType: "application/json;charset=UTF-8",
+	beforeSend: function (jqXHR, settings) {
+	var header = $("meta[name='_csrf_header']").attr("content");
+	var token = $("meta[name='_csrf']").attr("content");
+	jqXHR.setRequestHeader(header, token);
+						}
+					  }).done(function(data){
+						  console.log("성공");
+				console.log(data);
+					 
+	 })
 	
-		url:'/member/infoUpdate{userName}', 
+			
+/*		$.ajax({ 
+	
+		url:'/member/infoUpdate/{userName}', 
 		type:'post', 
 		data:JSON.stringify(userName),
 		dataType:'text', // 다른 페이지를 처리 후에 결과가 성공일 때 // 비동기식으로 처리를 함 async: false, success:function(data) { var message = data.message;
 		contentType: "application/json; charset=UTF-8",
-		beforeSend: function (jqXHR, settings) {
-		var header = $("meta[name='_csrf_header']").attr("content");
-		var token = $("meta[name='_csrf']").attr("content");
-		jqXHR.setRequestHeader(header, token);
-					} 
-					}).done(function(){
-					  console.log("성공");
-		
+		success : function(data) {    
+                alert("비밀번호 변경이 완료되었습니다.");
+                location.href="/member/infoUpdate";
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                alert("ERROR : " + textStatus + " : " + errorThrown);
+            }        
         })
-    }
+    }*/
     
 
 
 
 
+}
+
+
 })
-
-
-
 })
 
 

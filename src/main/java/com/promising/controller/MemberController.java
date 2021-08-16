@@ -8,10 +8,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.promising.repository.MemberRepository;
@@ -69,11 +70,19 @@ public class MemberController {
 		}
 	
 	
-	@RequestMapping("/infoUpdate{userName}")
-	public @ResponseBody String nameUpdate(@PathVariable("userName") Long userName,@ModelAttribute("dto")MemberVO vo,Model model,Principal principal) {
-	
+	@RequestMapping(value="/infoUpdate/{uname}",method = RequestMethod.POST)
+	@ResponseBody
+	public  String nameUpdate(@PathVariable("uname") String uname,@RequestBody MemberVO mvo,Model model,Principal principal) {
+		
+		MemberVO vo=repo.findById(uname).get();
+
+		System.out.println("=========================username : " + mvo.getUsername());
+		System.out.println(mvo.getUname());
+		System.out.println(mvo.getAddress1());
+		
 		repo.save(vo);
 		return "redirect:/member/infoUpdate";
+	
 		}
 	
 	
