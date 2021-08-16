@@ -1,5 +1,6 @@
 package com.promising.vo;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -45,9 +46,9 @@ public class ProjectVO {
 	@Column(nullable=true)
 	private int prCurrentMoney;
 	@Column(nullable=false)
-	private Timestamp prStartdate;
+	private Date prStartdate;
 	@Column(nullable=false)
-	private Timestamp prEnddate;
+	private Date prEnddate;
 	@Lob
 	@Column(nullable=false)
 	private String prContents;

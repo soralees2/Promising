@@ -2,246 +2,266 @@
 <html lang="en" xmlns:th="http://thymeleaf.org">
 
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-   <th:block th:replace="fragments/commonHead"></th:block>
- 
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<th:block th:replace="fragments/commonHead"></th:block>
 
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-  <link href="410_layout/410_layout/css/common_style.css" rel="stylesheet">
-  <link th:href="@{/css/upload3.css}" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
-    <script src="/js/upload3.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<link href="410_layout/410_layout/css/common_style.css" rel="stylesheet">
+<link th:href="@{/css/upload3.css}" rel="stylesheet">
+<link
+	href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css"
+	rel="stylesheet">
+<script
+	src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
+<script src="/js/upload3.js"></script>
 </head>
 
 <body>
-  <div class="wrap">
+	<div class="wrap">
 
 
 
-       <header th:replace="fragments/header.html :: fg-header"></header>
-    <div class="container">
-      <div class="makingproject">
-        <div class="makingcontents">
-        <form action="#">
-          <div class="categorywrap">
-            <dl class="mydl">
-              <dt class="mydl">프로젝트 카테고리<div class="imp"></div>
-              </dt>
-              <dd class="itemdd">프로젝트 성격과 가장 일치하는 카테고리를 선택해주세요.
-                적합하지 않을 경우 운영자에 의해 조정될 수 있습니다.</dd>
-            </dl>
-            <div class="explain">
-              <div class="categorybox">
-                <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                  <option value="game" selected>게임</option>
-                  <option value="1">One</option>
-                  <option value="2">Two</option>
-                  <option value="3">Three</option>
-                </select>
-              </div>
-            </div>
-          </div>
-          <div class="titlewrap">
-            <dl class="mydl">
-              <dt class="mydl">프로젝트 제목<div class="imp"></div>
-              </dt>
-              <dd class="itemdd">프로젝트의 주제, 창작물의 특징이 드러나는 멋진 제목을 붙여주세요.</dd>
-            </dl>
-            <div class="explain">
-              <div class="titlebox">
-                <input type="text" class="form-control w-100" placeholder="제목을 입력해주세요." >
-              </div>
-            </div>
-          </div>
+		<header th:replace="fragments/header.html :: fg-header"></header>
+		<div class="container">
+			<div class="makingproject">
+				<div class="makingcontents">
+					<form action="#">
+						<div class="categorywrap">
+							<dl class="mydl">
+								<dt class="mydl">
+									프로젝트 카테고리
+									<div class="imp"></div>
+								</dt>
+								<dd class="itemdd">프로젝트 성격과 가장 일치하는 카테고리를 선택해주세요. 적합하지 않을
+									경우 운영자에 의해 조정될 수 있습니다.</dd>
+							</dl>
+							<div class="explain">
+								<div class="categorybox">
+									<select class="form-select form-select-sm"
+										aria-label=".form-select-sm example" name="prCategory">
+										<option value="game" selected>게임</option>
+										<option value="1">One</option>
+										<option value="2">Two</option>
+										<option value="3">Three</option>
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="titlewrap">
+							<dl class="mydl">
+								<dt class="mydl">
+									프로젝트 제목
+									<div class="imp"></div>
+								</dt>
+								<dd class="itemdd">프로젝트의 주제, 창작물의 특징이 드러나는 멋진 제목을 붙여주세요.</dd>
+							</dl>
+							<div class="explain">
+								<div class="titlebox">
+									<input type="text" class="form-control w-100" name="prTitle"
+										placeholder="제목을 입력해주세요.">
+								</div>
+							</div>
+						</div>
 
-          <div class="summarywrap">
-            <dl class="mydl">
-              <dt class="mydl">프로젝트 요약<div class="imp"></div>
-              </dt>
-              <dd class="itemdd">후원자 분들이 프로젝트를 빠르게 이해할 수 있도록
-                명확하고 간략하게 소개해주세요.</dd>
-            </dl>
-            <div class="summary">
-              <div class="summarybox">
-                <textarea placeholder="프로젝트 요약" cols="90" rows="5"></textarea>
-              </div>
-            </div>
-          </div>
+						<div class="summarywrap">
+							<dl class="mydl">
+								<dt class="mydl">
+									프로젝트 요약
+									<div class="imp"></div>
+								</dt>
+								<dd class="itemdd">후원자 분들이 프로젝트를 빠르게 이해할 수 있도록 명확하고 간략하게
+									소개해주세요.</dd>
+							</dl>
+							<div class="summary">
+								<div class="summarybox">
+									<textarea placeholder="프로젝트 요약" cols="90" rows="5" name="prIntro"></textarea>
+								</div>
+							</div>
+						</div>
 
-          <div class="imagewrap">
-            <dl class="mydl">
-              <dt class="mydl">프로젝트 대표 이미지<div class="imp"></div>
-              </dt>
-              <dd class="itemdd">후원자들이 프로젝트의 내용을 쉽게 파악하고 좋은 인상을 받을 수 있도록 이미지 가이드라인을 따라주세요.</dd>
-            </dl>
-            <div class="image">
-              <div class="imagebox">
-                <div class="imageup">
-                  <span>이미지 업로드</span>
-                  <input type="file" class="form-control" accept=".jpg, .jpeg, .png">
-                </div>
-              </div>
-            </div>
-          </div>
+						<div class="imagewrap">
+							<dl class="mydl">
+								<dt class="mydl">
+									프로젝트 대표 이미지
+									<div class="imp"></div>
+								</dt>
+								<dd class="itemdd">후원자들이 프로젝트의 내용을 쉽게 파악하고 좋은 인상을 받을 수 있도록
+									이미지 가이드라인을 따라주세요.</dd>
+							</dl>
+							<div class="image">
+								<div class="imagebox">
+									<div class="imageup">
+										<span>이미지 업로드</span> <input type="file" class="form-control"
+											accept=".jpg, .jpeg, .png">
+									</div>
+								</div>
+							</div>
+						</div>
 
-          <div class="row moneywrap">
-            <div class="col-12 col-md-5">
-              <dl class="mydl">
-                <dt class="mydl">목표 금액<div class="imp"></div>
-                </dt>
-                <dd class="itemdd">프로젝트를 완수하기 위해 필요한 금액을 설정해주세요.</dd>
-                <div class="itemdiv">
-                  <div class="caution">목표 금액 설정 시 꼭 알아두세요!</div>
-                  <div class="list">
-                    <p>종료일까지 목표금액을 달성하지 못하면 후원자 결제가 진행되지 않습니다.</p>
-                    <p>종료 전 후원 취소를 대비해 10% 이상 초과 달성을 목표로 해주세요.</p>
-                    <p>제작비, 선물 배송비, 인건비, 예비 비용 등을 함께 고려해주세요.</p>
-                  </div>
-                </div>
-              </dl>
-            </div>
-            <div class="col-12 col-md-7 moneycontainer">
-              <div class="moneybox">
-                <p>목표금액</p>
-                <div class="moneyinputbox">
+						<div class="row moneywrap">
+							<div class="col-12 col-md-5">
+								<dl class="mydl">
+									<dt class="mydl">
+										목표 금액
+										<div class="imp"></div>
+									</dt>
+									<dd class="itemdd">프로젝트를 완수하기 위해 필요한 금액을 설정해주세요.</dd>
+									<div class="itemdiv">
+										<div class="caution">목표 금액 설정 시 꼭 알아두세요!</div>
+										<div class="list">
+											<p>종료일까지 목표금액을 달성하지 못하면 후원자 결제가 진행되지 않습니다.</p>
+											<p>종료 전 후원 취소를 대비해 10% 이상 초과 달성을 목표로 해주세요.</p>
+											<p>제작비, 선물 배송비, 인건비, 예비 비용 등을 함께 고려해주세요.</p>
+										</div>
+									</div>
+								</dl>
+							</div>
+							<div class="col-12 col-md-7 moneycontainer">
+								<div class="moneybox">
+									<p>목표금액</p>
+									<div class="moneyinputbox">
 
-                  <span></span><input type="text" class="form-control" inputmode="numeric" id="inputmoney"
-                    placeholder="50만원 이상의 금액을 입력해주세요" autocomplete="off" autocapitalize="off"></span>
+										<span></span><input type="number" class="form-control"
+											inputmode="numeric" id="inputmoney" name="prTargetMoney"
+											placeholder="50만원 이상의 금액을 입력해주세요" autocomplete="off"
+											autocapitalize="off" min=0 max=9999999999></span>
 
-                </div>
-                <div class="moneyexplain">
-                  <div class="expect">
-                    <span>목표 금액 달성 시 예상 수령액</span>
-                    <em id="expect"></em>
-                  </div>
-                  <div class="totalmoney">
-                    총수수료
-                    <em id="totalsusu"></em>
-                  </div>
-                  <div class="paysusu">
-                    결제대행 수수료 (총 결제액의 3% + VAT)
-                    <em id="paysusu"></em>
-                  </div>
-                  <div class="platsusu">
-                    플랫폼 수수료(총 모금액의 5%+VAT)
-                    <em id="platsusu"></em>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+									</div>
+									<div class="moneyexplain">
+										<div class="expect">
+											<span>목표 금액 달성 시 예상 수령액</span> <em id="expect"></em>
+										</div>
+										<div class="totalmoney">
+											총수수료 <em id="totalsusu"></em>
+										</div>
+										<div class="paysusu">
+											결제대행 수수료 (총 결제액의 3% + VAT) <em id="paysusu"></em>
+										</div>
+										<div class="platsusu">
+											플랫폼 수수료(총 모금액의 5%+VAT) <em id="platsusu"></em>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
 
-            <div class="row datewrap">
-              <div class="col-12 col-md-5">
-              <dl class="mydl">
-                <dt class="mydl">펀딩 일정<div class="imp"></div>
-                </dt>
-                <dd class="itemdd">설정한 일시가 되면 펀딩이 자동 시작됩니다. 펀딩 기간은 최대 60일까지 입니다.</dd>
-              </dl>
-            </div>
-              <div class="col-12 col-md-7 dateform">
-                <div class="dateformcontainer">
-                 <div class="datecontents">
-                   <div class="startdate">
-                     <p>시작일</p>
-                     <div>
-                       <input type="date" class="form-control ">
-                     </div>
-                    </div>
-                    <div class="countdate">
-                     <p>펀딩 기간</p>
-                     <div class="count">
-                      <select name="howlong" id="" class="form-select form-select-sm" aria-label=".form-select-sm example" >
-                        <option value="30">30일</option>
-                        <option value="60">60일</option>
-                      </select>
-                     </div>
-                    </div>
-                  </div>
-                 </div>
-               </div>
-             </div>
- 
-             <div class="row presentwrap">
-              <div class="col-12 col-md-5">
-                <dl class="mydl">
-                  <dt class="mydl">선물 만들기<div class="imp"></div>
-                  </dt>
-                  <dd class="itemdd">선물은 후원자에게 프로젝트의 가치를 전달하는 수단입니다. 다양한 금액대로 여러 개의 선물을 만들어주세요. 펀딩 성공률이 높아지고, 더 많은 후원 금액을 모금할 수 있어요.</dd>
-                </dl>
-              </div>
-              <div class="col-12 col-md-7 presentcontainer">
-                <div class="presentcontents">
-                  <div class="presenttitle">
-                    <p>선물 제목</p>
-                    <div>
-                      <input type="text" class="form-control" placeholder="선물 제목">
-                    </div>
-                   </div>
-                   <div class="presentdetail">
-                    <p>선물 설명</p>
-                    <div>
-                      <textarea placeholder="선물 설명" cols="70" rows="5"></textarea>
-                    </div>
-                   </div>
-                   <div class="presentprice">
-                    <p>선물 가격</p>
-                    <div>
-                      <input type="text" class="form-control" placeholder="선물 가격">
-                    </div>
-                   </div>
-                </div>
-              </div>
-             </div>
- <div class="summarywrap">
-            <dl class="mydl">
-              <dt class="mydl">창작자 소개<div class="imp"></div>
-              </dt>
-              <dd class="itemdd">후원자 분들이 프로젝트를 빠르게 이해할 수 있도록
-                명확하고 간략하게 소개해주세요.</dd>
-            </dl>
-            <div class="summary">
-              <div class="summarybox">
-                <textarea placeholder="창작자 소개" cols="100" rows="5"></textarea>
-              </div>
-            </div>
-          </div>
-             <div class="row explainwrap">
-              <div class="col-12 col-md-5 explainbox">
-                <dl class="mydl">
-                  <dt class="mydl">프로젝트 소개<div class="imp"></div>
-                  </dt>
-                  <div class="itemdiv">
-                    <div class="caution">텍스트 에디터 사용법</div>
-                    <div class="list">
-                      <p> Enter( )를 누르면 문단이 구분됩니다. 문단 내에서 간격 없이 줄바꿈 하려면 shift(⇧) + enter(↵) 를 사용해주세요.</p>
-                      <p> ctrl+c/v를 이용해 선택한 이미지를 입력창 내에서 복사/붙여넣기 할 수 있습니다.</p>
-                      <p>본문 텍스트와 이미지는 되도록 분리해서 작성해주세요. 통 이미지 사용은 불가합니다.</p>
-                    </div>
-                  </div>
-                </dl>
-              </div>
-              <div class="col-12 col-md-7 ">
-                <div class="explaincontents">
-                 <div class="editwrap ">
-                  <textarea name="" id="summernote" placeholder=""></textarea>
-                 </div>
-                </div>
-              </div>
-             </div>
-		</form>
-         </div>
-       </div>
-     </div>
- 
-   </div>
- </body>
- 
- </html>
-                    
-                 
+						<div class="row datewrap">
+							<div class="col-12 col-md-5">
+								<dl class="mydl">
+									<dt class="mydl">
+										펀딩 일정
+										<div class="imp"></div>
+									</dt>
+									<dd class="itemdd">설정한 일시가 되면 펀딩이 자동 시작됩니다. 펀딩 기간은 최대
+										60일까지 입니다.</dd>
+								</dl>
+							</div>
+							<div class="col-12 col-md-7 dateform">
+								<div class="dateformcontainer">
+									<div class="datecontents">
+										<div class="startdate">
+											<p>시작일</p>
+											<div>
+												<input type="date" class="form-control" min=2021-08-16>
+											</div>
+										</div>
+										<div class="countdate">
+											<p>펀딩 기간</p>
+											<div class="count">
+												<select name="howlong" id=""
+													class="form-select form-select-sm"
+													aria-label=".form-select-sm example">
+													<option value="30">30일</option>
+													<option value="60">60일</option>
+												</select>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="row presentwrap">
+							<div class="col-12 col-md-5">
+								<dl class="mydl">
+									<dt class="mydl">
+										선물 만들기
+										<div class="imp"></div>
+									</dt>
+									<dd class="itemdd">선물은 후원자에게 프로젝트의 가치를 전달하는 수단입니다. 다양한
+										금액대로 여러 개의 선물을 만들어주세요. 펀딩 성공률이 높아지고, 더 많은 후원 금액을 모금할 수 있어요.</dd>
+								</dl>
+							</div>
+							<div class="col-12 col-md-7 presentcontainer">
+								<div class="presentcontents">
+									<div class="presenttitle">
+										<p>선물 제목</p>
+										<div>
+											<input type="text" name="prPresentTitel" class="form-control" placeholder="선물 제목">
+										</div>
+									</div>
+									<div class="presentdetail">
+										<p>선물 설명</p>
+										<div>
+											<textarea placeholder="선물 설명" name="prPresentContents" cols="70" rows="5"></textarea>
+										</div>
+									</div>
+									<div class="presentprice">
+										<p>선물 가격</p>
+										<div>
+											<input type="number" name="prPresentPrice" class="form-control" placeholder="선물 가격" min=0 max=9999999999>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="summarywrap">
+							<dl class="mydl">
+								<dt class="mydl">
+									창작자 소개
+									<div class="imp"></div>
+								</dt>
+								<dd class="itemdd">후원자 분들을 위한 창작자 소개를 명확하고 간략하게 소개해주세요.</dd>
+							</dl>
+							<div class="summary">
+								<div class="summarybox">
+									<textarea placeholder="창작자 소개" name="prWriterintro" cols="80" rows="5"></textarea>
+								</div>
+							</div>
+						</div>
+						<div class="row explainwrap">
+							<div class="col-12 col-md-12 explainbox">
+								<dl class="mydl">
+									<dt class="mydl">
+										프로젝트 소개
+										<div class="imp"></div>
+									</dt>
+
+								</dl>
+							</div>
+							<div class="col-12 col-md-12 ">
+								<div class="explaincontents">
+									<div class="editwrap ">
+										<textarea name="prContents" id="summernote" placeholder=""></textarea>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</form>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</body>
+
+</html>
+
