@@ -1,4 +1,5 @@
 $(function(){
+	
 	$("#inputmoney").keyup(function(){
 		let fmoney=$("#inputmoney").val();
 		var susu3=fmoney*0.03+(fmoney*0.03)*0.1;
