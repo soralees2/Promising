@@ -28,14 +28,14 @@ public class QnaVO {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator ="QNA_SEQ_GENERATOR")
-	private int qnano;
-	@Column(nullable=false, length=20)
+	private long qnano;
+	@Column(nullable=false, length=50)
 	private String qnacategory;
 	
-	@Column(nullable=false, length=20)
+	@Column(nullable=false, length=100)
 	private String writer;
 	
-	@Column(nullable=false, length=20)
+	@Column(nullable=false, length=100)
 	private String receiver;
 	
 	@Column(nullable=false, length=4000)
