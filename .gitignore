@@ -39,4 +39,4 @@ build/
 mvnw.cmd
 
 ### properties ###
-application.properties
+application-dev.properties
