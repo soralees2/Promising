@@ -140,16 +140,21 @@
 								</div>
 								<img id="profile" th:src="@{/images/dog.jpg}">
 
-					<form action="#" method="post" enctype="multipart/form-data"> <!-- 프로필사진 전송 Form -->
-								<div class="fileUploadClass">
+								<form action="#" method="post" enctype="multipart/form-data">
+									<!-- 프로필사진 전송 Form -->
+									<div class="fileUploadClass">
 
-									<label class="btn btn-outline-secondary btn-file"
-										id="btn-fileUp"> 파일추가 <input type="file" name="file" accept="image/gif, image/jpeg, image/png" autofocus="autofocus"
-										style="display: none;" id="filebtn" maxlength="10" required> <!--숨기기-->
-									</label>
-								</div>
+										<label class="btn btn-outline-secondary btn-file"
+											id="btn-fileUp"> 파일추가 <input type="file" name="file"
+											accept="image/gif, image/jpeg, image/png"
+											autofocus="autofocus" style="display: none;" id="filebtn"
+											maxlength="10" required> <!--숨기기-->
+										</label>
+									</div>
+									<input type="hidden" th:name="${_csrf.parameterName}"
+										th:value="${_csrf.token}">
 
-					</form>
+								</form>
 
 								<div class="col-sm-4 col-md-4 " id="uploadDesc">
 									<span> 250X250 픽셀에 최적화 되어있으며, 10Mb 이하의 JPG,GIF,PNG 파일을
@@ -163,30 +168,32 @@
 							<hr>
 						</div>
 
-						<div class="UserName">
-							<div class="modifyScroll">
-								<span><a href="javascript:;" id="nameModifyScroll">변경</a></span>
+						<form action="#" method=get>
+							<div class="UserName">
+								<div class="modifyScroll">
+									<span><a href="javascript:;" id="nameModifyScroll">변경</a></span>
 
-							</div>
-							<h3>이름</h3>
+								</div>
+								<h3>이름</h3>
 
-							<h4>정규원</h4>
-							<br>
-							<div id="nameNBlank">
-								<input type="text" class="blank form-control-lg" id="userName"
-									placeholder="이름을 입력하세요.">
+								<h4>[[${result.username}]]</h4>
+								<br>
+								<div id="nameNBlank">
+									<input type="text" class="blank form-control-lg" id="userName"
+										placeholder="이름을 입력하세요." name="userName"> <input type="hidden"
+										th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+									<div class="col-sm-4 col-md-4 uploadcomment">
+										<button class="btn btn-dark" id="Namesavebutton">저장</button>
+									</div>
+								</div>
 
-								<div class="col-sm-4 col-md-4 uploadcomment">
-									<button class="btn btn-dark" id="Namesavebutton">저장</button>
+								<div class="container blankLine">
+
+									<hr>
+
 								</div>
 							</div>
-
-							<div class="container blankLine">
-
-								<hr>
-
-							</div>
-						</div>
+						</form>
 
 
 
@@ -198,14 +205,15 @@
 									<span><a href="javascript:;" id="emailModifyScroll">변경</a></span>
 								</div>
 								<h3>이메일</h3>
-								<h5>kyn00018@naver.com</h5>
+								<h5>[[${result.username}]]</h5>
 								<br>
 								<div id="emailblankNButton">
 									<input type="text" class="blank form-control-lg"
 										placeholder="이메일을 입력하세요." id="userEmail">
 
 									<div class="col-sm-4 col-md-4 uploadcomment">
-										<button class="btn btn-dark " id="emailSavebutton">인증메일 전송</button>
+										<button class="btn btn-dark " id="emailSavebutton">인증메일
+											전송</button>
 									</div>
 								</div>
 							</div>
@@ -228,13 +236,13 @@
 
 						<div class="pwReset" id=pwblankNButton>
 							<div class="rememberPw">
-							<h6>현재 비밀번호</h6>
-							<input type="text" class="blank form-control-lg"
-								placeholder="현재 비밀번호" id="pw"> <br>
-								
-							<h6>비밀번호가 기억나지 않나요?</h6>
-							
-							<button class="btn btn-link" id="pwResetBtn">비밀번호 초기화</button>
+								<h6>현재 비밀번호</h6>
+								<input type="text" class="blank form-control-lg"
+									placeholder="현재 비밀번호" id="pw"> <br>
+
+								<h6>비밀번호가 기억나지 않나요?</h6>
+
+								<button class="btn btn-link" id="pwResetBtn">비밀번호 초기화</button>
 							</div>
 							<div class="pwReset">
 								<h6>변경할 비밀번호</h6>
@@ -255,15 +263,16 @@
 						<div class="modifyScroll">
 							<span><a href="javascript:;" id="contactModifyScroll">변경</a></span>
 						</div>
-						<h3>연락처</h3>
+						<h3>전화번호</h3>
 						<div class="contactmodi" id="contactblankNButton">
-							<h4>01026143918</h4>
+							<h4>[[${result.uphone}]]</h4>
 							<input type="text" class="blank contactBlank form-control-lg"
 								placeholder="연락처를 입력하세요." id="contact">
 
 
 							<div class="col-sm-4 col-md-4 uploadcomment">
-								<button class="btn btn-dark" id="contactVertify">인증번호 전송</button>
+								<button class="btn btn-dark" id="contactVertify">인증번호
+									전송</button>
 							</div>
 
 							<div></div>
@@ -372,26 +381,55 @@
 						<div class="RoundedWrapper__Wrapper-a7usag-0 ckzBmr"
 							id="shippingDataBox">
 
-							<span>배송지 불러오기 </span>
+
+
+							<div class="mb-3">
+								<div class="mb-3">
+									<label for="postCode" class="form-label">주소</label><br>
+									<div class="form-control">
+										<h5>[[${result.address1}]]</h5>
+										<br>
+
+									</div>
+								</div>
+
+
+								<div class="mb-3">
+									<label for="postCode" class="form-label">상세주소</label><br>
+									<div class="form-control">
+										<h5>[[${result.address2}]]</h5>
+										<br>
+
+									</div>
+
+
+
+									<div class="mb-3">
+										<label for="postCode" class="form-label">우편번호</label><br>
+										<div class="form-control">
+											<h5>[[${result.upostcode}]]</h5>
+											<br>
+
+										</div>
+
+									</div>
+
+								</div>
+							</div>
+
 
 						</div>
-
 					</div>
+
+
+
 				</div>
 
 
+
 			</div>
+			<!--텝라인 div닫기 -->
 		</div>
-
-
-
-	</div>
-
-
-
-	</div>
-	<!--텝라인 div닫기 -->
-	</div>
 
 	</div>
 	<script>
@@ -399,4 +437,4 @@
 	</script>
 </body>
 
-</html>qor
+</html>

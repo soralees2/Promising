@@ -123,11 +123,40 @@ $("#search").on("click",function(){
         
 })
 
+$("#Namesavebutton").on("click",function(){
+	var modifyId =$("#userName").val();
+	
+	if(modifyId ==""){
+		alert("바꿀 이름을 입력해주세요.")
+		
+	}else{
+		
+		$.ajax({ 
+		anyne:true,
+		url:'/member/infoUpdate{userName}', 
+		type:'post', 
+		data:JSON.stringify(userName),
+		dataType:'text', // 다른 페이지를 처리 후에 결과가 성공일 때 // 비동기식으로 처리를 함 async: false, success:function(data) { var message = data.message;
+		contentType: "application/json; charset=UTF-8",
+		success : function(data) {    
+                alert("비밀번호 변경이 완료되었습니다.");
+                location.href="/member/infoUpdate";
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                alert("ERROR : " + textStatus + " : " + errorThrown);
+            }        
+        })
+    }
+    
+
+
+
+
 })
 
 
 
-
+})
 
 
 
