@@ -78,6 +78,9 @@
   text-decoration-line: underline;
   cursor: pointer;
 }
+.pro_title{
+	height:60px;
+}
 .pro_title > a {
   text-decoration: none;
   color: black;
