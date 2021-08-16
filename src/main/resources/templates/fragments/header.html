@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,7 +14,7 @@
 				<div class="col-4 col-md-5">
 					<ul class="menu">
 						<li class="search" id="search"><img src="../images/ic_search.png" alt=""><span>프로젝트 </span>둘러보기</li>
-						<li class="register"><a href="#">프로젝트 올리기</a></li>
+						<li class="register"><a href="#" th:href="@{/project/auth/upload1}">프로젝트 올리기</a></li>
 					</ul>
 				</div>
 				<div class="col-4 col-md-2">
@@ -21,12 +22,17 @@
 				</div>
 				<div class="col-4 col-md-5">
 					<div class="utils">
-						<a href="#">
-							<span>회원가입/로그인</span>
+							<sec:authorize access="isAnonymous()">
+							<span><a href="/member/login" >회원가입/로그인</a></span>
+							</sec:authorize>
 							<div class="pf_wrap">
+							<sec:authorize access="isAuthenticated()">
+							<a href="#">
 								<div class="pf_img" style="background:url(../images/atom02.png) 50% 50% no-repeat;background-size:cover;"></div>
+							</a>
+							</sec:authorize>
 							</div>
-						</a>
+						
 					</div>
 				</div>
 			</div>

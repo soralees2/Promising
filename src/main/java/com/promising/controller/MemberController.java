@@ -36,9 +36,9 @@ public class MemberController {
 		role.setRoleName("BASIC");
 		vo.setRoles(Arrays.asList(role));
 		vo.setPassword(pwEncoder.encode(vo.getPassword()));
-	
+		
 		repo.save(vo);
-		return "redirect:/login";
+		return "redirect:/member/login";
 	}
 	
 	@GetMapping("/mypage")
@@ -47,7 +47,7 @@ public class MemberController {
 		}
 	
 	
-	
+
 	@GetMapping("/infoUpdate")
 	public void infoUpdate() {
 		

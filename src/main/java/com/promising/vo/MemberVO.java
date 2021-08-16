@@ -47,15 +47,17 @@ public class MemberVO {
 		private String address1;
 		@Column(nullable=false , length=200)
 		private String address2;
-		
-		
+		@Column( length=300)
+		private String oriName;
+		@Column( length=300)
+		private String sysName;
 		@CreationTimestamp
 		private Timestamp regdate;
 		
 		@UpdateTimestamp
 		private Timestamp updatedate;
 		
-		@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+		@OneToMany(cascade=CascadeType.ALL,fetch = FetchType.EAGER)
 		@JoinColumn(name="member")
 		private List<MemberRoleVO> roles;
 		
