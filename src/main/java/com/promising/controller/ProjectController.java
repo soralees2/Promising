@@ -1,6 +1,8 @@
 package com.promising.controller;
 
+
 import java.util.ArrayList;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,7 @@ public class ProjectController {
 	
 	@Autowired
 	private ProjectRepository repo;
+
 	
 	@GetMapping("/detail/{pno}")
 	public String detail(@PathVariable("pno") Long pno,Model model) {
@@ -49,6 +52,14 @@ public class ProjectController {
 	
 	@GetMapping("/payment")
 	public void payment(Model model) {
+	}
+	
+	@GetMapping("/main")
+	public String main(Model model) {
+		List<ProjectVO> result = repo.findAll();
+		model.addAttribute("result", result);
+		
+		return "project/main";
 	}
 	
 	@GetMapping("/list")
