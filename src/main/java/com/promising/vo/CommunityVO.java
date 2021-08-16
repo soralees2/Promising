@@ -37,7 +37,7 @@ public class CommunityVO {
 	@Column(nullable=false , length=1)
 	private String secret;
 	@Column(nullable=false)
-	private int pr_parent;
+	private Long pr_parent;
 	@CreationTimestamp
 	private Timestamp regDate;
 	@UpdateTimestamp

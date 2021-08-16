@@ -25,7 +25,6 @@ import lombok.ToString;
 @Getter
 @Setter
 @Entity
-
 @ToString
 @Table(name="MEMBER")
 public class MemberVO {
@@ -36,7 +35,8 @@ public class MemberVO {
 		
 		@Column(nullable=false , length= 250)
 		private String password;
-		@Column(nullable=false , length= 30)
+		
+		@Column(nullable=false,unique=true , length= 100)
 		private String uname;
 		
 		@Column(unique =true,nullable=false , length= 20)
@@ -52,10 +52,9 @@ public class MemberVO {
 		@Column( length=300)
 		private String sysName;
 		@CreationTimestamp
-		private Timestamp regdate;
-		
+		private Timestamp regDate;
 		@UpdateTimestamp
-		private Timestamp updatedate;
+		private Timestamp updateDate;
 		
 		@OneToMany(cascade=CascadeType.ALL,fetch = FetchType.EAGER)
 		@JoinColumn(name="member")

@@ -1,11 +1,16 @@
 package com.promising.vo;
 
 import java.sql.Timestamp;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -58,5 +63,8 @@ public class ProjectVO {
 	@UpdateTimestamp
 	private Timestamp updateDate;
 	
-
+	@OneToMany(cascade=CascadeType.ALL,fetch = FetchType.EAGER)
+	@JoinColumn(name="parent")
+	private List<MemberRoleVO> roles;
+	
 }
