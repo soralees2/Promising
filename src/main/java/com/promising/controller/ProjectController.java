@@ -1,5 +1,6 @@
 package com.promising.controller;
 
+
 import java.io.File;
 import java.security.Principal;
 import java.sql.Date;
@@ -7,14 +8,24 @@ import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
 
+
+import java.util.ArrayList;
+
+import java.util.List;
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+
 import org.springframework.web.bind.annotation.PostMapping;
+
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartRequest;
 
 import com.promising.repository.ProjectRepository;
 import com.promising.vo.ProjectVO;
@@ -29,13 +40,48 @@ public class ProjectController {
 	private HttpSession session;
 	@Autowired
 	private ProjectRepository repo;
-	@GetMapping("/detail")
-	public void detail(Model model) {
+	
+	//@GetMapping("/detail")
+//	public void detail(Model model) {
 //		model.addAttribute("hello", "안녕하세요, 반갑습니다!");
+
+	
+	@GetMapping("/detail/{pno}")
+	public String detail(@PathVariable("pno") Long pno,Model model) {
+		System.out.println("프로젝트 넘  : " + pno);
+		ProjectVO vo= repo.findById(pno).get();
+		//CommunityVO qvo= repo.findByCmt(pno).get();
+
+		model.addAttribute("vo",vo);
+		
+		return "project/detail";
+		
+
 	}
+
+	
+	
+//	@GetMapping("/detail/{bno}")
+//	public String detail(@PathVariable("bno") Long bno, Model model) {
+//		System.out.println(bno);
+//		BoardVO vo= repo.findById(bno).get();
+//		model.addAttribute("vo",vo);
+//		System.out.println("bno : "+ bno);
+//		return "board/detail";
+//		
+//	}
+	
+	
 	@GetMapping("/payment")
 	public void payment(Model model) {
-//		model.addAttribute("hello", "안녕하세요, 반갑습니다!");
+	}
+	
+	@GetMapping("/main")
+	public String main(Model model) {
+		List<ProjectVO> result = repo.findAll();
+		model.addAttribute("result", result);
+		
+		return "project/main";
 	}
 	
 	@GetMapping("/list")

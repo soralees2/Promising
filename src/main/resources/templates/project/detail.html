@@ -4,6 +4,8 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="_csrf" th:content="${_csrf.token}">
+	<meta name="_csrf_header" th:content="${_csrf.headerName}">
 	<th:block th:replace="fragments/commonHead"></th:block>
 	<link th:href="@{/css/project_detail.css}" rel="stylesheet">
 </head>
@@ -16,11 +18,11 @@
 		<div class="project_detail">
 			<div class="container">
 				<div class="project_title">
-					<span class="pj_tag">도서</span>
-					<h2>SOFA 2 주거: 표류기와 머무르기</h2>
+					<span class="pj_tag" th:text="${vo.prCategory}"></span>
+					<h2 th:text="${vo.prTitle}"></h2>
 					<div class="writer">
 						<div class="profile_img" style="background:url(../images/atom02.png) 50% 50% no-repeat;background-size:cover;"></div>
-						<a href="#">잉어(-ing-er)</a>
+						<a href="#" th:text="${vo.prWriter}"></a>
 					</div>
 				</div>
 				<div class="row">
@@ -70,9 +72,9 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-12 col-md-8 project_content">
-							<div id="story" style="display:none;">
-								<div class="story_contents">
-									<h2><strong><img src="https://tumblbug-psi.imgix.net/27a62f1fb360e12d9926fef6a0f3386a6b2437c9/283b06b41dd353ee03c78335601e30fd978302a0/098886c29bfdbae8756062cd78722449a96c5dfc/178bf80f-f903-4a5b-8f23-42d0c61df675.jpg?ixlib=rb-1.1.0&amp;w=1240&amp;auto=format%2C%20compress&amp;lossless=true&amp;ch=save-data&amp;s=60ae7eaae4a6b05fae18bf77cde157e3"></strong></h2><br><br>
+							<div id="story" style="display:block;">
+								<div class="story_contents" th:text="${vo.prContents}">
+									<!-- <h2><strong><img src="https://tumblbug-psi.imgix.net/27a62f1fb360e12d9926fef6a0f3386a6b2437c9/283b06b41dd353ee03c78335601e30fd978302a0/098886c29bfdbae8756062cd78722449a96c5dfc/178bf80f-f903-4a5b-8f23-42d0c61df675.jpg?ixlib=rb-1.1.0&amp;w=1240&amp;auto=format%2C%20compress&amp;lossless=true&amp;ch=save-data&amp;s=60ae7eaae4a6b05fae18bf77cde157e3"></strong></h2><br><br>
 									<h2>SOFA</h2>
 									<p><span style="font-weight: 400;">Society of Feminist Architects(이하 SOFA)는 한국에 기반을 두고 활동하는 여성 건축인들의 모임입니다. SOFA는 건축계의 다양한 여성들이 서로 연결되고 연대하는 장이 되는 것을 목표로 합니다. 고립되지 않고 함께할 때 새로이 발견할 수 있는 가능성이 존재한다는 믿음 하에, 우리는 여성 건축인으로서 느끼는 막연한 불안감의 이유에 대해 질문을 던지고 답을 찾아나가고자 합니다. (@sofa.seoul)</span></p>
 									<p><span style="font-weight: 400;">닫힌 방을 살아가는 요즈음, 우리는 어떤 집을 살아가고 있을까요.<br></span><span style="font-weight: 400;">나아가 우리는, 어떤 집을 살고 싶나요.</span></p>
@@ -166,11 +168,12 @@
 									<p>- 현재 원고 작성 90% 마감되었으며, 내지 편집을 진행하고 있습니다.<br>- 현재 굿즈 디자인과 업체 선정이 완료되었습니다.<br>- 7월 내지 편집과 샘플 제작을 진행할 예정입니다.<br>- 8월 13일에 후원이 종료되며, 종료 직후 수량에 맞추어 모든 책과 굿즈를 제작합니다.<br>- 9월 1일에 모든 리워드를 발송하겠습니다.<br><br></p>
 									<h2>후원자 안내</h2>
 									<p>- 목표 금액은 원고료, 편집비, 도서 인쇄비, 리워드 제작비 및 배송비로 사용됩니다.<br>- 모든 리워드는 택배를 통해 전달됩니다.<br>- 문의사항은 '창작자에게 문의하기'를 통해 알려주세요.</p>
-									<h2>&nbsp;</h2>
+									<h2>&nbsp;</h2> -->
 								</div>
 							</div>
-							<div id="community" style="display:block;">
+							<div id="community" style="display:none;">
 								<div class="community_contents">
+									<button type="button" class="btn btn-dark btn-addComt" data-bs-toggle="modal" data-bs-target="#community_modal">커뮤니티 글 작성하기</button>
 									<div class="post_list">
 										<div class="post">
 											<div class="pf_wrap">
@@ -318,13 +321,13 @@
 										<div class="pf_img" style="background:url(../images/atom02.png) 50% 50% no-repeat;background-size:cover;"></div>
 										<div class="pf_link">
 											<a href="#">
-												<span class="name">잉어(-ing-er)</span>
+												<span class="name" th:text="${vo.prWriter}"></span>
 											</a>
 										</div>
 									</div>
 								</div>
 								<div class="info">
-									<p class="txt">덕질장려단행본 레이블 The Kooh의 편집장(aka. 덕집장). 남들이 주목하지 않는 것을 더 깊이 보려 합니다. 쓸모가 있고 없고는 당신이 정하시면 됩니다. 세상 모든 덕질을 응원합니다.</p>
+									<p class="txt" th:text="${vo.prWriterintro}"></p>
 									<dl>
 										<dt>진행한 프로젝트</dt>
 										<dd><em>15</em></dd>
@@ -370,7 +373,7 @@
 			</div>
 
 			<!-- QnA Modal -->	
-			<div class="modal fade" id="qna_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+			<div class="modal fade" id="qna_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
 				<div class="modal-dialog modal-dialog-centered">
 					<div class="modal-content">
 						<div class="modal-header">
@@ -381,25 +384,54 @@
 							<dl>
 								<dt>받는사람</dt>
 								<dd>
-									<input type="text" class="form-control" readonly placeholder="작성자닉네임">
+									<input type="text" class="form-control" id="receiver" value="" readonly placeholder="작성자닉네임">
 								</dd>
 								<dt>문의내용</dt>
 								<dd>
-									<select class="form-select">
+									<select class="form-select" id="qna_category">
 										<option value="">문의유형</option>
-										<option value="">선물/후원</option>
-										<option value="">프로젝트</option>
-										<option value="">수령자 정보</option>
-										<option value="">배송</option>
-										<option value="">기타</option>
+										<option value="선물/후원">선물/후원</option>
+										<option value="프로젝트">프로젝트</option>
+										<option value="수령자 정보">수령자 정보</option>
+										<option value="배송">배송</option>
+										<option value="기타">기타</option>
 									</select>
 								</dd>
 							</dl>
-							<textarea class="form-control" rows="5" col="20" placeholder="프로젝트 진행자에게 문의하고 싶은 내용을 적어주세요."></textarea>
+							<textarea class="form-control" id="qna_contents" rows="5" col="20" placeholder="프로젝트 진행자에게 문의하고 싶은 내용을 적어주세요."></textarea>
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-							<button type="button" class="btn btn-primary">등록 하기</button>
+							<button type="button" class="btn btn-primary" id="addQnaBtn">등록 하기</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		
+			<!-- Community Modal -->	
+			<div class="modal fade" id="community_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title">커뮤니티 글 작성</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<dl>
+								<dt>제목</dt>
+								<dd>
+									<input type="text" class="form-control" id="com_title" placeholder="제목을 입력해주세요.">
+								</dd>
+								<dt>작성 내용</dt>
+								<dd>
+									<textarea class="form-control" id="com_contents" rows="15" col="20" placeholder="커뮤니티에 작성하실 글을 입력해 주세요."></textarea>
+								</dd>
+							</dl>
+							
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+							<button type="button" class="btn btn-primary" id="addCommunityBtn">등록 하기</button>
 						</div>
 					</div>
 				</div>
@@ -407,8 +439,6 @@
 
 		</div>
 	</div>
-	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 	<script>
 		$(function(){
 			$(".tab_menu li").on("click", function(){
@@ -472,11 +502,65 @@
 				moneyTxt.text(money_txt);
 				$("#btn_payment .result_money").text(money_txt);
 			})
+			
+			
+			// 커뮤니티글 작성 
+			let pno = /*[[${vo.pno}]]*/
+			$("#addCommunityBtn").on('click', function(){
+				let title = $("#com_title").val();
+				let contents = $("#com_contents").val();				  
+			 	let obj = { writer:'writer',title: title, contents: contents, project_pno:pno, secret :'N'}
+			  	console.log(JSON.stringify(obj));
+		  		$.ajax({
+		  			type:'post',
+			  		url: '/community/' + obj.project_pno,
+				  	data : JSON.stringify(obj),
+				  	dataType:'json',
+				  	contentType: "application/json",
+				  	beforeSend: function (jqXHR, settings) {
+		           		let header = $("meta[name='_csrf_header']").attr("content");
+		           		let token = $("meta[name='_csrf']").attr("content");
+		           		jqXHR.setRequestHeader(header, token);
+					}
+		  		}).done(function(){
+		  			console.log("성공");
+	  			})
+				  
+			 });
+			
+			
+			// 문의하기 
+			$("#addQnaBtn").on('click', function(){
+				let category = $("#qna_category option:selected").val();
+				let contents = $("#qna_contents").val();		
+				let receiver = $("#receiver").val();
+				receiver = "작성자닉네임"
+				console.log("receiver : " + receiver);
+				console.log("category : " + category);
+				console.log("contents : " + contents);
+				
+			 	let obj = { writer:'qnawriter',qnacategory:category, contents: contents, member_username :receiver};
+			  	console.log(JSON.stringify(obj));
+			  	let url = '/qna/' + obj.member_username;
+			 	console.log(url);
+			 	
+		  		$.ajax({
+		  			type:'post',
+			  		url: decodeURI(url),
+				  	data : JSON.stringify(obj),
+				  	dataType:'json',
+				  	contentType: "application/json",
+				  	beforeSend: function (jqXHR, settings) {
+		           		let header = $("meta[name='_csrf_header']").attr("content");
+		           		let token = $("meta[name='_csrf']").attr("content");
+		           		jqXHR.setRequestHeader(header, token);
+					}
+		  		}).done(function(){
+		  			console.log("성공");
+	  			})
+				  
+			 });
 		})
 	</script>
-
-
-
 </body>
-
 </html>
