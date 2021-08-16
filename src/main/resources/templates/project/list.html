@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -81,33 +81,35 @@
                 <div class="row">
                     <div class="col-12 col-md-6 col-xl-4">
                         <div class="card">
-                            <div class="imgDiv">
-                                <img src="../images/main/card1.jpeg" class="card-img-top" alt="..." width="200">
-                                <img src="../images/main/heart1.png" width="25" class="heart">
-                            </div>
-                            <div class="card-body">
-                                <div class="pro_title">
-                                    <a href="#">미래학교 에디션_베니스비엔날레 국제건축전 한국관 2021</a>
-                                </div>
-                                <div class="pro_cate">
-                                    <span><a href="#">전시</a></span>
-                                    <span class="division">|</span>
-                                    <span><a href="#">미래학교</a></span>
-                                </div>
-                                <div class="pro_explain">
-                                    <span>제17회 베니스비엔날레 국제건축전 2021 한국관 <미래학교>를 소개합니다.</h6>
-                                </div>
-                                <div class="progress-small">
-                                    <div class="progress-bar bg-danger" role="progressbar" style="width: 50%"
-                                        aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                                <div class="money">
-                                    <span class="price">916,000원</span>
-                                    <span class="percent">91%</span>
-                                    <span class="period"><i class="far fa-clock"></i> 40일 남음</span>
-                                </div>
-                            </div>
-                        </div>
+	                        <a th:href="@{/project/detail/1}">
+	                            <div class="imgDiv">
+	                                <img src="../images/main/card1.jpeg" class="card-img-top" alt="..." width="200">
+	                                <img src="../images/main/heart1.png" width="25" class="heart">
+	                            </div>
+	                            <div class="card-body">
+	                                <div class="pro_title">
+	                                    <a href="#">미래학교 에디션_베니스비엔날레 국제건축전 한국관 2021</a>
+	                                </div>
+	                                <div class="pro_cate">
+	                                    <span><a href="#">전시</a></span>
+	                                    <span class="division">|</span>
+	                                    <span><a href="#">미래학교</a></span>
+	                                </div>
+	                                <div class="pro_explain">
+	                                    <span>제17회 베니스비엔날레 국제건축전 2021 한국관 <미래학교>를 소개합니다.</h6>
+	                                </div>
+	                                <div class="progress-small">
+	                                    <div class="progress-bar bg-danger" role="progressbar" style="width: 50%"
+	                                        aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+	                                </div>
+	                                <div class="money">
+	                                    <span class="price">916,000원</span>
+	                                    <span class="percent">91%</span>
+	                                    <span class="period"><i class="far fa-clock"></i> 40일 남음</span>
+	                                </div>
+	                            </div>
+	                        </div>
+                        </a>
                     </div>
                     <div class="col-12 col-md-6 col-xl-4">
                         <div class="card">
