@@ -31,7 +31,10 @@ public class ProjectController {
 	public void upload2() {
 		
 	}
-	
+	@GetMapping("/auth/upload3")
+	public void upload3() {
+		
+	}
 	@GetMapping("/complete")
 	public void complete() {
 		

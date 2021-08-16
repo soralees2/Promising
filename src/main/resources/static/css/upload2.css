@@ -9,7 +9,7 @@
 .leftcover{
   display: block;
   width: 438px;
-  background: url(leftcover.jpg) 0% 0% / cover no-repeat rgb(237, 229, 227);
+  background: url(/images/project/upload/leftcover.jpg) 0% 0% / cover no-repeat rgb(237, 229, 227);
 }
 .rightcontents{
   -webkit-box-flex: 1;

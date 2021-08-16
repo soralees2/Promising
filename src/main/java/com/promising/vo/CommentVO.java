@@ -21,21 +21,18 @@ import lombok.ToString;
 @Setter
 @Entity
 @ToString
-@SequenceGenerator(name="COMMUNITY_SEQ_GENERATOR",sequenceName = "COMMUNITY_SEQ" ,initialValue = 1,allocationSize = 1)
-@Table(name="PR_COMMUNITY")
-public class CommunityVO {
-
+@SequenceGenerator(name="COMMENT_SEQ_GENERATOR",sequenceName = "COMMENT_SEQ" ,initialValue = 1,allocationSize = 1)
+@Table(name="PR_COMMENT")
+public class CommentVO {
+	
+	
 	@Id
-	@GeneratedValue(strategy = GenerationType. SEQUENCE, generator = "COMMUNITY_SEQ_GENERATOR")
-	private Long communityno;
+	@GeneratedValue(strategy = GenerationType. SEQUENCE, generator = "COMMENT_SEQ_GENERATOR")
+	private Long commentno;
 	@Column(nullable=false , length=100)
 	private String writer;
-	@Column(nullable=false , length=200)
-	private String title;
 	@Column(nullable=false , length=4000)
 	private String contents;
-	@Column(nullable=false , length=1)
-	private String secret;
 	@Column(nullable=false)
 	private Long pr_parent;
 	@CreationTimestamp

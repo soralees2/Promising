@@ -27,7 +27,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private DataSource dataSource;
 	@Autowired
-	 MemberDetailService mservice;
+	 private MemberDetailService mservice;
 	
 	@Bean
 	public PasswordEncoder passwordEncoder() {
