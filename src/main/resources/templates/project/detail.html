@@ -539,12 +539,14 @@
 				console.log("category : " + category);
 				console.log("contents : " + contents);
 				
-				
-			 	let obj = { writer:'qnawriter',qnacategory:category, contents: contents, member_username :receiver}
+			 	let obj = { writer:'qnawriter',qnacategory:category, contents: contents, member_username :receiver};
 			  	console.log(JSON.stringify(obj));
+			  	let url = '/qna/' + obj.member_username;
+			 	console.log(url);
+			 	
 		  		$.ajax({
 		  			type:'post',
-			  		url: '/qna/' + obj.member_username,
+			  		url: decodeURI(url),
 				  	data : JSON.stringify(obj),
 				  	dataType:'json',
 				  	contentType: "application/json",

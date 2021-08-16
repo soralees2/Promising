@@ -11,11 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.promising.repository.CommunityRepository;
 import com.promising.repository.QnaRepository;
-import com.promising.vo.CommunityVO;
 import com.promising.vo.MemberVO;
-import com.promising.vo.ProjectVO;
 import com.promising.vo.QnaVO;
 
 @RestController
