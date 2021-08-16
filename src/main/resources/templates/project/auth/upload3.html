@@ -6,11 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
    <th:block th:replace="fragments/commonHead"></th:block>
+ 
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
   <link href="410_layout/410_layout/css/common_style.css" rel="stylesheet">
   <link th:href="@{/css/upload3.css}" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
@@ -27,6 +27,7 @@
     <div class="container">
       <div class="makingproject">
         <div class="makingcontents">
+        <form action="#">
           <div class="categorywrap">
             <dl class="mydl">
               <dt class="mydl">프로젝트 카테고리<div class="imp"></div>
@@ -197,7 +198,19 @@
                 </div>
               </div>
              </div>
-
+ <div class="summarywrap">
+            <dl class="mydl">
+              <dt class="mydl">창작자 소개<div class="imp"></div>
+              </dt>
+              <dd class="itemdd">후원자 분들이 프로젝트를 빠르게 이해할 수 있도록
+                명확하고 간략하게 소개해주세요.</dd>
+            </dl>
+            <div class="summary">
+              <div class="summarybox">
+                <textarea placeholder="창작자 소개" cols="100" rows="5"></textarea>
+              </div>
+            </div>
+          </div>
              <div class="row explainwrap">
               <div class="col-12 col-md-5 explainbox">
                 <dl class="mydl">
@@ -221,7 +234,7 @@
                 </div>
               </div>
              </div>
-
+		</form>
          </div>
        </div>
      </div>

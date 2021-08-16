@@ -7,10 +7,13 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -24,10 +27,12 @@ import lombok.ToString;
 @Setter
 @Entity
 @ToString
+@SequenceGenerator(name="PROJECT_SEQ_GENERATOR",sequenceName = "PROJECT_SEQ" ,initialValue = 1,allocationSize = 1)
 @Table(name="PR_PROJECT")
 public class ProjectVO {
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType. SEQUENCE, generator = "PROJECT_SEQ_GENERATOR")
 	private Long pno;
 	@Column(nullable=false , length= 300)
 	private String prTitle;
@@ -50,6 +55,12 @@ public class ProjectVO {
 	private String prWriter;
 	@Column(nullable=false , length= 500)
 	private String prWriterintro;
+	@Column(nullable=false , length= 100)
+	private String prPresentTitle;
+	@Column(nullable=false , length= 1000)
+	private String prPresentContents;
+	@Column(nullable=false)
+	private int prPresentPrice;
 	@Column(nullable=false , length= 1)
 	private String prCheck; 		// 프로젝트 심사중/심사완료
 	@Column(nullable=false , length= 1)

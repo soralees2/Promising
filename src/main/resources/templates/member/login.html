@@ -25,10 +25,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 		<div class="logincontainer">
 			<div class="container loginBox p-4 shadow bg-white rounded">
 				<h2 class="mb-5 text-center">로그인</h2>
-			
-	<div th:with="member=${#authentication.principal}">
-	[[${member}]]
-	</div>
+
 				<form method="post">
 					<div class="form-row mb-3">
 						<div class="col-12 mb-2">
