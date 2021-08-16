@@ -27,6 +27,7 @@
 .writer_profile {background-color:#fff;padding:2rem;box-shadow:rgb(10 10 10 / 10%) 0px 1px 2px 0px;}
 .story_contents{background-color:#fff;padding:2rem;box-shadow:rgb(10 10 10 / 10%) 0px 1px 2px 0px;}
 .community_contents .post_list .post{background-color:#fff;padding:2rem;box-shadow:rgb(10 10 10 / 10%) 0px 1px 2px 0px;}
+.community_contents .btn-addComt{margin-bottom:20px;}
 .post_list .post+.post{margin-top:30px;}
 .post_list .post .txt{font-size:1.1rem;}
 .writer_profile h4{font-size:14px;font-weight:600;margin-bottom:15px;}
@@ -120,3 +121,6 @@
 #modal_privacy dl dt{width:30%;}
 #modal_privacy dl dd{width:70%;}
 #modal_privacy .modal-body span{font-weight:300;font-size:12px;line-height:1.1;}
+
+
+#community_modal .modal-body dt{margin-bottom:15px;}
