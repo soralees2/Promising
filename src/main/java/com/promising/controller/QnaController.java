@@ -25,7 +25,7 @@ public class QnaController {
 	@PostMapping("/{uname}")
 	public ResponseEntity<List<QnaVO>> addQna(@PathVariable("uname")String uname, @RequestBody QnaVO qvo){
 		System.out.println(qvo.getContents());
-		System.out.println(qvo.getMember());
+		System.out.println("-----------------" + uname);
 		MemberVO vo = new MemberVO();
 		vo.setUsername(uname);
 		qvo.setMember(vo);

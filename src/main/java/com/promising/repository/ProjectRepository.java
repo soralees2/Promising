@@ -19,6 +19,4 @@ public interface ProjectRepository extends JpaRepository<ProjectVO, Long>, Query
 		
 		return builder;
 	}
-
-
 }

@@ -524,17 +524,18 @@
 					}
 		  		}).done(function(){
 		  			console.log("성공");
+		  			$('#community_modal').modal('hide');
 	  			})
 				  
 			 });
 			
 			
-			// 문의하기 
+			// QnA 문의하기 
 			$("#addQnaBtn").on('click', function(){
 				let category = $("#qna_category option:selected").val();
 				let contents = $("#qna_contents").val();		
 				let receiver = $("#receiver").val();
-				receiver = "작성자닉네임"
+				receiver = "hansol"
 				console.log("receiver : " + receiver);
 				console.log("category : " + category);
 				console.log("contents : " + contents);
@@ -557,6 +558,7 @@
 					}
 		  		}).done(function(){
 		  			console.log("성공");
+		  			$('#qna_modal').modal('hide');
 	  			})
 				  
 			 });
