@@ -7,6 +7,8 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="_csrf" th:content="${_csrf.token}">
+<meta name="_csrf_header" th:content="${_csrf.headerName}">
 <title>Promising</title>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
@@ -14,14 +16,11 @@
 <link rel="stylesheet"
 	href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
 <link href="../css/common_style.css" rel="stylesheet">
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-<link rel="stylesheet" type="text/css" href="../css/infoUp.css">
+	<th:block th:replace="fragments/commonHead"></th:block>
+
 <link rel="stylesheet"
 	href="../fonts/material-design-iconic-font.min.css">
-<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-<script src="../Js/infoUp.js"></script>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 <script
 	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
@@ -29,13 +28,10 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<script
-	src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<link rel="stylesheet" type="text/css"
-	th:href="@{/css/common_style.css}">
-<link rel="stylesheet" type="text/css" th:href="@{/css/infoUpdate.css}">
 
-<script type="text/javascript" th:src="@{/js/infoUpdate.js}"></script>
+<link rel="stylesheet" th:href="@{/css/infoUpdate.css}">
+
+
 
 <!-- 현재버젼: 큰레이아웃+ slideToggle 완성/ 디테일수정요망: 어떤정보~부분 / 배송지 부분(카카오적용완료) 프론트만수정/DB저장 연동필요 -->
 
@@ -120,9 +116,9 @@
 				<div class="tab-content" id="pills-tabContent">
 					<div class="tab-pane fade show active" id="pills-home"
 						role="tabpanel" aria-labelledby="pills-home-tab">
-						<h3>프로필</h3>
+						<h3>프로필 이미지</h3>
 						<div class="modifyScroll">
-							<span><a href="#" id="PromodifyScroll">변경</a></span>
+							<span><a href="javascript:;" id="PromodifyScroll">변경</a></span>
 						</div>
 						<div class='col-sm-4 col-md-4 namennavi' id="nameNaviBlock">
 							<div class='col-sm-4 col-md-4 namennavi'>
@@ -140,13 +136,21 @@
 								</div>
 								<img id="profile" th:src="@{/images/dog.jpg}">
 
-								<div class="fileUploadClass">
+								<form action="#" method="post" enctype="multipart/form-data">
+									<!-- 프로필사진 전송 Form -->
+									<div class="fileUploadClass">
 
-									<label class="btn btn-outline-secondary btn-file"
-										id="btn-fileUp"> 파일추가 <input type="file"
-										style="display: none;" id="filebtn"> <!--숨기기-->
-									</label>
-								</div>
+										<label class="btn btn-outline-secondary btn-file"
+											id="btn-fileUp"> 파일추가 <input type="file" name="file"
+											accept="image/gif, image/jpeg, image/png"
+											autofocus="autofocus" style="display: none;" id="filebtn"
+											maxlength="10" required> <!--숨기기-->
+										</label>
+									</div>
+									<input type="hidden" th:name="${_csrf.parameterName}"
+										th:value="${_csrf.token}">
+
+								</form>
 
 								<div class="col-sm-4 col-md-4 " id="uploadDesc">
 									<span> 250X250 픽셀에 최적화 되어있으며, 10Mb 이하의 JPG,GIF,PNG 파일을
@@ -160,30 +164,31 @@
 							<hr>
 						</div>
 
-						<div class="UserName">
-							<div class="modifyScroll">
-								<span><a href="#" id="nameModifyScroll">변경</a></span>
+					
+							<div class="UserName">
+								<div class="modifyScroll">
+									<span><a href="javascript:;" id="nameModifyScroll">변경</a></span>
 
-							</div>
-							<h3>이름</h3>
+								</div>
+								<h3>이름</h3>
 
-							<h4>정규원</h4>
-							<br>
-							<div id="nameNBlank">
-								<input type="text" class="blank form-control-lg" id="userName"
-									placeholder="이름을 입력하세요.">
+								<h4>[[${result.uname}]]</h4>
+								<br>
+								<div id="nameNBlank">
+									<input type="text" class="blank form-control-lg" id="userName"
+										placeholder="이름을 입력하세요." required> 
+									<div class="col-sm-4 col-md-4 uploadcomment">
+										<button class="btn btn-dark" type="button" id="Namesavebutton">저장</button>
+									</div>
+								</div>
 
-								<div class="col-sm-4 col-md-4 uploadcomment">
-									<button class="btn btn-dark" id="Namesavebutton">저장</button>
+								<div class="container blankLine">
+
+									<hr>
+
 								</div>
 							</div>
-
-							<div class="container blankLine">
-
-								<hr>
-
-							</div>
-						</div>
+				
 
 
 
@@ -192,17 +197,18 @@
 
 							<div class="UserEmail">
 								<div class="modifyScroll">
-									<span><a href="#" id="emailModifyScroll">변경</a></span>
+									<span><a href="javascript:;" id="emailModifyScroll">변경</a></span>
 								</div>
 								<h3>이메일</h3>
-								<h5>kyn00018@naver.com</h5>
+								<h5>[[${result.username}]]</h5>
 								<br>
 								<div id="emailblankNButton">
 									<input type="text" class="blank form-control-lg"
 										placeholder="이메일을 입력하세요." id="userEmail">
 
 									<div class="col-sm-4 col-md-4 uploadcomment">
-										<button class="btn btn-dark " id="emailSavebutton">인증메일 전송</button>
+										<button class="btn btn-dark " type="button" id="emailSavebutton">인증메일
+											전송</button>
 									</div>
 								</div>
 							</div>
@@ -216,7 +222,7 @@
 
 							<div class="UserPw">
 								<div class="modifyScroll">
-									<span><a href="#" id="pwModifyScroll">변경</a></span>
+									<span><a href="javascript:;" id="pwModifyScroll">변경</a></span>
 								</div>
 								<h3>비밀번호</h3>
 								<br>
@@ -225,13 +231,13 @@
 
 						<div class="pwReset" id=pwblankNButton>
 							<div class="rememberPw">
-							<h6>현재 비밀번호</h6>
-							<input type="text" class="blank form-control-lg"
-								placeholder="현재 비밀번호" id="pw"> <br>
-								
-							<h6>비밀번호가 기억나지 않나요?</h6>
-							
-							<button class="btn btn-link" id="pwResetBtn">비밀번호 초기화</button>
+								<h6>현재 비밀번호</h6>
+								<input type="text" class="blank form-control-lg"
+									placeholder="현재 비밀번호" id="pw"> <br>
+
+								<h6>비밀번호가 기억나지 않나요?</h6>
+
+								<button class="btn btn-link" id="pwResetBtn">비밀번호 초기화</button>
 							</div>
 							<div class="pwReset">
 								<h6>변경할 비밀번호</h6>
@@ -250,17 +256,18 @@
 
 						<!--연락처 시작 -->
 						<div class="modifyScroll">
-							<span><a href="#" id="contactModifyScroll">변경</a></span>
+							<span><a href="javascript:;" id="contactModifyScroll">변경</a></span>
 						</div>
-						<h3>연락처</h3>
+						<h3>전화번호</h3>
 						<div class="contactmodi" id="contactblankNButton">
-							<h4>01026143918</h4>
+							<h4>[[${result.uphone}]]</h4>
 							<input type="text" class="blank contactBlank form-control-lg"
-								placeholder="연락처를 입력하세요." id="contact">
+								placeholder="연락처를 입력하세요." name="uphone" id="contact">
 
 
 							<div class="col-sm-4 col-md-4 uploadcomment">
-								<button class="btn btn-dark" id="contactVertify">인증번호 전송</button>
+								<button class="btn btn-dark" type="button" id="contactVertify">인증번호
+									전송</button>
 							</div>
 
 							<div></div>
@@ -321,7 +328,7 @@
 														<input type="text" name="address1" class="form-control"
 															id="addressScope" placeholder="주소를 입력하세요." required>
 														<div class="modifyIcon">
-															<a href="#" class="py-2 d-block"><i
+															<a href="javacript:;" class="py-2 d-block"><i
 																class="zmdi zmdi-search zmdi-hc-2x" id=search></i></a>
 
 														</div>
@@ -346,16 +353,10 @@
 
 
 
-												<div class="mb-3 form-check">
-													<input type="checkbox" name="basic"
-														class="form-check-input" id="exampleCheck1"> <label
-														class="form-check-label" for="exampleCheck1">기본배송지로
-														등록 </label>
-												</div>
-
+											
 												<div class="modal-footer">
 													<button type="button"
-														class="btn btn-primary center col-12 ">등록 완료</button>
+														class="btn btn-primary center col-12"  id="modifyComp">등록 완료</button>
 
 												</div>
 
@@ -370,57 +371,162 @@
 							id="shippingDataBox">
 
 
-							<span>배송지 불러오기 </span>
+								<div class="mb-3">
+								<div class="mb-3">
+									<label for="postCode" class="form-label">받는 사람이름</label><br>
+									<div class="form-control">
+										<h5>[[${result.uname}]]</h5>
+										<br>
+
+									</div>
+								</div>
+
+								<div class="mb-3">
+								<div class="mb-3">
+									<label for="postCode" class="form-label">받는 사람 연락처</label><br>
+									<div class="form-control">
+										<h5>[[${result.uphone}]]</h5>
+										<br>
+
+									</div>
+								</div>
+
+
+
+
+							<div class="mb-3">
+								<div class="mb-3">
+									<label for="postCode" class="form-label">주소</label><br>
+									<div class="form-control">
+										<h5>[[${result.address1}]]</h5>
+										<br>
+
+									</div>
+								</div>
+
+
+								<div class="mb-3">
+									<label for="postCode" class="form-label">상세주소</label><br>
+									<div class="form-control">
+										<h5>[[${result.address2}]]</h5>
+										<br>
+
+									</div>
+
+
+
+									<div class="mb-3">
+										<label for="postCode" class="form-label">우편번호</label><br>
+										<div class="form-control">
+											<h5>[[${result.upostcode}]]</h5>
+											<br>
+
+										</div>
+
+									</div>
+
+								</div>
+							</div>
+
 
 						</div>
-
 					</div>
+
+
+
 				</div>
 
 
 
-
-
-
 			</div>
+			<!--텝라인 div닫기 -->
 		</div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 	</div>
+	<script type="text/javascript" th:src="@{/js/infoUpdate.js}"></script>
+	<script> 
+	$(function(){
+	$("#Namesavebutton").on("click",function(){
 
-
-
-	</div>
-	<!--텝라인 div닫기 -->
-	</div>
-
-	</div>
-	<script>
+		let modifyId =$("#userName").val();
 		
+if(modifyId == ""){
+	
+	alert("변경할 이름을 입력해주세요.")
+	
+	}else{
+
+		console.log(modifyId);
+		$.ajax({
+			type:'POST',
+			 url: '/member/infoUpdate/'+modifyId,
+			data : JSON.stringify({uname:modifyId}),
+			contentType: "application/json",
+			beforeSend: function (jqXHR, settings) {
+		           		let header = $("meta[name='_csrf_header']").attr("content");
+		           		let token = $("meta[name='_csrf']").attr("content");
+		           		jqXHR.setRequestHeader(header, token);
+					}, success: function(data){
+						 alert("갱신 성공");  
+							console.log(data);
+							location.reload();
+						
+					},error:function(request,status,error){
+				        alert("이름이 중복됩니다. 다른 이름을 설정해주세요."); // 실패 시 처리
+				    
+				       }
+
+})
+				
+	}
+	})
+	
+	
+$("#contactVertify").on("click",function(){
+
+		/*값이 잘가는가?*/
+		let modifyContact =$("#contact").val();
+		
+		
+if(modifyContact == ""){
+	
+	alert("변경할 번호을 입력해주세요.")
+	
+	}else{
+
+		console.log(modifyContact);
+		$.ajax({
+			type:'POST',
+			 url: '/member/uphoneUpdate/'+modifyContact,
+			data : JSON.stringify({uphone:modifyContact}),
+			contentType: "application/json",
+			beforeSend: function (jqXHR, settings) {
+		           		let header = $("meta[name='_csrf_header']").attr("content");
+		           		let token = $("meta[name='_csrf']").attr("content");
+		           		jqXHR.setRequestHeader(header, token);
+					}, success: function(data){
+						
+						  console.log("갱신 성공");  
+						  alert("갱신 성공");  
+						
+					},error:function(request,status,error){
+				        alert("번호가 중복됩니다. 다시 설정해주세요."); // 실패 시 처리
+				      
+
+				       }
+
+})
+				
+	}
+	})
+	
+	
+	
+	
+	})
+
+
+
 	</script>
 </body>
 

@@ -50,4 +50,5 @@ public class QnaVO {
 	@JsonIgnore
 	@ManyToOne(fetch=FetchType.LAZY)
 	private MemberVO member;
+	// 얘네 왜 안들어왔었지.. 
 }
