@@ -26,7 +26,7 @@ import lombok.ToString;
 @Setter
 @Entity
 @SequenceGenerator(name="QNA_SEQ_GENERATOR",sequenceName = "QNA_SEQ" ,initialValue = 1,allocationSize = 1)
-@ToString
+@ToString(exclude="member")
 @EqualsAndHashCode(of="qnano")
 @Table(name="PR_QNA")
 public class QnaVO {	
