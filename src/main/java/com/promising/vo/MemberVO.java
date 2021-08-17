@@ -7,11 +7,9 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -38,22 +36,31 @@ public class MemberVO {
 		
 		@Column(nullable=false,unique=true , length= 100)
 		private String uname;
+		
 		@Column(nullable=false,unique=true , length= 100)
 		private String realname;
+		
 		@Column(unique =true,nullable=false , length= 20)
 		private String uphone;
+		
 		@Column(nullable=false , length=10)
 		private String upostcode;
+		
 		@Column(nullable=false , length=300)
 		private String address1;
+		
 		@Column(nullable=false , length=200)
 		private String address2;
+		
 		@Column( length=300)
 		private String oriName;
+		
 		@Column( length=300)
 		private String sysName;
+		
 		@CreationTimestamp
 		private Timestamp regDate;
+		
 		@UpdateTimestamp
 		private Timestamp updateDate;
 		
