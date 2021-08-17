@@ -102,4 +102,20 @@ $("#next").on("click",function(){
 var token = $("meta[name='_csrf']").attr("content");
 var header = $("meta[name='_csrf_header']").attr("content");
 $(document).ajaxSend(function(e, xhr, options) { xhr.setRequestHeader(header, token); });
+
+function readInputFile(input) {
+    if(input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            $('#img').attr("src",e.target.result);
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+ 
+$("#imgform").on('change', function(){
+    readInputFile(this);
+});
+
+
 })

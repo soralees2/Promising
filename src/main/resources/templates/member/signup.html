@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
  <meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="_csrf" th:content="${_csrf.token}">
+<meta name="_csrf_header" th:content="${_csrf.headerName}">
 	<th:block th:replace="fragments/commonHead"></th:block>
   <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
@@ -31,11 +33,11 @@
 				</div>
 				<div class="col-8 col-sm-auto mb-2">
 					<input type="text" class="form-control" name="username" id="id"
-						placeholder="아이디를 입력해주세요.">
+						placeholder="이메일을 입력해주세요.">
 				</div>
 				<div class="col-4 col-sm-auto mb-2">
-					<input type="button" id="check" class="btn btn-dark w-100"
-						value="중복확인">
+					<input type="button" id="emailcheck" class="btn btn-dark w-100"
+						value="이메일 인증">
 				</div>
 			</div>
 			<div class="form-row align-items-cente">
@@ -62,12 +64,26 @@
 			</div>
 			<div class="form-row align-items-center">
 				<div class="col-12 col-sm-2 mb-2">
-					<label class="mb-0" for="">이름</label>
+					<label class="mb-0" for="">닉네임</label>
+				</div>
+				<div class="col-8 col-sm-auto mb-2">
+					<input type="text" class="form-control" name="uname" id="name"
+						placeholder="닉네임을 입력해주세요.">
+				</div>
+				<div class="col-4 col-sm-auto mb-2">
+					<input type="button" id="check" class="btn btn-dark w-100"
+						value="중복확인">
+				</div>
+			</div>
+			<div class="form-row align-items-center">
+				<div class="col-12 col-sm-2 mb-2">
+					<label class="mb-0" for="">실명</label>
 				</div>
 				<div class="col-12 col-sm-auto mb-2">
-					<input type="text" class="form-control" name="uname" id="name"
-						placeholder="이름을 입력해주세요.">
+					<input type="text" class="form-control" name="realname" id="realname"
+						placeholder="실명을 입력해주세요.">
 				</div>
+
 			</div>
 			<div class="form-row align-items-center">
 				<div class="col-12 col-sm-2 mb-2">
@@ -132,6 +148,22 @@
 	<script>
 
 	$(function() {
+		$("#emailcheck").on("click",function(){
+			var obj=$("#id").val();
+			$.ajax({
+				url:'/email/send/'+obj,
+				type:'POST',
+				 data : JSON.stringify({username:obj}),
+		         contentType: 'application/json',
+		         beforeSend: function (jqXHR, settings) {
+                     let header = $("meta[name='_csrf_header']").attr("content");
+                     let token = $("meta[name='_csrf']").attr("content");
+                     jqXHR.setRequestHeader(header, token);
+		         }
+				}).done(function(data){
+				
+			});
+		})
 		$("#check").on(
 				"click",
 				function() {

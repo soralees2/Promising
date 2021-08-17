@@ -38,7 +38,8 @@ public class MemberVO {
 		
 		@Column(nullable=false,unique=true , length= 100)
 		private String uname;
-		
+		@Column(nullable=false,unique=true , length= 100)
+		private String realname;
 		@Column(unique =true,nullable=false , length= 20)
 		private String uphone;
 		@Column(nullable=false , length=10)
