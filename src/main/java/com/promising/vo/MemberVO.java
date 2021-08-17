@@ -25,7 +25,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @Entity
-@ToString
+@ToString(exclude="qna")
 @Table(name="MEMBER")
 public class MemberVO {
 	
@@ -62,7 +62,7 @@ public class MemberVO {
 		private List<MemberRoleVO> roles;
 		
 		@JsonIgnore
-		@OneToMany(mappedBy="member", fetch=FetchType.LAZY)
+		@OneToMany(mappedBy="member", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 		private List<QnaVO> qna;
 		
 }
