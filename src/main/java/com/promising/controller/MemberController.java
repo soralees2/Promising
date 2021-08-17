@@ -3,6 +3,8 @@ package com.promising.controller;
 import java.security.Principal;
 import java.util.Arrays;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -25,6 +27,10 @@ public class MemberController {
 
 	@Autowired
 	private PasswordEncoder pwEncoder;
+	
+	@Autowired
+	HttpSession httpSession;
+	
 	@Autowired
 	private MemberRepository repo;
 	@GetMapping("/login")
@@ -72,19 +78,58 @@ public class MemberController {
 	
 	@RequestMapping(value="/infoUpdate/{uname}",method = RequestMethod.POST)
 	@ResponseBody
-	public  String nameUpdate(@PathVariable("uname") String uname,@RequestBody MemberVO mvo,Model model,Principal principal) {
+	public void nameUpdate(@PathVariable("uname") String uname,@RequestBody MemberVO mvo,Model model,Principal principal) {
+		System.out.println("10시");
 		
-		MemberVO vo=repo.findById(uname).get();
-
+		String originName =principal.getName();		
+		MemberVO vo=repo.findById(originName).get(); //찐
+		vo.setUname(uname);
+		
+		System.out.println("=========================username : " + vo.getUsername());
+		System.out.println("vo getname"+vo.getUname());
+		System.out.println("vo getname"+vo.getAddress1());
 		System.out.println("=========================username : " + mvo.getUsername());
-		System.out.println(mvo.getUname());
-		System.out.println(mvo.getAddress1());
+		System.out.println("mvo uname"+mvo.getUname());
 		
 		repo.save(vo);
-		return "redirect:/member/infoUpdate";
+		
+//		return "redirect:/member/infoUpdate";
+		
+			}
+
 	
-		}
+	@RequestMapping(value="/uphoneUpdate/{modifyContact}",method = RequestMethod.POST)
+	@ResponseBody
+	public void emailUpdate(@PathVariable("modifyContact") String modifyContact,@RequestBody MemberVO mvo,Model model,Principal principal) {
+		System.out.println("10시");
+		
+		String originName =principal.getName();		
+		MemberVO vo=repo.findById(originName).get(); //찐
+		vo.setUphone(modifyContact);
+		
+		repo.save(vo);
+		
+//		return "redirect:/member/infoUpdate";
+		
+			}
 	
+	
+	
+//	@RequestMapping(value="/deliveryModify/{obj.userName+obj.address1+obj.address2+obj.upostcode+obj.uphone}",method = RequestMethod.POST)
+//	@ResponseBody
+//	public void deliveryModify(@PathVariable("modifyContact") String o,Model model,Principal principal) {
+//		System.out.println("10시");
+//		
+//		String originName =principal.getName();		
+//		MemberVO vo=repo.findById(originName).get(); //찐
+//	    vo.setAddress1(obj.)
+//		vo.setUphone(modifyContact);
+//		
+//		repo.save(vo);
+		
+//		return "redirect:/member/infoUpdate";
+	
+		//	}
 	
 	
 	

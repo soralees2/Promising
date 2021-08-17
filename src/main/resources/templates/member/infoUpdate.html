@@ -31,7 +31,7 @@
 
 <link rel="stylesheet" th:href="@{/css/infoUpdate.css}">
 
-<script type="text/javascript" th:src="@{/js/infoUpdate.js}"></script>
+
 
 <!-- 현재버젼: 큰레이아웃+ slideToggle 완성/ 디테일수정요망: 어떤정보~부분 / 배송지 부분(카카오적용완료) 프론트만수정/DB저장 연동필요 -->
 
@@ -164,7 +164,7 @@
 							<hr>
 						</div>
 
-						<form >
+					
 							<div class="UserName">
 								<div class="modifyScroll">
 									<span><a href="javascript:;" id="nameModifyScroll">변경</a></span>
@@ -176,9 +176,9 @@
 								<br>
 								<div id="nameNBlank">
 									<input type="text" class="blank form-control-lg" id="userName"
-										placeholder="이름을 입력하세요." name="uname" required> 
+										placeholder="이름을 입력하세요." required> 
 									<div class="col-sm-4 col-md-4 uploadcomment">
-										<button class="btn btn-dark" id="Namesavebutton">저장</button>
+										<button class="btn btn-dark" type="button" id="Namesavebutton">저장</button>
 									</div>
 								</div>
 
@@ -188,7 +188,7 @@
 
 								</div>
 							</div>
-						</form>
+				
 
 
 
@@ -207,7 +207,7 @@
 										placeholder="이메일을 입력하세요." id="userEmail">
 
 									<div class="col-sm-4 col-md-4 uploadcomment">
-										<button class="btn btn-dark " id="emailSavebutton">인증메일
+										<button class="btn btn-dark " type="button" id="emailSavebutton">인증메일
 											전송</button>
 									</div>
 								</div>
@@ -262,11 +262,11 @@
 						<div class="contactmodi" id="contactblankNButton">
 							<h4>[[${result.uphone}]]</h4>
 							<input type="text" class="blank contactBlank form-control-lg"
-								placeholder="연락처를 입력하세요." id="contact">
+								placeholder="연락처를 입력하세요." name="uphone" id="contact">
 
 
 							<div class="col-sm-4 col-md-4 uploadcomment">
-								<button class="btn btn-dark" id="contactVertify">인증번호
+								<button class="btn btn-dark" type="button" id="contactVertify">인증번호
 									전송</button>
 							</div>
 
@@ -353,16 +353,10 @@
 
 
 
-												<div class="mb-3 form-check">
-													<input type="checkbox" name="basic"
-														class="form-check-input" id="exampleCheck1"> <label
-														class="form-check-label" for="exampleCheck1">기본배송지로
-														등록 </label>
-												</div>
-
+											
 												<div class="modal-footer">
 													<button type="button"
-														class="btn btn-primary center col-12 ">등록 완료</button>
+														class="btn btn-primary center col-12"  id="modifyComp">등록 완료</button>
 
 												</div>
 
@@ -375,6 +369,28 @@
 
 						<div class="RoundedWrapper__Wrapper-a7usag-0 ckzBmr"
 							id="shippingDataBox">
+
+
+								<div class="mb-3">
+								<div class="mb-3">
+									<label for="postCode" class="form-label">받는 사람이름</label><br>
+									<div class="form-control">
+										<h5>[[${result.uname}]]</h5>
+										<br>
+
+									</div>
+								</div>
+
+								<div class="mb-3">
+								<div class="mb-3">
+									<label for="postCode" class="form-label">받는 사람 연락처</label><br>
+									<div class="form-control">
+										<h5>[[${result.uphone}]]</h5>
+										<br>
+
+									</div>
+								</div>
+
 
 
 
@@ -427,8 +443,90 @@
 		</div>
 
 	</div>
-	<script>
+	<script type="text/javascript" th:src="@{/js/infoUpdate.js}"></script>
+	<script> 
+	$(function(){
+	$("#Namesavebutton").on("click",function(){
+
+		let modifyId =$("#userName").val();
 		
+if(modifyId == ""){
+	
+	alert("변경할 이름을 입력해주세요.")
+	
+	}else{
+
+		console.log(modifyId);
+		$.ajax({
+			type:'POST',
+			 url: '/member/infoUpdate/'+modifyId,
+			data : JSON.stringify({uname:modifyId}),
+			contentType: "application/json",
+			beforeSend: function (jqXHR, settings) {
+		           		let header = $("meta[name='_csrf_header']").attr("content");
+		           		let token = $("meta[name='_csrf']").attr("content");
+		           		jqXHR.setRequestHeader(header, token);
+					}, success: function(data){
+						 alert("갱신 성공");  
+							console.log(data);
+							location.reload();
+						
+					},error:function(request,status,error){
+				        alert("이름이 중복됩니다. 다른 이름을 설정해주세요."); // 실패 시 처리
+				    
+				       }
+
+})
+				
+	}
+	})
+	
+	
+$("#contactVertify").on("click",function(){
+
+		/*값이 잘가는가?*/
+		let modifyContact =$("#contact").val();
+		
+		
+if(modifyContact == ""){
+	
+	alert("변경할 번호을 입력해주세요.")
+	
+	}else{
+
+		console.log(modifyContact);
+		$.ajax({
+			type:'POST',
+			 url: '/member/uphoneUpdate/'+modifyContact,
+			data : JSON.stringify({uphone:modifyContact}),
+			contentType: "application/json",
+			beforeSend: function (jqXHR, settings) {
+		           		let header = $("meta[name='_csrf_header']").attr("content");
+		           		let token = $("meta[name='_csrf']").attr("content");
+		           		jqXHR.setRequestHeader(header, token);
+					}, success: function(data){
+						
+						  console.log("갱신 성공");  
+						  alert("갱신 성공");  
+						
+					},error:function(request,status,error){
+				        alert("번호가 중복됩니다. 다시 설정해주세요."); // 실패 시 처리
+				      
+
+				       }
+
+})
+				
+	}
+	})
+	
+	
+	
+	
+	})
+
+
+
 	</script>
 </body>
 

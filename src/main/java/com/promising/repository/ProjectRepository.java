@@ -1,8 +1,9 @@
 package com.promising.repository;
 
+
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.querydsl.QuerydslPredicateExecutor;
-
 
 import com.promising.vo.ProjectVO;
 import com.promising.vo.QProjectVO;
@@ -18,5 +19,6 @@ public interface ProjectRepository extends JpaRepository<ProjectVO, Long>, Query
 		
 		return builder;
 	}
+
 
 }

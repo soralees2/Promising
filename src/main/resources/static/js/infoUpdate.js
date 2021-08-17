@@ -122,63 +122,45 @@ $("#search").on("click",function(){
         }).open();//팝업을 띄우려면 오픈만해줘
         
 })
+
+/*$("#modifyComp").on("click",function(){
 	
-	$("#Namesavebutton").on("click",function(){
-		/*값이 잘가는가?*/
-		let modifyId =$("#userName").val();
-		
-		/*let obj ={"username":username, "address1":address1,"address2":address2,"oriname":oriname,"password":password,"regdate":regdate,"sysname":sysname,"uname":modifyId,"updatedate":updatedate,"uphone":uphone,"upostcode":upostcode}
-		console.log(obj);
-		console.log(modifyId);*/
-		
-		
-		if(modifyId ==""){
-			alert("바꿀 이름을 입력해주세요.")
-			
-		}else{
+	let nameVal=$("#inputReceiverName").val();
+	let phoneVal=$("#inputReceiverContact").val();
+	let address1Val=$("#addressScope").val();
+	let address2Val=$("#addressDetail").val();
+	let postCodeVal=$("#postCode").val();
+	
+		let obj = {username:'nameVal',address1:'address1Val',address2:'address1Val',upostcode:'postCodeVal',uphone:'phoneVal',oriName:oriName,sysName:sysName,regDate:regDate,updateDate:updateDate};
+	
+	console.log(obj);
 	$.ajax({
-	type:'POST',
-	 url: 'member/infoUpdate',
-	data : {uname:modifyId},
-	dataType:'json',
-	contentType: "application/json;charset=UTF-8",
-	beforeSend: function (jqXHR, settings) {
-	var header = $("meta[name='_csrf_header']").attr("content");
-	var token = $("meta[name='_csrf']").attr("content");
-	jqXHR.setRequestHeader(header, token);
-						}
-					  }).done(function(data){
-						  console.log("성공");
-				console.log(data);
-					 
-	 })
+			type:'POST',
+			 url: '/member/deliveryModify/'+obj.userName+obj.address1+obj.address2+obj.upostcode+obj.uphone,
+			data : (JSON.stringify(obj)),
+			contentType: "application/json",
+			beforeSend: function (jqXHR, settings) {
+		           		let header = $("meta[name='_csrf_header']").attr("content");
+		           		let token = $("meta[name='_csrf']").attr("content");
+		           		jqXHR.setRequestHeader(header, token);
+					}, success: function(data){
+						
+						  console.log("주소 갱신 성공");  
+						  alert("주소 갱신 성공");  
+						
+					},error:function(request,status,error){
+				        alert("번호가 중복됩니다. 다시 설정해주세요."); // 실패 시 처리	      
+	})
+	})
 	
-			
-/*		$.ajax({ 
+})*/
+
+
+
+
+
 	
-		url:'/member/infoUpdate/{userName}', 
-		type:'post', 
-		data:JSON.stringify(userName),
-		dataType:'text', // 다른 페이지를 처리 후에 결과가 성공일 때 // 비동기식으로 처리를 함 async: false, success:function(data) { var message = data.message;
-		contentType: "application/json; charset=UTF-8",
-		success : function(data) {    
-                alert("비밀번호 변경이 완료되었습니다.");
-                location.href="/member/infoUpdate";
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-                alert("ERROR : " + textStatus + " : " + errorThrown);
-            }        
-        })
-    }*/
-    
 
-
-
-
-}
-
-
-})
 })
 
 
