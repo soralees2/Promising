@@ -310,7 +310,48 @@
     -webkit-box-pack: justify;
     justify-content: space-between;
 }
-.explaincontents{
-
- 
+.twobtn{
+	margin-top:80px;
+	margin-bottom:100px;
+  display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+}
+#back{
+  cursor: pointer;
+  display: inline-flex;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  height: 40px;
+  white-space: nowrap;
+  border-radius: 4px;
+  margin: 0px;
+  border: 0px;
+  outline: none;
+  font-weight: normal;
+  box-sizing: border-box;
+  padding: 0px 16px;
+  background-color: transparent;
+  color: rgb(61, 61, 61);
+}
+#next{
+  cursor: pointer;
+  display: inline-flex;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  height: 40px;
+  white-space: nowrap;
+  border-radius: 4px;
+  margin: 0px;
+  border: 0px;
+  outline: none;
+  font-weight: normal;
+  box-sizing: border-box;
+  padding: 0px 16px;
+  background-color: rgb(255, 87, 87);
+  color: rgb(255, 255, 255);
 }

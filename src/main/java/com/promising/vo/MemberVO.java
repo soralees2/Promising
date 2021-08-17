@@ -17,7 +17,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -25,7 +25,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @Entity
-@ToString
+@ToString(exclude="qna")
 @Table(name="MEMBER")
 public class MemberVO {
 	
@@ -59,5 +59,9 @@ public class MemberVO {
 		@OneToMany(cascade=CascadeType.ALL,fetch = FetchType.EAGER)
 		@JoinColumn(name="member")
 		private List<MemberRoleVO> roles;
+		
+		@JsonIgnore
+		@OneToMany(mappedBy="member", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+		private List<QnaVO> qna;
 		
 }

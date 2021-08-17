@@ -20,6 +20,8 @@ import javax.persistence.Table;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -27,7 +29,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @Entity
-@ToString
+@ToString(exclude="community")
 @SequenceGenerator(name="PROJECT_SEQ_GENERATOR",sequenceName = "PROJECT_SEQ" ,initialValue = 1,allocationSize = 1)
 @Table(name="PR_PROJECT")
 public class ProjectVO {
@@ -78,5 +80,9 @@ public class ProjectVO {
 	@OneToMany(cascade=CascadeType.ALL,fetch = FetchType.EAGER)
 	@JoinColumn(name="parent")
 	private List<MemberRoleVO> roles;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy="project", fetch=FetchType.LAZY)
+	private List<CommunityVO> community;
 	
 }

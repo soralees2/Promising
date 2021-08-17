@@ -1,4 +1,31 @@
 $(function(){
+	function getFormatDate(date){
+		var year = date.getFullYear();
+		var month =(1+date.getMonth());
+		month = month >=10 ?month : '0' +month;
+		var day = date.getDate();
+		day = day>=10 ? day:'0'+day;
+		return year + '-' +month +'-'+day;
+	}
+var minday=new Date();
+
+	minday.setDate(minday.getDate()+7);
+	min = getFormatDate(minday);
+	$("#startday").attr("min",min);
+	
+	
+	var howlong=$("#howlong").val();
+	
+	$("#howlong").change(function(){
+		howlong = $(this).val();
+	})
+	var startday=new Date();
+		$("#startday").change(function(){
+		 startday= new Date($(this).val());
+	
+		
+	})
+	
 	
 	$("#inputmoney").keyup(function(){
 		let fmoney=$("#inputmoney").val();
@@ -11,6 +38,7 @@ $(function(){
 	$("#totalsusu").text(susu+"원");
 	$("#expect").text(total+"원");
 	})
+
 	
 	
   $("#summernote").summernote({
@@ -56,6 +84,22 @@ $(function(){
    });
   }
   } 
-  
   });
+	$("#back").on("click", function () {
+    history.back();
+  });  
+$("#next").on("click",function(){
+	var startdate =getFormatDate(startday);
+	$("#prStartday").attr("value",startdate);
+	startday.setDate(startday.getDate()+parseInt(howlong));
+	var enddate = getFormatDate(startday);
+	$("#prEndday").attr("value",enddate);
+		var check = confirm("프로젝트 심사가 시작되면 수정할 수 없습니다. 프로젝트 작성을 완료하시겠습니까?");
+		if(check){
+			$("#projectform").submit();
+		}
+})
+var token = $("meta[name='_csrf']").attr("content");
+var header = $("meta[name='_csrf_header']").attr("content");
+$(document).ajaxSend(function(e, xhr, options) { xhr.setRequestHeader(header, token); });
 })

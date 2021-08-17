@@ -9,7 +9,7 @@ import com.promising.vo.MemberVO;
 
 @Repository
 public interface MemberRepository extends JpaRepository<MemberVO, String> {
-
-
+		
+		
 		Optional<MemberVO> findByUsername(String username);
 }
