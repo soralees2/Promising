@@ -1,12 +1,17 @@
 package com.promising.controller;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.promising.repository.ProjectRepository;
 import com.promising.vo.ProjectVO;
@@ -29,10 +34,27 @@ public class ProjectController {
 	
 	@GetMapping("/main")
 	public String main(Model model) {
-		List<ProjectVO> result = repo.findAll();
+		List<ProjectVO> result = repo.selectAll();
 		model.addAttribute("result", result);
-		
 		return "project/main";
+	}
+	
+	@PostMapping("/newest")
+	@ResponseBody
+	public List<ProjectVO> newest (Model model, Principal principal) {
+		System.out.println("최신순 요청");
+		List<ProjectVO> result = repo.selectNewest();
+		model.addAttribute("result", result);
+		return result;
+	}
+	
+	@PostMapping("/close")
+	@ResponseBody
+	public List<ProjectVO> close (Model model, Principal principal) {
+		System.out.println("마감순 요청");
+		List<ProjectVO> result = repo.selectClose();
+		model.addAttribute("result", result);
+		return result;
 	}
 	
 	@GetMapping("/list")
