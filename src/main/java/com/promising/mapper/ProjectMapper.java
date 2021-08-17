@@ -14,8 +14,9 @@ public interface ProjectMapper {
 	@Select("SELECT * FROM PROJECT")	// 프로젝트 전체 리스트
 	List<ProjectVO> findAll();
 	
-	@Select("SELECT * FROM PROJECT WHERE SEQ = #{SEQ}")
+	@Select("SELECT * FROM PROJECT WHERE SEQ = #{seq}")
 	ProjectVO findBySeq(@Param("seq") int seq);
+	
 	@Select("SELECT MAX(SEQ) FROM PROJECT")
 	int getSeq();
 }
