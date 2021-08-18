@@ -2,7 +2,6 @@ package com.promising.config;
 
 import javax.sql.DataSource;
 
-import org.hibernate.engine.transaction.jta.platform.internal.SapNetWeaverJtaPlatform;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -38,6 +37,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	public void configure(WebSecurity web) throws Exception
 	{
 		web.ignoring().antMatchers("/css/**", "/script/**", "image/**", "/fonts/**", "lib/**");
+	
+		
 	}
 	@Override
 	protected void configure(HttpSecurity http) throws Exception
