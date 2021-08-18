@@ -160,4 +160,29 @@ public class MemberController {
 		
 		
 		}
+	
+	@RequestMapping(value="/pwModify",method = RequestMethod.POST)
+	@ResponseBody
+	public void pwUpdate(@PathVariable("currPw") String currPw,@PathVariable("repw1") String repw1,@RequestBody MemberVO mvo,Model model,Principal principal) {
+		System.out.println("10시");
+		
+		String nowPw= currPw;
+		
+		String originName =principal.getName();		
+		MemberVO vo=repo.findById(originName).get(); //찐
+		vo.setPassword(nowPw);
+		vo.setPassword(pwEncoder.encode(vo.getPassword()));
+		
+	
+		
+		repo.save(vo);
+		
+//		return "redirect:/member/infoUpdate";
+		
+			}
+	
+	
+	
+	
+	
 }
