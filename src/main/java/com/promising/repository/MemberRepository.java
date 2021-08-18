@@ -12,8 +12,7 @@ import com.promising.vo.MemberVO;
 
 @Repository
 public interface MemberRepository extends JpaRepository<MemberVO, String> ,QuerydslPredicateExecutor<MemberVO>{
-		
-		
+	
 		Optional<MemberVO> findByUsername(String username);
 		Optional<MemberVO> findByRealname(String realname);
 		Optional<MemberVO> findByUname(String uname);
