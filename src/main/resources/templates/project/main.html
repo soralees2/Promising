@@ -5,16 +5,20 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="_csrf" th:content="${_csrf.token}">
+      <meta name="_csrf_header" th:content="${_csrf.headerName}">
     <th:block th:replace="fragments/commonHead"></th:block>
     <title>Promising</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/common_style.css}">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/static/css/common_style.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/static/css/main.css}">
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-    <script type="text/javascript" th:src="@{/js/common.js}"></script>
+    <script type="text/javascript" th:src="@{/static/js/common.js}"></script>
+    <script type="text/javascript" th:src="@{/static/js/main.js}"></script>
+
     <script>
         $(function () {
             $(".heart").on({
@@ -25,9 +29,19 @@
                     $(this).attr('src', src);
                 }
             });
-
             
-        })
+            $("#popular").on("click",function(){
+               location.href="/project/popular";
+            })
+            
+            $("#newest").on("click",function(){
+               location.href="/project/newest";
+            })
+            
+            $("#close").on("click",function(){
+               location.href="/project/close";
+            })
+        })  
     </script>
 </head>
 <body>
@@ -36,7 +50,7 @@
         
         <div class="main">
             <div class="container">
-            	<!-- 캐러셀 -->
+               <!-- 캐러셀 -->
                 <div class="mainCarousel">
                     <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
                         <div class="carousel-indicators">
@@ -49,19 +63,19 @@
                         </div>
                         <div class="carousel-inner">
                             <div class="carousel-item active">
-                                <img src="../images/main/carou1.jpg" class="d-block w-100" alt="...">
+                                <img src="/static/images/main/carou1.jpg" class="d-block w-100" alt="...">
                                 <div class="carousel-caption d-none d-md-block">
                                     <span>쇼핑의 즐거움을 선물하다</span>
                                 </div>
                             </div>
                             <div class="carousel-item">
-                                <img src="../images/main/carou2.jpg" class="d-block w-100" alt="...">
+                                <img src="/static/images/main/carou2.jpg" class="d-block w-100" alt="...">
                                 <div class="carousel-caption d-none d-md-block">
                                     <span>부자 되기 프로젝트</span>
                                 </div>
                             </div>
                             <div class="carousel-item">
-                                <img src="../images/main/carou3.jpg" class="d-block w-100" alt="...">
+                                <img src="/static/images/main/carou3.jpg" class="d-block w-100" alt="...">
                                 <div class="carousel-caption d-none d-md-block">
                                     <span>MZ세대들의 최신 트렌드 다 모았다!</span>
                                 </div>
@@ -82,37 +96,41 @@
                 <!-- 정렬 버튼 -->
                 <div class="listTitle">
                     <h3>주목할 만한 프로젝트</h3><br>
-                    <button type="button" class="btn btn-light btn-sm">인기순</button>
-                    <button type="button" class="btn btn-light btn-sm">최신순</button>
-                    <button type="button" class="btn btn-light btn-sm">마감순</button>
+                    <button type="button" class="btn btn-light btn-sm" id="popular">인기순</button>
+                    <button type="button" class="btn btn-light btn-sm" id="newest">최신순</button>
+                    <button type="button" class="btn btn-light btn-sm" id="close">마감순</button>
                 </div>
                 <!-- 프로젝트 출력 -->
-                <div class="row" >
-                    <div class="col-12 col-md-6 col-xl-3" th:each="pro:${result}">
-                        <div class="card" >
-                            <div class="imgDiv">
-                                <img src="../images/main/card1.jpeg" class="card-img-top" alt="...">
-                                <img src="../images/main/heart1.png" width="20" class="heart">
-                            </div>
-                            <div class="card-body">
-                                <div class="writer">
-                                    <span><a href="#">[[${pro.prCategory}]]</a></span>
-                                    <span class="division">|</span>
-                                    <span><a href="#">[[${pro.prWriter}]]</a></span>
-                                </div>
-                                <div class="pro_title">
-                                    <a href="#">[[${pro.prTitle}]]</a>
-                                </div>
-                                <div class="achi">
-                                    <span>[[${pro.prCurrentMoney/pro.prTargetMoney*100}]]% 달성</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="row" id="main_list">
+                   <div class="col-12 col-md-6 col-xl-3" th:each="pro:${result}">
+                       <div class="card" >
+                           <div class="imgDiv">
+                               <img th:src="@{/static/images/main/card1.jpeg}" class="card-img-top" alt="...">
+                               <img src="../images/main/heart1.png" width="20" class="heart">
+                           </div>
+                           <div class="card-body">
+                               <div class="writer">
+                                   <span id="prCategory"><a href="#">[[${pro.prCategory}]]</a></span>
+                                   <span class="division">|</span>
+                                   <span><a href="#">[[${pro.prWriter}]]</a></span>
+                               </div>
+                               <div class="pro_title">
+                                   <a href="#">[[${pro.prTitle}]]</a>
+                               </div>
+                               <div class="achi">
+                                   <span>[[${pro.prTargetMoney}]]% 달성</span>
+                               </div>
+                           </div>
+                       </div>
+                   </div>
                 </div>
+    
+                <div class=row id="popular_list"></div>
+                <div class=row id="newest_list"></div>
+                <div class=row id="colse_list"></div>
                 
-             	<!-- 마이페이지 -->
-             	<div class=mypagego><a href="#" th:href="@{/member/mypage}">마이페이지이동</a></div>
+                <!-- 마이페이지 -->
+                <div class=mypagego><a href="#" th:href="@{/member/mypage}">마이페이지이동</a></div>
      
             </div>
             <!-- container end -->
@@ -135,14 +153,18 @@
             </div>
             <div class="search_wrap">
                 <div class="container">
+                
                     <div class="search2 row">
                         <div class="col-10">
-                            <input type="text" class="form-control w-100" placeholder="프로젝트를 검색하세요." id="param">
+                           
+                            <input type="text" class="form-control w-100"
+                               placeholder="프로젝트를 검색하세요." id="param">
                         </div>
                         <div class="col-2">
                             <button type="button" class="btn btn-light w-100" id="searchBtn">검색</button>
                         </div>
                     </div>
+                   
                     <div class="project">
                         <div class="shortcut">
                             <h4><a href="#">모든 프로젝트</a></h4>
@@ -162,14 +184,14 @@
                         <h6>태그</h6>
                     </div>
                     <div class="btn_wrap">
-                        <button type="button" class="btn btn-primary">Primary</button>
-                        <button type="button" class="btn btn-secondary">Secondary</button>
-                        <button type="button" class="btn btn-success">Success</button>
-                        <button type="button" class="btn btn-danger">Danger</button>
-                        <button type="button" class="btn btn-warning">Warning</button>
-                        <button type="button" class="btn btn-info">Info</button>
-                        <button type="button" class="btn btn-light">Light</button>
-                        <button type="button" class="btn btn-dark">Dark</button>
+                        <button type="button" class="btn btn-primary">게임</button>
+                        <button type="button" class="btn btn-secondary">향수</button>
+                        <button type="button" class="btn btn-success">디자인</button>
+                        <button type="button" class="btn btn-danger">지식</button>
+                        <button type="button" class="btn btn-warning">트렌드</button>
+                        <button type="button" class="btn btn-info">출판</button>
+                        <button type="button" class="btn btn-light">미디어</button>
+                        <button type="button" class="btn btn-dark">애완</button>
                     </div>
                 </div>
             </div>

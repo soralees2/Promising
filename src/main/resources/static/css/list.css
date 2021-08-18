@@ -119,6 +119,13 @@
 i {
   color: #b5b5b5;
 }
+.page-item.active .page-link{
+  background-color: #9480FF;
+  border-color: #9480FF;
+}
+.page-link{
+  color: #9480FF;
+}
 .lookaround {
   display: none;
   position: fixed;
