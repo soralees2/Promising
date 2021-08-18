@@ -9,27 +9,25 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="_csrf" th:content="${_csrf.token}">
 	<meta name="_csrf_header" th:content="${_csrf.headerName}">
+	<th:block th:replace="fragments/commonHead"></th:block>
 	<title>Promising</title>
 	<link
 		href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
 		rel="stylesheet">
 	<link rel="stylesheet"
 		href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
-	<link href="../css/common_style.css" rel="stylesheet">
-	<th:block th:replace="fragments/commonHead"></th:block>
-	
+	<link href="/static/css/common_style.css" rel="stylesheet">
+	<link rel="stylesheet" th:href="@{/static/css/infoUpdate.css}">
+	<link rel="stylesheet" th:href="@{/static/js/infoUpdate.js}">
+	<script type="text/javascript" th:src="@{/static/js/infoUpdate.js}"></script>
 	<link rel="stylesheet"
-		href="../fonts/material-design-iconic-font.min.css">
+		href="/static/fonts/material-design-iconic-font.min.css">
 	
-	<script
-		src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-	<script
-		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 	
-	<link rel="stylesheet" th:href="@{/css/infoUpdate.css}">
 	
 	
 	
@@ -40,31 +38,7 @@
 	<!--  -->
 	<body>
 		<div class="wrap">
-			<header id="header">
-				<div class="container">
-					<div class="row">
-						<div class="col-4 col-md-5">
-							<ul class="menu">
-								<li class="search"><a href="#"><img
-										th:src="@{/images/ic_search.png}"><span>프로젝트 </span>둘러보기</a></li>
-								<li class="register"><a href="#">프로젝트 올리기</a></li>
-							</ul>
-						</div>
-						<div class="col-4 col-md-2">
-							<h1 class="logo">
-								<a href="#">Promising</a>
-							</h1>
-						</div>
-						<div class="col-4 col-md-5">
-							<div class="utils">
-								<a href="#"> <!-- <span>홍길동</span> --> <span>회원가입/로그인</span>
-									<div class="pf_img no"></div>
-								</a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</header>
+	  <header th:replace="fragments/header.html :: fg-header"></header>
 	
 			<div class="container">
 				<div class=row>
@@ -117,8 +91,13 @@
 												class="PlainNavLink__Wrapper-sc-9qhsie-0 kZoYUd"> <a
 												href="/u/ciaggpxwysugxuel">내 프로필 바로가기</a></span>
 										</div>
+										<!-- [[${result.uname}]] -->
 									</div>
-									<img id="profile" th:src="@{/images/dog.jpg}">
+								
+	<!-- <img id="profile" th:src="@{'/src/main/resources/static/images/'+[[${result.sysName}]]}" class="w-100 h-100"> -->
+									<img id="profile" th:src="@{'/static/images/profileUpload/'+${result.sysName}}" class="w-100 h-100">
+		<!-- <img id="profile" th:src="@/[[${result.sysName}]]" class="w-100 h-100">  -->
+	<!-- /src/main/resources/ -->
 	
 									<form th:action="@{/member/profileAttach}" method="post"
 										enctype="multipart/form-data">
@@ -139,10 +118,7 @@
 											<button class="btn btn-dark savebutton" type="submit"
 												id="profileSaveBtn">저장</button>
 										</div>
-	
 									</form>
-	
-	
 	
 								</div>
 							</div>
@@ -215,11 +191,12 @@
 								</div>
 							</div>
 	
+	            <form action="/member/pwModify" method="post">	
 							<div class="pwReset" id=pwblankNButton>
 								<div class="rememberPw">
 									<h6>현재 비밀번호</h6>
 									<input type="text" class="blank form-control-lg"
-										placeholder="현재 비밀번호" id="pw"> <br>
+										placeholder="현재 비밀번호" id="pw" name="currPw"> <br>
 	
 									<h6>비밀번호가 기억나지 않나요?</h6>
 	
@@ -228,9 +205,9 @@
 								<div class="pwReset">
 									<h6>변경할 비밀번호</h6>
 									<input type="text" class="blank form-control-lg"
-										placeholder="변경할 비밀번호" id="repw1"><br> <input
+										placeholder="변경할 비밀번호" id="repw1" name="repw1"><br> <input
 										type="text" class="blank form-control-lg"
-										placeholder="변경할 비밀번호 확인" id="repw2">
+										placeholder="변경할 비밀번호 확인" id="repw2" name="repw2">
 	
 								</div>
 	
@@ -238,6 +215,7 @@
 									<button class="btn btn-dark savebutton" id="pwSaveBtn">저장</button>
 								</div>
 							</div>
+				</form>
 							<hr>
 	
 							<!--연락처 시작 -->
@@ -252,8 +230,7 @@
 	
 	
 								<div class="col-sm-4 col-md-4 uploadcomment">
-									<button class="btn btn-dark" type="button" id="contactVertify">인증번호
-										전송</button>
+									<button class="btn btn-dark" type="button" id="contactVertify">전화번호 변경</button>
 								</div>
 	
 								<div></div>
@@ -315,7 +292,7 @@
 																id="addressScope" placeholder="주소를 입력하세요." required>
 															<div class="modifyIcon">
 																<a href="javacript:;" class="py-2 d-block"><i
-																	class="zmdi zmdi-search zmdi-hc-2x" id=search></i></a>
+																	class="zmdi zmdi-search zmdi-hc-2x" id=searchAddress></i></a>
 	
 															</div>
 														</div>
@@ -430,7 +407,7 @@
 	
 				</div>
 				</div>
-				<script type="text/javascript" th:src="@{/js/infoUpdate.js}"></script>
+				
 				<script>
 					$(function() {
 						$("#Namesavebutton")
@@ -489,10 +466,7 @@
 											}
 										})
 	
-						$("#contactVertify")
-								.on(
-										"click",
-										function() {
+						$("#contactVertify").on("click",function() {
 	
 											/*값이 잘가는가?*/
 											let modifyContact = $("#contact").val();
@@ -547,6 +521,69 @@
 	
 											}
 										})
+										/* 비밀번호 변경 */
+							 	$("#pwSaveBtn").on("click",function() {
+	
+											let modifyPw1= $("#repw1").val();
+											let modifyPw2 = $("#repw2").val();
+											let currPw = $("#currPw").val();
+											
+											if (!modifyPw1==modifyPw2) {
+	
+												alert("비밀번호의 일치여부를 확인해주세요.");
+	
+											}else if((modifyPw1||modifyPw2)==""){
+												
+
+												alert("비밀번호를 입력하세요.");
+												location.reload(); 
+											}else {
+	
+												console.log(modifyContact);
+												$
+														.ajax({
+															type : 'POST',
+															url : '/member/pwModify/'
+																	,
+															data : JSON
+																	.stringify({
+																		modifyPw1:repw1,currPw:currPw
+																	}),
+															contentType : "application/json",
+															beforeSend : function(
+																	jqXHR, settings) {
+																let header = $(
+																		"meta[name='_csrf_header']")
+																		.attr(
+																				"content");
+																let token = $(
+																		"meta[name='_csrf']")
+																		.attr(
+																				"content");
+																jqXHR
+																		.setRequestHeader(
+																				header,
+																				token);
+															},
+															success : function(data) {
+	
+																console
+																		.log("갱신 성공");
+																alert("갱신 성공");
+	
+															},
+															error : function(
+																	request,
+																	status, error) {
+																alert("갱신실패"); // 실패 시 처리
+																location.reload(); 
+															}
+	
+														})
+	
+											}
+										}) 
+										
 	
 					})
 				</script>
