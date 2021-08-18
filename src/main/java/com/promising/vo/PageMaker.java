@@ -33,8 +33,8 @@ public class PageMaker<T> {
 	   }
 	   
 	   private void calcPages() {
-	      int tempEndNum = (int)(Math.ceil(this.currentPageNum/10.0)*10);
-	      int startNum = tempEndNum -9;
+	      int tempEndNum = (int)(Math.ceil(this.currentPageNum/9.0)*9);
+	      int startNum = tempEndNum -8;
 	      
 	      Pageable startPage  = this.currentPage;
 	      //move to start Pageable
