@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.promising.config.SecurityConfig;
 import com.promising.repository.MemberRepository;
 import com.promising.vo.MemberRoleVO;
 import com.promising.vo.MemberVO;
@@ -29,6 +30,10 @@ import com.promising.vo.MemberVO;
 @RequestMapping("/member")
 public class MemberController {
 
+	
+	@Autowired
+	private SecurityConfig security;
+	
 	@Autowired
 	private PasswordEncoder pwEncoder;
 	
@@ -73,6 +78,7 @@ public class MemberController {
 		String userName =principal.getName();
 		
 		MemberVO result = repo.findByUsername(userName).get();
+		
 //		model.addAttribute("list",result);
 		model.addAttribute("result", result);
 
@@ -122,11 +128,11 @@ public class MemberController {
 		vo = repo.findByUsername(principal.getName()).get();
 
 		
-		String realPath = session.getServletContext().getRealPath("");
-//		String realPath = request.getSession().getServletContext().getRealPath("files");
-//		String relativePath = File.separator + "resources"
-		System.out.println(realPath);
-		 File filesPath = new File(realPath);
+		String realPath = session.getServletContext().getRealPath("/");
+
+		String relativePath ="src"+File.separator+"main"+File.separator+"resources"+File.separator +"static"+File.separator+"images"+File.separator+"profileUpload";
+		System.out.println(relativePath+"/ 앞쪽이 리얼패스 ㅇㅇ");
+		 File filesPath = new File(relativePath);
 			if(!filesPath.exists()) {
 				filesPath.mkdir();
 			}
@@ -153,4 +159,29 @@ public class MemberController {
 		
 		
 		}
+	
+	@RequestMapping(value="/pwModify",method = RequestMethod.POST)
+	@ResponseBody
+	public void pwUpdate(@PathVariable("currPw") String currPw,@PathVariable("repw1") String repw1,@RequestBody MemberVO mvo,Model model,Principal principal) {
+		System.out.println("10시");
+		
+		String nowPw= currPw;
+		
+		String originName =principal.getName();		
+		MemberVO vo=repo.findById(originName).get(); //찐
+		vo.setPassword(nowPw);
+		vo.setPassword(pwEncoder.encode(vo.getPassword()));
+		
+	
+		
+		repo.save(vo);
+		
+//		return "redirect:/member/infoUpdate";
+		
+			}
+	
+	
+	
+	
+	
 }

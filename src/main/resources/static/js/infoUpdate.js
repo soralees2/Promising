@@ -109,7 +109,7 @@ $(function () {
 
 
 
-$("#search").on("click",function(){
+$("#searchAddress").on("click",function(){
 	
 	 new daum.Postcode({
             oncomplete: function(data) {
