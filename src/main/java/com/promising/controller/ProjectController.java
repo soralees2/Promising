@@ -8,16 +8,19 @@ import java.util.UUID;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.promising.repository.ProjectRepository;
+import com.promising.vo.PageMaker;
+import com.promising.vo.PageVO;
 import com.promising.vo.ProjectVO;
 
 @Controller
@@ -70,27 +73,47 @@ public class ProjectController {
 		return "project/main";
 	}
 	
-	@PostMapping("/newest")
-	@ResponseBody
-	public List<ProjectVO> newest (Model model, Principal principal) {
+//	@PostMapping("/newest")
+//	@ResponseBody
+//	public List<ProjectVO> newest (Model model, Principal principal) {
+//		System.out.println("최신순 요청");
+//		List<ProjectVO> result = repo.selectNewest();
+//		model.addAttribute("result", result);
+//		return result;
+//	}
+	
+//	@PostMapping("/close")
+//	@ResponseBody
+//	public List<ProjectVO> close (Model model, Principal principal) {
+//		System.out.println("마감순 요청");
+//		List<ProjectVO> result = repo.selectClose();
+//		model.addAttribute("result", result);
+//		return result;
+//	}
+	@GetMapping("/newest")
+	public String newest(Model model) {
 		System.out.println("최신순 요청");
 		List<ProjectVO> result = repo.selectNewest();
 		model.addAttribute("result", result);
-		return result;
+		return "project/main";
 	}
 	
-	@PostMapping("/close")
-	@ResponseBody
-	public List<ProjectVO> close (Model model, Principal principal) {
+	@GetMapping("/close")
+	public String close(Model model) {
 		System.out.println("마감순 요청");
 		List<ProjectVO> result = repo.selectClose();
 		model.addAttribute("result", result);
-		return result;
+		return "project/main";
 	}
 	
 	@GetMapping("/list")
-	public void list() {
-		
+	public String list(PageVO pvo, Model model) {
+		Pageable page = pvo.makePageable(0, "pno");
+		Page<ProjectVO> result = repo.findAll(repo.makePredicate(pvo.getType(), pvo.getKeyword()),page);
+		List<ProjectVO> project = repo.selectList();
+		model.addAttribute("project", project);
+ 		model.addAttribute("result", new PageMaker<ProjectVO>(result));
+ 		return "project/list";
 	}
 
 	@GetMapping("/auth/upload1")
