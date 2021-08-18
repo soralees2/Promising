@@ -17,13 +17,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-<<<<<<< HEAD
+
 import org.springframework.web.bind.annotation.ResponseBody;
-=======
+
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
->>>>>>> 9a0be890a8d4b4a3b57517567e900bd52960ee82
+
 
 import com.promising.repository.MemberRepository;
 import com.promising.vo.MemberRoleVO;
