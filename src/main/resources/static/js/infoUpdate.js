@@ -123,11 +123,44 @@ $("#search").on("click",function(){
         
 })
 
+/*$("#modifyComp").on("click",function(){
+	
+	let nameVal=$("#inputReceiverName").val();
+	let phoneVal=$("#inputReceiverContact").val();
+	let address1Val=$("#addressScope").val();
+	let address2Val=$("#addressDetail").val();
+	let postCodeVal=$("#postCode").val();
+	
+		let obj = {username:'nameVal',address1:'address1Val',address2:'address1Val',upostcode:'postCodeVal',uphone:'phoneVal',oriName:oriName,sysName:sysName,regDate:regDate,updateDate:updateDate};
+	
+	console.log(obj);
+	$.ajax({
+			type:'POST',
+			 url: '/member/deliveryModify/'+obj.userName+obj.address1+obj.address2+obj.upostcode+obj.uphone,
+			data : (JSON.stringify(obj)),
+			contentType: "application/json",
+			beforeSend: function (jqXHR, settings) {
+		           		let header = $("meta[name='_csrf_header']").attr("content");
+		           		let token = $("meta[name='_csrf']").attr("content");
+		           		jqXHR.setRequestHeader(header, token);
+					}, success: function(data){
+						
+						  console.log("주소 갱신 성공");  
+						  alert("주소 갱신 성공");  
+						
+					},error:function(request,status,error){
+				        alert("번호가 중복됩니다. 다시 설정해주세요."); // 실패 시 처리	      
+	})
+	})
+	
+})*/
+
+
+
+
+	
+
 })
-
-
-
-
 
 
 

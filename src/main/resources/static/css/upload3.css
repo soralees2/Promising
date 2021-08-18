@@ -85,8 +85,11 @@
 .imageup{
   display: flex;
   flex-wrap: wrap;
-  width: 400px;;
+  width: 400px;
   padding: 43px 0px;
+}
+.imageup>img{
+	padding-bottom:30px;
 }
 .imageup>span{
   display: flex;
