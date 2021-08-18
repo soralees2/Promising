@@ -7,16 +7,12 @@
 	<meta name="_csrf" th:content="${_csrf.token}">
 <meta name="_csrf_header" th:content="${_csrf.headerName}">
 	<th:block th:replace="fragments/commonHead"></th:block>
-  <title>Insert title here</title>
+
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
-<script
-	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
 	<link th:href="@{/css/signup.css}" rel="stylesheet">
-	
+	<script src="/js/signup.js"></script>
 </head>
 <body>
 <div class="wrap">
@@ -40,7 +36,20 @@
 						value="이메일 인증">
 				</div>
 			</div>
-			<div class="form-row align-items-cente">
+			<div class="form-row align-items-center secret">
+				<div class="col-12 col-sm-2 mb-2">
+					<label class="mb-0" for="inlineFormInput">이메일 인증</label>
+				</div>
+				<div class="col-8 col-sm-auto mb-2">
+					<input type="text" class="form-control"  id="keycheck"
+						placeholder="인증 키를 입력해주세요!">
+				</div>
+				<div class="col-4 col-sm-auto mb-2">
+					<input type="button" id="emailsubmit" class="btn btn-dark w-100"
+						value="인증번호 확인">
+				</div>
+			</div>
+			<div class="form-row align-items-center">
 				<div class="col-12 col-sm-2 mb-2">
 					<label class="mb-0" for="">비밀번호</label>
 				</div>
@@ -67,7 +76,7 @@
 					<label class="mb-0" for="">닉네임</label>
 				</div>
 				<div class="col-8 col-sm-auto mb-2">
-					<input type="text" class="form-control" name="uname" id="name"
+					<input type="text" class="form-control" name="uname" id="uname"
 						placeholder="닉네임을 입력해주세요.">
 				</div>
 				<div class="col-4 col-sm-auto mb-2">
@@ -77,11 +86,11 @@
 			</div>
 			<div class="form-row align-items-center">
 				<div class="col-12 col-sm-2 mb-2">
-					<label class="mb-0" for="">실명</label>
+					<label class="mb-0" for="">이름</label>
 				</div>
 				<div class="col-12 col-sm-auto mb-2">
 					<input type="text" class="form-control" name="realname" id="realname"
-						placeholder="실명을 입력해주세요.">
+						placeholder="이름을 입력해주세요.">
 				</div>
 
 			</div>
@@ -106,7 +115,7 @@
 						id="postcode">
 				</div>
 				<div class="col-4 col-sm-auto mb-2">
-					<button type="button" class="btn btn-dark w-100" id="search">찾기</button>
+					<button type="button" id= "search" class="btn btn-dark w-100" >찾기</button>
 				</div>
 			</div>
 			<div class="form-row align-items-center">
@@ -127,7 +136,7 @@
 						id="address2" placeholder="주소를 입력해 주세요.">
 				</div>
 			</div>
-			<div class="form-row align-items-center mt-5">
+			<div class="row align-items-center mt-5">
 				<div class="col-4 text-center">
 					<input type="button" class="btn btn-outline-primary w-100"
 						value="회원가입" id="send">
@@ -145,122 +154,7 @@
 	</div>
 	</div>
 	</div>
-	<script>
 
-	$(function() {
-		$("#emailcheck").on("click",function(){
-			var obj=$("#id").val();
-			$.ajax({
-				url:'/email/send/'+obj,
-				type:'POST',
-				 data : JSON.stringify({username:obj}),
-		         contentType: 'application/json',
-		         beforeSend: function (jqXHR, settings) {
-                     let header = $("meta[name='_csrf_header']").attr("content");
-                     let token = $("meta[name='_csrf']").attr("content");
-                     jqXHR.setRequestHeader(header, token);
-		         }
-				}).done(function(data){
-				
-			});
-		})
-		$("#check").on(
-				"click",
-				function() {
-					let idInput = document.getElementById("id");
-					let idReg = /^[a-z0-9]{5,20}$/;
-					let resultId = idReg.test(idInput.value);
-					if (resultId) {
-						$.ajax({
-							url:"/member/idCheck",
-							data:{id:$("#id").val()}
-							}).done(function(data){
-							if(data==="1"){// 아이디 이미 존재
-								alert("이미 사용중인 아이디입니다.");
-								
-							}else{
-								var idUse = confirm("사용 가능한 아이디입니다. 사용하시겠습니까?");
-								if(idUse){
-								isIdCheck = true;
-																							
-								}
-							}
-						});
-						
-					} else {
-						alert("올바른 아이디를 입력해주세요!");
-					}
-				})
-		$("#id").on("keyup", function() {
-			isIdCheck = false;
-		})
-	$("#back").on("click",function(){
-		location.href="/";
-	})
-	})
-	
-	
-	document.getElementById("inp_pw02").onkeyup = function() {
-			let chkPW = document.getElementById("inp_pw01").value;
-			if (chkPW === this.value) {
-				document.getElementById("pw-success").setAttribute("style",
-						"display:block");
-				document.getElementById("pw-danger").setAttribute("style",
-						"display:none");
-			} else {
-				document.getElementById("pw-success").setAttribute("style",
-						"display:none");
-				document.getElementById("pw-danger").setAttribute("style",
-						"display:block");
-
-			}
-		}
-
-		document.getElementById("search").onclick = function() {
-			new daum.Postcode({
-				oncomplete : function(data) {
-					let roadAddr = data.roadAddress;
-
-					document.getElementById('postcode').value = data.zonecode;
-					document.getElementById("address1").value = roadAddr;
-				}
-			}).open();
-		};
-
-		let pwInput = document.getElementById("inp_pw01");
-		let nameInput = document.getElementById("name");
-		
-
-	
-		let pwReg = /^[^ㄱ-ㅎ]\S{8,16}$/;
-		let nameRegex = /^[가-힣A-Za-z]+$/;
-
-
-
-		let check = document.getElementById("checkForm");
-
-		document.getElementById("send").onclick = function() {
-
-		
-			let resultPw = pwReg.test(pwInput.value);
-			let resultName = nameRegex.test(nameInput.value);
-
-
-
-		
-			if (!resultPw) {
-				alert("비밀번호는 8-16자 영문 대,소문자,숫자와 특수기호를 사용하세요.");
-				return;
-			}
-			if (!resultName) {
-				alert("이름은 한글과 영문 대,소문자를 사용하세요.(특수기호,공백 사용 불가)");
-				return;
-			}
-			
-
-			document.getElementById("checkForm").submit();
-		};
-</script>
 </body>
 </html>
 

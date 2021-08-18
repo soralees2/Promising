@@ -24,6 +24,7 @@ public class EmailController {
 	@ResponseBody
 	public String sendmail(@PathVariable("username") String username) throws MessagingException {
 		System.out.println(username+"이메일입니다");
+		String secret=emailService.secretKey();
 		StringBuffer emailcontent = new StringBuffer();
 		emailcontent.append("<!DOCTYPE html>");
 		emailcontent.append("<html>");
@@ -40,15 +41,15 @@ public class EmailController {
 						"	<p style=\"font-size: 16px; line-height: 26px; margin-top: 50px; padding: 0 5px;\">"																													+ 
 																																																				
 																																																	
-						"		<p style=\"color:'#9083EC'\">Promising</p>에 가입해 주셔서 진심으로 감사드립니다.<br />"																																						+ 
+						"		<p style=\"color:#9083EC\">Promising</p>에 가입해 주셔서 진심으로 감사드립니다.<br />"																																						+ 
 						"		아래 <b style=\"color: #02b875\">'메일 인증'</b> 인증번호를 입력하여 회원가입을 완료해 주세요.<br />"																													+ 
 						"		감사합니다."																																															+ 
 						"	</p>"																																																	+ 
 																																							
-								"<h2>"+emailService.secretKey()+"</h2>"+
+								"<h2>"+secret+"</h2>"+
 						"		<p"																																																	+
-						"			style=\"display: inline-block; width: 210px; height: 45px; margin: 30px 5px 40px; background: #02b875; line-height: 45px; vertical-align: middle; font-size: 16px;\">"							+ 
-						"			메일 인증</p>"																																														+ 
+						 
+																																																				 
 						"	</a>"																																																	+
 						"	<div style=\"border-top: 1px solid #DDD; padding: 5px;\"></div>"																																		+
 						" </div>"
@@ -56,7 +57,7 @@ public class EmailController {
 		emailcontent.append("</body>");
 		emailcontent.append("</html>");
 		emailService.sendMail(username, "Promising 이메일 인증입니다.", emailcontent.toString());
-		return emailService.secretKey();
+		return secret;
 	}
 
 }

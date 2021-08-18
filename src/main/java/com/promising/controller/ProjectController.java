@@ -29,6 +29,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.promising.repository.MemberRepository;
 import com.promising.repository.ProjectRepository;
+import com.promising.vo.MemberVO;
 import com.promising.vo.ProjectVO;
 
 
@@ -106,8 +107,8 @@ public class ProjectController {
 	}
 	@PostMapping("/auth/upload3")
 	public String projectUpload(ProjectVO vo,MultipartFile[] file,Principal principal,String prStartday,String prEndday,String targetmoney,String presentprice) throws Exception {
-	
-		vo.setPrWriter(principal.getName());
+		MemberVO newvo =memberrepo.findByUsername(principal.getName()).get();
+		vo.setPrWriter(newvo.getUname());
 		java.sql.Date prStartdate =java.sql.Date.valueOf(prStartday);
 		java.sql.Date prEnddate =java.sql.Date.valueOf(prEndday);
 		

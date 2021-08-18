@@ -23,3 +23,6 @@ div[class*="col-"] span {
 .pw-check span {
 	display: none;
 }
+.secret{
+	display:none;
+}
