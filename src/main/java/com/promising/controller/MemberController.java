@@ -129,9 +129,8 @@ public class MemberController {
 
 		
 		String realPath = session.getServletContext().getRealPath("/");
-		
-//		String realPath = request.getSession().getServletContext().getRealPath("files");
-		String relativePath ="src"+File.separator+"main"+File.separator+"resources"+File.separator +"static"+File.separator+"images";
+
+		String relativePath ="src"+File.separator+"main"+File.separator+"resources"+File.separator +"static"+File.separator+"images"+File.separator+"profileUpload";
 		System.out.println(relativePath+"/ 앞쪽이 리얼패스 ㅇㅇ");
 		 File filesPath = new File(relativePath);
 			if(!filesPath.exists()) {
