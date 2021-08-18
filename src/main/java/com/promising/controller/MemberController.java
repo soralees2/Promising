@@ -1,8 +1,11 @@
 package com.promising.controller;
 
+import java.io.File;
 import java.security.Principal;
 import java.util.Arrays;
+import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.promising.repository.MemberRepository;
 import com.promising.vo.MemberRoleVO;
@@ -29,7 +33,7 @@ public class MemberController {
 	private PasswordEncoder pwEncoder;
 	
 	@Autowired
-	HttpSession httpSession;
+	private HttpSession session;
 	
 	@Autowired
 	private MemberRepository repo;
@@ -113,24 +117,35 @@ public class MemberController {
 		
 			}
 	
-	
-	
-//	@RequestMapping(value="/deliveryModify/{obj.userName+obj.address1+obj.address2+obj.upostcode+obj.uphone}",method = RequestMethod.POST)
-//	@ResponseBody
-//	public void deliveryModify(@PathVariable("modifyContact") String o,Model model,Principal principal) {
-//		System.out.println("10시");
-//		
-//		String originName =principal.getName();		
-//		MemberVO vo=repo.findById(originName).get(); //찐
-//	    vo.setAddress1(obj.)
-//		vo.setUphone(modifyContact);
-//		
-//		repo.save(vo);
+	@PostMapping("/profileAttach")
+	public String projectUpload(MemberVO vo,MultipartFile[] file,Principal principal,HttpServletRequest request) throws Exception {
+		vo = repo.findByUsername(principal.getName()).get();
+
 		
-//		return "redirect:/member/infoUpdate";
-	
-		//	}
-	
+		String realPath = session.getServletContext().getRealPath("");
+//		String realPath = request.getSession().getServletContext().getRealPath("files");
+//		String relativePath = File.separator + "resources"
+		System.out.println(realPath);
+		 File filesPath = new File(realPath);
+			if(!filesPath.exists()) {
+				filesPath.mkdir();
+			}
+			for(MultipartFile tmp :file) {
+				if(tmp.getSize()>0) {
+				String oriName = tmp.getOriginalFilename();
+				String sysName=UUID.randomUUID().toString().replaceAll("-","")+"_"+oriName;
+				 vo.setOriName(oriName);
+				 vo.setSysName(sysName);
+				System.out.println(filesPath.getAbsolutePath()+" "+sysName+" "+oriName);
+				tmp.transferTo(new File(filesPath.getAbsolutePath()+"/"+sysName));
+				
+				}
+				}
+			System.out.println(vo);
+			repo.save(vo);
+			return "redirect:/member/infoUpdate";
+		
+}
 	
 	
 	@GetMapping("/qna")
@@ -138,6 +153,4 @@ public class MemberController {
 		
 		
 		}
-	
-	
 }
