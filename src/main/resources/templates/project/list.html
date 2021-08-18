@@ -82,9 +82,10 @@
                     </span>
                 </div>
                 <!-- 프로젝트 출력 -->
-                <div class="row">
-                    <div class="col-12 col-md-6 col-xl-4" th:each="pro:${project}">
+                <div class="row" th:with="result=${result.result}">
+                    <div class="col-12 col-md-6 col-xl-4" th:each="pro:${result.content}">
                         <div class="card">
+                        
                             <div class="imgDiv">
                                 <img src="../images/main/card1.jpeg" class="card-img-top" alt="..." width="200">
                                 <img src="../images/main/heart1.png" width="25" class="heart">
@@ -139,6 +140,13 @@
 							</li>
 						</ul>
 					</nav>
+					
+					<form id="f1" th:action="@{list}" method="get">
+						<input type="hidden" name="page" th:value="${result.currentPageNum}">
+						<input type="hidden" name="size" th:value="${result.currentPage.pageSize}">
+						<input type="hidden" name="type" th:value="${pageVO.type}">
+						<input type="hidden" name="keyword" th:value="${pageVO.keyword}">
+					</form>
 				</div><br><br>
 				
 			</div>
