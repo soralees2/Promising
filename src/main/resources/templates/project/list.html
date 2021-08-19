@@ -74,8 +74,8 @@
                     <div class="col-12 col-md-6 col-xl-4" th:each="pro:${result.content}">
                         <div class="card">
                             <div class="imgDiv">
-                                <img th:src="@{'/static/images/projectuploading/'+${pro.prSysName}}" class="card-img-top" alt="..." width="200">
-                                <img src="../images/main/heart1.png" width="25" class="heart">
+                                <img th:src="@{'/images/projectuploading/'+${pro.prSysName}}" class="card-img-top" width="200">
+                                <img th:src="@{/images/main/heart1.png}" width="25" class="heart">
                             </div>
                             <div class="card-body">
                                 <div class="pro_title">
@@ -95,7 +95,7 @@
                                 </div>
                                 <div class="money">
                                     <span class="price">[[${pro.prCurrentMoney}]]원</span>
-                                    <span class="percent">%</span>
+                                    <span class="percent">[[${pro.prCurrentMoney/pro.prTargetMoney*100}]]%</span>
                                     <span class="period"><i class="far fa-clock"></i> 40일 남음</span>
                                 </div>
                             </div>

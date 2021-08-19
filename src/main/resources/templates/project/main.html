@@ -9,7 +9,6 @@
    	<meta name="_csrf_header" th:content="${_csrf.headerName}">
     <th:block th:replace="fragments/commonHead"></th:block>
     <link rel="stylesheet" type="text/css" th:href="@{/static/css/main.css}">
-    <script type="text/javascript" src="/static/js/main.js"></script>
     <script>
         $(function () {
         		
@@ -18,15 +17,6 @@
        			alert("test");
        			
             } 
-        	
-            /* $(".heart").on({
-                'click': function () {
-                    var src = ($(this).attr('src') === '../images/main/heart1.png')
-                        ? '../images/main/heart2.png'
-                        : '../images/main/heart1.png';
-                    $(this).attr('src', src);
-                }
-            }); */
             
             $("#popular").on("click",function(){
                location.href="/project/popular";
@@ -107,7 +97,7 @@
                        <div class="card" >
                            <div class="imgDiv">
                                <img th:src="@{'/static/images/projectuploading/'+${pro.prSysName}}" class="card-img-top" alt="...">
-                               <img src="../images/main/heart1.png" width="20" class="heart">
+                               <!-- <img th:src="@{static/images/main/heart1.png}" width="20" class="heart"> -->
                            </div>
                            <div class="card-body">
                                <div class="writer">
@@ -119,7 +109,7 @@
                                    <a href="#">[[${pro.prTitle}]]</a>
                                </div>
                                <div class="achi">
-                                   <span>[[${pro.prTargetMoney}]]% 달성</span>
+                                   <span>[[${pro.prCurrentMoney/pro.prTargetMoney*100}]]% 달성</span>
                                </div>
                            </div>
                        </div>
