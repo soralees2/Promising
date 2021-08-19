@@ -109,7 +109,7 @@ $(function () {
 
 
 
-/*$("#searchAddress").on("click",function(){
+$("#searchAddress").on("click",function(){
 	
 	 new daum.Postcode({
             oncomplete: function(data) {
@@ -123,43 +123,10 @@ $(function () {
         
 })
 
-$("#modifyComp").on("click",function(){
-	var realName=$("#inputReceiverName").val();
-	var uphone=$("#inputReceiverContact").val();
-	var address1=$("#addressScope").val();
-	var postcode=$("#postCode").val();
-	var address2=$("#addressDetail").val();
-	
-	var obj ={"realName":realName,"uphone":uphone, "address1":address1,"postcode":postcode,"address2":address2}
-							
-$.ajax({
-		type : 'POST',
-		url : '/member/uphoneUpdate/'+ modifyContact,
-data : JSON.stringify({uphone : modifyContact}),
-	contentType : "application/json",
-	beforeSend : function(
-	jqXHR, settings) {
-	let header = $("meta[name='_csrf_header']").attr("content");
-	let token = $("meta[name='_csrf']").attr("content");
-	jqXHR.setRequestHeader(header,token);
-},success : function(data) {
-	alert("갱신 성공");
-console.log(data);
-location.reload();}
-,error : function(request,status, error) {
-alert("올바른 값을 입력했는지 확인해주세요."); // 실패 시 처리
-}
-})
-	
-}
 
-	
-
-})
-})
-*/
 
 
 
 
+})
     

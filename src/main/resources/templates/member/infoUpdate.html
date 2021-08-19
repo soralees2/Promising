@@ -416,7 +416,8 @@
 	<!-- Wrap 닫기 -->
 	
 				
-				<script>
+				
+		<script>
 					$(function() {
 						$("#Namesavebutton")
 								.on(
@@ -587,7 +588,44 @@
 											}
 										}) 
 										
-	
+											$("#modifyComp").on("click",function(){
+												var realName=$("#inputReceiverName").val();
+												var uphone=$("#inputReceiverContact").val();
+												var address1=$("#addressScope").val();
+												var postcode=$("#postCode").val();
+												var address2=$("#addressDetail").val();
+												
+												var obj ={"realName":realName,"uphone":uphone, "address1":address1,"postcode":postcode,"address2":address2}
+												
+												if((realName=="")||(uphone=="")||(address1=="")||(postcode=="")||(address2=="")){
+													alert("변경란을 모두 채워주세요.")
+													
+												}else{
+													
+													$.ajax({
+													type : 'POST',
+													url : '/member/addressUpdate',
+											data : JSON.stringify({"realName":realName,"uphone":uphone, "address1":address1,"postcode":postcode,"address2":address2}),
+												contentType : "application/json",
+												beforeSend : function(
+												jqXHR, settings) {
+												let header = $("meta[name='_csrf_header']").attr("content");
+												let token = $("meta[name='_csrf']").attr("content");
+												jqXHR.setRequestHeader(header,token);
+											},success : function(data) {
+												alert("갱신 성공");
+											console.log(data);
+											location.reload();}
+											
+											,error : function(request,status, error) {
+											alert("올바른 값을 입력했는지 확인해주세요."); // 실패 시 처리
+											}
+											})
+												
+											}
+											
+											})
+
 					})
 				</script>
 	</body>

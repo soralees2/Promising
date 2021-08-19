@@ -224,16 +224,48 @@ MemberVO vo=repo.findByUsername(originName).get(); //찐
 			return "error";
 		}
 		
+	}
 		
+		@RequestMapping(value="/addressUpdate",method = RequestMethod.POST)
+
+		public void addressUpdate(@RequestBody Map<String,Object> param,Model model,Principal principal) {
+			
+			System.out.println("변경~~start");
+			System.out.println(principal);
+			String originName =principal.getName();		
+
+			
+			for(String key : param.keySet()){
+				  System.out.println(key + " : " + param.get(key));
+				}
+
+			System.out.println(param.toString());
 		
-	
+					//만약에 originName 이 DB에 존재한다면 &안한다면
+					
+			String realName=(String)param.get("realName");
+			String address1=(String)param.get("address1");
+			String address2=(String)param.get("address2");
+			String postcode=(String)param.get("postcode");
+			String uphone=(String)param.get("uphone");
+			
+			
+			System.out.println(realName+": 이것은 진짜이름 ");
+			System.out.println(address1+": 이것은 주소1");
+			System.out.println(address2+": 이것은 주소2");
+			System.out.println(postcode+": 이것은 우편");
+			System.out.println(uphone+": 이것은 핸펀");
+			
+			
 		
-	
-		
-	
-		
-//		return "redirect:/member/infoUpdate";
-		
+			MemberVO vo=repo.findByUsername(originName).get(); //찐
+			vo.setAddress1(address1);
+			vo.setAddress2(address2);
+			vo.setUpostcode(postcode);
+			vo.setUphone(uphone);
+			vo.setRealname(realName);
+			repo.save(vo);		
+
 			}
 	
 	@GetMapping("/forget")
