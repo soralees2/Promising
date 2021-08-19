@@ -30,8 +30,7 @@ import com.promising.vo.ProjectVO;
 @Controller
 @RequestMapping("/project")
 public class ProjectController {
-	@Autowired
-	private HttpSession session;
+
 	@Autowired
 	private ProjectRepository repo;
 	@Autowired
@@ -149,8 +148,8 @@ public class ProjectController {
 		vo.setPrTargetMoney(Integer.parseInt(targetmoney));
 		vo.setPrPresentPrice(Integer.parseInt(presentprice));
 		
-		String realPath = session.getServletContext().getRealPath("files");
-		 File filesPath = new File(realPath);
+		
+		 File filesPath = new File("src"+File.separator+"main"+File.separator+"resources"+File.separator +"static"+File.separator+"images"+File.separator+"projectuploading");
 			if(!filesPath.exists()) {
 				filesPath.mkdir();
 			}

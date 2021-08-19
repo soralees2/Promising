@@ -1,8 +1,6 @@
 <!DOCTYPE html>
-<html lang="ko" 
-xmlns:th="http://www.thymeleaf.org" 
-xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
-xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -20,30 +18,11 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 					</ul>
 				</div>
 				<div class="col-4 col-md-2">
-<<<<<<< HEAD
-					<h1 class="logo"><a href="/">Promising</a></h1>
-				</div>
-				<div class="col-4 col-md-5">
-					<div class="utils">
-					
-							<sec:authorize access="isAnonymous()">
-							<a th:href="@{/member/login}">
-								<!-- <span>홍길동</span> -->
-								<span>회원가입/로그인</span>
-										
-								</a>
-								</sec:authorize>
-							<sec:authorize access="isAuthenticated()">
-							
-							<div class="pf_wrap">
-							<a href="#">
-								<div class="pf_img" style="background:url(../images/atom02.png) 50% 50% no-repeat;background-size:cover;"></div>
-							</a>
-							</div>
-							</sec:authorize>
-						
-=======
-					<h1 class="logo"><a href="#" th:href="@{/project/main}">Promising</a></h1>
+					<h1 class="logo">
+						<a href="#" th:href="@{/project/main}">
+							<img th:src="@{/static/images/logo.png}">
+						</a>
+					</h1>
 				</div>
 				<div class="col-4 col-md-5">
 					<div class="utils">
@@ -61,7 +40,6 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 								</a>
 							</sec:authorize>
 						</div>
->>>>>>> d05723bcd4fbaffa3d04277d4bed358a73bd402e
 					</div>
 				</div>
 			</div>

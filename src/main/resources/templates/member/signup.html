@@ -7,12 +7,11 @@
 	<meta name="_csrf" th:content="${_csrf.token}">
 <meta name="_csrf_header" th:content="${_csrf.headerName}">
 	<th:block th:replace="fragments/commonHead"></th:block>
-
-<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-
-	<link th:href="@{/css/signup.css}" rel="stylesheet">
-	<script src="/js/signup.js"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/static/css/common_style.css}">
+	<link th:href="@{/static/css/signup.css}" rel="stylesheet">
+	 <script type="text/javascript" th:src="@{/static/js/common.js}"></script>
+    <script type="text/javascript" th:src="@{/static/js/signup.js}"></script>
 </head>
 <body>
 <div class="wrap">
@@ -23,46 +22,47 @@
 		<form th:action="@{/member/signup}"
 			method="post" id="checkForm">
 			 <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
-			<div class="form-row align-items-center">
-				<div class="col-12 col-sm-2 mb-2">
-					<label class="mb-0" for="inlineFormInput">아이디</label>
+			<div class="row align-items-center box">
+				<div class="col-12 labelbox">
+					이메일 주소
 				</div>
-				<div class="col-8 col-sm-auto mb-2">
+				<div class="col-12 inputbox">
+				
 					<input type="text" class="form-control" name="username" id="id"
 						placeholder="이메일을 입력해주세요.">
 				</div>
-				<div class="col-4 col-sm-auto mb-2">
+				<div class="col-4">
 					<input type="button" id="emailcheck" class="btn btn-dark w-100"
 						value="이메일 인증">
 				</div>
 			</div>
-			<div class="form-row align-items-center secret">
-				<div class="col-12 col-sm-2 mb-2">
-					<label class="mb-0" for="inlineFormInput">이메일 인증</label>
+			<div class="row align-items-center secret box">
+				<div class="col-12 labelbox">
+				이메일 인증
 				</div>
-				<div class="col-8 col-sm-auto mb-2">
+				<div class="col-12 inputbox">
 					<input type="text" class="form-control"  id="keycheck"
 						placeholder="인증 키를 입력해주세요!">
 				</div>
-				<div class="col-4 col-sm-auto mb-2">
+				<div class="col-4">
 					<input type="button" id="emailsubmit" class="btn btn-dark w-100"
 						value="인증번호 확인">
 				</div>
 			</div>
-			<div class="form-row align-items-center">
-				<div class="col-12 col-sm-2 mb-2">
-					<label class="mb-0" for="">비밀번호</label>
+			<div class="row align-items-center box">
+				<div class="col-12 labelbox">
+					비밀번호
 				</div>
-				<div class="col-12 col-sm-auto mb-2">
+				<div class="col-12 inputbox">
 					<input type="password" class="form-control" name="password"
 						id="inp_pw01" placeholder="비밀번호를 입력해주세요.">
 				</div>
 			</div>
-			<div class="form-row align-items-center">
-				<div class="col-12 col-sm-2 mb-2">
-					<label class="mb-0" for="">비밀번호 확인</label>
+			<div class="row align-items-center box">
+				<div class="col-12 labelbox">
+					비밀번호 확인
 				</div>
-				<div class="col-12 col-sm-auto mb-2">
+				<div class="col-12 inputbox">
 					<input type="password" class="form-control" id="inp_pw02"
 						placeholder="비밀번호를 입력해주세요.">
 				</div>
@@ -71,67 +71,67 @@
 						class="text-success" id="pw-success">비밀번호가 일치합니다.</span>
 				</div>
 			</div>
-			<div class="form-row align-items-center">
-				<div class="col-12 col-sm-2 mb-2">
-					<label class="mb-0" for="">닉네임</label>
+			<div class="row align-items-center box">
+				<div class="col-12 labelbox">
+					닉네임
 				</div>
-				<div class="col-8 col-sm-auto mb-2">
+				<div class="col-12 inputbox">
 					<input type="text" class="form-control" name="uname" id="uname"
 						placeholder="닉네임을 입력해주세요.">
 				</div>
-				<div class="col-4 col-sm-auto mb-2">
+				<div class="col-4">
 					<input type="button" id="check" class="btn btn-dark w-100"
 						value="중복확인">
 				</div>
 			</div>
-			<div class="form-row align-items-center">
-				<div class="col-12 col-sm-2 mb-2">
-					<label class="mb-0" for="">이름</label>
+			<div class="row align-items-center box">
+				<div class="col-12 labelbox">
+					이름
 				</div>
-				<div class="col-12 col-sm-auto mb-2">
+				<div class="col-12 inputbox">
 					<input type="text" class="form-control" name="realname" id="realname"
 						placeholder="이름을 입력해주세요.">
 				</div>
 
 			</div>
-			<div class="form-row align-items-center">
-				<div class="col-12 col-sm-2 mb-2">
+			<div class="row align-items-center box">
+				<div class="col-12 labelbox">
 					<label class="mb-0" for="">전화번호</label>
 				</div>
 				
 
-				<div class="col-12 col-sm-auto mb-10">
+				<div class="col-12 inputbox">
 					<input type="text" class="form-control" name="uphone" id="phone"
 						size="11">
 				</div>
 			</div>
 			
-			<div class="form-row align-items-center">
-				<div class="col-12 col-sm-2 mb-2">
-					<label class="mb-0" for="">우편번호</label>
+			<div class="row align-items-center box">
+				<div class="col-12 labelbox">
+					우편번호
 				</div>
-				<div class="col-8 col-sm-auto mb-2">
+				<div class="col-12 inputbox">
 					<input type="text" class="form-control" name="upostcode"
 						id="postcode">
 				</div>
-				<div class="col-4 col-sm-auto mb-2">
+				<div class="col-4">
 					<button type="button" id= "search" class="btn btn-dark w-100" >찾기</button>
 				</div>
 			</div>
-			<div class="form-row align-items-center">
-				<div class="col-12 col-sm-2 mb-2">
-					<label class="mb-0" for="">주소1</label>
+			<div class="row align-items-center box">
+				<div class="col-12 labelbox">
+					주소1
 				</div>
-				<div class="col-12 col-sm-10 mb-2">
+				<div class="col-12 inputbox">
 					<input type="text" class="form-control" name="address1"
 						id="address1" placeholder="주소를 입력해 주세요.">
 				</div>
 			</div>
-			<div class="form-row align-items-center">
-				<div class="col-12 col-sm-2 mb-2">
-					<label class="mb-0" for="">주소2</label>
+			<div class="row align-items-center box">
+				<div class="col-12 labelbox">
+					주소2
 				</div>
-				<div class="col-12 col-sm-10 mb-2">
+				<div class="col-12 inputbox">
 					<input type="text" class="form-control" name="address2"
 						id="address2" placeholder="주소를 입력해 주세요.">
 				</div>

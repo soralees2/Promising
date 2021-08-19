@@ -205,4 +205,9 @@ public class MemberController {
 //		return "redirect:/member/infoUpdate";
 		
 			}
+	
+	@GetMapping("/forget")
+	public void forget() {
+		
+	}
 }
