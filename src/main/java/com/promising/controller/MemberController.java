@@ -17,9 +17,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+
 
 import com.promising.config.SecurityConfig;
 import com.promising.repository.MemberRepository;
@@ -159,6 +163,28 @@ public class MemberController {
 		
 		
 		}
+
+
+	@PostMapping("/idcheck/{username}")
+	@ResponseBody
+	public String idcheck(@PathVariable("username") String username) {
+		if(repo.findByUsername(username).isPresent()) {
+			return "exist";
+		}else {
+			return "can";
+		}
+	}
+	@PostMapping("/unamecheck/{uname}")
+	@ResponseBody
+	public String unameCheck(@PathVariable("uname") String uname) {
+	
+		if(repo.findByUname(uname).isPresent()) {
+			return "exist";
+		}else {
+			return "can";
+		}
+	}
+
 	
 	@RequestMapping(value="/pwModify",method = RequestMethod.POST)
 	@ResponseBody
@@ -180,8 +206,8 @@ public class MemberController {
 		
 			}
 	
-	
-	
-	
-	
+	@GetMapping("/forget")
+	public void forget() {
+		
+	}
 }

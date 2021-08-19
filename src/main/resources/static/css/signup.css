@@ -1,6 +1,29 @@
+.checkForm{
+	box-sizing: inherit;
+}
+.box{
+	    text-align: left;
+    margin: 0px 0px 23px;
+}
+.labelbox{
+	    color: rgb(61, 61, 61);
+    margin: 0px 0px 10px;
+    text-decoration: none;
+    -webkit-tap-highlight-color: rgba(0,0,0,.1);
+}
+
+.inputbox{
+	    width: 100%;
+    margin: 0px 0px 12px;
+}
+.inputbox>input{
+	width:100%;
+}
+
+
 .joinbox {
 	border: 1px solid #ddd;
-	max-width: 700px;
+	max-width: 500px;
 }
 
 .joinhi {
@@ -22,4 +45,7 @@ div[class*="col-"] span {
 
 .pw-check span {
 	display: none;
+}
+.secret{
+	display:none;
 }
