@@ -99,7 +99,7 @@
                    <div class="col-12 col-md-6 col-xl-3" th:each="pro:${result}">
                        <div class="card" >
                            <div class="imgDiv">
-                               <img th:src="@{/static/images/main/card1.jpeg}" class="card-img-top" alt="...">
+                               <img th:src="@{'/static/images/main/'+${pro.prSysName}}" class="card-img-top" alt="...">
                                <img src="../images/main/heart1.png" width="20" class="heart">
                            </div>
                            <div class="card-body">
