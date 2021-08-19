@@ -9,6 +9,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.session.SessionRegistry;
+import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
@@ -32,7 +34,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
-	
+	@Bean
+    public SessionRegistry sessionRegistry() {
+        return new SessionRegistryImpl();
+    }
 	@Override
 	public void configure(WebSecurity web) throws Exception
 	{
@@ -66,6 +71,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.userDetailsService(mservice)
 		.tokenRepository(getJDBCRepository())
 		.tokenValiditySeconds(60*60*24);
+		
+		 http.sessionManagement()
+         .maximumSessions(1)
+         .maxSessionsPreventsLogin(false)
+         .expiredUrl("/member/doublelogin")
+         .sessionRegistry(sessionRegistry());
+		
 	}
 	private PersistentTokenRepository getJDBCRepository() {
 		JdbcTokenRepositoryImpl repo= new JdbcTokenRepositoryImpl();
@@ -76,6 +88,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	public void configureGlobal(AuthenticationManagerBuilder auth)throws Exception{
 		auth.userDetailsService(mservice).passwordEncoder(passwordEncoder());
 	}
+	
+	
 //	  @Override
 //	  public void configure(AuthenticationManagerBuilder auth) throws Exception { // 9
 //	    auth.userDetailsService(userService)

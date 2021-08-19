@@ -120,13 +120,13 @@
 			}
 		}
 
-$("#search").on("click",function(){
-	
+$("#searchcode").on("click",function(){
+
 	 new daum.Postcode({
             oncomplete: function(data) {
                 let roadAddr = data.roadAddress; // 도로명 주소 변수
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
-               $("#postCode").attr('value', data.zonecode);
+               $("#postcode").attr('value', data.zonecode);
                 $("#address1").attr('value',roadAddr);
                 
             }
