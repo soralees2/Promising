@@ -8,21 +8,14 @@
 <meta name="_csrf" th:content="${_csrf.token}">
 <meta name="_csrf_header" th:content="${_csrf.headerName}">
 <th:block th:replace="fragments/commonHead"></th:block>
-<title>Document</title>
 
-<script
-	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-<script
-	src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+ <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
  <link rel="stylesheet" type="text/css" th:href="@{/static/css/common_style.css}">
 	<link th:href="@{/static/css/upload3.css}" rel="stylesheet">
 	 <script type="text/javascript" th:src="@{/static/js/common.js}"></script>
     <script type="text/javascript" th:src="@{/static/js/upload3.js}"></script>
-<link
-	href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css"
-	rel="stylesheet">
-<script
-	src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
 
 </head>
 
@@ -266,7 +259,7 @@
 							</div>
 						</div>
 						<div class="twobtn">
-						<button type="button" id="back">뒤로가기</button>
+						<button type="button" id="back" class="btn btn-dark">뒤로가기</button>
 						 <button type="button" id="next" class="btn btn-sm btn-primary" >시작하기</button>
 						 </div>
 					</form>
