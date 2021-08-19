@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.promising.repository.MemberRepository;
@@ -72,11 +73,24 @@ public class ProjectController {
 	}
 	
 	@GetMapping("/main")
-	public String main(Model model) {
-		List<ProjectVO> result = repo.selectAll();
-		model.addAttribute("result", result);
+	public String main(PageVO pvo, Model model) {
+		Pageable page = pvo.makePageable(0, "pno");
+		Page<ProjectVO> result = repo.findAll(repo.makePredicate(pvo.getType(), pvo.getKeyword()),page);
+ 		model.addAttribute("result", new PageMaker<ProjectVO>(result));
 		return "project/main";
 	}
+	
+//	@PostMapping("/scrollDown")
+//	@ResponseBody
+//	public Page<ProjectVO> scrollDown (PageVO pvo, Model model, Principal principal) {
+//		System.out.println("ajax 요청");
+//		Pageable page = pvo.makePageable(0, "pno");
+//		System.out.println(page);
+//		Page<ProjectVO> result = repo.selectAll(repo.makePredicate(pvo.getType(), pvo.getKeyword()),page);
+// 		model.addAttribute("result", new PageMaker<ProjectVO>(result));
+//		return result;
+//	}
+
 	
 //	@PostMapping("/newest")
 //	@ResponseBody
@@ -115,8 +129,6 @@ public class ProjectController {
 	public String list(PageVO pvo, Model model) {
 		Pageable page = pvo.makePageable(0, "pno");
 		Page<ProjectVO> result = repo.findAll(repo.makePredicate(pvo.getType(), pvo.getKeyword()),page);
-		List<ProjectVO> project = repo.selectList();
-		model.addAttribute("project", project);
  		model.addAttribute("result", new PageMaker<ProjectVO>(result));
  		return "project/list";
 	}

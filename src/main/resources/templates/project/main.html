@@ -9,17 +9,24 @@
    	<meta name="_csrf_header" th:content="${_csrf.headerName}">
     <th:block th:replace="fragments/commonHead"></th:block>
     <link rel="stylesheet" type="text/css" th:href="@{/static/css/main.css}">
-    <script type="text/javascript" th:src="@{/static/js/main.js}"></script>
+    <script type="text/javascript" src="/static/js/main.js"></script>
     <script>
         $(function () {
-            $(".heart").on({
+        		
+        	if($(window).scrollTop() == $(document).height() - $(window).height()) {
+       			console.log("성공");
+       			alert("test");
+       			
+            } 
+        	
+            /* $(".heart").on({
                 'click': function () {
                     var src = ($(this).attr('src') === '../images/main/heart1.png')
                         ? '../images/main/heart2.png'
                         : '../images/main/heart1.png';
                     $(this).attr('src', src);
                 }
-            });
+            }); */
             
             $("#popular").on("click",function(){
                location.href="/project/popular";
@@ -95,11 +102,11 @@
                     <button type="button" class="btn btn-light btn-sm" id="close">마감순</button>
                 </div>
                 <!-- 프로젝트 출력 -->
-                <div class="row" id="main_list">
-                   <div class="col-12 col-md-6 col-xl-3" th:each="pro:${result}">
+                <div class="row" id="main_list" th:with="result=${result.result}">
+                   <div class="col-12 col-md-6 col-xl-3" th:each="pro:${result.content}">
                        <div class="card" >
                            <div class="imgDiv">
-                               <img th:src="@{'/static/images/main/'+${pro.prSysName}}" class="card-img-top" alt="...">
+                               <img th:src="@{'/static/images/projectuploading/'+${pro.prSysName}}" class="card-img-top" alt="...">
                                <img src="../images/main/heart1.png" width="20" class="heart">
                            </div>
                            <div class="card-body">
@@ -118,10 +125,35 @@
                        </div>
                    </div>
                 </div>
-    
                 <div class=row id="popular_list"></div>
                 <div class=row id="newest_list"></div>
                 <div class=row id="colse_list"></div>
+                
+                <div>
+                	<nav aria-label="Page navigation example">
+	                  <ul class="pagination pagination-sm justify-content-center">
+	
+	                     <li class="page-item" th:if="${result.prevPage}">
+	                        <a class="page-link" href="#" aria-label="Previous"
+	                           th:href="${result.prevPage.pageNumber}+1">
+	                           <span aria-hidden="true">&laquo;</span>
+	                        </a>
+	                     </li>
+	
+	                     <li class="page-item" th:each="p:${result.pageList}"
+	                        th:classappend="${p.pageNumber ==result.currentPageNum-1}? active: '' ">
+	                        <a id="nextPage" class="page-link" th:href="${p.pageNumber}+1">[[${p.pageNumber}+1]]</a>
+	                     </li>
+	
+	                     <li class="page-item" th:if="${result.nextPage}">
+	                        <a class="page-link" href="#" aria-label="Next"
+	                           th:href="${result.nextPage.pageNumber}+1">
+	                           <span aria-hidden="true">&raquo;</span>
+	                        </a>
+	                     </li>
+	                  </ul>
+	               </nav>
+                </div>
                 
                 <!-- 마이페이지 -->
                 <div class=mypagego><a href="#" th:href="@{/member/mypage}">마이페이지이동</a></div>
@@ -148,16 +180,16 @@
             <div class="search_wrap">
                 <div class="container">
                 
-	                <!-- <div class="hide">
+	               <div class="hide">
 						<select id="searchType">
 							<option value='t' th:selected="${pageVO.type} == 't'">title</option>
 						</select>
-						<button id="searchBtn">검색</button> th:value="${pageVO.keyword}"
-					</div> -->
+						<button id="searchBtn">검색</button>  
+					</div>
                 
                     <div class="search2 row">
                         <div class="col-10">
-                            <input type="text" class="form-control w-100" 
+                            <input type="text" class="form-control w-100" th:value="${pageVO.keyword}"
                                placeholder="프로젝트를 검색하세요." id="searchKeyword">
                         </div>
                         <div class="col-2">
@@ -193,10 +225,40 @@
                         <button type="button" class="btn btn-light">미디어</button>
                         <button type="button" class="btn btn-dark">애완</button>
                     </div>
+                    
+                    <form id="f1" th:action="@{list}" method="get">
+						<input type="hidden" name="page" th:value="${result.currentPageNum}">
+						<input type="hidden" name="size" th:value="${result.currentPage.pageSize}">
+						<input type="hidden" name="type" th:value="${pageVO.type}">
+						<input type="hidden" name="keyword" th:value="${pageVO.keyword}">
+					</form>
                 </div>
             </div>
         </div>
         <!-- lookaround end -->
     </div>
+    	<script th:inline="javascript">
+		$(function() {
+			
+			$(".pagination a").click(function(e) {
+	            e.preventDefault();
+	            $("#f1").find("[name='page']").val($(this).attr("href"));
+	            $("#f1").submit();
+	         });
+
+	
+			$("#searchBtn").on("click", function(){
+				alert("test");
+				let typeStr = $("#searchType").find(":selected").val();
+				let keywordStr = $("#searchKeyword").val();
+				
+				$("#f1").find("[name='type']").val(typeStr);
+				$("#f1").find("[name='keyword']").val(keywordStr);
+				$("#f1").find("[name='page']").val("1");
+				$("#f1").submit();
+			});
+			
+		})
+	</script>
 </body>
 </html>

@@ -73,9 +73,8 @@
                 <div class="row" th:with="result=${result.result}">
                     <div class="col-12 col-md-6 col-xl-4" th:each="pro:${result.content}">
                         <div class="card">
-                        
                             <div class="imgDiv">
-                                <img th:src="@{/static/images/main/card1.jpeg}" class="card-img-top" alt="..." width="200">
+                                <img th:src="@{'/static/images/projectuploading/'+${pro.prSysName}}" class="card-img-top" alt="..." width="200">
                                 <img src="../images/main/heart1.png" width="25" class="heart">
                             </div>
                             <div class="card-body">
@@ -128,7 +127,6 @@
                      </li>
                   </ul>
                </nav>
-               
                <form id="f1" th:action="@{list}" method="get">
                   <input type="hidden" name="page" th:value="${result.currentPageNum}">
                   <input type="hidden" name="size" th:value="${result.currentPage.pageSize}">

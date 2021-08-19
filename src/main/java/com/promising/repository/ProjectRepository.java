@@ -2,6 +2,8 @@ package com.promising.repository;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.querydsl.QuerydslPredicateExecutor;
@@ -14,7 +16,7 @@ import com.querydsl.core.types.Predicate;
 public interface ProjectRepository extends JpaRepository<ProjectVO, Long>, QuerydslPredicateExecutor<ProjectVO>{
 	
 	@Query(value="select * from pr_project where pr_check not in ('N') and pr_status not in('F')", nativeQuery = true)
-	List<ProjectVO> selectAll();
+	Page<ProjectVO> selectAll(Predicate makePredicate, Pageable page);
 	
 	@Query(value="select * from pr_project where pr_check not in ('N') and pr_status not in('F') order by pr_startdate desc", nativeQuery = true)
 	List<ProjectVO> selectNewest();
@@ -26,7 +28,7 @@ public interface ProjectRepository extends JpaRepository<ProjectVO, Long>, Query
 	List<ProjectVO> selectPopular();
 	
 	@Query(value="select * from pr_project", nativeQuery = true)
-	List<ProjectVO> selectList();
+	Page<ProjectVO> selectList(Predicate makePredicate, Pageable page);
 
 	public default Predicate makePredicate(String type, String keyword) {
 		BooleanBuilder builder = new BooleanBuilder();
@@ -45,4 +47,6 @@ public interface ProjectRepository extends JpaRepository<ProjectVO, Long>, Query
 		
 		return builder;
 	}
+
+	
 }
