@@ -109,59 +109,55 @@ $(function () {
 
 
 
-$("#searchAddress").on("click",function(){
+/*$("#searchAddress").on("click",function(){
 	
 	 new daum.Postcode({
             oncomplete: function(data) {
                 let roadAddr = data.roadAddress; // 도로명 주소 변수
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
                $("#postCode").attr('value', data.zonecode);
-                $("#addressDetail").attr('value',roadAddr);
+                $("#addressScope").attr('value',roadAddr);
                 
             }
         }).open();//팝업을 띄우려면 오픈만해줘
         
 })
 
-/*$("#modifyComp").on("click",function(){
+$("#modifyComp").on("click",function(){
+	var realName=$("#inputReceiverName").val();
+	var uphone=$("#inputReceiverContact").val();
+	var address1=$("#addressScope").val();
+	var postcode=$("#postCode").val();
+	var address2=$("#addressDetail").val();
 	
-	let nameVal=$("#inputReceiverName").val();
-	let phoneVal=$("#inputReceiverContact").val();
-	let address1Val=$("#addressScope").val();
-	let address2Val=$("#addressDetail").val();
-	let postCodeVal=$("#postCode").val();
+	var obj ={"realName":realName,"uphone":uphone, "address1":address1,"postcode":postcode,"address2":address2}
+							
+$.ajax({
+		type : 'POST',
+		url : '/member/uphoneUpdate/'+ modifyContact,
+data : JSON.stringify({uphone : modifyContact}),
+	contentType : "application/json",
+	beforeSend : function(
+	jqXHR, settings) {
+	let header = $("meta[name='_csrf_header']").attr("content");
+	let token = $("meta[name='_csrf']").attr("content");
+	jqXHR.setRequestHeader(header,token);
+},success : function(data) {
+	alert("갱신 성공");
+console.log(data);
+location.reload();}
+,error : function(request,status, error) {
+alert("올바른 값을 입력했는지 확인해주세요."); // 실패 시 처리
+}
+})
 	
-		let obj = {username:'nameVal',address1:'address1Val',address2:'address1Val',upostcode:'postCodeVal',uphone:'phoneVal',oriName:oriName,sysName:sysName,regDate:regDate,updateDate:updateDate};
-	
-	console.log(obj);
-	$.ajax({
-			type:'POST',
-			 url: '/member/deliveryModify/'+obj.userName+obj.address1+obj.address2+obj.upostcode+obj.uphone,
-			data : (JSON.stringify(obj)),
-			contentType: "application/json",
-			beforeSend: function (jqXHR, settings) {
-		           		let header = $("meta[name='_csrf_header']").attr("content");
-		           		let token = $("meta[name='_csrf']").attr("content");
-		           		jqXHR.setRequestHeader(header, token);
-					}, success: function(data){
-						
-						  console.log("주소 갱신 성공");  
-						  alert("주소 갱신 성공");  
-						
-					},error:function(request,status,error){
-				        alert("번호가 중복됩니다. 다시 설정해주세요."); // 실패 시 처리	      
-	})
-	})
-	
-})*/
-
-
-
+}
 
 	
 
 })
-
+})
+*/
 
 
 

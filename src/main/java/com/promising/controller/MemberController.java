@@ -3,6 +3,7 @@ package com.promising.controller;
 import java.io.File;
 import java.security.Principal;
 import java.util.Arrays;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,13 +18,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.ResponseBody;
-
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-
 
 import com.promising.config.SecurityConfig;
 import com.promising.repository.MemberRepository;
@@ -114,7 +111,7 @@ public class MemberController {
 	
 	@RequestMapping(value="/uphoneUpdate/{modifyContact}",method = RequestMethod.POST)
 	@ResponseBody
-	public void emailUpdate(@PathVariable("modifyContact") String modifyContact,@RequestBody MemberVO mvo,Model model,Principal principal) {
+	public void emailUpdate(@PathVariable("modifyContact") String modifyContact,Model model,Principal principal) {
 		System.out.println("10시");
 		
 		String originName =principal.getName();		
@@ -128,11 +125,11 @@ public class MemberController {
 			}
 	
 	@PostMapping("/profileAttach")
-	public String projectUpload(MemberVO vo,MultipartFile[] file,Principal principal,HttpServletRequest request) throws Exception {
+	public String profileUpload(MemberVO vo,MultipartFile[] file,Principal principal,HttpServletRequest request) throws Exception {
 		vo = repo.findByUsername(principal.getName()).get();
 
 		
-		String realPath = session.getServletContext().getRealPath("/");
+//		String realPath = session.getServletContext().getRealPath("/");
 
 		String relativePath ="src"+File.separator+"main"+File.separator+"resources"+File.separator +"static"+File.separator+"images"+File.separator+"profileUpload";
 		System.out.println(relativePath+"/ 앞쪽이 리얼패스 ㅇㅇ");
@@ -187,20 +184,50 @@ public class MemberController {
 
 	
 	@RequestMapping(value="/pwModify",method = RequestMethod.POST)
-	@ResponseBody
-	public void pwUpdate(@PathVariable("currPw") String currPw,@PathVariable("repw1") String repw1,@RequestBody MemberVO mvo,Model model,Principal principal) {
-		System.out.println("10시");
+
+	public String pwUpdate(@RequestBody Map<String,Object> param,Model model,Principal principal) {
 		
-		String nowPw= currPw;
-		
+		System.out.println("변경~~start");
+		System.out.println(principal);
 		String originName =principal.getName();		
-		MemberVO vo=repo.findById(originName).get(); //찐
+
+		
+		for(String key : param.keySet()){
+			  System.out.println(key + " : " + param.get(key));
+			}
+
+		System.out.println(param.toString());
+	
+				//만약에 originName 이 DB에 존재한다면 &안한다면
+				
+		String nowPw=(String)param.get("currPw");
+		String toNewPw=(String)param.get("modifyPw1");
+	
+		System.out.println(nowPw+": 이것은 현재비번");
+		System.out.println(toNewPw+": 이것은 바꾼비번");
+		
+	
+MemberVO vo=repo.findByUsername(originName).get(); //찐
+
+		
 		vo.setPassword(nowPw);
-		vo.setPassword(pwEncoder.encode(vo.getPassword()));
+		
+		if(originName==nowPw) {
+			vo.setPassword(pwEncoder.encode(toNewPw));		
+			repo.save(vo);
+			return "success";
+		}else {
+			
+			return "error";
+		}
+		
+		
 		
 	
 		
-		repo.save(vo);
+	
+		
+	
 		
 //		return "redirect:/member/infoUpdate";
 		

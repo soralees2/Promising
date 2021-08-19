@@ -192,13 +192,12 @@
 									<br>
 								</div>
 							</div>
-	
-	            <form action="/member/pwModify" method="post">	
+		
 							<div class="pwReset" id=pwblankNButton>
 								<div class="rememberPw">
 									<h6>현재 비밀번호</h6>
 									<input type="text" class="blank form-control-lg"
-										placeholder="현재 비밀번호" id="pw" name="currPw"> <br>
+										placeholder="현재 비밀번호" id="currPw" name="currPw"> <br>
 	
 									<h6>비밀번호가 기억나지 않나요?</h6>
 	
@@ -214,10 +213,10 @@
 								</div>
 	
 								<div class="col-sm-4 col-md-4 uploadcomment">
-									<button class="btn btn-dark savebutton" id="pwSaveBtn">저장</button>
+									<button class="btn btn-dark savebutton" type="button" id="pwSaveBtn">저장</button>
 								</div>
 							</div>
-				</form>
+		
 							<hr>
 	
 							<!--연락처 시작 -->
@@ -237,7 +236,7 @@
 	
 								<div></div>
 							</div>
-	
+	</div>
 						</div>
 						</div>
 						<!--첫번째 계정 컨텐츠 들어 끝나는지점-->
@@ -322,7 +321,7 @@
 	
 													<div class="modal-footer">
 														<button type="button" class="btn btn-primary center col-12"
-															id="modifyComp">등록 완료</button>
+															id="modifyComp" name="modifyComp">등록 완료</button>
 	
 													</div>
 	
@@ -333,6 +332,9 @@
 								</div>
 							</div>
 	
+	
+	
+	<!--  주소부분시작 -->
 							<div class="RoundedWrapper__Wrapper-a7usag-0 ckzBmr"
 								id="shippingDataBox">
 	
@@ -401,15 +403,18 @@
 	
 	
 							</div>
+							
+							
+							<!--  주소끝부분 -->
 	
 	
 	
 						</div>
 						<!--텝라인 div닫기 -->
 					</div>
+
+	<!-- Wrap 닫기 -->
 	
-				</div>
-				</div>
 				
 				<script>
 					$(function() {
@@ -531,28 +536,25 @@
 											let modifyPw2 = $("#repw2").val();
 											let currPw = $("#currPw").val();
 											
-											if (!modifyPw1==modifyPw2) {
+											if (modifyPw1!=modifyPw2) {
 	
 												alert("비밀번호의 일치여부를 확인해주세요.");
-	
-											}else if((modifyPw1||modifyPw2)==""){
+												return false;
+											}else if((modifyPw1=="")||((modifyPw2)=="")){
 												
 
 												alert("비밀번호를 입력하세요.");
-												location.reload(); 
+												 return false;
 											}else {
 	
-												console.log(modifyContact);
+									
 												$
 														.ajax({
 															type : 'POST',
-															url : '/member/pwModify/'
-																	,
+															url : '/member/pwModify',
 															data : JSON
-																	.stringify({
-																		modifyPw1:repw1,currPw:currPw
-																	}),
-															contentType : "application/json",
+																	.stringify({"modifyPw1":modifyPw1,"currPw":currPw}),
+															contentType : "application/json; charset=UTF-8",
 															beforeSend : function(
 																	jqXHR, settings) {
 																let header = $(
@@ -575,11 +577,9 @@
 																alert("갱신 성공");
 	
 															},
-															error : function(
-																	request,
-																	status, error) {
+															error : function(error) {
 																alert("갱신실패"); // 실패 시 처리
-																location.reload(); 
+																
 															}
 	
 														})
