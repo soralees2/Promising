@@ -40,6 +40,7 @@
             $("#close").on("click",function(){
                location.href="/project/close";
             })
+        })
             
     </script>
 </head>
@@ -153,11 +154,17 @@
             <div class="search_wrap">
                 <div class="container">
                 
+	                <!-- <div class="hide">
+						<select id="searchType">
+							<option value='t' th:selected="${pageVO.type} == 't'">title</option>
+						</select>
+						<button id="searchBtn">검색</button> th:value="${pageVO.keyword}"
+					</div> -->
+                
                     <div class="search2 row">
                         <div class="col-10">
-                           
-                            <input type="text" class="form-control w-100"
-                               placeholder="프로젝트를 검색하세요." id="param">
+                            <input type="text" class="form-control w-100" 
+                               placeholder="프로젝트를 검색하세요." id="searchKeyword">
                         </div>
                         <div class="col-2">
                             <button type="button" class="btn btn-light w-100" id="searchBtn">검색</button>
