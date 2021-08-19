@@ -22,7 +22,7 @@
     width: 30%;
     min-width: 10rem;
     height: 100%;
-    background-image:url(/images/project/upload/projectupload1left.png);
+    background-image:url(/static/images/project/upload/projectupload1left.png);
     background-size: cover;
     background-position: center center;
     opacity: 0.5;
@@ -46,7 +46,7 @@
     margin: 0px auto;
   }
  .center>.madein{
-    background-image: url(/images/project/upload/madein.png);
+    background-image: url(/static/images/project/upload/madein.png);
     display: block;
     float: left;
     width: 18rem;
@@ -111,7 +111,7 @@
   width: 50%;
   max-width: 50rem;
   height: 100%;
-  background-image: url(/images/project/upload/middleimg.jpg);
+  background-image: url(/static/images/project/upload/middleimg.jpg);
   background-size: cover;
   background-position: center center;
 }
