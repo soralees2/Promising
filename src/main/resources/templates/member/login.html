@@ -45,7 +45,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 					</div>
 					<div class="row align-items-center mt-4">
 						
-							<button class="loginbtn btn btn-danger"><span>로그인</span></button>
+							<button class="loginbtn btn btn-primary"><span>로그인</span></button>
 						
 					</div>
 				</form>
@@ -61,7 +61,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 			</div>
 			<form action="/logout" method="post">
  <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
- <button>로그아웃</button>
+ <button class="primary">로그아웃</button>
  </form>
 		</div>
 	</div>

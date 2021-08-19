@@ -255,4 +255,9 @@ public class MemberController {
 		
 		return "redirect:/member/login";
 	}
+	
+	@GetMapping("/doublelogin")
+	public void doublelogin() {
+		
+	}
 }
