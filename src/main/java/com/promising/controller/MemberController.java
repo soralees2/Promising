@@ -314,4 +314,9 @@ MemberVO vo=repo.findByUsername(originName).get(); //찐
 		
 		return "redirect:/member/login";
 	}
+	
+	@GetMapping("/doublelogin")
+	public void doublelogin() {
+		
+	}
 }
