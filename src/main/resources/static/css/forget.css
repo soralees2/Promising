@@ -1,0 +1,72 @@
+.forgetbox{
+	width: 500px;
+    padding: 72px 0px 0px;
+    margin: 0px auto 12px;
+}
+.forgetwrap{
+	    padding: 32px;
+    border-radius: 5px;
+    border: 1px solid rgb(228, 228, 228);
+}
+.forgetwrap>h1{
+	    font-size: 24px;
+    line-height: 36px;
+    letter-spacing: -0.025em;
+    text-align: left;
+    margin: 0px 0px 32px;
+}
+.findbox{
+	    text-align: left;
+    margin: 0px 0px 23px;
+}
+.label{
+	color: rgb(61, 61, 61);
+    margin: 0px 0px 10px;
+    
+}
+.inputbox{
+	    width: 100%;
+    margin: 0px 0px 12px;
+}
+.inputbox>input{
+	    border: 1px solid rgb(230, 230, 230);
+    color: rgb(13, 13, 13);
+    background: rgb(255, 255, 255);
+    padding: 0px 12px;
+    max-height: 44px;
+    min-width: 100px;
+    display: flex;
+    font-size: 14px;
+    line-height: 24px;
+    letter-spacing: -0.015em;
+    -webkit-box-align: center;
+    align-items: center;
+    border-radius: 4px;
+	    width:100%;
+}
+.explainbox{
+	color: rgb(61, 61, 61);
+    font-size: 14px;
+    line-height: 24px;
+    letter-spacing: -0.015em;
+}   
+.findbtn{
+	width: 100%;
+    cursor: pointer;
+    display: inline-flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    height: 52px;
+    white-space: nowrap;
+    border-radius: 4px;
+    margin: 0px;
+    border: 0px;
+    outline: none;
+    font-weight: bold;
+    box-sizing: border-box;
+    padding: 0px 24px;
+ background-color: rgb(255, 87, 87);
+    color: rgb(255, 255, 255);
+}

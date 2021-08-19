@@ -20,6 +20,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.promising.repository.MemberRepository;
 import com.promising.repository.ProjectRepository;
+
+import com.promising.vo.MemberVO;
+
 import com.promising.vo.PageMaker;
 import com.promising.vo.PageVO;
 import com.promising.vo.ProjectVO;
@@ -27,8 +30,7 @@ import com.promising.vo.ProjectVO;
 @Controller
 @RequestMapping("/project")
 public class ProjectController {
-	@Autowired
-	private HttpSession session;
+
 	@Autowired
 	private ProjectRepository repo;
 	@Autowired
@@ -133,8 +135,8 @@ public class ProjectController {
 	}
 	@PostMapping("/auth/upload3")
 	public String projectUpload(ProjectVO vo,MultipartFile[] file,Principal principal,String prStartday,String prEndday,String targetmoney,String presentprice) throws Exception {
-	
-		vo.setPrWriter(principal.getName());
+		MemberVO newvo =memberrepo.findByUsername(principal.getName()).get();
+		vo.setPrWriter(newvo.getUname());
 		java.sql.Date prStartdate =java.sql.Date.valueOf(prStartday);
 		java.sql.Date prEnddate =java.sql.Date.valueOf(prEndday);
 		
@@ -146,8 +148,8 @@ public class ProjectController {
 		vo.setPrTargetMoney(Integer.parseInt(targetmoney));
 		vo.setPrPresentPrice(Integer.parseInt(presentprice));
 		
-		String realPath = session.getServletContext().getRealPath("files");
-		 File filesPath = new File(realPath);
+		
+		 File filesPath = new File("src"+File.separator+"main"+File.separator+"resources"+File.separator +"static"+File.separator+"images"+File.separator+"projectuploading");
 			if(!filesPath.exists()) {
 				filesPath.mkdir();
 			}
