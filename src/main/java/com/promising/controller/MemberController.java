@@ -228,7 +228,7 @@ MemberVO vo=repo.findByUsername(originName).get(); //찐
 		
 		@RequestMapping(value="/addressUpdate",method = RequestMethod.POST)
 
-		public void addressUpdate(@RequestBody Map<String,Object> param,Model model,Principal principal) {
+		public String addressUpdate(@RequestBody Map<String,Object> param,Model model,Principal principal) {
 			
 			System.out.println("변경~~start");
 			System.out.println(principal);
@@ -265,7 +265,7 @@ MemberVO vo=repo.findByUsername(originName).get(); //찐
 			vo.setUphone(uphone);
 			vo.setRealname(realName);
 			repo.save(vo);		
-
+			return "redirect:/member/infoUpdate";
 			}
 	
 	@GetMapping("/forget")

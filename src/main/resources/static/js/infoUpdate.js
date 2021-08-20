@@ -109,7 +109,7 @@ $(function () {
 
 
 
-$("#searchAddress").on("click",function(){
+/*$("#searchAddress").on("click",function(){
 	
 	 new daum.Postcode({
             oncomplete: function(data) {
@@ -121,8 +121,8 @@ $("#searchAddress").on("click",function(){
             }
         }).open();//팝업을 띄우려면 오픈만해줘
         
-})
 
+*/
 
 
 
