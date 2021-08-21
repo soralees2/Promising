@@ -4,14 +4,18 @@ import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -33,10 +37,13 @@ public class CommentVO {
 	private String writer;
 	@Column(nullable=false , length=4000)
 	private String contents;
-	@Column(nullable=false)
-	private Long pr_parent;
 	@CreationTimestamp
 	private Timestamp regDate;
 	@UpdateTimestamp
 	private Timestamp updateDate;
+	
+	@JsonIgnore
+	@ManyToOne(fetch=FetchType.LAZY)
+	private CommunityVO community;
+
 }
