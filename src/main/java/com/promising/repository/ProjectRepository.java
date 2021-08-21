@@ -33,6 +33,16 @@ public interface ProjectRepository extends JpaRepository<ProjectVO, Long>, Query
 	List<ProjectVO> selectCheckingPro(String writer);
 	
 	
+	//내가 올린프로젝트 심사중
+		@Query(value="select * from pr_project where pr_status not in ('F') and pr_writer='writer' ", nativeQuery = true)
+		List<ProjectVO> selectProceedingPro(String writer);
+		
+		//내가 올린프로젝트 완료된것
+@Query(value="select * from pr_project where pr_status not in ('I') and pr_writer='writer' ", nativeQuery = true)
+				List<ProjectVO> selectFinishedPro(String writer);
+	
+	
+	
 
 	public default Predicate makePredicate(String type, String keyword) {
 		BooleanBuilder builder = new BooleanBuilder();

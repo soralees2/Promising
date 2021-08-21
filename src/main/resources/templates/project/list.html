@@ -72,35 +72,36 @@
                 <!-- 프로젝트 출력 -->
                 <div class="row" th:with="result=${result.result}">
                     <div class="col-12 col-md-6 col-xl-4" th:each="pro:${result.content}">
-                        <div class="card">
-                        
-                            <div class="imgDiv">
-                                <img th:src="@{/static/images/main/card1.jpeg}" class="card-img-top" alt="..." width="200">
-                                <img src="../images/main/heart1.png" width="25" class="heart">
-                            </div>
-                            <div class="card-body">
-                                <div class="pro_title">
-                                    <a href="#">[[${pro.prTitle}]]</a>
-                                </div>
-                                <div class="pro_cate">
-                                    <span><a href="#">[[${pro.prCategory}]]</a></span>
-                                    <span class="division"> | </span>
-                                    <span><a href="#">[[${pro.prWriter}]]</a></span>
-                                </div>
-                                <div class="pro_explain">
-                                    <h6>[[${pro.prIntro}]]</h6>
-                                </div>
-                                <div class="progress-small">
-                                    <div class="progress-bar bg-danger" role="progressbar" style="width: 50%"
-                                        aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                                <div class="money">
-                                    <span class="price">[[${pro.prCurrentMoney}]]원</span>
-                                    <span class="percent">%</span>
-                                    <span class="period"><i class="far fa-clock"></i> 40일 남음</span>
-                                </div>
-                            </div>
-                        </div>
+	                    <a th:href="@{/project/story/} + ${pro.pno}">
+	                        <div class="card">
+	                            <div class="imgDiv">
+	                                <img th:src="@{/static/images/main/card1.jpeg}" class="card-img-top" alt="..." width="200">
+	                                <img src="../images/main/heart1.png" width="25" class="heart">
+	                            </div>
+	                            <div class="card-body">
+	                                <div class="pro_title">
+	                                    <a href="#">[[${pro.prTitle}]]</a>
+	                                </div>
+	                                <div class="pro_cate">
+	                                    <span><a href="#">[[${pro.prCategory}]]</a></span>
+	                                    <span class="division"> | </span>
+	                                    <span><a href="#">[[${pro.prWriter}]]</a></span>
+	                                </div>
+	                                <div class="pro_explain">
+	                                    <h6>[[${pro.prIntro}]]</h6>
+	                                </div>
+	                                <div class="progress-small">
+	                                    <div class="progress-bar bg-danger" role="progressbar" style="width: 50%"
+	                                        aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+	                                </div>
+	                                <div class="money">
+	                                    <span class="price">[[${pro.prCurrentMoney}]]원</span>
+	                                    <span class="percent">%</span>
+	                                    <span class="period"><i class="far fa-clock"></i> 40일 남음</span>
+	                                </div>
+	                            </div>
+	                        </div>
+                        </a>
                     </div>
                 </div>
             <!-- 페이징 -->

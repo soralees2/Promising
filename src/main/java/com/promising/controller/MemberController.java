@@ -169,9 +169,14 @@ public class MemberController {
 	@GetMapping("/myProjectGoing")
 	public void myProjectGoing(Model model,Principal principal) {
 		String writer =principal.getName();		
-		System.out.println(writer);
+//		System.out.println(writer); 출력잘됨
 		 List<ProjectVO> result = repoProject.selectCheckingPro(writer);
-		 model.addAttribute("result", result);
+		 List<ProjectVO> result2 = repoProject.selectProceedingPro(writer);
+		 System.out.println(result);
+		
+		
+			 model.addAttribute("result", result);
+			 model.addAttribute("result2", result2);
 		 
 
 		
