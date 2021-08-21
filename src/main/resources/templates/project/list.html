@@ -7,18 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <th:block th:replace="fragments/commonHead"></th:block>
     <link href="/static/css/list.css" rel="stylesheet">
-    <script>
-        $(function () {
-            $(".heart").on({
-                'click': function () {
-                    var src = ($(this).attr('src') === '../images/main/heart1.png')
-                        ? '../images/main/heart2.png'
-                        : '../images/main/heart1.png';
-                    $(this).attr('src', src);
-                }
-            });
-        })
-    </script>
+    <script type="text/javascript" th:src="@{/static/js/list.js}"></script>
 </head>
 <body>
     <div class="wrap">
@@ -28,27 +17,32 @@
             <div class="container">
                <!-- 상세검색 -->
                 <div class="details">
-                    <span class="searchWord">향수<button id="del">X</button></span>
-                    <select class="form-select form-select-sm" aria-label=".form-select-sm example" style="width:10%;">
-                        <option selected>카테고리</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                    <input type="text" class="searchWord" placeholder="검색어를 입력하세요." id="searchKeyword" th:value="${pageVO.keyword}"><!-- <button id="del">X</button> -->
+                    <select id="searchType" class="form-select form-select-sm" aria-label=".form-select-sm example" style="width:10%;">
+                        <option>카테고리</option>
+                        <option value='g' th:selected="${pageVO.type} == 'g'">게임</option>
+                        <option value='p' th:selected="${pageVO.type} == 'p'">향수</option>
+                        <option value='d' th:selected="${pageVO.type} == 'd'">디자인</option>
+                        <option value='k' th:selected="${pageVO.type} == 'k'">지식</option>
+                        <option value='t' th:selected="${pageVO.type} == 't'">트렌드</option>
+                        <option value='b' th:selected="${pageVO.type} == 'b'">출판</option>
+                        <option value='m' th:selected="${pageVO.type} == 'm'">미디어</option>
+                        <option value='a' th:selected="${pageVO.type} == 'a'">애완</option>
                     </select>
                     <select class="form-select form-select-sm" aria-label=".form-select-sm example" style="width:10%;">
-                        <option selected>진행상태</option>
+                        <option>진행상태</option>
                         <option value="1">전체 프로젝트</option>
                         <option value="2">진행중인 프로젝트</option>
                         <option value="3">마감된 프로젝트</option>
                     </select>
                     <select class="form-select form-select-sm" aria-label=".form-select-sm example" style="width:10%;">
-                        <option selected>달성율</option>
+                        <option>달성율</option>
                         <option value="1">75% 이하</option>
                         <option value="2">75% ~ 100%</option>
                         <option value="3">100% 이상</option>
                     </select>
                     <select class="form-select form-select-sm" aria-label=".form-select-sm example" style="width:10%;">
-                        <option selected>모인금액</option>
+                        <option>모인금액</option>
                         <option value="1">1백만원 이하</option>
                         <option value="2">1백만원 ~ 1천만원</option>
                         <option value="3">1천만원 ~ 5천만원</option>
@@ -59,7 +53,7 @@
                 </div>
                 <hr>
                 <!-- 정렬 -->
-                <div class="number">
+                <!-- <div class="number">
                     <span class="num">3</span><span>개의 프로젝트가 있습니다.</span>
                     <span class="order">
                         <select class="form-select form-select-sm" aria-label=".form-select-sm example">
@@ -68,16 +62,15 @@
                             <option value="3">마감순</option>
                         </select>
                     </span>
-                </div>
+                </div> -->
                 <!-- 프로젝트 출력 -->
                 <div class="row" th:with="result=${result.result}">
                     <div class="col-12 col-md-6 col-xl-4" th:each="pro:${result.content}">
                         <div class="card">
                             <div class="imgDiv">
-                                <img th:src="@{'/images/projectuploading/'+${pro.prSysName}}" class="card-img-top" width="200">
-                                <img th:src="@{/images/main/heart1.png}" width="25" class="heart">
+                                <img th:src="@{'/static/images/projectuploading/'+${pro.prSysName}}" class="card-img-top" width="200">
+                                <!-- <img th:src="@{/images/main/heart1.png}" width="25" class="heart"> -->
                             </div>
-                            <div class="card-body">
                                 <div class="pro_title">
                                     <a href="#">[[${pro.prTitle}]]</a>
                                 </div>
@@ -127,7 +120,7 @@
                      </li>
                   </ul>
                </nav>
-               <form id="f1" th:action="@{list}" method="get">
+               <form id="f3" th:action="@{list}" method="get">
                   <input type="hidden" name="page" th:value="${result.currentPageNum}">
                   <input type="hidden" name="size" th:value="${result.currentPage.pageSize}">
                   <input type="hidden" name="type" th:value="${pageVO.type}">
@@ -154,27 +147,23 @@
             </div>
             <div class="search_wrap">
                 <div class="container">
-                    <div class="search2 row">
-                        <div class="col-10">
-                            <input type="text" class="form-control w-100" placeholder="프로젝트를 검색하세요." id="param">
-                        </div>
-                        <div class="col-2">
-                            <button type="button" class="btn btn-light w-100" id="search">검색</button>
-                        </div>
-                    </div>
                     <div class="project">
                         <div class="shortcut">
-                            <h4><a href="#">모든 프로젝트</a></h4>
+                            <h4><a href="/project/list">모든 프로젝트</a></h4>
                         </div>
                         <div class="shortcut">
                             <h4><a href="#">인기 프로젝트</a></h4>
                         </div>
                         <div class="shortcut">
-                            <h4><a href="#">신규 프로젝트</a></h4>
+                            <h4><a href="#" id="newPro">신규 프로젝트</a></h4>
                         </div>
                         <div class="shortcut">
-                            <h4><a href="#">성공 임박 프로젝트</a></h4>
+                            <h4><a href="#" id="closePro">성공 임박 프로젝트</a></h4>
                         </div>
+                        
+                        <form id="f1" th:action="@{newest}" method="get"></form>
+                        <form id="f2" th:action="@{close}" method="get"></form>
+                        
                     </div>
                     <hr>
                     <div class="tag">
@@ -195,15 +184,24 @@
         </div>
         <!-- lookaround end -->
     </div>
-    
     <script th:inline="javascript">
       $(function() {
 
          $(".pagination a").click(function(e) {
             e.preventDefault();
-            $("#f1").find("[name='page']").val($(this).attr("href"));
-            $("#f1").submit();
+            $("#f3").find("[name='page']").val($(this).attr("href"));
+            $("#f3").submit();
          });
+         
+         $("#searchBtn").on("click", function(){
+			let typeStr = $("#searchType").find(":selected").val();
+			let keywordStr = $("#searchKeyword").val();
+			
+			$("#f3").find("[name='type']").val(typeStr);
+			$("#f3").find("[name='keyword']").val(keywordStr);
+			$("#f3").find("[name='page']").val("1");
+			$("#f3").submit();
+		});
          
          
       })

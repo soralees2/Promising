@@ -5,8 +5,6 @@ import java.security.Principal;
 import java.util.List;
 import java.util.UUID;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.promising.mapper.ProjectMapper;
 import com.promising.repository.MemberRepository;
 import com.promising.repository.ProjectRepository;
 
@@ -40,7 +39,6 @@ public class ProjectController {
 	//@GetMapping("/detail")
 //	public void detail(Model model) {
 //		model.addAttribute("hello", "안녕하세요, 반갑습니다!");
-
 	
 	@GetMapping("/detail/{pno}")
 	public String detail(@PathVariable("pno") Long pno,Model model) {
@@ -49,13 +47,9 @@ public class ProjectController {
 		//CommunityVO qvo= repo.findByCmt(pno).get();
 
 		model.addAttribute("vo",vo);
-		
-		return "project/detail";
-		
-
-	}
-
 	
+		return "project/detail";
+	}
 	
 //	@GetMapping("/detail/{bno}")
 //	public String detail(@PathVariable("bno") Long bno, Model model) {
@@ -67,31 +61,26 @@ public class ProjectController {
 //		
 //	}
 	
-	
 	@GetMapping("/payment")
 	public void payment(Model model) {
 	}
 	
 	@GetMapping("/main")
 	public String main(PageVO pvo, Model model) {
-		Pageable page = pvo.makePageable(0, "pno");
-		Page<ProjectVO> result = repo.findAll(repo.makePredicate(pvo.getType(), pvo.getKeyword()),page);
- 		model.addAttribute("result", new PageMaker<ProjectVO>(result));
+		List<ProjectVO> result = repo.selectAll();
+		model.addAttribute("result", result);
 		return "project/main";
 	}
 	
 //	@PostMapping("/scrollDown")
 //	@ResponseBody
-//	public Page<ProjectVO> scrollDown (PageVO pvo, Model model, Principal principal) {
+//	public List<ProjectVO> scrollDown (Model model, Principal principal) {
 //		System.out.println("ajax 요청");
-//		Pageable page = pvo.makePageable(0, "pno");
-//		System.out.println(page);
-//		Page<ProjectVO> result = repo.selectAll(repo.makePredicate(pvo.getType(), pvo.getKeyword()),page);
-// 		model.addAttribute("result", new PageMaker<ProjectVO>(result));
+//		List<ProjectVO> result = repo.selectScrollDown();
+//		model.addAttribute("result", result);
 //		return result;
 //	}
 
-	
 //	@PostMapping("/newest")
 //	@ResponseBody
 //	public List<ProjectVO> newest (Model model, Principal principal) {
@@ -109,20 +98,31 @@ public class ProjectController {
 //		model.addAttribute("result", result);
 //		return result;
 //	}
+	@GetMapping("/popular")
+	public String popular(PageVO pvo, Model model) {
+		System.out.println("인기순 요청");
+		Pageable page = pvo.makePageable(0, "pno");
+		Page<ProjectVO> result = repo.selectPopular(repo.makePredicate(pvo.getType(), pvo.getKeyword()),page);
+ 		model.addAttribute("result", new PageMaker<ProjectVO>(result));
+		return "project/list";
+	}
+	
 	@GetMapping("/newest")
-	public String newest(Model model) {
+	public String newest(PageVO pvo, Model model) {
 		System.out.println("최신순 요청");
-		List<ProjectVO> result = repo.selectNewest();
-		model.addAttribute("result", result);
-		return "project/main";
+		Pageable page = pvo.makePageable(0, "pno");
+		Page<ProjectVO> result = repo.selectNewest(repo.makePredicate(pvo.getType(), pvo.getKeyword()),page);
+ 		model.addAttribute("result", new PageMaker<ProjectVO>(result));
+		return "project/list";
 	}
 	
 	@GetMapping("/close")
-	public String close(Model model) {
+	public String close(PageVO pvo, Model model) {
 		System.out.println("마감순 요청");
-		List<ProjectVO> result = repo.selectClose();
-		model.addAttribute("result", result);
-		return "project/main";
+		Pageable page = pvo.makePageable(0, "pno");
+		Page<ProjectVO> result = repo.selectClose(repo.makePredicate(pvo.getType(), pvo.getKeyword()),page);
+ 		model.addAttribute("result", new PageMaker<ProjectVO>(result));
+		return "project/list";
 	}
 	
 	@GetMapping("/list")
@@ -137,14 +137,17 @@ public class ProjectController {
 	public void upload1() {
 		
 	}
+	
 	@GetMapping("/auth/upload2")
 	public void upload2() {
 		
 	}
+	
 	@GetMapping("/auth/upload3")
 	public void upload3() {
 		
 	}
+	
 	@PostMapping("/auth/upload3")
 	public String projectUpload(ProjectVO vo,MultipartFile[] file,Principal principal,String prStartday,String prEndday,String targetmoney,String presentprice) throws Exception {
 		MemberVO newvo =memberrepo.findByUsername(principal.getName()).get();
@@ -160,7 +163,6 @@ public class ProjectController {
 		vo.setPrTargetMoney(Integer.parseInt(targetmoney));
 		vo.setPrPresentPrice(Integer.parseInt(presentprice));
 		
-		
 		 File filesPath = new File("src"+File.separator+"main"+File.separator+"resources"+File.separator +"static"+File.separator+"images"+File.separator+"projectuploading");
 			if(!filesPath.exists()) {
 				filesPath.mkdir();
@@ -175,11 +177,12 @@ public class ProjectController {
 				tmp.transferTo(new File(filesPath.getAbsolutePath()+"/"+sysName));
 				
 				}
-				}
-			System.out.println(vo);
-			repo.save(vo);
-			return "redirect:/project/complete";
+			}
+		System.out.println(vo);
+		repo.save(vo);
+		return "redirect:/project/complete";
 	}
+	
 	@GetMapping("/complete")
 	public void complete() {
 		

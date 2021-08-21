@@ -15,17 +15,18 @@ import com.querydsl.core.types.Predicate;
 
 public interface ProjectRepository extends JpaRepository<ProjectVO, Long>, QuerydslPredicateExecutor<ProjectVO>{
 	
-	@Query(value="select * from pr_project where pr_check not in ('N') and pr_status not in('F')", nativeQuery = true)
-	Page<ProjectVO> selectAll(Predicate makePredicate, Pageable page);
+	@Query(value="SELECT * FROM (SELECT A.*, ROWNUM AS RNUM FROM (SELECT * FROM pr_project where pr_check not in ('N') and pr_status not in('F')) A )WHERE RNUM > 0 AND RNUM <= 12", nativeQuery = true)
+//	@Query("SELECT * FROM (SELECT A.*, ROWNUM AS RNUM FROM (SELECT * FROM pr_project where pr_check not in ('N') and pr_status not in('F')) A )WHERE RNUM > 0 AND RNUM <= 12")
+	List<ProjectVO> selectAll();
 	
-	@Query(value="select * from pr_project where pr_check not in ('N') and pr_status not in('F') order by pr_startdate desc", nativeQuery = true)
-	List<ProjectVO> selectNewest();
+	@Query(value="select * from pr_project where pr_check not in ('N') order by pr_current_money desc", nativeQuery = true)
+	Page<ProjectVO> selectPopular(Predicate makePredicate, Pageable page);
 	
-	@Query(value="select * from pr_project where pr_check not in ('N') and pr_status not in('F') order by pr_enddate asc", nativeQuery = true)
-	List<ProjectVO> selectClose();
+	@Query(value="select * from pr_project where pr_check not in ('N') order by pr_startdate desc", nativeQuery = true)
+	Page<ProjectVO> selectNewest(Predicate makePredicate, Pageable page);
 	
-	@Query(value="select pno, pr_category, pr_check, pr_enddate, pr_intro, pr_ori_name, pr_startdate, pr_status, pr_sys_name, pr_title, pr_writer,floor(pr_target_money/pr_current_money*100) as percent from pr_project where pr_check not in ('N') and pr_status not in('F') order by percent desc", nativeQuery = true)
-	List<ProjectVO> selectPopular();
+	@Query(value="select * from pr_project where pr_check not in ('N') order by pr_enddate asc", nativeQuery = true)
+	Page<ProjectVO> selectClose(Predicate makePredicate, Pageable page);
 	
 	@Query(value="select * from pr_project", nativeQuery = true)
 	Page<ProjectVO> selectList(Predicate makePredicate, Pageable page);
@@ -39,14 +40,37 @@ public interface ProjectRepository extends JpaRepository<ProjectVO, Long>, Query
 			return builder;
 		}
 		switch(type) {
+		case "g" :
+			builder.and(project.prTitle.like("%"+keyword+"%"));
+			break;
+		case "p" :
+			builder.and(project.prTitle.like("%"+keyword+"%"));
+			break;
+		case "d" :
+			builder.and(project.prTitle.like("%"+keyword+"%"));
+			break;
+		case "k" :
+			builder.and(project.prTitle.like("%"+keyword+"%"));
+			break;
 		case "t" :
 			builder.and(project.prTitle.like("%"+keyword+"%"));
 			break;
-		
+		case "b" :
+			builder.and(project.prTitle.like("%"+keyword+"%"));
+			break;
+		case "m" :
+			builder.and(project.prTitle.like("%"+keyword+"%"));
+			break;
+		case "a" :
+			builder.and(project.prTitle.like("%"+keyword+"%"));
+			break;
+			
 		}
 		
 		return builder;
 	}
+
+	
 
 	
 }

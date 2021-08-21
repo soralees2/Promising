@@ -6,19 +6,76 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="_csrf" th:content="${_csrf.token}">
-   	<meta name="_csrf_header" th:content="${_csrf.headerName}">
+      <meta name="_csrf_header" th:content="${_csrf.headerName}">
     <th:block th:replace="fragments/commonHead"></th:block>
     <link rel="stylesheet" type="text/css" th:href="@{/static/css/main.css}">
+    <script type="text/javascript" th:src="@{/static/js/main.js}"></script>
     <script>
         $(function () {
-        		
-        	if($(window).scrollTop() == $(document).height() - $(window).height()) {
-       			console.log("성공");
-       			alert("test");
+        	
+        	/* if($(window).scrollTop() == $(document).height() - $(window).height()) {
+        		var token = $("meta[name='_csrf']").attr("content");
+       			var header = $("meta[name='_csrf_header']").attr("content");
        			
-            } 
-            
-            $("#popular").on("click",function(){
+       			$.ajax({
+       				type: 'POST',
+       				url:'/project/scrollDown',
+       				dataType: 'json',
+       				contentType: "application/json",
+       				beforeSend : function(xhr){
+       					xhr.setRequestHeader(header, token);
+       	            },
+       				async: true,
+       				cache :false
+       			}).done(function(resp){
+       				console.log("성공");
+       				console.log(resp);
+       				
+       				for(let i=0;i<resp.length;i++){
+       					
+       					let row = $("<div class=row>");
+       	    			let col = $("<div class='col-12 col-md-6 col-xl-3'>");
+       	    			let card = $("<div class=card>");
+       	    			
+       	    			let imgDiv = $("<div class=imgDiv>");
+       	    			let proImg = $("<img th:src='@{/static/images/main/card1.jpeg}' class=card-img-top>");
+       	    			let heartImg = $("<img th:src='@{/images/main/heart1.png}' class=heart width=20>");
+       	    			imgDiv.append(proImg);
+       	    			imgDiv.append(heartImg);
+       	    			
+       	    			let cardBody = $("<div class=card-body>");
+       	    			
+       	    			let writer = $("<div class=writer>");
+       	    			let cate = $("<span><a href='#'>"+resp[i].prCategory+"</a></span>");
+       	    			let divi = $("<span class=division> | </span>");
+       	    			let wri = $("<span><a href='#'>"+resp[i].prWriter+"</a></span>");
+       	    			writer.append(cate);
+       	    			writer.append(divi);
+       	    			writer.append(wri);
+       	    			
+       	    			let title = $("<div class=pro_title>");
+       	    			let ti = $("<a href='#'>"+resp[i].prTitle+"</a>");
+       	    			title.append(ti);
+       	    			
+       	    			let achi = $("<div class=achi>");
+       	    			let ac = $("<span>"+(resp[i].prTargetMoney/resp[i].prCurrentMoney)*100+"% 달성</span>");
+       	    			
+       	    			achi.append(ac);
+       	    			
+       	    			cardBody.append(writer);
+       	    			cardBody.append(title);
+       	    			cardBody.append(achi);
+       	    			
+       	    			card.append(imgDiv);
+       	    			card.append(cardBody);
+       	    			
+       	    			col.append(card);
+       	    			$("#scrollDown").append(col);
+       				}
+       			})
+            }  */
+
+            /* $("#popular").on("click",function(){
                location.href="/project/popular";
             })
             
@@ -28,10 +85,8 @@
             
             $("#close").on("click",function(){
                location.href="/project/close";
-            })
-
+            }) */
         })
-            
 
     </script>
 </head>
@@ -86,18 +141,15 @@
                 </div>
                 <!-- 정렬 버튼 -->
                 <div class="listTitle">
-                    <h3>주목할 만한 프로젝트</h3><br>
-                    <button type="button" class="btn btn-light btn-sm" id="popular">인기순</button>
-                    <button type="button" class="btn btn-light btn-sm" id="newest">최신순</button>
-                    <button type="button" class="btn btn-light btn-sm" id="close">마감순</button>
+                    <h3>주목할 만한 프로젝트</h3>
                 </div>
                 <!-- 프로젝트 출력 -->
-                <div class="row" id="main_list" th:with="result=${result.result}">
-                   <div class="col-12 col-md-6 col-xl-3" th:each="pro:${result.content}">
+                <div class="row" id="main_list">
+                   <div class="col-12 col-md-6 col-xl-3" th:each="pro:${result}">
                        <div class="card" >
                            <div class="imgDiv">
-                               <img th:src="@{'/static/images/projectuploading/'+${pro.prSysName}}" class="card-img-top" alt="...">
-                               <!-- <img th:src="@{static/images/main/heart1.png}" width="20" class="heart"> -->
+                               <img th:src="@{/static/images/main/card1.jpeg}" class="card-img-top" alt="...">
+                               <img src="../images/main/heart1.png" width="20" class="heart">
                            </div>
                            <div class="card-body">
                                <div class="writer">
@@ -115,35 +167,17 @@
                        </div>
                    </div>
                 </div>
-                <div class=row id="popular_list"></div>
-                <div class=row id="newest_list"></div>
-                <div class=row id="colse_list"></div>
+    			
+    			<div class="seeMore">
+    				<button type="button" id="seeMoreBtn">프로젝트 더 보러가기</button>
+    			</div><br>
                 
-                <div>
-                	<nav aria-label="Page navigation example">
-	                  <ul class="pagination pagination-sm justify-content-center">
-	
-	                     <li class="page-item" th:if="${result.prevPage}">
-	                        <a class="page-link" href="#" aria-label="Previous"
-	                           th:href="${result.prevPage.pageNumber}+1">
-	                           <span aria-hidden="true">&laquo;</span>
-	                        </a>
-	                     </li>
-	
-	                     <li class="page-item" th:each="p:${result.pageList}"
-	                        th:classappend="${p.pageNumber ==result.currentPageNum-1}? active: '' ">
-	                        <a id="nextPage" class="page-link" th:href="${p.pageNumber}+1">[[${p.pageNumber}+1]]</a>
-	                     </li>
-	
-	                     <li class="page-item" th:if="${result.nextPage}">
-	                        <a class="page-link" href="#" aria-label="Next"
-	                           th:href="${result.nextPage.pageNumber}+1">
-	                           <span aria-hidden="true">&raquo;</span>
-	                        </a>
-	                     </li>
-	                  </ul>
-	               </nav>
-                </div>
+                <!-- <form id="f1" th:action="@{list}" method="get">
+					<input type="hidden" name="page" th:value="${result.currentPageNum}">
+					<input type="hidden" name="size" th:value="${result.currentPage.pageSize}">
+					<input type="hidden" name="type" th:value="${pageVO.type}">
+					<input type="hidden" name="keyword" th:value="${pageVO.keyword}">
+				</form> -->
                 
                 <!-- 마이페이지 -->
                 <div class=mypagego><a href="#" th:href="@{/member/mypage}">마이페이지이동</a></div>
@@ -153,7 +187,7 @@
         </div>
         <!-- main end -->
         
-        <div class="lookaround">
+       <div class="lookaround">
             <div id="searchHeader">
                 <div class="container">
                     <div class="row">
@@ -169,37 +203,24 @@
             </div>
             <div class="search_wrap">
                 <div class="container">
-                
-	               <div class="hide">
-						<select id="searchType">
-							<option value='t' th:selected="${pageVO.type} == 't'">title</option>
-						</select>
-						<button id="searchBtn">검색</button>  
-					</div>
-                
-                    <div class="search2 row">
-                        <div class="col-10">
-                            <input type="text" class="form-control w-100" th:value="${pageVO.keyword}"
-                               placeholder="프로젝트를 검색하세요." id="searchKeyword">
-                        </div>
-                        <div class="col-2">
-                            <button type="button" class="btn btn-light w-100" id="searchBtn">검색</button>
-                        </div>
-                    </div>
-                   
-                    <div class="project">
+                	<div class="project">
                         <div class="shortcut">
-                            <h4><a href="#">모든 프로젝트</a></h4>
+                            <h4><a href="/project/list">모든 프로젝트</a></h4>
                         </div>
                         <div class="shortcut">
-                            <h4><a href="#">인기 프로젝트</a></h4>
+                            <h4><a href="#" id="popularPro">인기 프로젝트</a></h4>
                         </div>
                         <div class="shortcut">
-                            <h4><a href="#">신규 프로젝트</a></h4>
+                            <h4><a href="#" id="newPro">신규 프로젝트</a></h4>
                         </div>
                         <div class="shortcut">
-                            <h4><a href="#">성공 임박 프로젝트</a></h4>
+                            <h4><a href="#" id="closePro">성공 임박 프로젝트</a></h4>
                         </div>
+                        
+                        <form id="f1" th:action="@{popular}" method="get"></form>
+                        <form id="f2" th:action="@{newest}" method="get"></form>
+                        <form id="f3" th:action="@{close}" method="get"></form>
+                        
                     </div>
                     <hr>
                     <div class="tag">
@@ -215,40 +236,26 @@
                         <button type="button" class="btn btn-light">미디어</button>
                         <button type="button" class="btn btn-dark">애완</button>
                     </div>
-                    
-                    <form id="f1" th:action="@{list}" method="get">
-						<input type="hidden" name="page" th:value="${result.currentPageNum}">
-						<input type="hidden" name="size" th:value="${result.currentPage.pageSize}">
-						<input type="hidden" name="type" th:value="${pageVO.type}">
-						<input type="hidden" name="keyword" th:value="${pageVO.keyword}">
-					</form>
                 </div>
             </div>
         </div>
         <!-- lookaround end -->
     </div>
-    	<script th:inline="javascript">
-		$(function() {
-			
-			$(".pagination a").click(function(e) {
-	            e.preventDefault();
-	            $("#f1").find("[name='page']").val($(this).attr("href"));
-	            $("#f1").submit();
-	         });
 
-	
-			$("#searchBtn").on("click", function(){
-				alert("test");
+	<!-- <script th:inline="javascript">
+		$(function() {
+
+			$("#searchBtn").on("click", function() {
 				let typeStr = $("#searchType").find(":selected").val();
 				let keywordStr = $("#searchKeyword").val();
-				
+
 				$("#f1").find("[name='type']").val(typeStr);
 				$("#f1").find("[name='keyword']").val(keywordStr);
 				$("#f1").find("[name='page']").val("1");
 				$("#f1").submit();
 			});
-			
+
 		})
-	</script>
+	</script> -->
 </body>
 </html>
