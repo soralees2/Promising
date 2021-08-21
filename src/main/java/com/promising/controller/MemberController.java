@@ -3,6 +3,7 @@ package com.promising.controller;
 import java.io.File;
 import java.security.Principal;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -25,9 +26,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.promising.config.SecurityConfig;
 import com.promising.repository.MemberRepository;
+import com.promising.repository.ProjectRepository;
 import com.promising.service.EmailService;
 import com.promising.vo.MemberRoleVO;
 import com.promising.vo.MemberVO;
+import com.promising.vo.ProjectVO;
 
 @Controller
 @RequestMapping("/member")
@@ -46,6 +49,11 @@ public class MemberController {
 	
 	@Autowired
 	private MemberRepository repo;
+	
+	@Autowired
+	private ProjectRepository repoProject;
+	
+	
 	@GetMapping("/login")
 	public void login() {
 		
@@ -158,11 +166,26 @@ public class MemberController {
 }
 	
 	
+	@GetMapping("/myProjectGoing")
+	public void myProjectGoing(Model model,Principal principal) {
+		String writer =principal.getName();		
+		System.out.println(writer);
+		 List<ProjectVO> result = repoProject.selectCheckingPro(writer);
+		 model.addAttribute("result", result);
+		 
+
+		
+		
+		
+		}
+	
+	
 	@GetMapping("/qna")
 	public void qna() {
 		
 		
 		}
+	
 
 
 	@PostMapping("/idcheck/{username}")

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<th:block th:replace="fragments/commonHead"></th:block>
+<meta name="_csrf" th:content="${_csrf.token}">
+<meta name="_csrf_header" th:content="${_csrf.headerName}">
+</head>
+
+
+<body>
+    <div class="wrap">
+<header id="header" th:fragment="fg-header">
+		<div class="container">
+			<div class="row">
+				<div class="col-4 col-md-5">
+					<ul class="menu">
+						<li class="search" id="search"><img src="../images/ic_search.png" alt=""><span>프로젝트 </span>둘러보기</li>
+						<li class="register"><a href="#">프로젝트 올리기</a></li>
+						<li class="back"><a href="">이전페이지로</a></li>
+					</ul>
+				</div>
+				<div class="col-4 col-md-2">
+					<h1 class="logo"><a href="#">Promising</a></h1>
+				</div>
+				<div class="col-4 col-md-5">
+					<div class="utils">
+						<a href="#">
+							<span>회원가입/로그인</span>
+							<div class="pf_wrap">
+								<div class="pf_img" style="background:url(../images/atom02.png) 50% 50% no-repeat;background-size:cover;"></div>
+							</div>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+	
+	
+            <!-- 해당 페이지 클래스명을 적어주세요-->
+            <div class="container mx-7">
+                <div class="row profileLine">
+                    <div class='col-12 namennavi'>
+                    
+                       
+                        <div class='nameline'>
+                            <span>내가 올린 프로젝트</span>
+                        </div>
+                 
+                    </div>
+
+             </div>
+            </div>
+                   
+                        <div class="container">
+                                <div class=" row tabline">
+                                    <ul class="nav nav-pills" id="pills-tab" role="tablist">
+                                      
+                                         <li class="nav-item" role="presentation">
+                                            <button class="nav-link p-3" id="pills-underCheckingMyPro-tab" data-bs-toggle="pill"
+                                                data-bs-target="#pills-underCheckingMyPro" type="button" role="tab"
+                                                aria-controls="pills-underCheckingMyPro" aria-selected="false">심사중인 내 프로젝트</button>
+                                        </li>
+                                        
+                                         <li class="nav-item" role="presentation">
+                                            <button class="nav-link p-3" id="pills-proceedingMyPro-tab" data-bs-toggle="pill"
+                                                data-bs-target="#pills-proceedingMyPro" type="button" role="tab"
+                                                aria-controls="pills-MyQnA" aria-selected="false">진행중인 내 프로젝트</button>
+                                        </li>
+                                        
+                                         <li class="nav-item" role="presentation">
+                                            <button class="nav-link p-3" id="pills-finishedMyPro-tab" data-bs-toggle="pill"
+                                                data-bs-target="#pills-finishedMyPro" type="button" role="tab"
+                                                aria-controls="pills-finishedMyPro" aria-selected="false">진행중인 내 프로젝트</button>
+                                        </li>
+                                        
+                                    </ul>
+                       
+                        <hr>
+                       
+                                <div class="tab-content" id="underCheckingMyPro-tabContent">
+                                    <div class="tab-pane fade show active" id="pills-QnA" role="tabpanel"
+                                        aria-labelledby="pills-underCheckingMyPro-tab">
+                                    <div class="row" id="main_list">
+                   <div class="col-12 col-md-6 col-xl-3" th:each="pro:${result}">
+                       <div class="card" >
+                           <div class="imgDiv">
+                               <img th:src="@{/static/images/main/card1.jpeg}" class="card-img-top" alt="...">
+                               <img src="../images/main/heart1.png" width="20" class="heart">
+                           </div>
+                           <div class="card-body">
+                               <div class="writer">
+                                   
+                                   <div th:if="${result}!=null">
+                                   <span>결과 나옴~</span>
+		                                   <span id="prCategory"><a href="#">[[${pro.prCategory}]]</a></span>
+		                                   <span class="division">|</span>
+		                                   <span><a href="#">[[${pro.prWriter}]]</a></span>
+ 									</div>
+ 									
+ 									    <div th:unless="${result}=null">
+		                            		<span>0개의 문의 내역이있습니다.</span>
+		                                   <span id="prCategory"><a href="#">[[${pro.prCategory}]]</a></span>
+		                                   <span class="division">|</span>
+		                                   <span><a href="#">[[${pro.prWriter}]]</a></span>
+ 									</div>
+ 									
+ 									
+ 									                             
+                               </div>
+                               <div class="pro_title">
+                                   <a href="#">[[${pro.prTitle}]]</a>
+                               </div>
+                               <div class="achi">
+                                   <span>[[${pro.prTargetMoney}]]% 달성</span>
+                               </div>
+                           </div>
+                       </div>
+                   </div>
+                </div>
+                                   
+                                   
+                                   
+                                   
+                                   
+                                    </div>
+                                  
+                                
+                                    
+                                     <div class="tab-pane fade" id="pills-proceedingMyPro" role="tabpanel"
+                                        aria-labelledby="pills-proceedingMyPro-tab">
+                                      <span>1개의 문의 내역이있습니다.</span> 
+
+                                    </div>
+                                    
+                                        
+                                     <div class="tab-pane fade" id="pills-finishedMyPro" role="tabpanel"
+                                        aria-labelledby="pills-finishedMyPro-tab">
+                                           <span>2개의 문의 내역이있습니다.</span> 
+
+                                    </div>
+                                    
+                                </div>
+
+
+                            </div>
+                        </div>
+             
+                    </div>
+	
+	
+
+
+
+
+</body>
+</html>

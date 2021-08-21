@@ -33,7 +33,8 @@ public class CommentVO {
 	private String writer;
 	@Column(nullable=false , length=4000)
 	private String contents;
-	@Column(nullable=false)
+	//nullable=false->true
+	@Column(nullable=true)
 	private Long pr_parent;
 	@CreationTimestamp
 	private Timestamp regDate;

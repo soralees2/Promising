@@ -53,14 +53,19 @@
                                                 aria-controls="pills-home" aria-selected="true">소개</button>
                                         </li>
                                         <li class="nav-item" role="presentation">
-                                            <button class="nav-link p-3" id="pills-profile-tab" data-bs-toggle="pill"
-                                                data-bs-target="#pills-profile" type="button" role="tab"
-                                                aria-controls="pills-profile" aria-selected="false">후원한 프로젝트</button>
+                                            <button class="nav-link p-3" id="pills-donated-tab" data-bs-toggle="pill"
+                                                data-bs-target="#pills-donated" type="button" role="tab"
+                                                aria-controls="pills-donated" aria-selected="false">후원한 프로젝트</button>
                                         </li>
                                         <li class="nav-item" role="presentation">
-                                            <button class="nav-link p-3" id="pills-contact-tab" data-bs-toggle="pill"
+                                         <a href="#" th:href="@{/member/myProjectGoing}" class="py-2 d-block"><button class="nav-link p-3" id="pills-qna-tab" data-bs-toggle="pill"
+                                                data-bs-target="#pills-myProjectGoing" type="button" role="tab"
+                                                aria-controls="pills-myProjectGoing" aria-selected="false">내가 올린 프로젝트</button></a>
+                                        
+<!--                                             <button class="nav-link p-3" id="pills-contact-tab" data-bs-toggle="pill"
                                                 data-bs-target="#pills-contact" type="button" role="tab"
-                                                aria-controls="pills-contact" aria-selected="false">올린 프로젝트</button>
+                                                aria-controls="pills-contact" aria-selected="false">올린 프로젝트</button> -->
+                                        
                                         </li>
                                          <li class="nav-item" role="presentation">
                                          
@@ -80,14 +85,14 @@
                                         aria-labelledby="pills-home-tab">
                                         <span>등록된 소개가 없습니다.</span>
                                     </div>
-                                    <div class="tab-pane fade" id="pills-profile" role="tabpanel"
-                                        aria-labelledby="pills-profile-tab">
+                                    <div class="tab-pane fade" id="pills-donated" role="tabpanel"
+                                        aria-labelledby="pill-donated-tab">
                                         <span>0개의 프로젝트가 있습니다.</span>
                                     </div>
-                                    <div class="tab-pane fade" id="pills-contact" role="tabpanel"
+                               <!--      <div class="tab-pane fade" id="pills-contact" role="tabpanel"
                                         aria-labelledby="pills-contact-tab">
                                         <span>0개의 프로젝트가 있습니다.</span>
-                                    </div>
+                                    </div> -->
                                     
                                 </div>
 
