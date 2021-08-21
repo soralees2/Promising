@@ -1,6 +1,7 @@
 package com.promising.vo;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -34,8 +36,8 @@ public class CommunityVO {
 	private Long communityno;
 	@Column(nullable=false , length=100)
 	private String writer;
-	@Column(nullable=false , length=200)
-	private String title;
+//	@Column(nullable=false , length=200)
+//	private String title;
 	@Column(nullable=false , length=4000)
 	private String contents;
 	@Column(nullable=false , length=1)
@@ -48,4 +50,9 @@ public class CommunityVO {
 	@JsonIgnore
 	@ManyToOne(fetch=FetchType.LAZY)
 	private ProjectVO project;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy="community", fetch=FetchType.LAZY)
+	private List<CommentVO> comment;
+	
 }

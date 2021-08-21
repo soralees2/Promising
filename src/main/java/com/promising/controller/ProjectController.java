@@ -21,9 +21,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.promising.repository.CommunityRepository;
 import com.promising.repository.MemberRepository;
 import com.promising.repository.ProjectRepository;
-
+import com.promising.vo.CommentVO;
+import com.promising.vo.CommunityVO;
 import com.promising.vo.MemberVO;
 
 import com.promising.vo.PageMaker;
@@ -38,6 +40,7 @@ public class ProjectController {
 	private ProjectRepository repo;
 	@Autowired
 	private MemberRepository memberrepo;
+<<<<<<< HEAD
 
 	//@GetMapping("/detail")
 	//	public void detail(Model model) {
@@ -46,16 +49,64 @@ public class ProjectController {
 
 	@GetMapping("/detail/{pno}")
 	public String detail(@PathVariable("pno") Long pno,Model model) {
+=======
+	@Autowired
+	private CommunityRepository comrepo;
+	
+	
+	@GetMapping("/story/{pno}")
+	public String projectStory(@PathVariable("pno") Long pno,Model model) {
+		ProjectVO vo= repo.findById(pno).get();
+		model.addAttribute("vo",vo);
+		
+		return "project/story";
+	}
+	
+	@GetMapping("/community/{pno}")
+	public String projectCommunity(@PathVariable("pno") Long pno,Model model) {
+		System.out.println("프로젝트 넘  : " + pno);
+		ProjectVO vo= repo.findById(pno).get();
+		List<CommunityVO> comList = comrepo.getCommunities(vo);
+
+//		List<CommentVO> cmtList = comrepo.getCommets(vo);
+		
+		model.addAttribute("vo",vo);
+		model.addAttribute("com", comList);
+		
+		return "project/community";
+	}
+	
+	@GetMapping("/notice/{pno}")
+	public String projectNotice(@PathVariable("pno") Long pno,Model model) {
+>>>>>>> b7f7a9ca333ee04ec96224e6019b423490dd31c0
 		System.out.println("프로젝트 넘  : " + pno);
 		ProjectVO vo= repo.findById(pno).get();
 		//CommunityVO qvo= repo.findByCmt(pno).get();
 
 		model.addAttribute("vo",vo);
+<<<<<<< HEAD
 
 		return "project/detail";
 
 
+=======
+		
+		return "project/notice";
+>>>>>>> b7f7a9ca333ee04ec96224e6019b423490dd31c0
 	}
+//	
+//	@GetMapping("/detail/{pno}")
+//	public String detail(@PathVariable("pno") Long pno,Model model) {
+//		System.out.println("프로젝트 넘  : " + pno);
+//		ProjectVO vo= repo.findById(pno).get();
+//		//CommunityVO qvo= repo.findByCmt(pno).get();
+//
+//		model.addAttribute("vo",vo);
+//		
+//		return "project/detail";
+//		
+//
+//	}
 
 
 
@@ -172,6 +223,7 @@ public class ProjectController {
 		repo.save(vo);
 		return "redirect:/project/complete";
 	}
+	
 	@GetMapping("/complete")
 	public void complete() {
 

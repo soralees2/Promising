@@ -67,18 +67,35 @@
 .no_data i{font-size:6rem;}
 .no_data p{font-size:24px;margin-top:20px;}
 
-.post_list .cmt_amount{font-size:13px;color:#666;margin-top:20px;margin-bottom:10px;}
-.post_list .cmt_wrap{border-top:1px solid #ddd;}
-.post_list .cmt {padding-top:1rem;margin-bottom:20px;}
-.post_list .cmt+.cmt{border-top:1px solid #ddd;}
+.post_list .amount_wrap{margin-top:20px;position:relative;}
+.post_list .amount_wrap>.txt{font-size:13px;display:none;}
+.post_list .amount_wrap .ic b{font-size: 9px;color: #fff;background-color: #E15488;border-radius: 8px;display: inline-block;width: 22px;height: 18px;line-height: 18px;text-align: center;letter-spacing: 0;top: -7px;position: relative;left: -9px; display: none;}
+.post_list .amount_wrap .ic i{font-size:26px;color:#666;vertical-align:middle;}
+.post_list .cmt_wrap{margin-top:10px;}
+.post_list .cmt {border-top:1px solid #ddd;padding-top:1rem;margin-bottom:20px;}
 .post_list .cmt:last-of-type{margin-bottom:0;}
+#addCmt {position:absolute;top:-5px;right:0;font-size:12px;}
+
+/* .post_list .post .btn_modify{float:right;} */
+.post {position:relative;}
+.post .btn_wrap{float:right;}
+.post .btn_wrap button{border:none;font-size:12px;border:1px solid #ddd;}
+.post .btn_wrap li{display:inline-block;color:#999;}
+.post .btn_wrap li:nth-child(2){margin:0 5px;}
 .cmt .pf_wrap{margin-bottom:10px;}
 .cmt .pf_wrap .pf_img{width:30px;height:30px;}
 .cmt .pf_wrap .pf_link{padding-top:0;width:calc(100% - 45px);}
 .cmt .pf_wrap .pf_link .name{float:left;line-height:30px;font-size:14px;}
 .cmt .pf_wrap i{position:relative;top:9px;right:-5px;font-size:11px;}
 .cmt .pf_wrap span.date{font-size:12px;float:right;margin:0;line-height:30px;}
-.cmt .txt p{font-size:.9rem;}
+.cmt .txt:after{display:block;clear:both;content:'';}
+.cmt .txt p{font-size:.9rem;width:calc(100% - 90px);float:left;}
+.cmt .txt .btnCmtremove{font-size:12px;float:right;}
+.addCmt_wrap{margin-top:20px;display:none;}
+.addCmt_wrap .btn_wrap{margin-top:10px;float:none;text-align:right;}
+.addCmt_wrap textarea{font-size:.8rem;}
+
+/* .cmt_wrap{display:none;} */
 
 /* 후원 및 결제 페이지 */
 .project_payment .project_info{border-bottom: 1px solid #ddd;padding-bottom:30px;}
@@ -124,3 +141,6 @@
 
 
 #community_modal .modal-body dt{margin-bottom:15px;}
+#community_modal .modal-body dd+dt{margin-top:20px;}
+#community_modal .form-check{margin-top:10px;}
+/* #community_modal .modal-body textarea{} */
