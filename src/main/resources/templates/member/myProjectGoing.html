@@ -144,7 +144,7 @@
 
 						<!-- 지금  심사중인 프로젝트출력  -->
 						<div class="row" id="main_list"
-							th:if="${not #lists.isEmpty(result)}">
+							th:if="${not #lists.isEmpty(result2)}">
 
 							<div class="col-12 col-md-6 col-xl-3" th:each="pro:${result}">
 								<div class="card">
@@ -173,7 +173,7 @@
 						</div>
 
 						<div class="col-12 col-md-6 col-xl-3"
-							th:unless="${not #lists.isEmpty(result)}">
+							th:unless="${not #lists.isEmpty(result2)}">
 
 							<span>진행중인 프로젝트가 없습니다.</span>
 
@@ -185,12 +185,12 @@
 					<div class="tab-pane fade" id="pills-finishedMyPro" role="tabpanel"
 						aria-labelledby="pills-finishedMyPro-tab">
 
-		<!-- 완료된 내 프로젝트 시작 -->
+						<!-- 완료된 내 프로젝트 시작 -->
 
 						<div class="row" id="main_list"
 							th:if="${not #lists.isEmpty(result)}">
 
-							<div class="col-12 col-md-6 col-xl-3" th:each="pro:${result}">
+							<div class="col-12 col-md-6 col-xl-3" th:each="pro:${result3}">
 								<div class="card">
 									<div class="imgDiv">
 										<img th:src="@{/static/images/main/card1.jpeg}"
@@ -203,35 +203,36 @@
 											<span id="prCategory"><a href="#">[[${pro.prCategory}]]</a></span>
 											<span class="division">|</span> <span><a href="#">[[${pro.prWriter}]]</a></span>
 										</div>
+
 										<div class="pro_title">
 											<a href="#">[[${pro.prTitle}]]</a>
 										</div>
+
 										<div class="achi">
 											<span>[[${pro.prTargetMoney}]]% 달성</span>
 										</div>
-
 									</div>
-
 								</div>
 							</div>
-							<div class="col-12 col-md-6 col-xl-3"
-								th:unless="${not #lists.isEmpty(result)}">
+						</div>
+						<div class="col-12 col-md-6 col-xl-3"
+							th:unless="${not #lists.isEmpty(result3)}">
 
-								<span>완료된 프로젝트가 없습니다.</span>
-
-							</div>
+							<span>완료된 프로젝트가 없습니다.</span>
 
 						</div>
 
-						<!-- 완료된 내 프로젝트 끝 -->
+					</div>
 
-					
+					<!-- 완료된 내 프로젝트 끝 -->
+
+
 				</div>
-</div>
-</div>
 			</div>
-
 		</div>
+	</div>
+
+	</div>
 
 
 

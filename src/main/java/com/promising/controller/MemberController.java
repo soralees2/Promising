@@ -172,12 +172,13 @@ public class MemberController {
 //		System.out.println(writer); 출력잘됨
 		 List<ProjectVO> result = repoProject.selectCheckingPro(writer);
 		 List<ProjectVO> result2 = repoProject.selectProceedingPro(writer);
+		 List<ProjectVO> result3 = repoProject.selectFinishedPro(writer);
 		 System.out.println(result);
 		
 		
 			 model.addAttribute("result", result);
 			 model.addAttribute("result2", result2);
-		 
+			 model.addAttribute("result3", result3);
 
 		
 		
