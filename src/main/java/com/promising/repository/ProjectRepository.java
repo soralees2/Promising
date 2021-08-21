@@ -27,6 +27,12 @@ public interface ProjectRepository extends JpaRepository<ProjectVO, Long>, Query
 	
 	@Query(value="select * from pr_project", nativeQuery = true)
 	List<ProjectVO> selectList();
+	
+	//내가 올린프로젝트 심사중
+	@Query(value="select * from pr_project where pr_check not in ('Y') and pr_status not in('T') where pr_writer=writer", nativeQuery = true)
+	List<ProjectVO> selectCheckingPro(String writer);
+	
+	
 
 	public default Predicate makePredicate(String type, String keyword) {
 		BooleanBuilder builder = new BooleanBuilder();
