@@ -3,15 +3,14 @@ var commentManager = (function(){
 	var getAll  = function(obj, callback){
 		console.log("get All....");
 		
-		$.getJSON('/com/cmt/'+obj,callback );
+		$.getJSON('/com/cmt/'+obj,callback);
 		
 	};
 	
-	var getCount  = function(obj, callback){
-		console.log("get Count....");
+	var getCount  = function(cno){
+		console.log("get Count...");
 		
-		$.getJSON('/com/count/'+obj,callback );
-		
+		$.getJSON('/com/cmtnum/'+cno, callback);
 	};
 	
 	var add = function(obj, callback){
@@ -47,15 +46,19 @@ var commentManager = (function(){
 		
 	};
 	
-	var remove = function(obj, callback){
+	var remove = function(obj,callback){
 		
 		console.log("remove........");
-		
 		$.ajax({
 			type:'delete',
-			url: '/com/cmt/'+ obj.bno+"/" + obj.rno,
+			url: '/com/cmtdel/'+ obj.commentno + '/' + obj.community,
 			dataType:'json',
 			contentType: "application/json",
+			beforeSend: function (jqXHR, settings) {
+		           		let header = $("meta[name='_csrf_header']").attr("content");
+		           		let token = $("meta[name='_csrf']").attr("content");
+		           		jqXHR.setRequestHeader(header, token);
+					},
 			success:callback
 		});
 	};

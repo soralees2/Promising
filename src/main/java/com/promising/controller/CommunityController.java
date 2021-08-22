@@ -9,16 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.promising.repository.CommentRepository;
@@ -26,9 +23,7 @@ import com.promising.repository.CommunityRepository;
 import com.promising.repository.ProjectRepository;
 import com.promising.vo.CommentVO;
 import com.promising.vo.CommunityVO;
-import com.promising.vo.MemberVO;
 import com.promising.vo.PageVO;
-import com.promising.vo.ProjectVO;
 
 @Controller
 @RequestMapping("/com")
@@ -42,59 +37,21 @@ public class CommunityController {
 	
 	@Autowired
 	private CommentRepository crepo;
+
 	
-	
-//	@PostMapping("/delete/{pno}")
-//	public String delete(@PathVariable("bno") Long bno) { 
-//		repo.deleteById(bno);
-//		return "redirect:/board/list";
-//	}
-	
-	
-//	@GetMapping("/register")
-//	public void registerGet(@ModelAttribute("vo")BoardVO vo) { // 궁금증은 나중에
-//		
-//	}
-	
-//	@GetMapping("/{pno}")
-//	public String getCommunityCount(@PathVariable("pno") Long pno) {
-//		String userName = principal.getName();
-//		vo.setWriter(userName);
-//		System.out.println("작성자 : " + vo.getWriter());
-//		System.out.println("작성자1 : " + vo.getProject());
-//		repo.save(vo);
-//		System.out.println("ㅇㅇㅇㅇㅇㅇㅇ등록완료 ");
-//		return "redirect:/project/community/"+pno;
-//	}
-	
-	@PostMapping("/insert/{pno}")
-	public String registerPost(@ModelAttribute("vo")CommunityVO vo, @PathVariable("pno") Long pno, Principal principal) {
+	// 커뮤니티 글 작성 
+	@PostMapping("/insert/{project}")
+	public String registerPost(@ModelAttribute("vo")CommunityVO vo, @PathVariable("project") Long pno, Principal principal) {
 		String userName = principal.getName();
 		vo.setWriter(userName);
-		System.out.println("작성자 : " + vo.getWriter());
-		System.out.println("작성자1 : " + vo.getProject());
 		repo.save(vo);
-		System.out.println("ㅇㅇㅇㅇㅇㅇㅇ등록완료 ");
+		
 		return "redirect:/project/community/"+pno;
 	}
 	
-	
-	@PostMapping("/delete")
-	public String delete(Long pno, Long cno, PageVO vo, RedirectAttributes rttr) {
-
-		System.out.println("삭제 pno ======================================= : " + pno);
-		System.out.println("삭제 cno ======================================= : " + cno);
-		repo.deleteById(cno);
-		rttr.addFlashAttribute("msg", "success");
-		return "redirect:/project/community/"+pno;
-	}
-	
+	// 커뮤니티 글 수정
 	@PostMapping("/modify/{pno}")
 	public String modifyPost(CommunityVO vo, @PathVariable("pno") Long pno, RedirectAttributes rttr ){
-		
-		System.out.println("========id 수정 : " +vo.getCommunityno());
-//		System.out.println("========id 수정 : " +vo.getTitle());
-		System.out.println("========id 수정 : " +vo.getContents());
 		
 		repo.findById(vo.getCommunityno()).ifPresent( origin ->{
 			System.out.println(vo.getCommunityno());
@@ -102,38 +59,27 @@ public class CommunityController {
 			repo.save(origin);
 		});	
 		
-		//페이징과 검색했던 결과로 이동하는 경우 
+		return "redirect:/project/community/"+pno;
+	}
+	// 커뮤니티 글 삭제
+	@PostMapping("/delete/{pno}")
+	public String delete(Long communityno, @PathVariable("pno") Long pno) {
+		repo.deleteById(communityno);
 		return "redirect:/project/community/"+pno;
 	}
 	
-	
-	
-	//댓글 목록
+	// 댓글 목록 
 	@GetMapping("/cmt/{communityno}")
-	public ResponseEntity<List<CommentVO>> getReplies(
-			@PathVariable("communityno")Long cno){
-		System.out.println("=-===================댓글목록");
+	public ResponseEntity<List<CommentVO>> getReplies(@PathVariable("communityno")Long cno){
 		CommunityVO vo = new CommunityVO();
 		vo.setCommunityno(cno);
-		return new ResponseEntity<>(getListByCommunity(vo),HttpStatus.OK );
+		return new ResponseEntity<>(getListByCommunity(vo),HttpStatus.OK);
 	}
-	
-//	// 댓글 수
-//	@GetMapping("/count/{communityno}")
-//	public ResponseEntity<List<Integer>> getCount(
-//			@PathVariable("communityno")Long cno){
-//		System.out.println("=-===================댓글목록");
-//		CommunityVO vo = new CommunityVO();
-//		vo.setCommunityno(cno);
-//		return new ResponseEntity<>(getListByCount(vo),HttpStatus.OK );
-//	}
 	
 	//댓글 추가
 	@Transactional
 	@PostMapping("/cmtadd/{communityno}")
-	public ResponseEntity<List<CommentVO>> addReply(
-			@PathVariable("communityno")Long cno, 
-			@RequestBody CommentVO cmt){
+	public ResponseEntity<List<CommentVO>> addReply(@PathVariable("communityno")Long cno, @RequestBody CommentVO cmt){
 
 		CommunityVO vo = new CommunityVO();
 		vo.setCommunityno(cno);
@@ -145,67 +91,21 @@ public class CommunityController {
 		
 	}
 	
-//	@Transactional
-//	@PostMapping("/{pno}")
-//	public ResponseEntity<List<CommentVO>> addReply(
-//			@PathVariable("pno")Long pno, 
-//			@RequestBody CommentVO reply){
-//
-//		ProjectVO board = new ProjectVO();
-//		board.setPno(pno);
-//		
-//		reply.setProject(board);
-//		
-//		crepo.save(reply);		
-//		
-//		return new ResponseEntity<>(getListByCommunity(board), HttpStatus.CREATED);
-//		
-//	}
-	
-//	@Transactional
-//	@DeleteMapping("/{pno}/{rno}")
-//	public ResponseEntity<List<CommentVO>> remove(
-//			@PathVariable("pno")Long pno,
-//			@PathVariable("commentno")Long cmo){
-//		
-//		
-//		crepo.deleteById(cmo);
-//		
-//		ProjectVO board = new ProjectVO();
-//		board.setPno(pno);
-//		
-//		return  new ResponseEntity<>(getListByBoard(board), HttpStatus.OK);
-//		
-//	}
-//	
-//	
-//	
-//	@Transactional
-//	@PutMapping("/{pno}")
-//	public ResponseEntity<List<CommentVO>> modify(@PathVariable("pno")Long pno, 
-//			@RequestBody CommentVO reply){
-//	
-//		
-//		crepo.findById(reply.getCommentno()).ifPresent(origin -> {
-//			
-//			origin.setContents(reply.getContents());
-//			origin.setWriter(reply.getWriter());
-//			
-//			crepo.save(origin);
-//		});
-//		
-//		ProjectVO board = new ProjectVO();
-//		board.setPno(pno);
-//		
-//		return new ResponseEntity<>(getListByBoard(board), HttpStatus.OK);
-//	}
-//	
-	
+	// 댓글 삭제
+	@Transactional
+	@DeleteMapping("cmtdel/{commentno}/{communityno}")
+	public ResponseEntity<List<CommentVO>> remove(@PathVariable("commentno")Long cmo,@PathVariable("communityno")Long cno){
+		crepo.deleteById(cmo);
+		CommunityVO vo = new CommunityVO();
+		vo.setCommunityno(cno);
+
+		return new ResponseEntity<>(getListByCommunity(vo), HttpStatus.OK);
+	}
+		
 	private List<CommentVO> getListByCommunity(CommunityVO cmt)throws RuntimeException{
-		
 		return crepo.getCommentsOfCommunities(cmt);
-		
 	}
 	
+
 	
 }

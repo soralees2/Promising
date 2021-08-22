@@ -5,6 +5,9 @@
 .main {
   margin-top: calc(-10rem + 95px);
 }
+.search:hover {
+  cursor: pointer;
+}
 .container {
   margin: auto;
 }
@@ -17,17 +20,17 @@
   border-radius: 4px;
   margin-right: 5px;
 }
-.searchWord button {
+/* .searchWord button {
   border: none;
   background-color: transparent;
-}
+} */
 .details select {
   margin-right: 5px;
 }
 .form-select {
   display: inline-block;
 }
-.number {
+/* .number {
   margin-top: 30px;
   margin-bottom: 30px;
 }
@@ -39,7 +42,7 @@
 }
 .order {
   float: right;
-}
+} */
 .card {
   padding-bottom: 100px;
   border: none;
@@ -54,11 +57,6 @@
   transition: all 0.2s linear;
   padding: 0;
   display: block;
-}
-.imgDiv .heart {
-  position: absolute;
-  top: 10px;
-  right: 3%;
 }
 .card .card-img-top:hover {
   transform: scale(1.1);
@@ -107,6 +105,7 @@
 }
 .progress-small {
   margin-bottom: 5px;
+  margin-top: 15px;
 }
 .price {
   font-size: 17px;
@@ -142,7 +141,6 @@ i {
   background-color: white;
   z-index: 9999;
 }
-
 #searchHeader {
   position: fixed;
   top: 0;
@@ -173,20 +171,6 @@ i {
 }
 .search_wrap .btn_wrap .btn {
   margin-right: 10px;
-}
-#searchBtn{
-  background-color: #E0E0F9;
-}
-#searchBtn:hover{
-  background-color: #F0F0FB;
-}
-.search2 {
-  margin-bottom: 30px;
-}
-
-#param {
-  border-radius: 4px;
-  border: 1px solid #cfcfcf;
 }
 .project {
   margin-top: 50px;

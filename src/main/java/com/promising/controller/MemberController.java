@@ -3,6 +3,8 @@ package com.promising.controller;
 import java.io.File;
 import java.security.Principal;
 import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.mail.MessagingException;
@@ -18,19 +20,19 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.ResponseBody;
-
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-
 import com.promising.config.SecurityConfig;
 import com.promising.repository.MemberRepository;
+import com.promising.repository.ProjectRepository;
+import com.promising.repository.QnaRepository;
 import com.promising.service.EmailService;
 import com.promising.vo.MemberRoleVO;
 import com.promising.vo.MemberVO;
+import com.promising.vo.ProjectVO;
+import com.promising.vo.QnaVO;
 
 @Controller
 @RequestMapping("/member")
@@ -49,6 +51,14 @@ public class MemberController {
 	
 	@Autowired
 	private MemberRepository repo;
+	
+	@Autowired
+	private ProjectRepository repoProject;
+
+	@Autowired
+	private QnaRepository qnaRepo;
+	
+	
 	@GetMapping("/login")
 	public void login() {
 		
@@ -117,7 +127,7 @@ public class MemberController {
 	
 	@RequestMapping(value="/uphoneUpdate/{modifyContact}",method = RequestMethod.POST)
 	@ResponseBody
-	public void emailUpdate(@PathVariable("modifyContact") String modifyContact,@RequestBody MemberVO mvo,Model model,Principal principal) {
+	public void emailUpdate(@PathVariable("modifyContact") String modifyContact,Model model,Principal principal) {
 		System.out.println("10시");
 		
 		String originName =principal.getName();		
@@ -131,11 +141,11 @@ public class MemberController {
 			}
 	
 	@PostMapping("/profileAttach")
-	public String projectUpload(MemberVO vo,MultipartFile[] file,Principal principal,HttpServletRequest request) throws Exception {
+	public String profileUpload(MemberVO vo,MultipartFile[] file,Principal principal,HttpServletRequest request) throws Exception {
 		vo = repo.findByUsername(principal.getName()).get();
 
 		
-		String realPath = session.getServletContext().getRealPath("/");
+//		String realPath = session.getServletContext().getRealPath("/");
 
 		String relativePath ="src"+File.separator+"main"+File.separator+"resources"+File.separator +"static"+File.separator+"images"+File.separator+"profileUpload";
 		System.out.println(relativePath+"/ 앞쪽이 리얼패스 ㅇㅇ");
@@ -161,11 +171,35 @@ public class MemberController {
 }
 	
 	
-	@GetMapping("/qna")
-	public void qna() {
+	@GetMapping("/myProjectGoing")
+	public void myProjectGoing(Model model,Principal principal) {
+		String writer =principal.getName();		
+//		System.out.println(writer); 출력잘됨
+		 List<ProjectVO> result = repoProject.selectCheckingPro(writer);
+		 List<ProjectVO> result2 = repoProject.selectProceedingPro(writer);
+		 List<ProjectVO> result3 = repoProject.selectFinishedPro(writer);
+		 System.out.println(result);
+		
+		
+			 model.addAttribute("result", result);
+			 model.addAttribute("result2", result2);
+			 model.addAttribute("result3", result3);
+
+		
 		
 		
 		}
+	
+	@GetMapping("/qna")
+	public void qna(Model model, Principal principal) {
+		String writer =principal.getName();
+		System.out.println(writer);
+		 List<QnaVO> result = qnaRepo.selectQnaTome(writer);
+		 System.out.println(result);
+		 model.addAttribute("result", result);
+		}
+	
+	
 
 
 	@PostMapping("/idcheck/{username}")
@@ -190,23 +224,85 @@ public class MemberController {
 
 	
 	@RequestMapping(value="/pwModify",method = RequestMethod.POST)
-	@ResponseBody
-	public void pwUpdate(@PathVariable("currPw") String currPw,@PathVariable("repw1") String repw1,@RequestBody MemberVO mvo,Model model,Principal principal) {
-		System.out.println("10시");
+
+	public String pwUpdate(@RequestBody Map<String,Object> param,Model model,Principal principal) {
 		
-		String nowPw= currPw;
-		
+		System.out.println("변경~~start");
+		System.out.println(principal);
 		String originName =principal.getName();		
-		MemberVO vo=repo.findById(originName).get(); //찐
-		vo.setPassword(nowPw);
-		vo.setPassword(pwEncoder.encode(vo.getPassword()));
+
+		
+		for(String key : param.keySet()){
+			  System.out.println(key + " : " + param.get(key));
+			}
+
+		System.out.println(param.toString());
+	
+				//만약에 originName 이 DB에 존재한다면 &안한다면
+				
+		String nowPw=(String)param.get("currPw");
+		String toNewPw=(String)param.get("modifyPw1");
+	
+		System.out.println(nowPw+": 이것은 현재비번");
+		System.out.println(toNewPw+": 이것은 바꾼비번");
 		
 	
+MemberVO vo=repo.findByUsername(originName).get(); //찐
+
 		
-		repo.save(vo);
+		vo.setPassword(nowPw);
 		
-//		return "redirect:/member/infoUpdate";
+		if(originName==nowPw) {
+			vo.setPassword(pwEncoder.encode(toNewPw));		
+			repo.save(vo);
+			return "success";
+		}else {
+			
+			return "error";
+		}
 		
+	}
+		
+		@RequestMapping(value="/addressUpdate",method = RequestMethod.POST)
+
+		public String addressUpdate(@RequestBody Map<String,Object> param,Model model,Principal principal) {
+			
+			System.out.println("변경~~start");
+			System.out.println(principal);
+			String originName =principal.getName();		
+
+			
+			for(String key : param.keySet()){
+				  System.out.println(key + " : " + param.get(key));
+				}
+
+			System.out.println(param.toString());
+		
+					//만약에 originName 이 DB에 존재한다면 &안한다면
+					
+			String realName=(String)param.get("realName");
+			String address1=(String)param.get("address1");
+			String address2=(String)param.get("address2");
+			String postcode=(String)param.get("postcode");
+			String uphone=(String)param.get("uphone");
+			
+			
+			System.out.println(realName+": 이것은 진짜이름 ");
+			System.out.println(address1+": 이것은 주소1");
+			System.out.println(address2+": 이것은 주소2");
+			System.out.println(postcode+": 이것은 우편");
+			System.out.println(uphone+": 이것은 핸펀");
+			
+			
+		
+			MemberVO vo=repo.findByUsername(originName).get(); //찐
+			vo.setAddress1(address1);
+			vo.setAddress2(address2);
+			vo.setUpostcode(postcode);
+			vo.setUphone(uphone);
+			vo.setRealname(realName);
+			repo.save(vo);		
+			return "redirect:/member/infoUpdate";
 			}
 	
 	@GetMapping("/forget")
@@ -260,4 +356,11 @@ public class MemberController {
 	public void doublelogin() {
 		
 	}
+	
+	
+	
+	
+	
+	
+	
 }

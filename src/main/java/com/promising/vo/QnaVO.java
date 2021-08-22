@@ -42,6 +42,7 @@ public class QnaVO {
 	
 	@Column(nullable=false, length=4000)
 	private String contents;
+	
 	@CreationTimestamp
 	private Timestamp regDate;
 	@UpdateTimestamp

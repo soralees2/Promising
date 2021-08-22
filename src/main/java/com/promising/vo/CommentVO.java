@@ -29,7 +29,6 @@ import lombok.ToString;
 @Table(name="PR_COMMENT")
 public class CommentVO {
 	
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType. SEQUENCE, generator = "COMMENT_SEQ_GENERATOR")
 	private Long commentno;
@@ -41,6 +40,8 @@ public class CommentVO {
 	private Timestamp regDate;
 	@UpdateTimestamp
 	private Timestamp updateDate;
+	@Column(nullable=false)
+	private Long communityno;
 	
 	@JsonIgnore
 	@ManyToOne(fetch=FetchType.LAZY)

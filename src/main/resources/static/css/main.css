@@ -31,9 +31,9 @@
   font-size: 30px;
   font-weight: 600;
 }
-.listTitle .btn {
+/* .listTitle .btn {
   margin-right: 15px;
-}
+} */
 .card {
   padding-bottom: 50px;
   border: none;
@@ -41,17 +41,13 @@
 .imgDiv {
   overflow: hidden;
   position: relative;
+  height:300px;
 }
 .card .card-img-top {
   padding-right: 10px;
   transition: all 0.2s linear;
   padding: 0;
   display: block;
-}
-.imgDiv .heart {
-  position: absolute;
-  top: 10px;
-  right: 3%;
 }
 .card .card-img-top:hover {
   transform: scale(1.1);
@@ -80,7 +76,7 @@
   cursor: pointer;
 }
 .pro_title{
-	height:60px;
+  height:60px;
 }
 .pro_title > a {
   text-decoration: none;
@@ -154,9 +150,6 @@
 }
 .search_wrap .btn_wrap .btn {
   margin-right: 10px;
-}
-.search2 {
-  margin-bottom: 30px;
 }
 .project {
   margin-top: 50px;
