@@ -1,3 +1,4 @@
+/*
 package com.promising.controller;
 
 import java.util.List;
@@ -22,7 +23,7 @@ import com.promising.vo.ProjectVO;
 
 @RestController
 @RequestMapping("/community")
-public class CommunityControlelr {
+public class CommunityController2 {
 	
 	@Autowired
 	private CommunityRepository repo;
@@ -42,7 +43,7 @@ public class CommunityControlelr {
 	}
 	
 	private List<CommunityVO> getListByProject(ProjectVO vo) throws RuntimeException{
-		return repo.getCommunitiesOfProject(vo);
+		return repo.getCommunities(vo);
 	}
 	
 	// 커뮤니티 게시글 삭제
@@ -60,7 +61,7 @@ public class CommunityControlelr {
 	@Transactional
 	@PutMapping("/{pno}")
 	public ResponseEntity<List<CommunityVO>> modifyCommunity(@PathVariable("pno")Long pno, @RequestBody CommunityVO com){
-
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
 		repo.findById(com.getCommunityno()).ifPresent(origin ->{
 			origin.setContents(com.getContents());
 			repo.save(origin);
@@ -82,3 +83,4 @@ public class CommunityControlelr {
 	
 	
 }
+*/

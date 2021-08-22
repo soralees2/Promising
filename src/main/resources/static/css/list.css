@@ -47,6 +47,7 @@
 .imgDiv {
   overflow: hidden;
   position: relative;
+  height:300px;
 }
 .card .card-img-top {
   padding-right: 10px;
@@ -71,11 +72,12 @@
 }
 .pro_title {
   margin-top: 10px;
+  margin-bottom:10px;
 }
 .pro_title > a {
   text-decoration: none;
   color: black;
-  font-size: 20px;
+  font-size: 22px;
   font-weight: 600;
 }
 .pro_title > a:hover {
@@ -87,7 +89,7 @@
 .pro_cate > span > a {
   text-decoration: none;
   color: gray;
-  font-size: 12px;
+  font-size: 15px;
 }
 .pro_cate > span > a:hover {
   color: gray;
@@ -97,11 +99,11 @@
 .pro_cate {
   margin-bottom: 5px;
 }
-.pro_explain {
-  margin-bottom: 5px;
-}
 .pro_explain > span {
-  font-size: 15px;
+  font-size: 17px;
+}
+.hei{
+	height:150px;
 }
 .progress-small {
   margin-bottom: 5px;
@@ -125,6 +127,10 @@ i {
 }
 .page-link{
   color: #9480FF;
+}
+.etc{
+	font-size: 15px;
+	font-weight: 600;
 }
 .lookaround {
   display: none;
@@ -167,6 +173,12 @@ i {
 }
 .search_wrap .btn_wrap .btn {
   margin-right: 10px;
+}
+#searchBtn{
+  background-color: #E0E0F9;
+}
+#searchBtn:hover{
+  background-color: #F0F0FB;
 }
 .search2 {
   margin-bottom: 30px;

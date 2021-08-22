@@ -18,9 +18,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.promising.mapper.ProjectMapper;
+import com.promising.repository.CommunityRepository;
 import com.promising.repository.MemberRepository;
 import com.promising.repository.ProjectRepository;
-
+import com.promising.vo.CommentVO;
+import com.promising.vo.CommunityVO;
 import com.promising.vo.MemberVO;
 
 import com.promising.vo.PageMaker;
@@ -35,21 +37,55 @@ public class ProjectController {
 	private ProjectRepository repo;
 	@Autowired
 	private MemberRepository memberrepo;
+	@Autowired
+	private CommunityRepository comrepo;
 	
-	//@GetMapping("/detail")
-//	public void detail(Model model) {
-//		model.addAttribute("hello", "안녕하세요, 반갑습니다!");
+	@GetMapping("/story/{pno}")
+	public String projectStory(@PathVariable("pno") Long pno,Model model) {
+		ProjectVO vo= repo.findById(pno).get();
+		model.addAttribute("vo",vo);
+		
+		return "project/story";
+	}
 	
-	@GetMapping("/detail/{pno}")
-	public String detail(@PathVariable("pno") Long pno,Model model) {
+	@GetMapping("/community/{pno}")
+	public String projectCommunity(@PathVariable("pno") Long pno,Model model) {
+		System.out.println("프로젝트 넘  : " + pno);
+		ProjectVO vo= repo.findById(pno).get();
+		List<CommunityVO> comList = comrepo.getCommunities(vo);
+
+//		List<CommentVO> cmtList = comrepo.getCommets(vo);
+		
+		model.addAttribute("vo",vo);
+		model.addAttribute("com", comList);
+		
+		return "project/community";
+	}
+	
+	@GetMapping("/notice/{pno}")
+	public String projectNotice(@PathVariable("pno") Long pno,Model model) {
 		System.out.println("프로젝트 넘  : " + pno);
 		ProjectVO vo= repo.findById(pno).get();
 		//CommunityVO qvo= repo.findByCmt(pno).get();
 
 		model.addAttribute("vo",vo);
-	
-		return "project/detail";
+		
+		return "project/notice";
 	}
+//	
+//	@GetMapping("/detail/{pno}")
+//	public String detail(@PathVariable("pno") Long pno,Model model) {
+//		System.out.println("프로젝트 넘  : " + pno);
+//		ProjectVO vo= repo.findById(pno).get();
+//		//CommunityVO qvo= repo.findByCmt(pno).get();
+//
+//		model.addAttribute("vo",vo);
+//		
+//		return "project/detail";
+//		
+//
+//	}
+
 	
 //	@GetMapping("/detail/{bno}")
 //	public String detail(@PathVariable("bno") Long bno, Model model) {
@@ -98,6 +134,7 @@ public class ProjectController {
 //		model.addAttribute("result", result);
 //		return result;
 //	}
+	
 	@GetMapping("/popular")
 	public String popular(PageVO pvo, Model model) {
 		System.out.println("인기순 요청");
