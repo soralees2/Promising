@@ -268,6 +268,7 @@
 		let communityForm = $("#comForm"); 		// 커뮤니티 모달 폼 
 		let cmtForm = $("#cmtForm");			// 댓글 작성 폼
 
+
 		// 커뮤니티 modal open
 		$("#btn-addComt").on("click", function(){
 			$("#community_modal .modal-title").text("커뮤니티 글 작성");
@@ -301,6 +302,7 @@
 				}else{
 					cmModal.removeClass("modify");
 					return false;
+
 				}
 			}else{ 
 				check = confirm("글을 등록 하시겠습니까?");
@@ -322,10 +324,11 @@
 				delForm.attr("action", "/com/delete/" + pno);
 				delForm.submit();
 			}else{
+
 				return false;
 			}
 		})
-		
+
 		// 댓글 작성 open
 		$(".addCmt").on("click", function(){
 			$(this).siblings(".addCmt_wrap").show();
@@ -411,6 +414,7 @@
 
 		}
 		
+
 	})
 	</script>
 </body>
