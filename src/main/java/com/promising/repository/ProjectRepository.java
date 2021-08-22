@@ -86,13 +86,13 @@ public interface ProjectRepository extends JpaRepository<ProjectVO, Long>, Query
 			builder.and(project.prCategory.like("%"+keyword+"%"));
 			break;
 		case "I" :
-			builder.and(project.prStatus.like(keyword));
+			builder.and(project.prStatus.like("%"+keyword+"%"));
 			break;
 		case "N" :
-			builder.and(project.prCheck.like(keyword));
+			builder.and(project.prCheck.like("%"+keyword+"%"));
 			break;
 		case "F" :
-			builder.and(project.prCheck.like(keyword));
+			builder.and(project.prCheck.like("%"+keyword+"%"));
 			break;
 		}
 

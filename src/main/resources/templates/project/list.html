@@ -246,16 +246,14 @@
         	 }else if(state == "status"){
         		 $("#selectCategory").hide();
         		 $("#selectStatus").show();
-        		 
         	 }
          })
+         
          let typeStr;
          let keywordStr;
-         $(".searchGo select").on("change", function(){
+         $(".searchGo").on("change", function(){
         	typeStr = $(this).find(":selected").val();
   			keywordStr = $(this).val();
-  			alert(typeStr);
-			alert(keywordStr);
          });
          
          $("#searchBtn").on("click", function(){
@@ -263,21 +261,6 @@
         		 alert("검색 조건을 선택하세요.");
         		 return false;
         	 }
-        	 
-        	 /* if($("#searchType option:selected").val() == "c"){
-        		 $("#searchCondition").text("category");
-        		 return false;
-        	 }else if($("#searchType option:selected").val() == "status"){
-        		 
-        	 }else if($("#searchType option:selected").val() == "achievement"){
-        		 
-        	 }else if($("#searchType option:selected").val() == "money"){
-        		 
-        	 } */
-        	 
-        	
-			alert(typeStr);
-			alert(keywordStr);
 			$("#f3").find("[name='type']").val(typeStr);
 			$("#f3").find("[name='keyword']").val(keywordStr);
 			$("#f3").find("[name='page']").val("1");
