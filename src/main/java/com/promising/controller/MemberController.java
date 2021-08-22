@@ -195,6 +195,7 @@ public class MemberController {
 		String writer =principal.getName();
 		System.out.println(writer);
 		 List<QnaVO> result = qnaRepo.selectQnaTome(writer);
+		 
 		 System.out.println(result);
 		 model.addAttribute("result", result);
 		}
