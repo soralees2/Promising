@@ -72,8 +72,9 @@
 .post_list .amount_wrap .ic b{font-size: 9px;color: #fff;background-color: #E15488;border-radius: 8px;display: inline-block;width: 22px;height: 18px;line-height: 18px;text-align: center;letter-spacing: 0;top: -7px;position: relative;left: -9px; display: none;}
 .post_list .amount_wrap .ic i{font-size:26px;color:#666;vertical-align:middle;}
 .post_list .amount_wrap .ic i:hover{color:#333;}
-.post_list .cmt_wrap{margin-top:10px;}
+/* .post_list .cmt_wrap{margin-top:10px;} */
 .post_list .cmt {border-top:1px solid #ddd;padding-top:1rem;margin-bottom:20px;}
+.post_list .cmt:first-of-type{margin-top:10px;}
 .post_list .cmt:last-of-type{margin-bottom:0;}
 .post .addCmt {position:absolute;top:-5px;right:0;font-size:12px;}
 
