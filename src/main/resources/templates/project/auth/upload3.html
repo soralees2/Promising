@@ -287,7 +287,7 @@
 				</div>
 			</div>
 		</div>
-		<img id="testimg" th:src="@{/static/images/summernoteuploading/}">
+		
 	</div>
 	<input type=hidden id="urlTest" th:value=@{/static/images/summernoteuploading}>
 	<script>
@@ -312,8 +312,8 @@
 				fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72'],
 			
 				callbacks : {
-					onImageUpload : function(files) {
-						let editor = this;
+					onImageUpload : function(files,editor,welEditable) {
+						editor=this;
 						let file = files[0];
 						let form = new FormData();
 						form.append("file", file);
@@ -338,12 +338,13 @@
 							//let url =  /*[[@{/static/images/summernoteuploading/}]]*/ +resp;
 							//alert(urrr);
 							console.log( resp);
-							console.log("되었다");
-							
+							console.log(editor);
 							//$(editor).summernote("insertImage", urrr+"/"+ resp);
 							//	$(editor).summernote("insertImage", url);
-							console.log(form.url);
-							$(editor).summernote("insertImage", form.url);
+							setTimeout(function() {
+								$(editor).summernote("insertImage", "/static/images/summernoteuploading/"+resp);
+							},10000);
+							
 						})
 					}
 				}
@@ -354,4 +355,3 @@
 </body>
 
 </html>
-
