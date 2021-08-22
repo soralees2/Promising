@@ -12,10 +12,10 @@ import com.promising.vo.ProjectVO;
 public interface CommentRepository extends JpaRepository<CommentVO, Long>{
 
 	@Query("SELECT r FROM CommentVO r WHERE r.community = ?1 " +
-		       " AND r.commentno > 0 ORDER BY r.commentno ASC")
+		       " AND r.commentno > 0 ORDER BY r.commentno DESC")
 		public List<CommentVO> getCommentsOfCommunities(CommunityVO community);
 	
-	@Query("SELECT commentno FROM CommentVO c WHERE c.community= ?1")
-	public List<Integer> commentCount(CommunityVO community);
+	@Query("SELECT count(*) FROM CommentVO c WHERE c.community= ?1")
+	public int commentCount(CommunityVO community);
 	
 }

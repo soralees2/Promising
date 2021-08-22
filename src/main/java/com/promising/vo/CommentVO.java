@@ -41,6 +41,8 @@ public class CommentVO {
 	private Timestamp regDate;
 	@UpdateTimestamp
 	private Timestamp updateDate;
+	@Column(nullable=false)
+	private Long communityno;
 	
 	@JsonIgnore
 	@ManyToOne(fetch=FetchType.LAZY)

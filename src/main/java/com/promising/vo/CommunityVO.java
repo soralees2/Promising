@@ -36,8 +36,6 @@ public class CommunityVO {
 	private Long communityno;
 	@Column(nullable=false , length=100)
 	private String writer;
-//	@Column(nullable=false , length=200)
-//	private String title;
 	@Column(nullable=false , length=4000)
 	private String contents;
 	@Column(nullable=false , length=1)
@@ -46,6 +44,8 @@ public class CommunityVO {
 	private Timestamp regDate;
 	@UpdateTimestamp
 	private Timestamp updateDate;
+	@Column(nullable=false)
+	private Long pno;
 	
 	@JsonIgnore
 	@ManyToOne(fetch=FetchType.LAZY)
