@@ -15,7 +15,7 @@
 .sponsor{height:45px;}
 .sponsor>*{height:100%;}
 .sponsor .btn_like{width:45px;margin-right:5px;}
-.sponsor .btn_sponsor{width:calc(100% - 55px);}
+.sponsor .btn_sponsor{width:calc(100% - 55px);line-height:2;}
 
 .tab_menu{margin-top:30px;}
 .tab_menu li{display:inline-block;padding:14px;position:relative;}
