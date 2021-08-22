@@ -29,7 +29,6 @@ import lombok.ToString;
 @Table(name="PR_COMMENT")
 public class CommentVO {
 	
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType. SEQUENCE, generator = "COMMENT_SEQ_GENERATOR")
 	private Long commentno;
