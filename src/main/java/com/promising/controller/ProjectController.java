@@ -40,7 +40,8 @@ public class ProjectController {
 	private ProjectRepository repo;
 	@Autowired
 	private MemberRepository memberrepo;
-<<<<<<< HEAD
+	@Autowired
+	private CommunityRepository comrepo;
 
 	//@GetMapping("/detail")
 	//	public void detail(Model model) {
@@ -49,11 +50,11 @@ public class ProjectController {
 
 	@GetMapping("/detail/{pno}")
 	public String detail(@PathVariable("pno") Long pno,Model model) {
-=======
-	@Autowired
-	private CommunityRepository comrepo;
+
+
+		return "project/detail";
 	
-	
+	}
 	@GetMapping("/story/{pno}")
 	public String projectStory(@PathVariable("pno") Long pno,Model model) {
 		ProjectVO vo= repo.findById(pno).get();
@@ -78,21 +79,20 @@ public class ProjectController {
 	
 	@GetMapping("/notice/{pno}")
 	public String projectNotice(@PathVariable("pno") Long pno,Model model) {
->>>>>>> b7f7a9ca333ee04ec96224e6019b423490dd31c0
+
 		System.out.println("프로젝트 넘  : " + pno);
 		ProjectVO vo= repo.findById(pno).get();
 		//CommunityVO qvo= repo.findByCmt(pno).get();
 
 		model.addAttribute("vo",vo);
-<<<<<<< HEAD
-
-		return "project/detail";
 
 
-=======
+
+
+
 		
 		return "project/notice";
->>>>>>> b7f7a9ca333ee04ec96224e6019b423490dd31c0
+
 	}
 //	
 //	@GetMapping("/detail/{pno}")

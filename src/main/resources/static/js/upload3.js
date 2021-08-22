@@ -43,7 +43,7 @@ var minday=new Date();
 	
 	
 	
-	
+	/*
 	$('#summernote').summernote({
 				height : 300,
 				minHeight : null,
@@ -85,16 +85,24 @@ var minday=new Date();
 		                     jqXHR.setRequestHeader(header, token);
 				         }
 						}).done(function(resp){
-							console.log("decodeURI" + decodeURI(resp));
+							let test = $("#urlTest").val();
+							let url =  /*[[@{/static/images/summernoteuploading/}]]*/
+							/* +resp;
+							alert(test);
+							console.log( resp);
 							console.log("되었다");
-							$(editor).summernote('insertImage', "/static/images/summernoteuploading/"+  decodeURI(resp));
+							
+							$(editor).summernote("insertImage", "/static/images/summernoteuploading/"+ resp);
+							//	$(editor).summernote("insertImage", url);
+							
+							
 						})
 					}
 				}
 				});
 	
 	
-	
+	*/
 	
 	
 	

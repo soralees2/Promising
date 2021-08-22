@@ -1,10 +1,14 @@
 package com.promising.repository;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.querydsl.QuerydslPredicateExecutor;
+import org.springframework.data.repository.query.Param;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.promising.vo.ProjectVO;
 import com.promising.vo.QProjectVO;
@@ -27,6 +31,12 @@ public interface ProjectRepository extends JpaRepository<ProjectVO, Long>, Query
 	
 	@Query(value="select * from pr_project", nativeQuery = true)
 	List<ProjectVO> selectList();
+	
+	@Transactional
+	@Modifying
+	@Query(value="UPDATE PR_PROJECT P set P.PR_CHECK='Y' WHERE P.PR_CHECK='N'", nativeQuery = true)
+	void updatePrCheck();
+	
 
 	public default Predicate makePredicate(String type, String keyword) {
 		BooleanBuilder builder = new BooleanBuilder();
