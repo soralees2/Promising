@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="_csrf" th:content="${_csrf.token}">
-   	<meta name="_csrf_header" th:content="${_csrf.headerName}">
+      <meta name="_csrf_header" th:content="${_csrf.headerName}">
     <th:block th:replace="fragments/commonHead"></th:block>
 
     <title>Promising</title>
@@ -19,16 +19,70 @@
     <script type="text/javascript" th:src="@{/static/js/main.js}"></script>
     <script>
         $(function () {
-            $(".heart").on({
-                'click': function () {
-                    var src = ($(this).attr('src') === '../images/main/heart1.png')
-                        ? '../images/main/heart2.png'
-                        : '../images/main/heart1.png';
-                    $(this).attr('src', src);
-                }
-            });
-            
-            $("#popular").on("click",function(){
+        	
+        	/* if($(window).scrollTop() == $(document).height() - $(window).height()) {
+        		var token = $("meta[name='_csrf']").attr("content");
+       			var header = $("meta[name='_csrf_header']").attr("content");
+       			
+       			$.ajax({
+       				type: 'POST',
+       				url:'/project/scrollDown',
+       				dataType: 'json',
+       				contentType: "application/json",
+       				beforeSend : function(xhr){
+       					xhr.setRequestHeader(header, token);
+       	            },
+       				async: true,
+       				cache :false
+       			}).done(function(resp){
+       				console.log("성공");
+       				console.log(resp);
+       				
+       				for(let i=0;i<resp.length;i++){
+       					
+       					let row = $("<div class=row>");
+       	    			let col = $("<div class='col-12 col-md-6 col-xl-3'>");
+       	    			let card = $("<div class=card>");
+       	    			
+       	    			let imgDiv = $("<div class=imgDiv>");
+       	    			let proImg = $("<img th:src='@{/static/images/main/card1.jpeg}' class=card-img-top>");
+       	    			let heartImg = $("<img th:src='@{/images/main/heart1.png}' class=heart width=20>");
+       	    			imgDiv.append(proImg);
+       	    			imgDiv.append(heartImg);
+       	    			
+       	    			let cardBody = $("<div class=card-body>");
+       	    			
+       	    			let writer = $("<div class=writer>");
+       	    			let cate = $("<span><a href='#'>"+resp[i].prCategory+"</a></span>");
+       	    			let divi = $("<span class=division> | </span>");
+       	    			let wri = $("<span><a href='#'>"+resp[i].prWriter+"</a></span>");
+       	    			writer.append(cate);
+       	    			writer.append(divi);
+       	    			writer.append(wri);
+       	    			
+       	    			let title = $("<div class=pro_title>");
+       	    			let ti = $("<a href='#'>"+resp[i].prTitle+"</a>");
+       	    			title.append(ti);
+       	    			
+       	    			let achi = $("<div class=achi>");
+       	    			let ac = $("<span>"+(resp[i].prTargetMoney/resp[i].prCurrentMoney)*100+"% 달성</span>");
+       	    			
+       	    			achi.append(ac);
+       	    			
+       	    			cardBody.append(writer);
+       	    			cardBody.append(title);
+       	    			cardBody.append(achi);
+       	    			
+       	    			card.append(imgDiv);
+       	    			card.append(cardBody);
+       	    			
+       	    			col.append(card);
+       	    			$("#scrollDown").append(col);
+       				}
+       			})
+            }  */
+
+            /* $("#popular").on("click",function(){
                location.href="/project/popular";
             })
             
@@ -38,7 +92,7 @@
             
             $("#close").on("click",function(){
                location.href="/project/close";
-            })
+            }) */
         })
 
     </script>
@@ -94,53 +148,48 @@
                 </div>
                 <!-- 정렬 버튼 -->
                 <div class="listTitle">
-                    <h3>주목할 만한 프로젝트</h3><br>
-                    <button type="button" class="btn btn-light btn-sm" id="popular">인기순</button>
-                    <button type="button" class="btn btn-light btn-sm" id="newest">최신순</button>
-                    <button type="button" class="btn btn-light btn-sm" id="close">마감순</button>
+                    <h3>주목할 만한 프로젝트</h3>
                 </div>
                 <!-- 프로젝트 출력 -->
                 <div class="row" id="main_list">
                    <div class="col-12 col-md-6 col-xl-3" th:each="pro:${result}">
-	                   <a th:href="@{/project/story/} + ${pro.pno}">
-	                       <div class="card">
-	                           <div class="imgDiv">
-	                               <img th:src="@{/static/images/main/card1.jpeg}" class="card-img-top" alt="...">
-	                               <img src="../images/main/heart1.png" width="20" class="heart">
-	                           </div>
-	                           <div class="card-body">
-	                               <div class="writer">
-	                                   <span id="prCategory"><a href="#">[[${pro.prCategory}]]</a></span>
-	                                   <span class="division">|</span>
-	                                   <span><a href="#">[[${pro.prWriter}]]</a></span>
-	                               </div>
-	                               <div class="pro_title">
-	                                   <a href="#">[[${pro.prTitle}]]</a>
-	                               </div>
-	                               <div class="achi">
-	                                   <span>[[${pro.prTargetMoney}]]% 달성</span>
-	                               </div>
-	                           </div>
-	                       </div>
-	                   </a>
+                       <div class="card" >
+                           <div class="imgDiv">
+                               <a href="#"><img th:src="@{'/static/images/projectuploading/'+${pro.prSysName}}" class="card-img-top" alt="..."></a>
+                               <!-- <img src="../images/main/heart1.png" width="20" class="heart"> -->
+                           </div>
+                           <div class="card-body">
+                               <div class="writer">
+                                   <span id="prCategory"><a href="#">[[${pro.prCategory}]]</a></span>
+                                   <span class="division">|</span>
+                                   <span><a href="#">[[${pro.prWriter}]]</a></span>
+                               </div>
+                               <div class="pro_title">
+                                   <a href="#">[[${pro.prTitle}]]</a>
+                               </div>
+                               <div class="achi">
+                                   <span>[[${pro.prCurrentMoney/pro.prTargetMoney*100}]]% 달성</span>
+                               </div>
+                           </div>
+                       </div>
                    </div>
                 </div>
-    
-                <div class=row id="popular_list"></div>
-                <div class=row id="newest_list"></div>
-                <div class=row id="colse_list"></div>
+    			
+    			<div class="seeMore">
+    				<button type="button" id="seeMoreBtn">프로젝트 더 보러가기</button>
+    			</div><br>
                 
                 <!-- 마이페이지 -->
                 <div class=mypagego><a href="#" th:href="@{/member/mypage}">마이페이지이동</a></div>
                 <!-- 관리자페이지 -->
-                   <div class=managerPageGo><a href="#" th:href="@{/man/manPage}">모니터링페이지</a></div>
+                <div class=managerPageGo><a href="#" th:href="@{/man/manPage}">모니터링페이지</a></div>
      
             </div>
             <!-- container end -->
         </div>
         <!-- main end -->
         
-        <div class="lookaround">
+       <div class="lookaround">
             <div id="searchHeader">
                 <div class="container">
                     <div class="row">
@@ -156,31 +205,24 @@
             </div>
             <div class="search_wrap">
                 <div class="container">
-                
-                    <div class="search2 row">
-                        <div class="col-10">
-                           
-                            <input type="text" class="form-control w-100"
-                               placeholder="프로젝트를 검색하세요." id="param">
-                        </div>
-                        <div class="col-2">
-                            <button type="button" class="btn btn-light w-100" id="searchBtn">검색</button>
-                        </div>
-                    </div>
-                   
-                    <div class="project">
+                	<div class="project">
                         <div class="shortcut">
-                            <h4><a href="#">모든 프로젝트</a></h4>
+                            <h4><a href="/project/list">모든 프로젝트</a></h4>
                         </div>
                         <div class="shortcut">
-                            <h4><a href="#">인기 프로젝트</a></h4>
+                            <h4><a href="#" id="popularPro">인기 프로젝트</a></h4>
                         </div>
                         <div class="shortcut">
-                            <h4><a href="#">신규 프로젝트</a></h4>
+                            <h4><a href="#" id="newPro">신규 프로젝트</a></h4>
                         </div>
                         <div class="shortcut">
-                            <h4><a href="#">성공 임박 프로젝트</a></h4>
+                            <h4><a href="#" id="closePro">성공 임박 프로젝트</a></h4>
                         </div>
+                        
+                        <form id="f1" th:action="@{popular}" method="get"></form>
+                        <form id="f2" th:action="@{newest}" method="get"></form>
+                        <form id="f3" th:action="@{close}" method="get"></form>
+                        
                     </div>
                     <hr>
                     <div class="tag">
