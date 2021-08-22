@@ -11,7 +11,7 @@ import com.promising.vo.ProjectVO;
 @Mapper
 public interface ProjectMapper {
 
-	@Select("SELECT * FROM PROJECT")	// 프로젝트 전체 리스트
+	@Select("SELECT * FROM PR_PROJECT")	// 프로젝트 전체 리스트
 	List<ProjectVO> findAll();
 	
 	@Select("SELECT * FROM PROJECT WHERE SEQ = #{seq}")
@@ -19,4 +19,6 @@ public interface ProjectMapper {
 	
 	@Select("SELECT MAX(SEQ) FROM PROJECT")
 	int getSeq();
+	
+	
 }

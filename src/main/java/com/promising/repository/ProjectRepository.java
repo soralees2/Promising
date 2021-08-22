@@ -3,6 +3,8 @@ package com.promising.repository;
 import java.sql.Date;
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -16,32 +18,31 @@ import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Predicate;
 
 public interface ProjectRepository extends JpaRepository<ProjectVO, Long>, QuerydslPredicateExecutor<ProjectVO>{
-
-	@Query(value="select * from pr_project where pr_check not in ('N') and pr_status not in('F')", nativeQuery = true)
+	
+	@Query(value="SELECT * FROM (SELECT A.*, ROWNUM AS RNUM FROM (SELECT * FROM pr_project where pr_check not in ('N') and pr_status not in('F')) A )WHERE RNUM > 0 AND RNUM <= 12", nativeQuery = true)
+//	@Query("SELECT * FROM (SELECT A.*, ROWNUM AS RNUM FROM (SELECT * FROM pr_project where pr_check not in ('N') and pr_status not in('F')) A )WHERE RNUM > 0 AND RNUM <= 12")
 	List<ProjectVO> selectAll();
-
-	@Query(value="select * from pr_project where pr_check not in ('N') and pr_status not in('F') order by pr_startdate desc", nativeQuery = true)
-	List<ProjectVO> selectNewest();
-
-	@Query(value="select * from pr_project where pr_check not in ('N') and pr_status not in('F') order by pr_enddate asc", nativeQuery = true)
-	List<ProjectVO> selectClose();
-
-	@Query(value="select pno, pr_category, pr_check, pr_enddate, pr_intro, pr_ori_name, pr_startdate, pr_status, pr_sys_name, pr_title, pr_writer,floor(pr_target_money/pr_current_money*100) as percent from pr_project where pr_check not in ('N') and pr_status not in('F') order by percent desc", nativeQuery = true)
-	List<ProjectVO> selectPopular();
-
+	
+	@Query(value="select * from pr_project where pr_check not in ('N') order by pr_current_money desc", nativeQuery = true)
+	Page<ProjectVO> selectPopular(Predicate makePredicate, Pageable page);
+	
+	@Query(value="select * from pr_project where pr_check not in ('N') order by pr_startdate desc", nativeQuery = true)
+	Page<ProjectVO> selectNewest(Predicate makePredicate, Pageable page);
+	
+	@Query(value="select * from pr_project where pr_check not in ('N') order by pr_enddate asc", nativeQuery = true)
+	Page<ProjectVO> selectClose(Predicate makePredicate, Pageable page);
+	
 	@Query(value="select * from pr_project", nativeQuery = true)
-	List<ProjectVO> selectList();
+	Page<ProjectVO> selectList(Predicate makePredicate, Pageable page);
 	
 	@Transactional
 	@Modifying
 	@Query(value="UPDATE PR_PROJECT P set P.PR_CHECK='Y' WHERE P.PR_CHECK='N'", nativeQuery = true)
 	void updatePrCheck();
-	
 
 	//내가 올린프로젝트 심사중
 	@Query(value="select * from pr_project where pr_check not in ('Y') and pr_writer='writer' ", nativeQuery = true)
 	List<ProjectVO> selectCheckingPro(String writer);
-
 
 	//내가 올린프로젝트 심사중
 	@Query(value="select * from pr_project where pr_status not in ('F') and pr_writer='writer' ", nativeQuery = true)
@@ -50,9 +51,6 @@ public interface ProjectRepository extends JpaRepository<ProjectVO, Long>, Query
 	//내가 올린프로젝트 완료된것
 	@Query(value="select * from pr_project where pr_status not in ('I') and pr_writer='writer' ", nativeQuery = true)
 	List<ProjectVO> selectFinishedPro(String writer);
-
-
-
 
 	public default Predicate makePredicate(String type, String keyword) {
 		BooleanBuilder builder = new BooleanBuilder();
@@ -63,12 +61,36 @@ public interface ProjectRepository extends JpaRepository<ProjectVO, Long>, Query
 			return builder;
 		}
 		switch(type) {
+		case "g" :
+			builder.and(project.prTitle.like("%"+keyword+"%"));
+			break;
+		case "p" :
+			builder.and(project.prTitle.like("%"+keyword+"%"));
+			break;
+		case "d" :
+			builder.and(project.prTitle.like("%"+keyword+"%"));
+			break;
+		case "k" :
+			builder.and(project.prTitle.like("%"+keyword+"%"));
+			break;
 		case "t" :
 			builder.and(project.prTitle.like("%"+keyword+"%"));
 			break;
-
+		case "b" :
+			builder.and(project.prTitle.like("%"+keyword+"%"));
+			break;
+		case "m" :
+			builder.and(project.prTitle.like("%"+keyword+"%"));
+			break;
+		case "a" :
+			builder.and(project.prTitle.like("%"+keyword+"%"));
+			break;
 		}
 
 		return builder;
 	}
+
+	
+
+	
 }
