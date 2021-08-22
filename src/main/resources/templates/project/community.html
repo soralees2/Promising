@@ -267,7 +267,7 @@
 		let cmModal = $("#community_modal");	// 커뮤니티 모달 
 		let communityForm = $("#comForm"); 		// 커뮤니티 모달 폼 
 		let cmtForm = $("#cmtForm");			// 댓글 작성 폼
-
+	
 		// 커뮤니티 modal open
 		$("#btn-addComt").on("click", function(){
 			$("#community_modal .modal-title").text("커뮤니티 글 작성");
@@ -333,60 +333,60 @@
 		// 댓글 작성 close
 	 	$(".cmtCancel").on("click", function(){
 			$(this).parents().closest(".addCmt_wrap").hide();
+			$(this).parents().closest(".post").find("textarea").val("");
 		});
-	 	
+		
+		let cmtNum; // 해당 커뮤니티글 넘버
 		// 댓글작성
 		$(".cmtRegi").on("click", function(){
 			let post = $(this).parents().closest(".post"); // 부모 글
-			let cno = post.find(".cno").val(); // 부모 번호
+			cmtNum = post.find(".cno").val(); // 부모 번호
 			let cmt_wrap = post.find(".cmt_wrap");
+			let txt = post.find("textarea").val();
+			let obj = {writer:"sorazzang", contents: txt, communityno: cmtNum, community: cmtNum};
 			
-			let txt = post.find("textarea");
-			let obj = {writer:"sorazzang", contents: txt.val(), communityno: cno, community: cno};
-			
-			console.log(obj);
 			let check = confirm("댓글을 등록 하시겠습니까?");
 			if(check){
-				commentManager.add(obj, function(obj){
-					alert("새로운 댓글이 추가되었습니다.")
-					cmt_wrap.children().remove();
-					txt.val("");
-				});	
-				cmtList(cno); // 커뮤니티 넘버를 넘겨서 댓글 목록 불러오기 호출 
+				if(txt == ""){
+					alert("댓글 내용을 입력해 주세요!");
+					return false;
+				}else{
+					commentManager.add(obj, function(obj){
+						alert("새로운 댓글이 추가되었습니다.");
+						cmt_wrap.children().remove();
+						printList(obj);
+						post.find("textarea").val("");
+						post.find(".ic").hide();
+						post.find(".amount_wrap").find(".txt").show();
+					});	
+				}
 			}else{
 				txt.val("");
 				return false;
 			}
 		})
 		
-		
-		
 		// 해당 글에 대한 댓글 목록
 		$(".amount_wrap .ic").on("click", function(){
-/* 			commentCno = $(this).parents().closest(".post").find(".cno").val();
+			cmtNum = $(this).parents().closest(".post").find(".cno").val();
+			let cmt = $(this).parents().closest(".post").find(".amount_wrap");
+			commentManager.getAll(cmtNum, printList); 
 			$(this).hide();
 			$(this).next().show();
-			let cno = $(this).parents().closest(".post").find(".cno").val();
-			let cmt = $(this).parents().closest(".post").find(".amount_wrap");
-			cmt.after().append("<div class=cmt_wrap id=cmtno" +commentCno + ">");
-			commentManager.getAll(cno, printList); */
 		});
-		
-		function cmtList(cno){
-			commentManager.getAll(cno, printList);
-		}
-		
+
+		// 게시글 append 
 		function printList(list){
 			let comObj;
-			console.log("list : "+list)
-			let div = $("<div>");
+			let div = $(".cno[value="+ cmtNum +"]").parent().closest(".post").find(".cmt_wrap");
+			div.siblings(".amount_wrap").find(".txt b").text(list.length); 
+			
 			for (let i=0; i<list.length; i++){
 				comObj = list[i];
-				console.log("안찍히니 : "+  comObj);
-				/* let post = $("#cmtno" + commentCno);
 				let date = comObj.regDate;
+				
 				let imgUrl = "../images/atom02.png";
-				let link = "#"
+				let link = "#";
 				let cmt = $("<div class=cmt>");
 				let pf_wrap =$("<div class=pf_wrap>");
 				let pf_img =$("<div class=pf_img style='background:url(" + imgUrl + ") 50% 50% no-repeat;background-size:cover;'>");
@@ -396,7 +396,7 @@
 				let content = $("<div class=txt><p>"+ comObj.contents +"</p></div>");
 				let rmBtn = $("<button class='btn btn-sm btn-outline-danger btnCmtremove'>삭제</button>");
 				let cmo = $("<input type=hidden name=commentno value=" + comObj.commentno + ">");
-				cmo.addClass("cmtNo")
+				cmo.addClass("cmtNo");
 				pf_wrap.append(pf_img);
 				pf_wrap.append(pf_link);
 				pf_link.append(regdate);
@@ -405,12 +405,37 @@
 				cmt.append(cmo);
 				content.append(rmBtn);
 
-				post.append(cmt);
-				post.closest(".amount_wrap").find(".txt b").text(list.length);  */
+				div.append(cmt);
 			}
-
 		}
 		
+		// 날짜 포맷 
+		function formatDate(timeValue){
+			let date = new Date(timeValue);
+			return date.getFullYear() + "-" + (date.getMonth()+1 >= 10?date.getMonth()+1 : '0' + (date.getMonth()+1)) + "-" + date.getDate();
+		}
+		
+		
+		// 댓글 삭제
+		$(".post").on("click", ".btnCmtremove", function(){
+			let post = $(this).parents().closest(".post"); // 부모 글
+			let cmt_wrap = post.find(".cmt_wrap");
+			
+			cmtNum = $(this).parents().closest(".post").find(".cno").val();
+			let cmo = $(this).parents().closest(".cmt").find(".cmtNo").val();
+			let obj = {commentno: cmo, community: cmtNum};
+			
+			let check = confirm("댓글을 삭제 하시겠습니까?");
+			if(check){
+				commentManager.remove(obj, function(obj){
+					cmt_wrap.children().remove();
+					alert("댓글이 삭제되었습니다.")
+					printList(obj);
+				});	
+			}else{
+				return false;
+			}
+		})
 	})
 	</script>
 </body>
