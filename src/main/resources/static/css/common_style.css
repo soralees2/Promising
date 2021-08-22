@@ -80,6 +80,7 @@ header .pf_img.no{background:url(../images/ic_profile.png) 50% 50% no-repeat;} *
 
 /* bootstrap css custom */
 .btn-primary, .btn-primary:hover{background-color:#E15488 !important;border:1px solid #E15488 !important;}
+a.btn-primary{color:#fff;}
 .btn-primary:hover{background-color:#d1497b !important;border:1px solid #d1497b !important;}
 .btn-check:active+.btn-primary:focus, .btn-check:checked+.btn-primary:focus, .btn-primary.active:focus, .btn-primary:active:focus, 
 .show>.btn-primary.dropdown-toggle:focus, .btn-check:focus+.btn-primary, .btn-primary:focus{box-shadow:0 0 0 0.25rem rgba(225,84,136, 0.25) !important}

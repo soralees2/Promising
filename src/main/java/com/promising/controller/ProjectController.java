@@ -68,8 +68,6 @@ public class ProjectController {
 		System.out.println("프로젝트 넘  : " + pno);
 		ProjectVO vo= repo.findById(pno).get();
 		List<CommunityVO> comList = comrepo.getCommunities(vo);
-
-//		List<CommentVO> cmtList = comrepo.getCommets(vo);
 		
 		model.addAttribute("vo",vo);
 		model.addAttribute("com", comList);
@@ -82,10 +80,8 @@ public class ProjectController {
 
 		System.out.println("프로젝트 넘  : " + pno);
 		ProjectVO vo= repo.findById(pno).get();
-		//CommunityVO qvo= repo.findByCmt(pno).get();
 
 		model.addAttribute("vo",vo);
-	
 		return "project/notice";
 
 	}

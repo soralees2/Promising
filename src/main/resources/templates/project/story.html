@@ -16,221 +16,32 @@
 
 		<!-- 해당 페이지 클래스명을 적어주세요-->
 		<div class="project_detail">
-			<div class="container">
-				<div class="project_title">
-					<span class="pj_tag" th:text="${vo.prCategory}"></span>
-					<h2 th:text="${vo.prTitle}"></h2>
-					<div class="writer">
-						<div class="profile_img" style="background:url(../images/atom02.png) 50% 50% no-repeat;background-size:cover;"></div>
-						<a href="#" th:text="${vo.prWriter}"></a>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-12 col-md-8">
-						<img src="../images/temp/pj_img.jpg">
-					</div>
-					<div class="col-12 col-md-4">
-						<div class="pj_state">
-							<dl>
-								<dt>모인금액</dt>
-								<dd>
-									<strong th:text="${vo.prCurrentMoney}"></strong>원 &nbsp;&nbsp;/&nbsp;&nbsp; 달성률 <b>58%</b>
-								</dd>
-								<dt>남은시간</dt>
-								<dd>
-									<strong>10</strong>일
-								</dd>
-								<dt>후원자</dt>
-								<dd>
-									<strong>69</strong>명
-								</dd>
-							</dl>
-						</div>
-						<div class="help_box">
-							<h4>펀딩 진행중</h4>
-							<p>목표 금액인 <span th:text="${vo.prTargetMoney}"></span>원이 모여야만 결제됩니다.<br>결제는 <span th:text="${vo.prEnddate}"></span>에 다함께 진행됩니다.</p>
-						</div>
-						<div class="sponsor">
-							<button type="button" class="btn btn-outline-secondary btn_like">
-								<i class="far fa-heart"></i>
-								<!-- <i class="fas fa-heart"></i> -->
-							</button>
-							<button type="button" class="btn btn-primary btn_sponsor">이 프로젝트 후원하기</button>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<ul class="tab_menu">
-						<li class="tab_01 active"><a href="javascript:;">스토리</a></li>
-						<li class="tab_02"><a th:href="@{/project/community/} + ${vo.pno}">커뮤니티<span class="count">2</span></a></li>
-						<li class="tab_03"><a th:href="@{/project/notice/} + ${vo.pno}">펀딩안내</a></li>
-					</ul>
-				</div>
-			</div>
+			<div th:replace="project/projectHead.html :: project_head"></div>
 			
 			<div class="container-fluide">
 				<div class="container">
 					<div class="row">
 						<div class="col-12 col-md-8 project_content">
 							<div id="story" style="display:block;">
-								<div class="story_contents" th:text="${vo.prContents}">
-							
+								<div class="story_contents" th:utext="${vo.prContents}">
+									[[${vo.prContents}]]
 								</div>
 							</div>
 						</div>
-						<div class="col-12 col-md-4">
-							<div class="writer_profile">
-								<h4>창작자 소개</h4>
-								<div class="writer">
-									<div class="pf_wrap">
-										<div class="pf_img" style="background:url(../images/atom02.png) 50% 50% no-repeat;background-size:cover;"></div>
-										<div class="pf_link">
-											<a href="#">
-												<span class="name" th:text="${vo.prWriter}"></span>
-											</a>
-										</div>
-									</div>
-								</div>
-								<div class="info">
-									<p class="txt" th:text="${vo.prWriterintro}"></p>
-									<dl>
-										<dt>진행한 프로젝트</dt>
-										<dd><em>15</em></dd>
-										<dt>후원한 프로젝트</dt>
-										<dd><em>115</em></dd>
-									</dl>
-									<button type="button" class="btn btn-outline-secondary w-100 btn-qna" data-bs-toggle="modal" data-bs-target="#qna_modal">
-										<i class="far fa-envelope"></i> 문의하기
-									</button>
-								</div>
-							</div>
-							<div class="payment _01">
-								<h4>후원하기</h4>
-								<p class="money"><strong>+10000</strong></p>
-								<p>추가 후원금(선택)</p>
-								<input type="text" id="add_money" class="form-control" placeholder="0">
-								<p class="s_txt">- 더 후원해주시면 프로젝트 성사가 앞당겨집니다.</p>
-								<div class="btn_wrap">
-									<button type="button" id="pay_01" class="btn btn-sm btn-outline-secondary">+ 1만 원</button>
-									<button type="button" id="pay_02" class="btn btn-sm btn-outline-secondary">+ 30만 원</button>
-									<button type="button" id="pay_03" class="btn btn-sm btn-outline-secondary">+ 50만 원</button>
-									<button type="button" id="pay_04" class="btn btn-sm btn-outline-secondary">+ 100만 원</button>
-								</div>
-								<button type="button" class="btn btn-primary w-100" id="btn_payment">1만 원 후원하기</button>
-							</div>
-							<div class="payment _02">
-								<h4>결제하기</h4>
-								<p class="money"><strong id="payment_money">+1000</strong></p>
-								<p>수량 선택</p>
-								<!-- <input type="text" id="add_money" class="form-control" placeholder="0"> -->
-
-								<div class="incremental-input" id="counter-input">
-									<button type="button" class="btn btn-sm btn-outline-secondary btn_minus">-</button>
-									<span class="count">1</span>
-									<button type="button" class="btn btn-sm btn-outline-secondary btn_plus">+</button>
-								</div> 
-								<button type="button" class="btn btn-primary w-100" id="btn_payment"><strong class="result_money">1000</strong>원 결제하기</button>
-							</div>
-						</div>
-					</div>
-
-				</div>
-			</div>
-
-			<!-- QnA Modal -->	
-			<div class="modal fade" id="qna_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
-				<div class="modal-dialog modal-dialog-centered">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title">창작자에게 문의</h5>
-							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-						</div>
-						<div class="modal-body">
-							<dl>
-								<dt>받는사람</dt>
-								<dd>
-									<input type="text" class="form-control" id="receiver" value="" readonly placeholder="작성자닉네임">
-								</dd>
-								<dt>문의내용</dt>
-								<dd>
-									<select class="form-select" id="qna_category">
-										<option value="">문의유형</option>
-										<option value="선물/후원">선물/후원</option>
-										<option value="프로젝트">프로젝트</option>
-										<option value="수령자 정보">수령자 정보</option>
-										<option value="배송">배송</option>
-										<option value="기타">기타</option>
-									</select>
-								</dd>
-							</dl>
-							<textarea class="form-control" id="qna_contents" rows="5" col="20" placeholder="프로젝트 진행자에게 문의하고 싶은 내용을 적어주세요."></textarea>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-							<button type="button" class="btn btn-primary" id="addQnaBtn">등록 하기</button>
-						</div>
+						<div th:replace="project/projectInfo.html :: project_info"></div>
 					</div>
 				</div>
 			</div>
-		
-			<!-- Community Modal -->	
-			<div class="modal fade" id="community_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
-				<div class="modal-dialog modal-dialog-centered">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title">커뮤니티</h5>
-							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-						</div>
-						<div class="modal-body">
-							<dl>
-								<dt>제목</dt>
-								<dd>
-									<input type="text" class="form-control" id="com_title" placeholder="제목을 입력해주세요.">
-								</dd>
-								<dt>작성 내용</dt>
-								<dd>
-									<textarea class="form-control" id="com_contents" rows="15" col="20" placeholder="커뮤니티에 작성하실 글을 입력해 주세요."></textarea>
-								</dd>
-							</dl>
-							
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-							<button type="button" class="btn btn-primary" id="addCommunityBtn">등록 하기</button>
-						</div>
-					</div>
-				</div>
-			</div>
-			
-			<input type="hidden" id="pno" name="pno" th:value="${vo.pno}">
 		</div>
+		
+		<div th:replace="project/modal.html :: qna_modal"></div>
+		
 	</div>
-	
-	
-	
-	<!-- <ul class="btn_wrap">
-			<li><button type="button" data-bs-toggle="modal" data-bs-target="#community_modal" >수정</button></li>
-			<li><button type="button" class="btn_del">삭제</button></li>													
-		</ul> -->
-												
-												
 												
 	<script th:inline="javascript" th:src="@{/static/js/community.js}"></script>
 	<script type="text/javascript" >
 	 	var pno = $("#pno").val();
 		$(function(){
-			console.log('pno : ' + pno);
-			
-		/* 	communityManager.getAll(pno, function(list){
-				console.log('pno : ' + pno);
-				console.log("list : " + list);
-			}); */
-			
-			(function(){
-				//load community
-				communityManager.getAll(pno, printList)
-			})();
-			
 			function printList(list){
 				let comObj;
 				for (let i=0; i<list.length; i++){
@@ -381,6 +192,19 @@
 		  			$('#qna_modal').modal('hide');
 	  			})
 				  
+	  			
+	  			var menuHeight = d$(".payment _01").offset().top;
+		  		var location = $(".btn_sponsor").offset().top;
+		  		window.scrollTo({top:location - menuHeight, behavior:'smooth'});
+		  		
+		  		$('.btn_sponsor').on("click", function(){
+		  			
+		  		    $('html, body').animate({
+		  		        scrollTop: $( $(this).attr('href') ).offset().top
+		  		    }, 500);
+		  		    return false;
+		  		});
+		  		
 			 });
 		})
 	</script>

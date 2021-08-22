@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="_csrf" th:content="${_csrf.token}">
+	<meta name="_csrf_header" th:content="${_csrf.headerName}">
+	<th:block th:replace="fragments/commonHead"></th:block>
+	<link th:href="@{/static/css/project_detail.css}" rel="stylesheet">
+</head>
+
+<body>
+
+	<div class="col-12 col-md-4" th:fragment="project_info">
+		<div class="writer_profile">
+			<h4>창작자 소개</h4>
+			<div class="writer">
+				<div class="pf_wrap">
+					<div class="pf_img" style="background:url(../images/atom02.png) 50% 50% no-repeat;background-size:cover;"></div>
+					<div class="pf_link">
+						<a href="#">
+							<span class="name" th:text="${vo.prWriter}"></span>
+						</a>
+					</div>
+				</div>
+			</div>
+			<div class="info">
+				<p class="txt" th:text="${vo.prWriterintro}"></p>
+				<dl>
+					<dt>진행한 프로젝트</dt>
+					<dd><em>15</em></dd>
+					<dt>후원한 프로젝트</dt>
+					<dd><em>115</em></dd>
+				</dl>
+				<button type="button" class="btn btn-outline-secondary w-100 btn-qna" data-bs-toggle="modal" data-bs-target="#qna_modal">
+					<i class="far fa-envelope"></i> 문의하기
+				</button>
+			</div>
+		</div>
+		<div class="payment _01" id="payment">
+			<h4>후원하기</h4>
+			<p class="money"><strong>+10000</strong></p>
+			<p>추가 후원금(선택)</p>
+			<input type="text" id="add_money" class="form-control" placeholder="0">
+			<p class="s_txt">- 더 후원해주시면 프로젝트 성사가 앞당겨집니다.</p>
+			<div class="btn_wrap">
+				<button type="button" id="pay_01" class="btn btn-sm btn-outline-secondary">+ 1만 원</button>
+				<button type="button" id="pay_02" class="btn btn-sm btn-outline-secondary">+ 30만 원</button>
+				<button type="button" id="pay_03" class="btn btn-sm btn-outline-secondary">+ 50만 원</button>
+				<button type="button" id="pay_04" class="btn btn-sm btn-outline-secondary">+ 100만 원</button>
+			</div>
+			<button type="button" class="btn btn-primary w-100" id="btn_payment">1만 원 후원하기</button>
+		</div>
+		<div class="payment _02">
+			<h4>결제하기</h4>
+			<p class="money"><strong id="payment_money">+1000</strong></p>
+			<p>수량 선택</p>
+			<!-- <input type="text" id="add_money" class="form-control" placeholder="0"> -->
+	
+			<div class="incremental-input" id="counter-input">
+				<button type="button" class="btn btn-sm btn-outline-secondary btn_minus">-</button>
+				<span class="count">1</span>
+				<button type="button" class="btn btn-sm btn-outline-secondary btn_plus">+</button>
+			</div> 
+			<button type="button" class="btn btn-primary w-100" id="btn_payment"><strong class="result_money">1000</strong>원 결제하기</button>
+		</div>
+	</div>
+	
+</body>
+</html>
