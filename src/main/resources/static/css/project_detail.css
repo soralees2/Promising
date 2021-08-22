@@ -146,3 +146,8 @@
 #community_modal .modal-body dd+dt{margin-top:20px;}
 #community_modal .form-check{margin-top:10px;}
 /* #community_modal .modal-body textarea{} */
+
+
+#qna_modal dl dd{margin-top: 10px;}
+#qna_modal dl dd+dt{margin-top:20px;}
+#qna_modal #qna_contents{margin-top:10px;}
