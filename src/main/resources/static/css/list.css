@@ -33,6 +33,9 @@
 #selectStatus{
 	display:none;
 }
+#selectAchievement{
+	display:none;
+}
 .details select {
   margin-right: 5px;
 }

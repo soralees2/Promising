@@ -30,6 +30,7 @@
                     
                     	<span id="selectCategory">
                     		<select class="searchGo form-select form-select-sm" aria-label=".form-select-sm example" style="width:10%;">
+		                        <option value=''>선택하세요</option>
 		                        <option value='게임' th:selected="${pageVO.type} == '게임'">게임</option>
 		                        <option value='향수' th:selected="${pageVO.type} == '향수'">향수</option>
 		                        <option value='디자인' th:selected="${pageVO.type} == '디자인'">디자인</option>
@@ -42,10 +43,19 @@
                     	</span>
                     	
                     	<span id="selectStatus">
-                    		<select class="searchGo form-select form-select-sm" aria-label=".form-select-sm example" style="width:12%;">
+                    		<select class="searchGo form-select form-select-sm" aria-label=".form-select-sm example" style="width:13%;">
+		                        <option value=''>선택하세요</option>
 		                        <option value='I' th:selected="${pageVO.type} == 'I'">진행중인 프로젝트</option>
 		                        <option value='N' th:selected="${pageVO.type} == 'N'">공개예정 프로젝트</option>
 		                        <option value='F' th:selected="${pageVO.type} == 'F'">성사된 프로젝트</option>
+		                    </select>
+                    	</span>
+                    	
+                    	<span id="selectAchievement">
+                    		<select class="searchGo form-select form-select-sm" aria-label=".form-select-sm example" style="width:10%;">
+		                        <option value='75' th:selected="${pageVO.type} == '75'">75% 이하</option>
+		                        <option value="75" value2="100" th:selected="${pageVO.type} == '100'">75% ~ 100%</option>
+		                        <option value='100' th:selected="${pageVO.type} == '101'">100% 이상</option>
 		                    </select>
                     	</span>
                     	
@@ -53,13 +63,7 @@
                     
                     <!-- <input type="text" class="searchWord" placeholder="검색어를 입력하세요." id="searchKeyword" th:value="${pageVO.keyword}"> <button id="del">X</button> -->
                     
-                   <!--  <select class="form-select form-select-sm" aria-label=".form-select-sm example" style="width:10%;">
-                        <option>진행상태</option>
-                        <option value="1">전체 프로젝트</option>
-                        <option value="2">진행중인 프로젝트</option>
-                        <option value="3">마감된 프로젝트</option>
-                    </select>
-                    <select class="form-select form-select-sm" aria-label=".form-select-sm example" style="width:10%;">
+                   <!-- <select class="form-select form-select-sm" aria-label=".form-select-sm example" style="width:10%;">
                         <option>달성율</option>
                         <option value="1">75% 이하</option>
                         <option value="2">75% ~ 100%</option>
@@ -75,6 +79,23 @@
                     </select> -->
                     <button type="button" class="btn btn-light" id="searchBtn">검색</button>
                 </div>
+                
+                <form id="f3" th:action="@{list}" method="get">
+                  <input type="hidden" name="page" th:value="${result.currentPageNum}">
+                  <input type="hidden" name="size" th:value="${result.currentPage.pageSize}">
+                  <input type="hidden" name="type" th:value="${pageVO.type}">
+                  <input type="hidden" name="keyword" th:value="${pageVO.keyword}">
+                  <input type="hidden" name="keyword2" th:value="${pageVO.keyword2}">
+               </form>
+               
+               <!-- <form id="f4" th:action="@{list}" method="get">
+                  <input type="hidden" name="page" th:value="${result.currentPageNum}">
+                  <input type="hidden" name="size" th:value="${result.currentPage.pageSize}">
+                  <input type="hidden" name="type" th:value="${pageVO.type}">
+                  <input type="hidden" name="keyword" th:value="${pageVO.keyword}">
+                  <input type="hidden" name="keyword2" th:value="${pageVO.keyword2}">
+               </form> -->
+               
                 <hr>
                 <!-- 정렬 -->
                 <!-- <div class="number">
@@ -165,13 +186,7 @@
                         </a>
                      </li>
                   </ul>
-               </nav>
-               <form id="f3" th:action="@{list}" method="get">
-                  <input type="hidden" name="page" th:value="${result.currentPageNum}">
-                  <input type="hidden" name="size" th:value="${result.currentPage.pageSize}">
-                  <input type="hidden" name="type" th:value="${pageVO.type}">
-                  <input type="hidden" name="keyword" th:value="${pageVO.keyword}">
-               </form>
+               </nav> 
             </div><br><br>
          </div>
         </div>
@@ -242,18 +257,29 @@
         	 let state = $("#searchType option:selected").val();
         	 if(state == "category"){
         		 $("#selectStatus").hide();
+        		 $("#selectAchievement").hide();
+        		 
         		 $("#selectCategory").show();
         	 }else if(state == "status"){
         		 $("#selectCategory").hide();
+        		 $("#selectAchievement").hide();
+        		 
         		 $("#selectStatus").show();
+        	 }else if(state == "achievement"){
+        		 $("#selectCategory").hide();
+        		 $("#selectStatus").hide();
+        		 
+        		 $("#selectAchievement").show();
         	 }
-         })
+         });
          
          let typeStr;
          let keywordStr;
+         let keywordStr2;
          $(".searchGo").on("change", function(){
         	typeStr = $(this).find(":selected").val();
   			keywordStr = $(this).val();
+  			keywordStr2 = $(this).attr("value2");
          });
          
          $("#searchBtn").on("click", function(){
@@ -263,6 +289,7 @@
         	 }
 			$("#f3").find("[name='type']").val(typeStr);
 			$("#f3").find("[name='keyword']").val(keywordStr);
+			$("#f3").find("[name='keyword2']").val(keywordStr2);
 			$("#f3").find("[name='page']").val("1");
 			$("#f3").submit();
 		});

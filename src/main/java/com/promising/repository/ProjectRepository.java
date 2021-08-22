@@ -56,6 +56,8 @@ public interface ProjectRepository extends JpaRepository<ProjectVO, Long>, Query
 		BooleanBuilder builder = new BooleanBuilder();
 		QProjectVO project = QProjectVO.projectVO;
 		builder.and(project.pno.gt(0));
+		
+		System.out.println(type + " : " + keyword);
 
 		if(type==null) {
 			return builder;
@@ -92,13 +94,40 @@ public interface ProjectRepository extends JpaRepository<ProjectVO, Long>, Query
 			builder.and(project.prCheck.like("%"+keyword+"%"));
 			break;
 		case "F" :
-			builder.and(project.prCheck.like("%"+keyword+"%"));
+			builder.and(project.prStatus.like("%"+keyword+"%"));
 			break;
 		}
 
 		return builder;
 	}
-
+	
+//	public default Predicate makePredicate(String type, String keyword, String keyword2) {
+//		BooleanBuilder builder = new BooleanBuilder();
+//		QProjectVO project = QProjectVO.projectVO;
+//		builder.and(project.pno.gt(0));
+//		
+//		System.out.println(type + " : " + keyword);
+//
+//		if(type==null) {
+//			return builder;
+//		}
+//		
+//		switch(type) {
+//		case "게임" :
+//			builder.and(project.prCategory.like("%"+keyword+"%"));
+//			break;
+//		case "향수" :
+//			builder.and(project.prCategory.like("%"+keyword+"%"));
+//			break;
+//		case "디자인" :
+//			builder.and(project.prCategory.like("%"+keyword+"%"));
+//			break;
+//		
+//		}
+//
+//		return builder;
+//		
+//	}
 	
 
 	

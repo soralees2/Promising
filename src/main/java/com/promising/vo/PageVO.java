@@ -13,10 +13,19 @@ public class PageVO {
 	private int size;
 	private String keyword;
 	private String type;
+	private String keyword2;
 	
 	public PageVO() {
 		this.page=1;
 		this.size=DEFAULT_SIZE;
+	}
+	
+	public String getKeyword2() {
+		return keyword2;
+	}
+
+	public void setKeyword2(String keyword2) {
+		this.keyword2 = keyword2;
 	}
 	
 	public String getKeyword() {
