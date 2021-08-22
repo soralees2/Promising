@@ -6,6 +6,8 @@ import java.security.Principal;
 import java.util.List;
 import java.util.UUID;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +39,7 @@ import com.promising.vo.ProjectVO;
 @RequestMapping("/project")
 public class ProjectController {
 	Logger logger = LoggerFactory.getLogger(ProjectController.class);
+
 	@Autowired
 	private ProjectRepository repo;
 	@Autowired
@@ -223,6 +226,7 @@ public class ProjectController {
 	@ResponseBody
 	public String summerUploading(MultipartFile file) throws Exception {
 		System.out.println("컨트롤러까지왔어!");
+		
 		File filesPath = new File("src"+File.separator+"main"+File.separator+"resources"+File.separator +"static"+File.separator+"images"+File.separator+"summernoteuploading");
 		if(!filesPath.exists()) {
 			filesPath.mkdir();
@@ -233,6 +237,7 @@ public class ProjectController {
 		System.out.println(filesPath.getAbsolutePath()+" "+sysName+" ///"+oriName);
 
 		file.transferTo(new File(filesPath.getAbsolutePath()+"/"+sysName));
+	
 
 		return sysName;
 
