@@ -36,6 +36,12 @@
 #selectAchievement{
 	display:none;
 }
+#selectCurrentMoney{
+	display:none;
+}
+#searchBtn2{
+	display:none;
+}
 .details select {
   margin-right: 5px;
 }
