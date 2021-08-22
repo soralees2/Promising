@@ -61,29 +61,38 @@ public interface ProjectRepository extends JpaRepository<ProjectVO, Long>, Query
 			return builder;
 		}
 		switch(type) {
-		case "g" :
-			builder.and(project.prTitle.like("%"+keyword+"%"));
+		case "게임" :
+			builder.and(project.prCategory.like("%"+keyword+"%"));
 			break;
-		case "p" :
-			builder.and(project.prTitle.like("%"+keyword+"%"));
+		case "향수" :
+			builder.and(project.prCategory.like("%"+keyword+"%"));
 			break;
-		case "d" :
-			builder.and(project.prTitle.like("%"+keyword+"%"));
+		case "디자인" :
+			builder.and(project.prCategory.like("%"+keyword+"%"));
 			break;
-		case "k" :
-			builder.and(project.prTitle.like("%"+keyword+"%"));
+		case "지식" :
+			builder.and(project.prCategory.like("%"+keyword+"%"));
 			break;
-		case "t" :
-			builder.and(project.prTitle.like("%"+keyword+"%"));
+		case "트렌드" :
+			builder.and(project.prCategory.like("%"+keyword+"%"));
 			break;
-		case "b" :
-			builder.and(project.prTitle.like("%"+keyword+"%"));
+		case "출판" :
+			builder.and(project.prCategory.like("%"+keyword+"%"));
 			break;
-		case "m" :
-			builder.and(project.prTitle.like("%"+keyword+"%"));
+		case "미디어" :
+			builder.and(project.prCategory.like("%"+keyword+"%"));
 			break;
-		case "a" :
-			builder.and(project.prTitle.like("%"+keyword+"%"));
+		case "애완" :
+			builder.and(project.prCategory.like("%"+keyword+"%"));
+			break;
+		case "I" :
+			builder.and(project.prStatus.like(keyword));
+			break;
+		case "N" :
+			builder.and(project.prCheck.like(keyword));
+			break;
+		case "F" :
+			builder.and(project.prCheck.like(keyword));
 			break;
 		}
 
