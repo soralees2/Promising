@@ -19,8 +19,12 @@ import com.promising.vo.QnaVO;
 @RequestMapping("/qna")
 public class QnaController {
 
+	
+	
 	@Autowired
-	private QnaRepository repo;
+	private QnaRepository qnaRepo;
+		
+	
 	
 	@PostMapping("/{uname}")
 	public ResponseEntity<List<QnaVO>> addQna(@PathVariable("uname")String uname, @RequestBody QnaVO qvo){
@@ -29,12 +33,12 @@ public class QnaController {
 		MemberVO vo = new MemberVO();
 		vo.setUsername(uname);
 		qvo.setMember(vo);
-		repo.save(qvo);
+		qnaRepo.save(qvo);
 		
 		return new ResponseEntity<>(getListByMember(vo),HttpStatus.CREATED);
 	}
 	
 	private List<QnaVO> getListByMember(MemberVO vo) throws RuntimeException{
-		return repo.getQnaOfMember(vo);
+		return qnaRepo.getQnaOfMember(vo);
 	}
 }

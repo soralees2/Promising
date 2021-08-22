@@ -11,11 +11,11 @@
 
     <link rel="stylesheet" type="text/css" th:href="@{/static/css/common_style.css}">
     <meta name="_csrf" th:content="${_csrf.token}">
-<meta name="_csrf_header" th:content="${_csrf.headerName}">
+	<meta name="_csrf_header" th:content="${_csrf.headerName}">
     <th:block th:replace="fragments/commonHead"></th:block>
    
 	<link rel="stylesheet" type="text/css" th:href="@{/static/css/mypage.css}">
-     <link rel="stylesheet" type="text/css" th:href="@{/static/js/mypage.js}">
+    <link rel="stylesheet" type="text/css" th:href="@{/static/js/mypage.js}">
     
 
 </head>
@@ -61,15 +61,11 @@
                                          <a href="#" th:href="@{/member/myProjectGoing}" class="py-2 d-block"><button class="nav-link p-3" id="pills-qna-tab" data-bs-toggle="pill"
                                                 data-bs-target="#pills-myProjectGoing" type="button" role="tab"
                                                 aria-controls="pills-myProjectGoing" aria-selected="false">내가 올린 프로젝트</button></a>
-                                        
-<!--                                             <button class="nav-link p-3" id="pills-contact-tab" data-bs-toggle="pill"
-                                                data-bs-target="#pills-contact" type="button" role="tab"
-                                                aria-controls="pills-contact" aria-selected="false">올린 프로젝트</button> -->
-                                        
+
                                         </li>
                                          <li class="nav-item" role="presentation">
                                          
-                                        <a href="#" th:href="@{/member/qna}" class="py-2 d-block"><button class="nav-link p-3" id="pills-qna-tab" data-bs-toggle="pill"
+                                        <a href="#" th:href="@{/member/qna}" class="py-2 d-block"><button class="nav-link navlinkQ p-3" id="pills-qna-tab" data-bs-toggle="pill"
                                                 data-bs-target="#pills-QnA" type="button" role="tab"
                                                 aria-controls="pills-QnA" aria-selected="false">프로젝트 문의</button></a>
                                         </li>
