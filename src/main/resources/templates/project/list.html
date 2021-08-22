@@ -249,9 +249,12 @@
         		 
         	 }
          })
+         
+         
          let typeStr;
          let keywordStr;
-         $(".searchGo select").on("change", function(){
+         
+         $(".searchGo").on("change", function(){
         	typeStr = $(this).find(":selected").val();
   			keywordStr = $(this).val();
   			alert(typeStr);
