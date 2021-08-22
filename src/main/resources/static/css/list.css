@@ -24,6 +24,15 @@
   border: none;
   background-color: transparent;
 } */
+.searchCondition{
+	display:inline;
+}
+#selectCategory{
+	display:none;
+}
+#selectStatus{
+	display:none;
+}
 .details select {
   margin-right: 5px;
 }
