@@ -34,7 +34,7 @@
 							<dl>
 								<dt>모인금액</dt>
 								<dd>
-									<strong>1,757,000</strong>원 &nbsp;&nbsp;/&nbsp;&nbsp; 달성률 <b>58%</b>
+									<strong th:text="${vo.prCurrentMoney}"></strong>원 &nbsp;&nbsp;/&nbsp;&nbsp; 달성률 <b>58%</b>
 								</dd>
 								<dt>남은시간</dt>
 								<dd>
@@ -48,7 +48,7 @@
 						</div>
 						<div class="help_box">
 							<h4>펀딩 진행중</h4>
-							<p>목표 금액인 3,000,000원이 모여야만 결제됩니다.<br>결제는 2021년 8월 14일에 다함께 진행됩니다.</p>
+							<p>목표 금액인 <span th:text="${vo.prTargetMoney}"></span>원이 모여야만 결제됩니다.<br>결제는 <span th:text="${vo.prEnddate}"></span>에 다함께 진행됩니다.</p>
 						</div>
 						<div class="sponsor">
 							<button type="button" class="btn btn-outline-secondary btn_like">
