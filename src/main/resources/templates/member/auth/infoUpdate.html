@@ -447,7 +447,7 @@
 												$
 														.ajax({
 															type : 'POST',
-															url : '/member/infoUpdate/'
+															url : '/member/auth/infoUpdate/'
 																	+ modifyId,
 															data : JSON.stringify({
 																uname : modifyId
@@ -501,7 +501,7 @@
 												$
 														.ajax({
 															type : 'POST',
-															url : '/member/uphoneUpdate/'
+															url : '/member/auth/uphoneUpdate/'
 																	+ modifyContact,
 															data : JSON
 																	.stringify({
@@ -563,7 +563,7 @@
 												$
 														.ajax({
 															type : 'POST',
-															url : '/member/pwModify',
+															url : '/member/auth/pwModify',
 															data : JSON
 																	.stringify({"modifyPw1":modifyPw1,"currPw":currPw}),
 															contentType : "application/json; charset=UTF-8",
@@ -627,7 +627,7 @@ $("#searchAddress").on("click",function(){
 													
 													$.ajax({
 													type : 'POST',
-													url : '/member/addressUpdate',
+													url : '/member/auth/addressUpdate',
 											data : JSON.stringify({"realName":realName,"uphone":uphone, "address1":address1,"postcode":postcode,"address2":address2}),
 												contentType : "application/json",
 												beforeSend : function(
