@@ -99,7 +99,7 @@
 						<div class="row" id="main_list"
 							th:if="${not #lists.isEmpty(result)}">
 
-							<div class="col-12 col-md-6 col-xl-3" th:each="pro:${result}">
+							<div class="col-12 col-md-6 col-xl-3" th:each="qna:${result}">
 								<div class="card">
 									<div class="imgDiv">
 										<img th:src="@{/static/images/main/card1.jpeg}"
@@ -109,14 +109,15 @@
 									<div class="card-body">
 
 										<div class="writer">
-											<span id="prCategory"><a href="#">[[${pro.prCategory}]]</a></span>
-											<span class="division">|</span> <span><a href="#">[[${pro.prWriter}]]</a></span>
+											<span id="prCategory"><a href="#">[[${qna.qnano}]]</a></span>
+											<span class="division">|</span> <span><a href="#">[[${qna.qnacategory}]]</a></span>
+											<span class="division">|</span> <span><a href="#">[[${qna.writer}]]</a></span>
 										</div>
-										<div class="pro_title">
-											<a href="#">[[${pro.prTitle}]]</a>
+										<div class="pro_">
+											<!-- <a href="#">[[${qna.prTitle}]]</a> -->
 										</div>
 										<div class="achi">
-											<span>[[${pro.prTargetMoney}]]% 달성</span>
+											<span>[[${qna.regDate}]]</span>
 										</div>
 
 									</div>
@@ -128,7 +129,7 @@
 						<div class="col-12 col-md-6 col-xl-3"
 							th:unless="${not #lists.isEmpty(result)}">
 
-							<span>심사중인 프로젝트가 없습니다.</span>
+							<span>받은 메세지가 없습니다.</span>
 
 						</div>
 

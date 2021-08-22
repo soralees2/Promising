@@ -27,10 +27,12 @@ import org.springframework.web.multipart.MultipartFile;
 import com.promising.config.SecurityConfig;
 import com.promising.repository.MemberRepository;
 import com.promising.repository.ProjectRepository;
+import com.promising.repository.QnaRepository;
 import com.promising.service.EmailService;
 import com.promising.vo.MemberRoleVO;
 import com.promising.vo.MemberVO;
 import com.promising.vo.ProjectVO;
+import com.promising.vo.QnaVO;
 
 @Controller
 @RequestMapping("/member")
@@ -52,6 +54,9 @@ public class MemberController {
 	
 	@Autowired
 	private ProjectRepository repoProject;
+
+	@Autowired
+	private QnaRepository qnaRepo;
 	
 	
 	@GetMapping("/login")
@@ -185,12 +190,15 @@ public class MemberController {
 		
 		}
 	
-	
 	@GetMapping("/qna")
-	public void qna() {
-		
-		
+	public void qna(Model model, Principal principal) {
+		String writer =principal.getName();
+		System.out.println(writer);
+		 List<QnaVO> result = qnaRepo.selectQnaTome(writer);
+		 System.out.println(result);
+		 model.addAttribute("result", result);
 		}
+	
 	
 
 
@@ -348,4 +356,11 @@ MemberVO vo=repo.findByUsername(originName).get(); //찐
 	public void doublelogin() {
 		
 	}
+	
+	
+	
+	
+	
+	
+	
 }
