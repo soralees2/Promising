@@ -175,15 +175,15 @@ public class MemberController {
 	public void myProjectGoing(Model model,Principal principal) {
 		String writer =principal.getName();		
 //		System.out.println(writer); 출력잘됨
-		 List<ProjectVO> result = repoProject.selectCheckingPro(writer);
-		 List<ProjectVO> result2 = repoProject.selectProceedingPro(writer);
-		 List<ProjectVO> result3 = repoProject.selectFinishedPro(writer);
-		 System.out.println(result);
-		
-		
-			 model.addAttribute("result", result);
-			 model.addAttribute("result2", result2);
-			 model.addAttribute("result3", result3);
+//		 List<ProjectVO> result = repoProject.selectCheckingPro(writer);
+//		 List<ProjectVO> result2 = repoProject.selectProceedingPro(writer);
+//		 List<ProjectVO> result3 = repoProject.selectFinishedPro(writer);
+//		 System.out.println(result);
+//		
+//		
+//			 model.addAttribute("result", result);
+//			 model.addAttribute("result2", result2);
+//			 model.addAttribute("result3", result3);
 
 		
 		
