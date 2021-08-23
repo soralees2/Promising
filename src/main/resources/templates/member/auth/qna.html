@@ -70,9 +70,8 @@
 									<div class="card">
 										<div class="imgDiv">
 											<img th:src="@{/static/images/main/card1.jpeg}"
-												class="card-img-top" alt="..."> <img
-												th:src="@{/static/images/main/heart1.png}" width="20"
-												class="heart">
+												class="card-img-top" alt="...">
+											
 										</div>
 										<div class="card-body">
 
@@ -123,9 +122,7 @@
 									<div class="card">
 										<div class="imgDiv">
 											<img th:src="@{/static/images/main/card1.jpeg}"
-												class="card-img-top" alt="..."> <img
-												th:src="@{/static/images/main/heart1.png}" width="20"
-												class="heart">
+												class="card-img-top" alt="..."> 
 										</div>
 										<div class="card-body">
 
@@ -245,6 +242,7 @@ $(function(){
 		console.log(taker);
 
 	$("#receiver").val(taker);
+	
 	$("#addQnaBtn").on('click', function(){
 		let category = $("#qna_category option:selected").val();
 		let contents = $("#qna_contents").val();		
@@ -253,9 +251,9 @@ $(function(){
 		console.log("category : " + category);
 		console.log("contents : " + contents);
 		
-		let obj = { qnano:QnaNo,writer:'qnawriter',qnacategory:category, contents: contents, member_username :receiver};
+		let obj = {contents: contents,qnacategory:category, member:receiver,receiver:receiver};
 	  	console.log(JSON.stringify(obj));
-	  	let url = '/member/' + obj.member_username;
+	  	let url = '/member/' + obj.receiver;
 	 	console.log(url);
 	 	
 			$.ajax({

@@ -21,4 +21,6 @@ public interface QnaRepository  extends JpaRepository<QnaVO, Long> {
 
 	@Query("SELECT q FROM QnaVO q WHERE q.member= ?1 AND q.qnano > 0 ORDER BY q.qnano ASC")
 	public List<QnaVO> getQnaOfMember(MemberVO member);
+	
+
 }
