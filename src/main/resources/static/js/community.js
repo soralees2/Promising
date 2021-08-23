@@ -163,6 +163,14 @@ $(function(){
 		moneyTxt.text(money_txt);
 		$("#btn_payment .result_money").text(money_txt);
 	});	
+	
+	// 결제하기 
+	$("#btn_payment").on("click", function(){
+		let payMoney = $("#payment_money").text();
+		let pno = $("#pno").val();
+		location.href="/project/payment/"+pno+"/"+payMoney;
+	});
+	
 
 })
 

@@ -78,8 +78,8 @@ public class ProjectController {
 
 	}
 
-	@GetMapping("/payment")
-	public void payment(Model model) {
+	@GetMapping("/payment/{pno}/{price}")
+	public void payment(@PathVariable("pno") Long pno, @PathVariable("price")int price) {
 	}
 
 	@GetMapping("/main")
@@ -136,6 +136,7 @@ public class ProjectController {
 
 	@GetMapping("/list")
 	public String list(PageVO pvo, Model model) {
+		System.out.println("카테고리, 상태 요청");
 		Pageable page = pvo.makePageable(0, "pno");
 		Page<ProjectVO> result = repo.findAll(repo.makePredicate(pvo.getType(), pvo.getKeyword()),page);
 		model.addAttribute("result", new PageMaker<ProjectVO>(result));
@@ -144,6 +145,7 @@ public class ProjectController {
 	
 	@GetMapping("/list2")
 	public String list2(PageVO pvo, Model model) {
+		System.out.println("달성률, 모인금액 요청");
 		Pageable page = pvo.makePageable(0, "pno");
 		Page<ProjectVO> result = repo.findAll(repo.makePredicate2(pvo.getType(), Integer.parseInt(pvo.getKeyword()), Integer.parseInt(pvo.getKeyword2())),page);
 		model.addAttribute("result", new PageMaker<ProjectVO>(result));

@@ -30,25 +30,44 @@ public interface ProjectRepository extends JpaRepository<ProjectVO, Long>, Query
 	@Query(value="select * from pr_project where pr_check not in ('N') order by pr_enddate asc", nativeQuery = true)
 	Page<ProjectVO> selectClose(Predicate makePredicate, Pageable page);
 	
-	@Query(value="select * from pr_project", nativeQuery = true)
-	Page<ProjectVO> selectList(Predicate makePredicate, Pageable page);
-	
 	@Transactional
 	@Modifying
 	@Query(value="UPDATE PR_PROJECT P set P.PR_CHECK='Y' WHERE P.PR_CHECK='N'", nativeQuery = true)
 	void updatePrCheck();
 
-//	//내가 올린프로젝트 심사중
-//	@Query(value="select * from pr_project where pr_check not in ('Y') and pr_writer='writer' ", nativeQuery = true)
-//	List<ProjectVO> selectCheckingPro(String writer);
+	
+	//내가 올린프로젝트 심사중
+//		@Query("select c from pr_project c where c.pr_check not in ('Y') and c.pr_writer=:writer ")
+//		List<ProjectVO> selectCheckingPro(String writer);
 //
-//	//내가 올린프로젝트 심사중
-//	@Query(value="select * from pr_project where pr_status not in ('F') and pr_writer='writer' ", nativeQuery = true)
-//	List<ProjectVO> selectProceedingPro(String writer);
+//		//내가 올린프로젝트 심사중
+//		@Query("select c from pr_project c where c.pr_status not in ('F') and c.pr_writer=:writer ")
+//		List<ProjectVO> selectProceedingPro(String writer);
 //
-//	//내가 올린프로젝트 완료된것
-//	@Query(value="select * from pr_project where pr_status not in ('I') and pr_writer='writer' ", nativeQuery = true)
-//	List<ProjectVO> selectFinishedPro(String writer);
+//		//내가 올린프로젝트 완료된것
+//		@Query("select c from pr_project c where pr_status not in ('I') and c.pr_writer=:writer ")
+//		List<ProjectVO> selectFinishedPro(String writer);
+	
+	
+		
+		  //내가 올린프로젝트 심사중
+		  
+		  @Query(
+		  value="select * from pr_project where pr_check not in ('Y') and pr_writer=:writer"
+		  , nativeQuery = true) List<ProjectVO> selectCheckingPro(String writer);
+		 
+		  //내가 진행중인 프로젝트
+		  
+		  @Query(
+		 value="select * from pr_project where pr_status not in ('F') and pr_check not in ('N') and pr_writer=:writer"
+		  , nativeQuery = true) List<ProjectVO> selectProceedingPro(String writer);
+		  
+		  //내가 올린프로젝트 완료된것
+		  
+		 @Query(
+		  value="select * from pr_project where pr_status not in ('I') and pr_writer=:writer"
+		  , nativeQuery = true) List<ProjectVO> selectFinishedPro(String writer);
+		 
 
 	public default Predicate makePredicate(String type, String keyword) {
 		BooleanBuilder builder = new BooleanBuilder();
@@ -94,6 +113,9 @@ public interface ProjectRepository extends JpaRepository<ProjectVO, Long>, Query
 		case "F" :
 			builder.and(project.prStatus.like("%"+keyword+"%"));
 			break;
+		case "제목" :
+			builder.and(project.prTitle.like("%"+keyword+"%"));
+			break;
 		}
 
 		return builder;
@@ -112,16 +134,7 @@ public interface ProjectRepository extends JpaRepository<ProjectVO, Long>, Query
 		}
 		
 		switch(type) {
-		case "0" :
-			builder.and(project.prCategory.like("%"+keyword+"%"));
-			break;
-		case "76" :
-			builder.and(project.prCategory.like("%"+keyword+"%"));
-			break;
-		case "101" :
-			builder.and(project.prCategory.like("%"+keyword+"%"));
-			break;
-		case "1000" :
+		case "1" :
 			builder.and(project.prCurrentMoney.between(keyword, keyword2));
 			break;
 		case "1000001" :
