@@ -87,9 +87,51 @@
 				<div class="tab-content" id="pills-tabContent">
 					<div class="tab-pane fade show active" id="pills-QnA"
 						role="tabpanel" aria-labelledby="pills-QnA-tab">
-					
-					<span>심사중인 프로젝트가 없습니다.</span>
+					<div class="row" id="main_list"
+							th:if="${not #lists.isEmpty(result2)}">
 
+							<div class="col-12 col-md-6 col-xl-3" th:each="pro:${result2}">
+								<div class="card">
+									<div class="imgDiv">
+										<img th:src="@{/static/images/main/card1.jpeg}"
+											class="card-img-top" alt="..."> <img
+											th:src="@{/static/images/main/heart1.png}" width="20" class="heart">
+									</div>
+									<div class="card-body">
+
+										<div class="writer">
+											<span id="prCategory"><a href="#">[[${pro.qnano}]]</a></span>
+											<span class="division">|</span> 
+											<span class="division">|</span> <span id="prCategory"><a href="#">[[${pro.qnacategory}]]</a></span>
+											<span class="division">|</span> <span id="prCategory"><a href="#">[[${pro.contents}]]</a></span>
+											<span class="division">|</span> <span><a href="#">[[${pro.writer}]]</a></span>
+											
+										</div>
+										<div class="pro_title">
+										<!-- 	<a href="#">[[${pro.regDate}]]</a> -->
+										</div>
+										<div class="achi">
+											<span>[[${pro.regDate}]]</span>
+										</div>
+
+									</div>
+
+								</div>
+							</div>
+										<hr>
+							
+					<div class="col-12 col-md-6 col-xl-3 float-right">
+
+							<a href="/member/auth/mypage"><input type="button" class="btn-lg btn-primary " id="backBtn" value="뒤로가기"></a>
+					</div>
+						</div>
+
+						<div class="col-12 col-md-6 col-xl-3"
+							th:unless="${not #lists.isEmpty(result)}">
+
+							<span>프로젝트 문의가 없습니다.</span>
+
+						</div>
 					</div>
 
 
