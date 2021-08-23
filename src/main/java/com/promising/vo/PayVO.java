@@ -33,12 +33,12 @@ public class PayVO {
 	private Long payno;
 	@Column(nullable=false)
 	private Long pno; // 부모 프로젝트 넘버 
-	@Column(nullable=false , length= 500)
-	private String joiner;
+	@Column(nullable=false , length= 1000)
+	private String present;	// 상품 이름
 	@Column(nullable=false , length= 1000)
 	private String amount;	// 상품 갯수
 	@Column(nullable=false , length= 1000)
-	private String payment; // 결제 금액
+	private String price; // 결제 금액
 	@Column(nullable=false , length= 500)
 	private String username; // 결제자 아이디 
 	@Column( length=300)

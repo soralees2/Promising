@@ -114,19 +114,19 @@ $(function(){
 	 
 	 // 후원 금액 선택 
 	$("#pay_01").on("click", function(){
-		$("#btn_payment").text("1 만 원 후원하기");
+		$("#btn_payment01").text("1 만 원 후원하기");
 		$("._01 .money strong").text("+10000");
 	});
 	$("#pay_02").on("click", function(){
-		$("#btn_payment").text("30 만 원 후원하기");
+		$("#btn_payment01").text("30 만 원 후원하기");
 		$("._01 .money strong").text("+300000");
 	});
 	$("#pay_03").on("click", function(){
-		$("#btn_payment").text("50 만 원 후원하기");
+		$("#btn_payment01").text("50 만 원 후원하기");
 		$("._01 .money strong").text("+500000");
 	});
 	$("#pay_04").on("click", function(){
-		$("#btn_payment").text("100 만 원 후원하기");
+		$("#btn_payment01").text("100 만 원 후원하기");
 		$("._01 .money strong").text("+1000000");
 	});
 
@@ -154,18 +154,16 @@ $(function(){
 		let money_txt= (money*count);
 		$(".incremental-input .count").text(count);
 		moneyTxt.text(money_txt);
-		$("#btn_payment .result_money").text(money_txt);
+		$("#btn_payment02 .result_money").text(money_txt);
 	});
 	$(".btn_plus").on("click", function(){
 		++count;
 		let money_txt= (money*count);
 		$(".incremental-input .count").text(count);
 		moneyTxt.text(money_txt);
-		$("#btn_payment .result_money").text(money_txt);
+		$("#btn_payment02 .result_money").text(money_txt);
 	});	
-	
 
-	
 
 })
 

@@ -14,6 +14,7 @@ import com.promising.aop.LogAspect;
  @ExceptionHandler(Exception.class) 
  public String exception(Exception e) { 
 	 logger.info(e.getMessage());
+	e.printStackTrace();
 	 return "/error"; 
 	 }
 }
