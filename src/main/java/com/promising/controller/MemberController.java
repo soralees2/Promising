@@ -76,7 +76,7 @@ public class MemberController {
 		role.setRoleName("BASIC");
 		vo.setRoles(Arrays.asList(role));
 		vo.setPassword(pwEncoder.encode(vo.getPassword()));
-		
+		vo.setSysName("basicprofile.png");
 		repo.save(vo);
 		return "redirect:/member/login";
 	}
@@ -208,7 +208,7 @@ public class MemberController {
 		MemberVO vo = repo.findByUsername(writer).get();
 		System.out.println(writer);
 		 List<QnaVO> result = qnaRepo.selectQnaTome(writer);
-		 List<QnaVO> send = qnaRepo.selectQnaToOthers(vo.getUname());
+		 List<QnaVO> send = qnaRepo.selectQnaToOthers(vo.getUsername());
 		 System.out.println("이것이 내가 받은 문의"+result);
 		 System.out.println("이것이 다른사람에게 보낸 문의"+send);
 		 model.addAttribute("result", result);
@@ -313,11 +313,11 @@ public class MemberController {
 
 	
 	@RequestMapping(value="/auth/pwModify",method = RequestMethod.POST)
-
+	@ResponseBody
 	public String pwUpdate(@RequestBody Map<String,Object> param,Model model,Principal principal) {
 		
 		System.out.println("변경~~start");
-		System.out.println(principal);
+		System.out.println(principal.getName());
 		String originName =principal.getName();		
 
 		
@@ -329,26 +329,21 @@ public class MemberController {
 	
 				//만약에 originName 이 DB에 존재한다면 &안한다면
 				
-		String nowPw=(String)param.get("currPw");
+	
 		String toNewPw=(String)param.get("modifyPw1");
 	
-		System.out.println(nowPw+": 이것은 현재비번");
-		System.out.println(toNewPw+": 이것은 바꾼비번");
-		
 	
-MemberVO vo=repo.findByUsername(originName).get(); //찐
+		System.out.println(toNewPw+": 이것은 바꾼비번");
 
 		
-		vo.setPassword(nowPw);
+	
+		MemberVO vo=repo.findByUsername(originName).get(); //찐
 		
-		if(originName==nowPw) {
+	
 			vo.setPassword(pwEncoder.encode(toNewPw));		
 			repo.save(vo);
 			return "success";
-		}else {
-			
-			return "error";
-		}
+		
 		
 	}
 		

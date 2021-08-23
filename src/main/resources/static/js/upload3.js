@@ -39,76 +39,6 @@ var minday=new Date();
 	$("#expect").text(total+"원");
 	})
 
-	
-	
-	
-	
-	/*
-	$('#summernote').summernote({
-				height : 300,
-				minHeight : null,
-				maxHeight : null,
-				toolbar: [
-				    // [groupName, [list of button]]
-				    ['fontname', ['fontname']],
-				    ['fontsize', ['fontsize']],
-				    ['style', ['bold', 'italic', 'underline','strikethrough', 'clear']],
-				    ['color', ['forecolor','color']],
-				    ['table', ['table']],
-				    ['para', ['ul', 'ol', 'paragraph']],
-				    ['height', ['height']],
-				    ['insert',['picture','link','video']],
-				    ['view', ['fullscreen', 'help']]
-				  ],
-				fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋움체','바탕체'],
-				fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72'],
-			
-				callbacks : {
-					onImageUpload : function(files) {
-						let editor = this;
-						let file = files[0];
-						let form = new FormData();
-						form.append("file", file);
-						
-						console.log(file);
-						
-						$.ajax({
-								data: form,
-         						type: "POST",
-         						url: "/project/summeruploading",
-							contentType : false,
-							processData : false,
-							enctype : 'multipart/form-data',
-							 beforeSend: function (jqXHR, settings) {
-		                     let header = $("meta[name='_csrf_header']").attr("content");
-		                     let token = $("meta[name='_csrf']").attr("content");
-		                     jqXHR.setRequestHeader(header, token);
-				         }
-						}).done(function(resp){
-							let test = $("#urlTest").val();
-							let url =  /*[[@{/static/images/summernoteuploading/}]]*/
-							/* +resp;
-							alert(test);
-							console.log( resp);
-							console.log("되었다");
-							
-							$(editor).summernote("insertImage", "/static/images/summernoteuploading/"+ resp);
-							//	$(editor).summernote("insertImage", url);
-							
-							
-						})
-					}
-				}
-				});
-	
-	
-	*/
-	
-	
-	
-	
-  
-  
   
 	$("#back").on("click", function () {
     history.back();
@@ -141,4 +71,64 @@ function readInputFile(input) {
 $("#imgform").on('change', function(){
     readInputFile(this);
 });
+
+
+$('#summernote').summernote({
+				height : 300,
+				minHeight : null,
+				maxHeight : null,
+				toolbar: [
+				    // [groupName, [list of button]]
+				    ['fontname', ['fontname']],
+				    ['fontsize', ['fontsize']],
+				    ['style', ['bold', 'italic', 'underline','strikethrough', 'clear']],
+				    ['color', ['forecolor','color']],
+				    ['table', ['table']],
+				    ['para', ['ul', 'ol', 'paragraph']],
+				    ['height', ['height']],
+				    ['insert',['picture','link','video']],
+				    ['view', ['fullscreen', 'help']]
+				  ],
+				fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋움체','바탕체'],
+				fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72'],
+			
+				callbacks : {
+					onImageUpload : function(files,editor,welEditable) {
+						editor=this;
+						let file = files[0];
+						let form = new FormData();
+						form.append("file", file);
+						
+						console.log(file);
+						
+						$.ajax({
+								data: form,
+         						type: "POST",
+         						url: "/project/summeruploading",
+							contentType : false,
+							processData : false,
+							enctype : 'multipart/form-data',
+							 beforeSend: function (jqXHR, settings) {
+		                     let header = $("meta[name='_csrf_header']").attr("content");
+		                     let token = $("meta[name='_csrf']").attr("content");
+		                     jqXHR.setRequestHeader(header, token);
+				         }
+						}).done(function(resp){
+							let test = $("#urlTest").val();
+							//let urrr = $("#testimg").getAttribute("src");
+							//let url =  /*[[@{/static/images/summernoteuploading/}]]*/ +resp;
+							//alert(urrr);
+							console.log( resp);
+							console.log(editor);
+							//$(editor).summernote("insertImage", urrr+"/"+ resp);
+							//	$(editor).summernote("insertImage", url);
+							setTimeout(function() {
+								$(editor).summernote("insertImage", "/static/images/summernoteuploading/"+resp);
+							},2000);
+							
+						})
+					}
+				}
+				});
+
 })

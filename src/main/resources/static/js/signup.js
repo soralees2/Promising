@@ -133,21 +133,21 @@ $("#searchcode").on("click",function(){
         }).open();
         
 })
-	$("#inp_pw01")
+
+		document.getElementById("send").onclick = function() {
+
 		let pwInput = $("#inp_pw01").val();
 		let nameInput = $("#realname").val();
 		let uphoneInput =$("#phone").val();
 		
 
 		
-		let pwReg = /^[^ㄱ-ㅎ]\S{8,16}$/;
+		let pwReg = /^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+]).{8,16}$/;
 		let nameRegex = /^[가-힣A-Za-z]+$/;
 		let phoneReg=/^[0-9]{10,12}$/;
 
 
 		let check = document.getElementById("checkForm");
-
-		document.getElementById("send").onclick = function() {
 
 		
 			let resultPw = pwReg.test(pwInput);

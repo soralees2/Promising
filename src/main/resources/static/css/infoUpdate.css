@@ -162,9 +162,7 @@ display: none;
 	display: none;
 }
 
-#emailblankNButton #userEmail{
- border-color: #F1F1F1;
-}
+
 
 .fnt-p1 {
 	font-size: 16px;
@@ -172,11 +170,6 @@ display: none;
 	letter-spacing: -0.020em;
 }
 
-#emailSavebutton {
-	width: 125px;
-	height: 50px;
-	margin-top:20px;
-}
 
 .uploadcomment span {
 	float: left;
@@ -204,7 +197,7 @@ display: none;
 
 .contactmodi input{
 	 border-color: #F1F1F1;
-	 color: #F1F1F1;
+	
 }
 
 #pwblankNButton {
@@ -344,4 +337,8 @@ margin-top:20px;
 
 .mb-3 {
 	margin-top: 20px;
+}
+.profilebox{
+	    border-bottom: 1px solid rgb(230, 230, 230);
+    margin: 0px 0px 16px;
 }
