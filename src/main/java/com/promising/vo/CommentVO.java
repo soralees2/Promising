@@ -24,7 +24,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @Entity
-@ToString
+@ToString(exclude="community")
 @SequenceGenerator(name="COMMENT_SEQ_GENERATOR",sequenceName = "COMMENT_SEQ" ,initialValue = 1,allocationSize = 1)
 @Table(name="PR_COMMENT")
 public class CommentVO {

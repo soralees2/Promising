@@ -163,6 +163,9 @@ $(function(){
 		moneyTxt.text(money_txt);
 		$("#btn_payment .result_money").text(money_txt);
 	});	
+	
+
+	
 
 })
 

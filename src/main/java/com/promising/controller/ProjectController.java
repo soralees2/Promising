@@ -78,8 +78,13 @@ public class ProjectController {
 
 	}
 
-	@GetMapping("/payment")
-	public void payment(Model model) {
+	@GetMapping("/payment/{pno}/{price}")
+	public String payment(@PathVariable("pno") Long pno, @PathVariable("price")int price) {
+		
+		System.out.println("pno : "+ pno);
+		System.out.println("price : "+ price);
+		
+		return "project/payment";
 	}
 
 	@GetMapping("/main")

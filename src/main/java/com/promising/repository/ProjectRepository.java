@@ -39,17 +39,39 @@ public interface ProjectRepository extends JpaRepository<ProjectVO, Long>, Query
 	@Query(value="UPDATE PR_PROJECT P set P.PR_CHECK='Y' WHERE P.PR_CHECK='N'", nativeQuery = true)
 	void updatePrCheck();
 
-//	//내가 올린프로젝트 심사중
-//	@Query(value="select * from pr_project where pr_check not in ('Y') and pr_writer='writer' ", nativeQuery = true)
-//	List<ProjectVO> selectCheckingPro(String writer);
+	
+	//내가 올린프로젝트 심사중
+//		@Query("select c from pr_project c where c.pr_check not in ('Y') and c.pr_writer=:writer ")
+//		List<ProjectVO> selectCheckingPro(String writer);
 //
-//	//내가 올린프로젝트 심사중
-//	@Query(value="select * from pr_project where pr_status not in ('F') and pr_writer='writer' ", nativeQuery = true)
-//	List<ProjectVO> selectProceedingPro(String writer);
+//		//내가 올린프로젝트 심사중
+//		@Query("select c from pr_project c where c.pr_status not in ('F') and c.pr_writer=:writer ")
+//		List<ProjectVO> selectProceedingPro(String writer);
 //
-//	//내가 올린프로젝트 완료된것
-//	@Query(value="select * from pr_project where pr_status not in ('I') and pr_writer='writer' ", nativeQuery = true)
-//	List<ProjectVO> selectFinishedPro(String writer);
+//		//내가 올린프로젝트 완료된것
+//		@Query("select c from pr_project c where pr_status not in ('I') and c.pr_writer=:writer ")
+//		List<ProjectVO> selectFinishedPro(String writer);
+	
+	
+		
+		  //내가 올린프로젝트 심사중
+		  
+		  @Query(
+		  value="select * from pr_project where pr_check not in ('Y') and pr_writer=:writer"
+		  , nativeQuery = true) List<ProjectVO> selectCheckingPro(String writer);
+		 
+		  //내가 진행중인 프로젝트
+		  
+		  @Query(
+		 value="select * from pr_project where pr_status not in ('F') and pr_check not in ('N') and pr_writer=:writer"
+		  , nativeQuery = true) List<ProjectVO> selectProceedingPro(String writer);
+		  
+		  //내가 올린프로젝트 완료된것
+		  
+		 @Query(
+		  value="select * from pr_project where pr_status not in ('I') and pr_writer=:writer"
+		  , nativeQuery = true) List<ProjectVO> selectFinishedPro(String writer);
+		 
 
 
 	
