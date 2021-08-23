@@ -1,6 +1,7 @@
 package com.promising.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -50,6 +51,8 @@ public interface ProjectRepository extends JpaRepository<ProjectVO, Long>, Query
 //	@Query(value="select * from pr_project where pr_status not in ('I') and pr_writer='writer' ", nativeQuery = true)
 //	List<ProjectVO> selectFinishedPro(String writer);
 
+
+	
 	public default Predicate makePredicate(String type, String keyword) {
 		BooleanBuilder builder = new BooleanBuilder();
 		QProjectVO project = QProjectVO.projectVO;

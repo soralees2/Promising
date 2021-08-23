@@ -35,17 +35,17 @@
 							</a>
 						</div>
 						<div class="pf_wrap" sec:authorize="isAuthenticated()">
-<form action="/logout" method="post">
- <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
- <button class="btn btn-primary" id="logout">로그아웃</button>
- </form>
-									<a href="#"><span>마이페이지</span> 
-					
+							<form action="/logout" method="post">
+								<input type="hidden" th:name="${_csrf.parameterName}"
+									th:value="${_csrf.token}">
+								<button class="btn btn-primary" id="logout">로그아웃</button>
+							</form>
+							<a href="#"><span>마이페이지</span>
+
 
 								<div class="pf_img">
 									<img th:src="@{/static/images/atom02.png}">
-								</div>
-							</a>
+								</div> </a>
 						</div>
 					</div>
 				</div>
@@ -56,4 +56,3 @@
 </body>
 </html>
 
-							

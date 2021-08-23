@@ -100,9 +100,15 @@
 
 
 								<!-- <img id="profile" th:src="@{'/src/main/resources/static/images/'+[[${result.sysName}]]}" class="w-100 h-100"> -->
-								<img id="profile"
-									th:src="@{'/static/images/profileUpload/'+${result.sysName}}"
-									class="w-200 h-200">
+								<div id="origin" th:if="${result.sysName} !=''">
+									<img id="profile"
+										th:src="@{'/static/images/profileUpload/'+${result.sysName}}"
+										class="w-100 h-100">
+								</div>
+
+								<div th:unless="${result.sysName} ==''">
+									<img id="imgsrc" class="w-200 h-200">
+								</div>
 								<!-- <img id="profile" th:src="@/[[${result.sysName}]]" class="w-100 h-100">  -->
 								<!-- /src/main/resources/ -->
 
@@ -115,7 +121,7 @@
 
 										<label class="btn btn-outline-secondary btn-file"
 											id="btn-fileUp"> 파일추가 <input type="file" name="file"
-											accept=".gif, .jpeg, .png" autofocus="autofocus"
+											accept=".gif, .jpeg, .png,.jpg" autofocus="autofocus"
 											style="display: none;" id="filebtn" maxlength="10" required>
 											<!--숨기기-->
 										</label>
@@ -130,9 +136,7 @@
 
 							</div>
 						</div>
-						<br>
-						<br>
-						<br>
+						<br> <br> <br>
 						<div>
 							<hr>
 						</div>
@@ -149,7 +153,7 @@
 							<br>
 							<div id="nameNBlank">
 								<input type="text" class="blank form-control-lg" id="userName"
-									placeholder="이름을 입력하세요." required>
+									placeholder="닉네임을 입력하세요." required>
 								<div class="col-sm-4 col-md-4 uploadcomment">
 									<button class="btn btn-dark" type="button" id="Namesavebutton">저장</button>
 								</div>
@@ -162,34 +166,6 @@
 							</div>
 						</div>
 
-
-
-
-						<!-- 이메일 시작 -->
-						<div class='col-sm-4 col-md-4 emailnavi'>
-
-							<div class="UserEmail">
-								<div class="modifyScroll">
-									<span><a href="javascript:;" id="emailModifyScroll">변경</a></span>
-								</div>
-								<h3>이메일</h3>
-								<h5>[[${result.username}]]</h5>
-								<br>
-								<div id="emailblankNButton">
-									<input type="text" class="blank form-control-lg"
-										placeholder="이메일을 입력하세요." id="userEmail">
-
-									<div class="col-sm-4 col-md-4 uploadcomment">
-										<button class="btn btn-dark " type="button"
-											id="emailSavebutton">인증메일 전송</button>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<div>
-							<hr>
-						</div>
 						<!-- 비밀번호 시작 -->
 						<div class='col-sm-4 col-md-4 pwnavi'>
 
@@ -208,9 +184,7 @@
 								<input type="text" class="blank form-control-lg"
 									placeholder="현재 비밀번호" id="currPw" name="currPw"> <br>
 
-								<h6>비밀번호가 기억나지 않나요?</h6>
 
-								<button class="btn btn-link" id="pwResetBtn">비밀번호 초기화</button>
 							</div>
 							<div class="pwReset">
 								<h6>변경할 비밀번호</h6>
@@ -429,233 +403,238 @@
 
 
 	<script>
-					$(function() {
-						$("#Namesavebutton")
-								.on(
-										"click",
-										function() {
-	
-											let modifyId = $("#userName").val();
-	
-											if (modifyId == "") {
-	
-												alert("변경할 이름을 입력해주세요.")
-	
-											} else {
-	
-												console.log(modifyId);
-												$
-														.ajax({
-															type : 'POST',
-															url : '/member/infoUpdate/'
-																	+ modifyId,
-															data : JSON.stringify({
-																uname : modifyId
-															}),
-															contentType : "application/json",
-															beforeSend : function(
-																	jqXHR, settings) {
-																let header = $(
-																		"meta[name='_csrf_header']")
-																		.attr(
-																				"content");
-																let token = $(
-																		"meta[name='_csrf']")
-																		.attr(
-																				"content");
-																jqXHR
-																		.setRequestHeader(
-																				header,
-																				token);
-															},
-															success : function(data) {
-																alert("갱신 성공");
-																console.log(data);
-																location.reload();
-	
-															},
-															error : function(
-																	request,
-																	status, error) {
-																alert("이름이 중복됩니다. 다른 이름을 설정해주세요."); // 실패 시 처리
-	
-															}
-	
-														})
-	
-											}
-										})
-	
-						$("#contactVertify").on("click",function() {
-	
-											/*값이 잘가는가?*/
-											let modifyContact = $("#contact").val();
-	
-											if (modifyContact == "") {
-	
-												alert("변경할 번호을 입력해주세요.")
-	
-											} else {
-	
-												console.log(modifyContact);
-												$
-														.ajax({
-															type : 'POST',
-															url : '/member/uphoneUpdate/'
-																	+ modifyContact,
-															data : JSON
-																	.stringify({
-																		uphone : modifyContact
-																	}),
-															contentType : "application/json",
-															beforeSend : function(
-																	jqXHR, settings) {
-																let header = $(
-																		"meta[name='_csrf_header']")
-																		.attr(
-																				"content");
-																let token = $(
-																		"meta[name='_csrf']")
-																		.attr(
-																				"content");
-																jqXHR
-																		.setRequestHeader(
-																				header,
-																				token);
-															},
-															success : function(data) {
-	
-																console
-																		.log("갱신 성공");
-																alert("갱신 성공");
-	
-															},
-															error : function(
-																	request,
-																	status, error) {
-																alert("번호가 중복됩니다. 다시 설정해주세요."); // 실패 시 처리
-	
-															}
-	
-														})
-	
-											}
-										})
-										/* 비밀번호 변경 */
-							 	$("#pwSaveBtn").on("click",function() {
-	
-											let modifyPw1= $("#repw1").val();
-											let modifyPw2 = $("#repw2").val();
-											let currPw = $("#currPw").val();
-											
-											if (modifyPw1!=modifyPw2) {
-	
-												alert("비밀번호의 일치여부를 확인해주세요.");
-												return false;
-											}else if((modifyPw1=="")||((modifyPw2)=="")){
-												
+		$(function() {
+			$("#Namesavebutton").on(
+					"click",
+					function() {
 
-												alert("비밀번호를 입력하세요.");
-												 return false;
-											}else {
-	
-									
-												$
-														.ajax({
-															type : 'POST',
-															url : '/member/pwModify',
-															data : JSON
-																	.stringify({"modifyPw1":modifyPw1,"currPw":currPw}),
-															contentType : "application/json; charset=UTF-8",
-															beforeSend : function(
-																	jqXHR, settings) {
-																let header = $(
-																		"meta[name='_csrf_header']")
-																		.attr(
-																				"content");
-																let token = $(
-																		"meta[name='_csrf']")
-																		.attr(
-																				"content");
-																jqXHR
-																		.setRequestHeader(
-																				header,
-																				token);
-															},
-															success : function(data) {
-	
-																console
-																		.log("갱신 성공");
-																alert("갱신 성공");
-	
-															},
-															error : function(error) {
-																alert("갱신실패"); // 실패 시 처리
-																
-															}
-	
-														})
-	
-											}
-										}) 
-$("#searchAddress").on("click",function(){
-	
-	 new daum.Postcode({
-            oncomplete: function(data) {
-                let roadAddr = data.roadAddress; // 도로명 주소 변수
-                // 우편번호와 주소 정보를 해당 필드에 넣는다.
-               $("#postCode").attr('value', data.zonecode);
-                $("#addressScope").attr('value',roadAddr);
-                
-            }
-        }).open();//팝업을 띄우려면 오픈만해줘
-})
-        
-											$("#modifyComp").on("click",function(){
-												var realName=$("#inputReceiverName").val();
-												var uphone=$("#inputReceiverContact").val();
-												var address1=$("#addressScope").val();
-												var postcode=$("#postCode").val();
-												var address2=$("#addressDetail").val();
-												
-												var obj ={"realName":realName,"uphone":uphone, "address1":address1,"postcode":postcode,"address2":address2}
-												
-												if((realName=="")||(uphone=="")||(address1=="")||(postcode=="")||(address2=="")){
-													alert("변경란을 모두 채워주세요.")
-													
-												}else{
-													
-													$.ajax({
-													type : 'POST',
-													url : '/member/addressUpdate',
-											data : JSON.stringify({"realName":realName,"uphone":uphone, "address1":address1,"postcode":postcode,"address2":address2}),
-												contentType : "application/json",
-												beforeSend : function(
-												jqXHR, settings) {
-												let header = $("meta[name='_csrf_header']").attr("content");
-												let token = $("meta[name='_csrf']").attr("content");
-												jqXHR.setRequestHeader(header,token);
-											},success : function(data) {
-												alert("갱신 성공");
-											console.log(data);
-											location.reload();}
-											
-											,error : function(request,status, error) {
-											alert("올바른 값을 입력했는지 확인해주세요."); // 실패 시 처리
-											}
+						let modifyId = $("#userName").val();
+
+						if (modifyId == "") {
+
+							alert("변경할 이름을 입력해주세요.")
+
+						} else {
+
+							console.log(modifyId);
+							$.ajax({
+								type : 'POST',
+								url : '/member/infoUpdate/' + modifyId,
+								data : JSON.stringify({
+									uname : modifyId
+								}),
+								contentType : "application/json",
+								beforeSend : function(jqXHR, settings) {
+									let header = $("meta[name='_csrf_header']")
+											.attr("content");
+									let token = $("meta[name='_csrf']").attr(
+											"content");
+									jqXHR.setRequestHeader(header, token);
+								},
+								success : function(data) {
+									alert("갱신 성공");
+									console.log(data);
+									location.reload();
+
+								},
+								error : function(request, status, error) {
+									alert("이름이 중복됩니다. 다른 이름을 설정해주세요."); // 실패 시 처리
+
+								}
+
+							})
+
+						}
+					})
+
+			$("#contactVertify").on(
+					"click",
+					function() {
+
+						/*값이 잘가는가?*/
+						let modifyContact = $("#contact").val();
+
+						if (modifyContact == "") {
+
+							alert("변경할 번호을 입력해주세요.")
+
+						} else {
+
+							console.log(modifyContact);
+							$.ajax({
+								type : 'POST',
+								url : '/member/uphoneUpdate/' + modifyContact,
+								data : JSON.stringify({
+									uphone : modifyContact
+								}),
+								contentType : "application/json",
+								beforeSend : function(jqXHR, settings) {
+									let header = $("meta[name='_csrf_header']")
+											.attr("content");
+									let token = $("meta[name='_csrf']").attr(
+											"content");
+									jqXHR.setRequestHeader(header, token);
+								},
+								success : function(data) {
+
+									alert("갱신 성공");
+									location.reload();
+
+								},
+								error : function(request, status, error) {
+									alert("번호가 중복됩니다. 다시 설정해주세요."); // 실패 시 처리
+
+								}
+
+							})
+
+						}
+					})
+			/* 비밀번호 변경 */
+			$("#pwSaveBtn")
+					.on(
+							"click",
+							function() {
+
+								let modifyPw1 = $("#repw1").val();
+								let modifyPw2 = $("#repw2").val();
+								let currPw = $("#currPw").val();
+
+								if (modifyPw1 != modifyPw2) {
+
+									alert("비밀번호의 일치여부를 확인해주세요.");
+									return false;
+								} else if ((modifyPw1 == "")
+										|| ((modifyPw2) == "")) {
+
+									alert("비밀번호를 입력하세요.");
+									return false;
+								} else {
+
+									$
+											.ajax({
+												type : 'POST',
+												url : '/member/pwModify',
+												data : JSON.stringify({
+													"modifyPw1" : modifyPw1,
+													"currPw" : currPw
+												}),
+												contentType : "application/json; charset=UTF-8",
+												beforeSend : function(jqXHR,
+														settings) {
+													let header = $(
+															"meta[name='_csrf_header']")
+															.attr("content");
+													let token = $(
+															"meta[name='_csrf']")
+															.attr("content");
+													jqXHR.setRequestHeader(
+															header, token);
+												},
+												success : function(data) {
+
+													console.log("갱신 성공");
+													alert("갱신 성공");
+													location.reload();
+
+												},
+												error : function(error) {
+													alert("갱신실패"); // 실패 시 처리
+
+												}
+
 											})
-												
-											}
-											
-											})
-											
-											
-										})
-										
-										
-										
+
+								}
+							})
+			$("#searchAddress").on("click", function() {
+
+				new daum.Postcode({
+					oncomplete : function(data) {
+						let roadAddr = data.roadAddress; // 도로명 주소 변수
+						// 우편번호와 주소 정보를 해당 필드에 넣는다.
+						$("#postCode").attr('value', data.zonecode);
+						$("#addressScope").attr('value', roadAddr);
+
+					}
+				}).open();//팝업을 띄우려면 오픈만해줘
+			})
+
+			$("#modifyComp").on(
+					"click",
+					function() {
+						var realName = $("#inputReceiverName").val();
+						var uphone = $("#inputReceiverContact").val();
+						var address1 = $("#addressScope").val();
+						var postcode = $("#postCode").val();
+						var address2 = $("#addressDetail").val();
+
+						var obj = {
+							"realName" : realName,
+							"uphone" : uphone,
+							"address1" : address1,
+							"postcode" : postcode,
+							"address2" : address2
+						}
+
+						if ((realName == "") || (uphone == "")
+								|| (address1 == "") || (postcode == "")
+								|| (address2 == "")) {
+							alert("변경란을 모두 채워주세요.")
+
+						} else {
+
+							$.ajax({
+								type : 'POST',
+								url : '/member/addressUpdate',
+								data : JSON.stringify({
+									"realName" : realName,
+									"uphone" : uphone,
+									"address1" : address1,
+									"postcode" : postcode,
+									"address2" : address2
+								}),
+								contentType : "application/json",
+								beforeSend : function(jqXHR, settings) {
+									let header = $("meta[name='_csrf_header']")
+											.attr("content");
+									let token = $("meta[name='_csrf']").attr(
+											"content");
+									jqXHR.setRequestHeader(header, token);
+								},
+								success : function(data) {
+									alert("갱신 성공");
+									console.log(data);
+									location.reload();
+								}
+
+								,
+								error : function(request, status, error) {
+									alert("올바른 값을 입력했는지 확인해주세요."); // 실패 시 처리
+								}
+							})
+
+						}
+
+					})
+			function readInputFile(input) {
+				if (input.files && input.files[0]) {
+					var reader = new FileReader();
+					reader.onload = function(e) {
+						$('#imgsrc').attr("src", e.target.result);
+					}
+					reader.readAsDataURL(input.files[0]);
+				}
+			}
+
+			$("#filebtn").on('change', function() {
+				$("#origin").hide();
 				
-				</script>
+				readInputFile(this);
+			});
+
+		})
+	</script>
 </body>
 
 </html>

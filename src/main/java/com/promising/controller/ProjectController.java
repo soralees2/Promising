@@ -196,7 +196,7 @@ public class ProjectController {
 	
 	@GetMapping("/complete")
 	public void complete() {
-
+	
 	}
 	@PostMapping("/summeruploading")
 	@ResponseBody

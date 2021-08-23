@@ -90,7 +90,7 @@ public class MemberController {
 	
 	
 
-	@GetMapping("/infoUpdate")
+	@GetMapping("/auth/infoUpdate")
 	public void infoUpdate(Model model,Principal principal) {
 		String userName =principal.getName();
 		
@@ -164,9 +164,17 @@ public class MemberController {
 				
 				}
 				}
+			   try 
+		        {
+		            Thread.sleep(1500);
+		        }
+		        catch(InterruptedException e) 
+		        {
+		            e.printStackTrace();
+		        }
 			System.out.println(vo);
 			repo.save(vo);
-			return "redirect:/member/infoUpdate";
+			return "redirect:/member/auth/infoUpdate";
 		
 }
 	
@@ -175,15 +183,15 @@ public class MemberController {
 	public void myProjectGoing(Model model,Principal principal) {
 		String writer =principal.getName();		
 //		System.out.println(writer); 출력잘됨
-		 List<ProjectVO> result = repoProject.selectCheckingPro(writer);
-		 List<ProjectVO> result2 = repoProject.selectProceedingPro(writer);
-		 List<ProjectVO> result3 = repoProject.selectFinishedPro(writer);
-		 System.out.println(result);
-		
-		
-			 model.addAttribute("result", result);
-			 model.addAttribute("result2", result2);
-			 model.addAttribute("result3", result3);
+//		 List<ProjectVO> result = repoProject.selectCheckingPro(writer);
+//		 List<ProjectVO> result2 = repoProject.selectProceedingPro(writer);
+//		 List<ProjectVO> result3 = repoProject.selectFinishedPro(writer);
+//		 System.out.println(result);
+//		
+//		
+//			 model.addAttribute("result", result);
+//			 model.addAttribute("result2", result2);
+//			 model.addAttribute("result3", result3);
 
 		
 		
