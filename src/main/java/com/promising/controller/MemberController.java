@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -208,10 +209,50 @@ public class MemberController {
 		 List<QnaVO> result = qnaRepo.selectQnaTome(writer);
 		 List<QnaVO> send = qnaRepo.selectQnaToOthers(vo.getUname());
 		 System.out.println("이것이 내가 받은 문의"+result);
-		 System.out.println("이것이 다른사람에게서 보낸 문의"+send);
+		 System.out.println("이것이 다른사람에게 보낸 문의"+send);
 		 model.addAttribute("result", result);
 		 model.addAttribute("result2", send);
 		}
+	
+	
+	@PostMapping("/{uname}")
+	public ResponseEntity<List<QnaVO>> VOID(@PathVariable("uname")String uname, @RequestBody QnaVO qvo, Principal principal){
+
+		System.out.println("내가보낸 내용"+qvo.getContents());//잘옴
+	System.out.println("받는 사람닉네임 :" + uname); // 받는 사람 닉네임 작성자 닉네임
+	System.out.println("qnao:"+qvo.getQnano());
+		String contentDetail=qvo.getContents();
+
+		MemberVO mvo = repo.findByUname(uname).get(); //ans
+		System.out.println("mvo의 정체는?"+mvo);	
+		String receiver = mvo.getUsername();
+		MemberVO vo = new MemberVO();
+
+		System.out.println("받는 사람mvo값"+mvo);
+	
+//		String receiver = mvo.getUname();
+		System.out.println("메세지 받는사람: "+receiver);
+		
+		System.out.println("보내는 사람 유저 ID~: " + principal.getName());
+		String writer =principal.getName();
+		qvo.setContents(contentDetail);
+		qvo.setQnano(qvo.getQnano());
+		qvo.setWriter(writer);
+		qvo.setMember(mvo);
+		qvo.setWriter(writer);
+		qvo.setMember(vo);
+
+		qnaRepo.save(qvo);
+		return null;
+		
+//		return new ResponseEntity<>(getListByMember(vo),HttpStatus.CREATED);
+	}
+	
+//	private List<QnaVO> getListByMember(MemberVO vo) throws RuntimeException{
+//		return qnaRepo.getQnaOfMember(vo);
+//	}
+	
+	
 	
 	
 
