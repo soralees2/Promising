@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://thymeleaf.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="_csrf" th:content="${_csrf.token}">
+	<meta name="_csrf_header" th:content="${_csrf.headerName}">
+	<th:block th:replace="fragments/commonHead"></th:block>
+	<link th:href="@{/static/css/project_detail.css}" rel="stylesheet">
+</head>
+
+<body>
+	<div class="wrap">
+		<!-- Community Modal -->	
+		<div class="modal fade" id="community_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true" th:fragment="community_modal">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<form id="comForm" method="post">
+						<div class="modal-header">
+							<h5 class="modal-title">커뮤니티</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<dl>
+								<!-- <dt>제목</dt>
+								<dd>
+									<input type="text" class="form-control" name="title" id="com_title" placeholder="제목을 입력해주세요.">
+								</dd> -->
+								<dt>작성 내용</dt>
+								<dd>
+									<textarea class="form-control" id="com_contents"  name="contents" rows="15" col="20" placeholder="커뮤니티에 작성하실 글을 입력해 주세요."></textarea>
+								</dd>
+							</dl>
+							<div class="form-check">
+								<input class="form-check-input" name="secret" type="checkbox" value="Y" id="secretChecked" checked>
+								<label class="form-check-label" for="flexCheckChecked">비밀글로 작성</label>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+							<button type="button" class="btn btn-primary" id="addCommunityBtn">등록 하기</button>
+						</div>
+						<input type="hidden" class="cno" name="communityno" value="">
+						<input type="hidden" class="pno" name="pno" th:value="${vo.pno}">
+						<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+					</form>
+				</div>
+			</div>
+		</div>
+		
+		<!-- QnA Modal -->	
+		<div class="modal fade" id="qna_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true" th:fragment="qna_modal">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">창작자에게 문의</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<dl>
+							<dt>받는사람</dt>
+							<dd>
+								<input type="text" class="form-control" name="re" id="receiver" th:value="${vo.prWriter}" readonly>
+							</dd>
+							<dt>문의내용</dt>
+							<dd>
+								<select class="form-select" id="qna_category">
+									<option value="">문의유형</option>
+									<option value="선물/후원">선물/후원</option>
+									<option value="프로젝트">프로젝트</option>
+									<option value="수령자 정보">수령자 정보</option>
+									<option value="배송">배송</option>
+									<option value="기타">기타</option>
+								</select>
+							</dd>
+						</dl>
+						<textarea class="form-control" id="qna_contents" rows="5" col="20" placeholder="프로젝트 진행자에게 문의하고 싶은 내용을 적어주세요."></textarea>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+						<button type="button" class="btn btn-primary" id="addQnaBtn">등록 하기</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+	</div>
+		
+</body>
+</html>
