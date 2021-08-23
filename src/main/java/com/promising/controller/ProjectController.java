@@ -78,11 +78,13 @@ public class ProjectController {
 
 	}
 
-	@GetMapping("/payment/{pno}/{price}")
-	public String payment(@PathVariable("pno") Long pno, @PathVariable("price")int price) {
+	@GetMapping("/payment/{pno}")
+	public String payment(@PathVariable("pno") Long pno, Model model) {
 		
 		System.out.println("pno : "+ pno);
-		System.out.println("price : "+ price);
+		
+		ProjectVO vo= repo.findById(pno).get();
+		model.addAttribute("vo",vo);
 		
 		return "project/payment";
 	}
