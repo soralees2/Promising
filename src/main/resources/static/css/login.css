@@ -72,3 +72,6 @@
     .ifforgot>a{
         color: rgb(39, 163, 255);
     text-decoration: underline;}
+    .rememberbox>label{
+   cursor:pointer;
+    }

@@ -13,6 +13,7 @@ import com.promising.aop.LogAspect;
 	 Logger logger =  LoggerFactory.getLogger(ExceptionController.class);
  @ExceptionHandler(Exception.class) 
  public String exception(Exception e) { 
+
 	 logger.info(e.getMessage());
 	e.printStackTrace();
 	 return "/error"; 
