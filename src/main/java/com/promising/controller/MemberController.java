@@ -197,11 +197,14 @@ public class MemberController {
 	@GetMapping("/auth/qna")
 	public void qna(Model model, Principal principal) {
 		String writer =principal.getName();
+		MemberVO vo = repo.findByUsername(writer).get();
 		System.out.println(writer);
 		 List<QnaVO> result = qnaRepo.selectQnaTome(writer);
-		 
-		 System.out.println(result);
+		 List<QnaVO> send = qnaRepo.selectQnaToOthers(vo.getUname());
+		 System.out.println("이것이 내가 받은 문의"+result);
+		 System.out.println("이것이 다른사람에게서 보낸 문의"+send);
 		 model.addAttribute("result", result);
+		 model.addAttribute("result2", send);
 		}
 	
 	
