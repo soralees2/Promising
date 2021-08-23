@@ -18,11 +18,11 @@
             <div class="container">
                <!-- 상세검색 -->
                 <div class="details">
-                	<select id="searchType" class="form-select form-select-sm" aria-label=".form-select-sm example" style="width:10%;">
+                	<select id="searchType" class="form-select form-select-sm" aria-label=".form-select-sm example" style="width:14%;">
                         <option value="">선택하세요</option>
+                        <option value='title'>프로젝트 타이틀</option>
                         <option value='category'>카테고리</option>
                         <option value='status'>상태</option>
-                        <option value='achievement'>달성률</option>
                         <option value='money'>모인금액</option>
                     </select>
                     
@@ -30,6 +30,7 @@
                     
                     	<span id="selectCategory">
                     		<select class="searchGo form-select form-select-sm" aria-label=".form-select-sm example" style="width:10%;">
+		                        <option value=''>선택하세요</option>
 		                        <option value='게임' th:selected="${pageVO.type} == '게임'">게임</option>
 		                        <option value='향수' th:selected="${pageVO.type} == '향수'">향수</option>
 		                        <option value='디자인' th:selected="${pageVO.type} == '디자인'">디자인</option>
@@ -42,39 +43,53 @@
                     	</span>
                     	
                     	<span id="selectStatus">
-                    		<select class="searchGo form-select form-select-sm" aria-label=".form-select-sm example" style="width:12%;">
+                    		<select class="searchGo form-select form-select-sm" aria-label=".form-select-sm example" style="width:13%;">
+		                        <option value=''>선택하세요</option>
 		                        <option value='I' th:selected="${pageVO.type} == 'I'">진행중인 프로젝트</option>
 		                        <option value='N' th:selected="${pageVO.type} == 'N'">공개예정 프로젝트</option>
 		                        <option value='F' th:selected="${pageVO.type} == 'F'">성사된 프로젝트</option>
 		                    </select>
                     	</span>
                     	
+                    	<span id="selectTitle">
+                    		<select id="title2" class="form-select form-select-sm" aria-label=".form-select-sm example" style="width:10%;">
+		                        <option value='제목' th:selected="${pageVO.type} == '제목'">제목</option>
+		                    </select>
+                    	</span>
+                    	<span id="inputTitle">
+                    		<input type="text" class="searchWord" placeholder="검색어를 입력하세요." id="searchKeyword" th:value="${pageVO.keyword}" style="width:25%;">
+                    	</span>
+                    	
+                    	<span id="selectCurrentMoney">
+                    		<select id="current2" class="searchGo2 form-select form-select-sm" aria-label=".form-select-sm example" style="width:13%;">
+		                        <option value=''>선택하세요</option>
+		                        <option value='1' value2='1000000' th:selected="${pageVO.type} == '1000000'">1백만원 이하</option>
+		                        <option value='1000001' value2='10000000' th:selected="${pageVO.type} == '10000000'">1백만원 ~ 1천만원</option>
+		                        <option value='10000001' value2='50000000' th:selected="${pageVO.type} == '50000000'">1천만원 ~ 5천만원</option>
+		                        <option value='50000001' value2='100000000' th:selected="${pageVO.type} == '100000000'">5천만원 ~ 1억원</option>
+		                        <option value='100000001' value2='990000000' th:selected="${pageVO.type} == '990000000'">1억원 이상</option>
+		                    </select>
+                    	</span>
                     </div>
-                    
-                    <!-- <input type="text" class="searchWord" placeholder="검색어를 입력하세요." id="searchKeyword" th:value="${pageVO.keyword}"> <button id="del">X</button> -->
-                    
-                   <!--  <select class="form-select form-select-sm" aria-label=".form-select-sm example" style="width:10%;">
-                        <option>진행상태</option>
-                        <option value="1">전체 프로젝트</option>
-                        <option value="2">진행중인 프로젝트</option>
-                        <option value="3">마감된 프로젝트</option>
-                    </select>
-                    <select class="form-select form-select-sm" aria-label=".form-select-sm example" style="width:10%;">
-                        <option>달성율</option>
-                        <option value="1">75% 이하</option>
-                        <option value="2">75% ~ 100%</option>
-                        <option value="3">100% 이상</option>
-                    </select>
-                    <select class="form-select form-select-sm" aria-label=".form-select-sm example" style="width:10%;">
-                        <option>모인금액</option>
-                        <option value="1">1백만원 이하</option>
-                        <option value="2">1백만원 ~ 1천만원</option>
-                        <option value="3">1천만원 ~ 5천만원</option>
-                        <option value="4">5천만원 ~ 1억원</option>
-                        <option value="5">1억원 이상</option>
-                    </select> -->
                     <button type="button" class="btn btn-light" id="searchBtn">검색</button>
+                    <button type="button" class="btn btn-light" id="searchBtn2">검색</button>
                 </div>
+                
+                <form id="f3" th:action="@{list}" method="get">
+                  <input type="hidden" name="page" th:value="${result.currentPageNum}">
+                  <input type="hidden" name="size" th:value="${result.currentPage.pageSize}">
+                  <input type="hidden" name="type" th:value="${pageVO.type}">
+                  <input type="hidden" name="keyword" th:value="${pageVO.keyword}">
+               </form>
+               
+               <form id="f4" th:action="@{list2}" method="get">
+                  <input type="hidden" name="page" th:value="${result.currentPageNum}">
+                  <input type="hidden" name="size" th:value="${result.currentPage.pageSize}">
+                  <input type="hidden" name="type" th:value="${pageVO.type}">
+                  <input type="hidden" name="keyword" th:value="${pageVO.keyword}">
+                  <input type="hidden" name="keyword2" th:value="${pageVO.keyword2}">
+               </form>
+               
                 <hr>
                 <!-- 정렬 -->
                 <!-- <div class="number">
@@ -165,13 +180,7 @@
                         </a>
                      </li>
                   </ul>
-               </nav>
-               <form id="f3" th:action="@{list}" method="get">
-                  <input type="hidden" name="page" th:value="${result.currentPageNum}">
-                  <input type="hidden" name="size" th:value="${result.currentPage.pageSize}">
-                  <input type="hidden" name="type" th:value="${pageVO.type}">
-                  <input type="hidden" name="keyword" th:value="${pageVO.keyword}">
-               </form>
+               </nav> 
             </div><br><br>
          </div>
         </div>
@@ -238,55 +247,83 @@
             $("#f3").submit();
          });
          
+         let typeStr;
+         let keywordStr;
+         let keywordStr2;
+         
          $("#searchType").on("change",function(){
         	 let state = $("#searchType option:selected").val();
         	 if(state == "category"){
         		 $("#selectStatus").hide();
+        		 $("#inputTitle").hide();
+        		 $("#selectCurrentMoney").hide();
         		 $("#selectCategory").show();
         	 }else if(state == "status"){
         		 $("#selectCategory").hide();
+        		 $("#inputTitle").hide();
+        		 $("#selectCurrentMoney").hide();
         		 $("#selectStatus").show();
-        		 
+        	 }else if(state == "title"){
+        		 $("#selectCategory").hide();
+        		 $("#selectStatus").hide();
+        		 $("#selectCurrentMoney").hide();
+        		 $("#inputTitle").show();
+        	 }else if(state == "money"){
+        		 $("#selectCategory").hide();
+        		 $("#selectStatus").hide();
+        		 $("#inputTitle").hide();
+        		 $("#selectCurrentMoney").show();
         	 }
-         })
-         
-         
-         let typeStr;
-         let keywordStr;
+         });
          
          $(".searchGo").on("change", function(){
         	typeStr = $(this).find(":selected").val();
   			keywordStr = $(this).val();
-  			alert(typeStr);
-			alert(keywordStr);
+  			
+  			$("#searchBtn2").hide();
+  			$("#searchBtn").show();
          });
+         
+         $("#searchKeyword").keyup(function(){
+        	 typeStr = $("#title2").find(":selected").val();
+        	 keywordStr = $(this).val();
+        	 
+        	 $("#searchBtn2").hide();
+   			 $("#searchBtn").show();
+         })
+         
+         $("#current2").on("change", function(){
+         	typeStr = $(this).find(":selected").val();
+   			keywordStr = $(this).val();
+   			keywordStr2 = $("#current2 > option:selected").attr("value2");
+   			
+   			$("#searchBtn").hide();
+   			$("#searchBtn2").show();
+          });
          
          $("#searchBtn").on("click", function(){
         	 if($("#searchType option:selected").val() == ""){
         		 alert("검색 조건을 선택하세요.");
         		 return false;
         	 }
-        	 
-        	 /* if($("#searchType option:selected").val() == "c"){
-        		 $("#searchCondition").text("category");
-        		 return false;
-        	 }else if($("#searchType option:selected").val() == "status"){
-        		 
-        	 }else if($("#searchType option:selected").val() == "achievement"){
-        		 
-        	 }else if($("#searchType option:selected").val() == "money"){
-        		 
-        	 } */
-        	 
-        	
-			alert(typeStr);
-			alert(keywordStr);
 			$("#f3").find("[name='type']").val(typeStr);
 			$("#f3").find("[name='keyword']").val(keywordStr);
 			$("#f3").find("[name='page']").val("1");
 			$("#f3").submit();
-		});
+		 });
          
+         $("#searchBtn2").on("click", function(){
+        	 if($("#searchType option:selected").val() == ""){
+        		 alert("검색 조건을 선택하세요.");
+        		 return false;
+        	 }
+			$("#f4").find("[name='type']").val(typeStr);
+			$("#f4").find("[name='keyword']").val(keywordStr);
+			$("#f4").find("[name='keyword2']").val(keywordStr2);
+			$("#f4").find("[name='page']").val("1");
+			$("#f4").submit();
+		 });
+
          
       })
    </script>

@@ -141,10 +141,18 @@ public class ProjectController {
 
 	@GetMapping("/list")
 	public String list(PageVO pvo, Model model) {
+		System.out.println("카테고리, 상태 요청");
 		Pageable page = pvo.makePageable(0, "pno");
 		Page<ProjectVO> result = repo.findAll(repo.makePredicate(pvo.getType(), pvo.getKeyword()),page);
-//		List<ProjectVO> project = repo.selectList();
-//		model.addAttribute("project", project);
+		model.addAttribute("result", new PageMaker<ProjectVO>(result));
+		return "project/list";
+	}
+	
+	@GetMapping("/list2")
+	public String list2(PageVO pvo, Model model) {
+		System.out.println("달성률, 모인금액 요청");
+		Pageable page = pvo.makePageable(0, "pno");
+		Page<ProjectVO> result = repo.findAll(repo.makePredicate2(pvo.getType(), Integer.parseInt(pvo.getKeyword()), Integer.parseInt(pvo.getKeyword2())),page);
 		model.addAttribute("result", new PageMaker<ProjectVO>(result));
 		return "project/list";
 	}

@@ -197,10 +197,6 @@ public class MemberController {
 			 model.addAttribute("result", result);
 			 model.addAttribute("result2", result2);
 			 model.addAttribute("result3", result3);
-
-
-		
-		
 		
 		}
 	
