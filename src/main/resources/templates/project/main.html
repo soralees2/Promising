@@ -17,85 +17,6 @@
 
     <link rel="stylesheet" type="text/css" th:href="@{/static/css/main.css}">
     <script type="text/javascript" th:src="@{/static/js/main.js}"></script>
-    <script>
-        $(function () {
-        	
-        	/* if($(window).scrollTop() == $(document).height() - $(window).height()) {
-        		var token = $("meta[name='_csrf']").attr("content");
-       			var header = $("meta[name='_csrf_header']").attr("content");
-       			
-       			$.ajax({
-       				type: 'POST',
-       				url:'/project/scrollDown',
-       				dataType: 'json',
-       				contentType: "application/json",
-       				beforeSend : function(xhr){
-       					xhr.setRequestHeader(header, token);
-       	            },
-       				async: true,
-       				cache :false
-       			}).done(function(resp){
-       				console.log("성공");
-       				console.log(resp);
-       				
-       				for(let i=0;i<resp.length;i++){
-       					
-       					let row = $("<div class=row>");
-       	    			let col = $("<div class='col-12 col-md-6 col-xl-3'>");
-       	    			let card = $("<div class=card>");
-       	    			
-       	    			let imgDiv = $("<div class=imgDiv>");
-       	    			let proImg = $("<img th:src='@{/static/images/main/card1.jpeg}' class=card-img-top>");
-       	    			let heartImg = $("<img th:src='@{/images/main/heart1.png}' class=heart width=20>");
-       	    			imgDiv.append(proImg);
-       	    			imgDiv.append(heartImg);
-       	    			
-       	    			let cardBody = $("<div class=card-body>");
-       	    			
-       	    			let writer = $("<div class=writer>");
-       	    			let cate = $("<span><a href='#'>"+resp[i].prCategory+"</a></span>");
-       	    			let divi = $("<span class=division> | </span>");
-       	    			let wri = $("<span><a href='#'>"+resp[i].prWriter+"</a></span>");
-       	    			writer.append(cate);
-       	    			writer.append(divi);
-       	    			writer.append(wri);
-       	    			
-       	    			let title = $("<div class=pro_title>");
-       	    			let ti = $("<a href='#'>"+resp[i].prTitle+"</a>");
-       	    			title.append(ti);
-       	    			
-       	    			let achi = $("<div class=achi>");
-       	    			let ac = $("<span>"+(resp[i].prTargetMoney/resp[i].prCurrentMoney)*100+"% 달성</span>");
-       	    			
-       	    			achi.append(ac);
-       	    			
-       	    			cardBody.append(writer);
-       	    			cardBody.append(title);
-       	    			cardBody.append(achi);
-       	    			
-       	    			card.append(imgDiv);
-       	    			card.append(cardBody);
-       	    			
-       	    			col.append(card);
-       	    			$("#scrollDown").append(col);
-       				}
-       			})
-            }  */
-
-            /* $("#popular").on("click",function(){
-               location.href="/project/popular";
-            })
-            
-            $("#newest").on("click",function(){
-               location.href="/project/newest";
-            })
-            
-            $("#close").on("click",function(){
-               location.href="/project/close";
-            }) */
-        })
-
-    </script>
 </head>
 <body>
     <div class="wrap">
@@ -116,19 +37,19 @@
                         </div>
                         <div class="carousel-inner">
                             <div class="carousel-item active">
-                                <img src="/static/images/main/carou1.jpg" class="d-block w-100" alt="...">
+                                <img src="/static/images/main/carou1.jpg" class="d-block w-100">
                                 <div class="carousel-caption d-none d-md-block">
                                     <span>쇼핑의 즐거움을 선물하다</span>
                                 </div>
                             </div>
                             <div class="carousel-item">
-                                <img src="/static/images/main/carou2.jpg" class="d-block w-100" alt="...">
+                                <img src="/static/images/main/carou2.jpg" class="d-block w-100">
                                 <div class="carousel-caption d-none d-md-block">
                                     <span>부자 되기 프로젝트</span>
                                 </div>
                             </div>
                             <div class="carousel-item">
-                                <img src="/static/images/main/carou3.jpg" class="d-block w-100" alt="...">
+                                <img src="/static/images/main/carou3.jpg" class="d-block w-100">
                                 <div class="carousel-caption d-none d-md-block">
                                     <span>MZ세대들의 최신 트렌드 다 모았다!</span>
                                 </div>
@@ -229,14 +150,14 @@
                         <h6>태그</h6>
                     </div>
                     <div class="btn_wrap">
-                        <button type="button" class="btn btn-primary">게임</button>
-                        <button type="button" class="btn btn-secondary">향수</button>
-                        <button type="button" class="btn btn-success">디자인</button>
-                        <button type="button" class="btn btn-danger">지식</button>
-                        <button type="button" class="btn btn-warning">트렌드</button>
-                        <button type="button" class="btn btn-info">출판</button>
-                        <button type="button" class="btn btn-light">미디어</button>
-                        <button type="button" class="btn btn-dark">애완</button>
+                        <button type="button" class="btn btn-primary" id="game">게임</button>
+                        <button type="button" class="btn btn-secondary" id="perfume">향수</button>
+                        <button type="button" class="btn btn-success" id="design">디자인</button>
+                        <button type="button" class="btn btn-danger" id="knowledge">지식</button>
+                        <button type="button" class="btn btn-warning" id="trend">트렌드</button>
+                        <button type="button" class="btn btn-info" id="publishing">출판</button>
+                        <button type="button" class="btn btn-light" id="media">미디어</button>
+                        <button type="button" class="btn btn-dark" id="animal">애완</button>
                     </div>
                 </div>
             </div>

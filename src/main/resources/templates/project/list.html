@@ -58,6 +58,7 @@
                     	</span>
                     	<span id="inputTitle">
                     		<input type="text" class="searchWord" placeholder="검색어를 입력하세요." id="searchKeyword" th:value="${pageVO.keyword}" style="width:25%;">
+                    		<button type="button" id="del">X</button>
                     	</span>
                     	
                     	<span id="selectCurrentMoney">
@@ -137,7 +138,7 @@
 												<div class="money">
 													<span class="price">[[${pro.prCurrentMoney}]]원</span>
 													<span class="percent">[[${pro.prCurrentMoney/pro.prTargetMoney*100}]]%</span>
-													<span class="period"><i class="far fa-clock"></i>40일 남음</span>
+													<!-- <span class="period"><i class="far fa-clock"></i>[[$pro.prEnddate-pro.prStartdate]]일 남음</span> -->
 												</div>
 											</div>
 											<div th:case="N">
@@ -224,108 +225,19 @@
                         <h6>태그</h6>
                     </div>
                     <div class="btn_wrap">
-                        <button type="button" class="btn btn-primary">게임</button>
-                        <button type="button" class="btn btn-secondary">향수</button>
-                        <button type="button" class="btn btn-success">디자인</button>
-                        <button type="button" class="btn btn-danger">지식</button>
-                        <button type="button" class="btn btn-warning">트렌드</button>
-                        <button type="button" class="btn btn-info">출판</button>
-                        <button type="button" class="btn btn-light">미디어</button>
-                        <button type="button" class="btn btn-dark">애완</button>
+                        <button type="button" class="btn btn-primary" id="game">게임</button>
+                        <button type="button" class="btn btn-secondary" id="perfume">향수</button>
+                        <button type="button" class="btn btn-success" id="design">디자인</button>
+                        <button type="button" class="btn btn-danger" id="knowledge">지식</button>
+                        <button type="button" class="btn btn-warning" id="trend">트렌드</button>
+                        <button type="button" class="btn btn-info" id="publishing">출판</button>
+                        <button type="button" class="btn btn-light" id="media">미디어</button>
+                        <button type="button" class="btn btn-dark" id="animal">애완</button>
                     </div>
                 </div>
             </div>
         </div>
         <!-- lookaround end -->
     </div>
-    <script th:inline="javascript">
-      $(function() {
-    	 
-         $(".pagination a").click(function(e) {
-            e.preventDefault();
-            $("#f3").find("[name='page']").val($(this).attr("href"));
-            $("#f3").submit();
-         });
-         
-         let typeStr;
-         let keywordStr;
-         let keywordStr2;
-         
-         $("#searchType").on("change",function(){
-        	 let state = $("#searchType option:selected").val();
-        	 if(state == "category"){
-        		 $("#selectStatus").hide();
-        		 $("#inputTitle").hide();
-        		 $("#selectCurrentMoney").hide();
-        		 $("#selectCategory").show();
-        	 }else if(state == "status"){
-        		 $("#selectCategory").hide();
-        		 $("#inputTitle").hide();
-        		 $("#selectCurrentMoney").hide();
-        		 $("#selectStatus").show();
-        	 }else if(state == "title"){
-        		 $("#selectCategory").hide();
-        		 $("#selectStatus").hide();
-        		 $("#selectCurrentMoney").hide();
-        		 $("#inputTitle").show();
-        	 }else if(state == "money"){
-        		 $("#selectCategory").hide();
-        		 $("#selectStatus").hide();
-        		 $("#inputTitle").hide();
-        		 $("#selectCurrentMoney").show();
-        	 }
-         });
-         
-         $(".searchGo").on("change", function(){
-        	typeStr = $(this).find(":selected").val();
-  			keywordStr = $(this).val();
-  			
-  			$("#searchBtn2").hide();
-  			$("#searchBtn").show();
-         });
-         
-         $("#searchKeyword").keyup(function(){
-        	 typeStr = $("#title2").find(":selected").val();
-        	 keywordStr = $(this).val();
-        	 
-        	 $("#searchBtn2").hide();
-   			 $("#searchBtn").show();
-         })
-         
-         $("#current2").on("change", function(){
-         	typeStr = $(this).find(":selected").val();
-   			keywordStr = $(this).val();
-   			keywordStr2 = $("#current2 > option:selected").attr("value2");
-   			
-   			$("#searchBtn").hide();
-   			$("#searchBtn2").show();
-          });
-         
-         $("#searchBtn").on("click", function(){
-        	 if($("#searchType option:selected").val() == ""){
-        		 alert("검색 조건을 선택하세요.");
-        		 return false;
-        	 }
-			$("#f3").find("[name='type']").val(typeStr);
-			$("#f3").find("[name='keyword']").val(keywordStr);
-			$("#f3").find("[name='page']").val("1");
-			$("#f3").submit();
-		 });
-         
-         $("#searchBtn2").on("click", function(){
-        	 if($("#searchType option:selected").val() == ""){
-        		 alert("검색 조건을 선택하세요.");
-        		 return false;
-        	 }
-			$("#f4").find("[name='type']").val(typeStr);
-			$("#f4").find("[name='keyword']").val(keywordStr);
-			$("#f4").find("[name='keyword2']").val(keywordStr2);
-			$("#f4").find("[name='page']").val("1");
-			$("#f4").submit();
-		 });
-
-         
-      })
-   </script>
 </body>
 </html>

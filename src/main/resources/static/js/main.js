@@ -17,5 +17,38 @@ $(function(){
 	})
 	
 	
+	$("#game").on("click",function(){
+		location.href="project/list?page=1&size=12&type=게임&keyword=게임";
+	})
+	
+	$("#perfume").on("click",function(){
+		
+	})
+	
+	$("#design").on("click",function(){
+		
+	})
+	
+	$("#knowledge").on("click",function(){
+		
+	})
+	
+	$("#trend").on("click",function(){
+		
+	})
+	
+	$("#publishing").on("click",function(){
+		
+	})
+	
+	$("#media").on("click",function(){
+		
+	})
+	
+	$("#animal").on("click",function(){
+		
+	})
+	
+	
 	
 })
