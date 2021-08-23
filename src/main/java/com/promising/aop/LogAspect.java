@@ -24,7 +24,7 @@ public class LogAspect {
 				e.printStackTrace();
 			}
 			Long end = System.currentTimeMillis();
-	        logger.info("finished - " + pjp.getSignature().getDeclaringTypeName() + " / " + pjp.getSignature().getName()+" 소요시간은 "+(end-start)+"입니다.");
+	        logger.info("finished - " + pjp.getSignature().getDeclaringTypeName() + " / " + pjp.getSignature().getName()+" 소요시간은 "+((end-start)*0.001)+"초 입니다.");
 	        return result;
 	    }
 

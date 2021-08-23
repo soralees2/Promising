@@ -242,7 +242,7 @@ public class MemberController {
 	public String pwUpdate(@RequestBody Map<String,Object> param,Model model,Principal principal) {
 		
 		System.out.println("변경~~start");
-		System.out.println(principal);
+		System.out.println(principal.getName());
 		String originName =principal.getName();		
 
 		
@@ -254,26 +254,21 @@ public class MemberController {
 	
 				//만약에 originName 이 DB에 존재한다면 &안한다면
 				
-		String nowPw=(String)param.get("currPw");
+	
 		String toNewPw=(String)param.get("modifyPw1");
 	
-		System.out.println(nowPw+": 이것은 현재비번");
-		System.out.println(toNewPw+": 이것은 바꾼비번");
-		
 	
-MemberVO vo=repo.findByUsername(originName).get(); //찐
+		System.out.println(toNewPw+": 이것은 바꾼비번");
 
 		
-		vo.setPassword(nowPw);
+	
+		MemberVO vo=repo.findByUsername(originName).get(); //찐
 		
-		if(originName==nowPw) {
+	
 			vo.setPassword(pwEncoder.encode(toNewPw));		
 			repo.save(vo);
 			return "success";
-		}else {
-			
-			return "error";
-		}
+		
 		
 	}
 		
