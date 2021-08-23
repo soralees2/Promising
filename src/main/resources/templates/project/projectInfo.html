@@ -51,33 +51,25 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 				<button type="button" id="pay_03" class="btn btn-sm btn-outline-secondary">+ 50만 원</button>
 				<button type="button" id="pay_04" class="btn btn-sm btn-outline-secondary">+ 100만 원</button>
 			</div>
-			<button type="button" class="btn btn-primary w-100" id="btn_payment">1만 원 후원하기</button>
+			<button type="button" class="btn btn-primary w-100" id="btn_payment01">1만 원 후원하기</button>
 		</div>
 		<div class="payment _02">
 			<h4>결제하기</h4>
-			<p class="money"><strong id="payment_money">+<span th:text="${vo.prPresentPrice}"></span></strong></p>
+			<p class="money"><strong id="payment_money">+<span>[[${vo.prPresentPrice}]]</span></strong></p>
 			<p>수량 선택</p>
 			<!-- <input type="text" id="add_money" class="form-control" placeholder="0"> -->
-	
-			<div class="incremental-input" id="counter-input">
-				<button type="button" class="btn btn-sm btn-outline-secondary btn_minus">-</button>
-				<span class="count">1</span>
-				<button type="button" class="btn btn-sm btn-outline-secondary btn_plus">+</button>
-			</div> 
-			<button type="button" class="btn btn-primary w-100" id="btn_payment"><strong class="result_money">1000</strong>원 결제하기</button>
+			<form id="payForm" method="post">
+				<div class="incremental-input" id="counter-input">
+					<button type="button" class="btn btn-sm btn-outline-secondary btn_minus">-</button>
+					<span class="count">1</span>
+					<button type="button" class="btn btn-sm btn-outline-secondary btn_plus">+</button>
+				</div> 
+				<button type="button" class="btn btn-primary w-100" id="btn_payment02"><strong class="result_money" th:text="${vo.prPresentPrice}"></strong>원 결제하기</button>
+				<input type="hidden" value="" name="amount" id="amount">
+				<input type="hidden" value="" name="price" id="price"> 
+				<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+			</form>
 		</div>
 	</div>
-	<script>
-		$(function(){
-			
-			// 결제하기 
-			$("#btn_payment").on("click", function(){
-				let payMoney = $("#payment_money").text();
-				let pno = $("#pno").val();
-				location.href="/project/payment/"+pno+"/"+payMoney;
-			});
-			
-		})
-	</script>
 </body>
 </html>
