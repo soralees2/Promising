@@ -1,6 +1,7 @@
 package com.promising.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -69,6 +70,8 @@ public interface ProjectRepository extends JpaRepository<ProjectVO, Long>, Query
 		  , nativeQuery = true) List<ProjectVO> selectFinishedPro(String writer);
 		 
 
+
+	
 	public default Predicate makePredicate(String type, String keyword) {
 		BooleanBuilder builder = new BooleanBuilder();
 		QProjectVO project = QProjectVO.projectVO;

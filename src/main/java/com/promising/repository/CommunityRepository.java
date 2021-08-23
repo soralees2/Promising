@@ -19,15 +19,8 @@ public interface CommunityRepository extends JpaRepository<CommunityVO, Long> {
 	
 //	@Query("SELECT c FROM CommentVO c WHERE c.project= ?1 AND c.community= ?2 AND c.commentno > 0 ORDER BY c.commentno DESC")
 //	public List<CommentVO> getCommets(ProjectVO project, CommunityVO community);
-//	
 //	@Query("select c from community c where c.project_pno = :pno")
-//    public List<CommunityVO> methodName(@Param("pno") Long pno);
-	
+//  public List<CommunityVO> methodName(@Param("pno") Long pno);	
 //	@Query("select m from Member m where m.username = :username and m.age = :age") 
 //	List<Member> findUser(@Param("username") String username, @Param("age") int age);
-	
-
-
-	
-
 }

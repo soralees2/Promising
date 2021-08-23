@@ -5,11 +5,11 @@ body {
 .main {
   margin-top: calc(-10rem + 95px);
 }
-.main .container {
+.container>.main  {
   height: 100vh;
   background-image: url("../images/back.png");
   text-align: center;
-  position:relative;
+
   z-index:-1;
 }
 .card {
@@ -44,4 +44,7 @@ body {
   border-radius: 4px;
   font-size: 20px;
   font-weight: 600;
+}
+.ment{
+	padding-top:30vh;
 }

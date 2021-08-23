@@ -164,9 +164,17 @@ public class MemberController {
 				
 				}
 				}
+			   try 
+		        {
+		            Thread.sleep(2500);
+		        }
+		        catch(InterruptedException e) 
+		        {
+		            e.printStackTrace();
+		        }
 			System.out.println(vo);
 			repo.save(vo);
-			return "redirect:/member/infoUpdate";
+			return "redirect:/member/auth/infoUpdate";
 		
 }
 	
