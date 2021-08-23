@@ -13,6 +13,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
 <body>
 	<div class="container" th:fragment="project_head">
+		<input type="hidden" id="pno" name="pno" th:value="${vo.pno}">
 		<div class="project_title">
 			<span class="pj_tag" th:text="${vo.prCategory}"></span>
 			<h2 th:text="${vo.prTitle}"></h2>
