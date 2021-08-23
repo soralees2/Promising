@@ -20,10 +20,10 @@
   border-radius: 4px;
   margin-right: 5px;
 }
-/* .searchWord button {
+.searchWord + button {
   border: none;
   background-color: transparent;
-} */
+}
 .searchCondition{
 	display:inline;
 }
@@ -31,6 +31,18 @@
 	display:none;
 }
 #selectStatus{
+	display:none;
+}
+#selectTitle{
+	display:none;
+}
+#inputTitle{
+	display:none;
+}
+#selectCurrentMoney{
+	display:none;
+}
+#searchBtn2{
 	display:none;
 }
 .details select {
