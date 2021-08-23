@@ -65,15 +65,9 @@
 .writer {
   padding-top: 10px;
 }
-.writer span a {
-  text-decoration: none;
+.writer span{
   color: gray;
-  font-size: 12px;
-}
-.writer span a:hover {
-  color: gray;
-  text-decoration-line: underline;
-  cursor: pointer;
+  font-size: 14px;
 }
 .pro_title{
   height:60px;
@@ -82,7 +76,7 @@
   text-decoration: none;
   color: black;
   font-weight: 500;
-  font-size: 17px;
+  font-size: 20px;
 }
 .pro_title > a:hover {
   text-decoration-line: underline;
@@ -90,7 +84,7 @@
 }
 .achi > span {
   color: #e15488;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 800;
 }
 .seeMore{
