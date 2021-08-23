@@ -25,25 +25,36 @@
   background-color: transparent;
 }
 .searchCondition{
-	display:inline;
+  display:inline;
 }
 #selectCategory{
-	display:none;
+  display:none;
 }
 #selectStatus{
-	display:none;
+  display:none;
 }
 #selectTitle{
-	display:none;
+  display:none;
 }
 #inputTitle{
-	display:none;
+  display:none;
+}
+#del{
+  margin-left: -35px;
+  margin-right: 15px;
+  font-size: 16px;
+  font-weight: 500;
 }
 #selectCurrentMoney{
-	display:none;
+  display:none;
 }
 #searchBtn2{
-	display:none;
+  display:none;
+}
+#ds{
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 5px;
 }
 .details select {
   margin-right: 5px;
@@ -68,6 +79,9 @@
   padding-bottom: 100px;
   border: none;
 }
+.card hr{
+  height:2px;
+}
 .imgDiv {
   overflow: hidden;
   position: relative;
@@ -87,7 +101,7 @@
   padding: 0;
 }
 .card-body div {
-  padding-bottom: 5px;
+  padding-bottom: 2px;
 }
 .pro_title {
   margin-top: 10px;
@@ -105,15 +119,10 @@
 .division {
   color: gray;
 }
-.pro_cate > span > a {
+.pro_cate > span {
   text-decoration: none;
   color: gray;
   font-size: 15px;
-}
-.pro_cate > span > a:hover {
-  color: gray;
-  text-decoration-line: underline;
-  cursor: pointer;
 }
 .pro_cate {
   margin-bottom: 5px;
@@ -122,14 +131,14 @@
   font-size: 17px;
 }
 .hei{
-	height:150px;
+	height:160px;
 }
 .progress-small {
   margin-bottom: 5px;
   margin-top: 15px;
 }
 .price {
-  font-size: 17px;
+  font-size: 18px;
 }
 .percent {
   color: #e15488;
@@ -142,11 +151,11 @@ i {
   color: #b5b5b5;
 }
 .page-item.active .page-link{
-  background-color: #9480FF;
-  border-color: #9480FF;
+  background-color: #E15488;
+  border-color: #E15488;
 }
 .page-link{
-  color: #9480FF;
+  color: #E15488;
 }
 .etc{
 	font-size: 15px;
