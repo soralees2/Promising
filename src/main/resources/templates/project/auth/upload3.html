@@ -83,7 +83,7 @@
 							<div class="explain">
 								<div class="titlebox">
 									<input type="text" class="form-control w-100" name="prTitle"
-										placeholder="제목을 입력해주세요.">
+										placeholder="제목을 입력해주세요." required>
 								</div>
 							</div>
 						</div>
@@ -100,7 +100,7 @@
 							<div class="summary">
 								<div class="summarybox">
 									<textarea placeholder="프로젝트 요약" cols="90" rows="5"
-										name="prIntro"></textarea>
+										name="prIntro" required></textarea>
 								</div>
 							</div>
 						</div>
@@ -148,10 +148,10 @@
 									<p>목표금액</p>
 									<div class="moneyinputbox">
 
-										<span></span><input type="number" class="form-control"
+										<span><input type="number" class="form-control"
 											inputmode="numeric" id="inputmoney" name="targetmoney"
 											placeholder="50만원 이상의 금액을 입력해주세요" autocomplete="off"
-											autocapitalize="off" min=0 max=9999999999></span>
+											autocapitalize="off" min=500000 max=9999999999 required></span>
 
 									</div>
 									<div class="moneyexplain">
@@ -189,7 +189,7 @@
 										<div class="startdate">
 											<p>시작일</p>
 											<div>
-												<input type="date" class="form-control" id="startday">
+												<input type="date" class="form-control" id="startday" required>
 												<input type="hidden" id="prStartday" name="prStartday">
 											</div>
 										</div>
@@ -226,21 +226,21 @@
 										<p>선물 제목</p>
 										<div>
 											<input type="text" name="prPresentTitle" class="form-control"
-												placeholder="선물 제목">
+												placeholder="선물 제목" required>
 										</div>
 									</div>
 									<div class="presentdetail">
 										<p>선물 설명</p>
 										<div>
 											<textarea placeholder="선물 설명" name="prPresentContents"
-												cols="70" rows="5"></textarea>
+												cols="70" rows="5" required></textarea>
 										</div>
 									</div>
 									<div class="presentprice">
 										<p>선물 가격</p>
 										<div>
 											<input type="number" name="presentprice" class="form-control"
-												placeholder="선물 가격" min=0 max=9999999999>
+												placeholder="선물 가격" min=0 max=9999999999 required>
 										</div>
 									</div>
 								</div>
@@ -257,7 +257,7 @@
 							<div class="summary">
 								<div class="summarybox">
 									<textarea placeholder="창작자 소개" name="prWriterintro" cols="80"
-										rows="5"></textarea>
+										rows="5" required></textarea>
 								</div>
 							</div>
 						</div>
@@ -274,7 +274,7 @@
 							<div class="col-12 col-md-12 ">
 								<div class="explaincontents">
 									<div class="editwrap ">
-										<textarea name="prContents" id="summernote"></textarea>
+										<textarea name="prContents" id="summernote" required></textarea>
 									</div>
 								</div>
 							</div>
