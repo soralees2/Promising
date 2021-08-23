@@ -6,7 +6,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,8 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.promising.repository.MemberRepository;
 import com.promising.repository.QnaRepository;
-import com.promising.vo.CommentVO;
-import com.promising.vo.CommunityVO;
 import com.promising.vo.MemberVO;
 import com.promising.vo.QnaVO;
 

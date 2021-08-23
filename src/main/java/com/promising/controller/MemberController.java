@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -203,12 +205,88 @@ public class MemberController {
 	@GetMapping("/auth/qna")
 	public void qna(Model model, Principal principal) {
 		String writer =principal.getName();
+		MemberVO vo = repo.findByUsername(writer).get();
 		System.out.println(writer);
 		 List<QnaVO> result = qnaRepo.selectQnaTome(writer);
-		 
-		 System.out.println(result);
+		 List<QnaVO> send = qnaRepo.selectQnaToOthers(vo.getUname());
+		 System.out.println("이것이 내가 받은 문의"+result);
+		 System.out.println("이것이 다른사람에게 보낸 문의"+send);
 		 model.addAttribute("result", result);
+		 model.addAttribute("result2", send);
 		}
+	
+	
+	@PostMapping("/{uname}")
+	public ResponseEntity<List<QnaVO>> VOID(@PathVariable("uname")String uname, @RequestBody QnaVO qvo, Principal principal){
+		String writer=principal.getName();
+		
+		System.out.println(qvo.getContents());
+		System.out.println("-----------------" + uname); // 작성자 닉네임
+		MemberVO vo = new MemberVO();
+		
+		System.out.println(qvo);
+		
+		MemberVO mvo = repo.findByUsername(uname).get();
+		String receiver = mvo.getUsername();
+		vo.setUsername(receiver);
+		System.out.println("ㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎ : " + principal.getName());
+		qvo.setWriter(principal.getName());
+		qvo.setMember(vo);
+		System.out.println("qvo : "+qvo);
+		qnaRepo.save(qvo);
+		
+//		System.out.println("내가보낸 내용 컨텐츠 :"+qvo.getContents());//잘옴
+//		System.out.println("받는 사람WRITER :" + uname); // 받는 사람 닉네임 작성자 닉네임
+//		System.out.println("보내는사람 :"+writer);
+//		System.out.println("qnao: "+qvo.getQnano());
+//		String contentDetail=qvo.getContents();
+//		System.out.println("qvo출력: "+qvo);
+//		System.out.println("콘텐츠내용 :"+contentDetail);
+//
+//		MemberVO vo = new MemberVO();
+//		MemberVO mvo = repo.findByUname(uname).get();
+////		System.out.println("mvo내용"+mvo);
+////		
+////		String receiver = mvo.getUsername();
+//		System.out.println("principal통해 writer추출 : " + principal.getName());
+//		qvo.setWriter(principal.getName());
+//		
+//		qnaRepo.save(qvo);
+//		
+		
+//		
+//		MemberVO mvo = repo.findByUname(uname).get(); //ans
+//		System.out.println("mvo의 정체는?"+mvo);	
+//		String receiver = mvo.getUsername();
+//		MemberVO vo = new MemberVO();
+//
+//	System.out.println("받는 사람mvo값"+mvo);
+//	
+//		String receiver = mvo.getUname();
+//	System.out.println("메세지 받는사람: "+receiver);
+//		
+//		System.out.println("보내는 사람 유저 ID~: " + principal.getName());
+//		qvo.getQnacategory();
+//		qvo.setMember(vo);
+//		qvo.setContents(contentDetail);
+//		qvo.setReceiver(receiver);
+//		qvo.setWriter(writer);
+//		
+//		System.out.println("qvo출력2:"+qvo);
+//		qvo.setMember(mvo);
+//		qvo.setMember(vo);
+//
+//		qnaRepo.save(qvo);
+//		qnaRepo.save(qvo);
+		
+		return new ResponseEntity<>(getListByMember(vo),HttpStatus.CREATED);
+	}
+	
+	private List<QnaVO> getListByMember(MemberVO vo) throws RuntimeException{
+		return qnaRepo.getQnaOfMember(vo);
+	}
+	
+	
 	
 	
 

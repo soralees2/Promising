@@ -9,150 +9,284 @@
 <meta name="_csrf_header" th:content="${_csrf.headerName}">
 
 <th:block th:replace="fragments/commonHead"></th:block>
-   
-	<link rel="stylesheet" type="text/css" th:href="@{/static/css/qna.css}">
+
+<link rel="stylesheet" type="text/css" th:href="@{/static/css/qna.css}">
+
 </head>
 
 
 <body>
 	<div class="wrap">
-		<header id="header" th:fragment="fg-header">
-			<div class="container">
-				<div class="row">
-					<div class="col-4 col-md-5">
-						<ul class="menu">
-							<li class="search" id="search"><img
-								src="../images/ic_search.png" alt=""><span>프로젝트 </span>둘러보기</li>
-							<li class="register"><a href="#">프로젝트 올리기</a></li>
-							<li class="back"><a href="">이전페이지로</a></li>
-						</ul>
-					</div>
-					<div class="col-4 col-md-2">
-						<h1 class="logo">
-							<a href="#">Promising</a>
-						</h1>
-					</div>
-					<div class="col-4 col-md-5">
-						<div class="utils">
-							<a href="#"> <span>회원가입/로그인</span>
-								<div class="pf_wrap">
-									<div class="pf_img"
-										style="background: url(../images/atom02.png) 50% 50% no-repeat; background-size: cover;"></div>
-								</div>
-							</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</header>
-
-
-		<!-- 해당 페이지 클래스명을 적어주세요-->
-		<div class="container mx-7">
-			<div class="row profileLine">
-				<div class='col-12 namennavi'>
-
-
-					<div class='nameline'>
-						<span>문의사항</span>
-					</div>
-
-				</div>
-
-			</div>
-		</div>
-
+		<header th:replace="fragments/header.html :: fg-header"></header>
 		<div class="container">
-			<div class=" row tabline">
-				<ul class="nav nav-pills" id="pills-tab" role="tablist">
 
-					<li class="nav-item" role="presentation">
-						<button class="nav-link p-3" id="pills-contact-tab"
-							data-bs-toggle="pill" data-bs-target="#pills-QnA" type="button"
-							role="tab" aria-controls="pills-QnA" aria-selected="false">보낸
-							프로젝트 문의</button>
-					</li>
 
-					<li class="nav-item" role="presentation">
-						<button class="nav-link p-3" id="pills-contact-tab"
-							data-bs-toggle="pill" data-bs-target="#pills-MyQnA" type="button"
-							role="tab" aria-controls="pills-MyQnA" aria-selected="false">받은
-							프로젝트 문의</button>
-					</li>
 
-				</ul>
 
-				<hr>
+			<!-- 해당 페이지 클래스명을 적어주세요-->
+			<div class="container mx-7">
+				<div class="row profileLine">
+					<div class='col-12 namennavi'>
 
-				<div class="tab-content" id="pills-tabContent">
-					<div class="tab-pane fade show active" id="pills-QnA"
-						role="tabpanel" aria-labelledby="pills-QnA-tab">
-					
-					<span>심사중인 프로젝트가 없습니다.</span>
+
+						<div class='nameline'>
+							<span>문의사항</span>
+						</div>
 
 					</div>
 
+				</div>
+			</div>
 
-					<div class="tab-pane fade" id="pills-MyQnA" role="tabpanel"
-						aria-labelledby="pills-MyQnA-tab">
-								<div class="row" id="main_list"
-							th:if="${not #lists.isEmpty(result)}">
+			<div class="container">
+				<div class=" row tabline">
+					<ul class="nav nav-pills" id="pills-tab" role="tablist">
 
-							<div class="col-12 col-md-6 col-xl-3" th:each="pro:${result}">
-								<div class="card">
-									<div class="imgDiv">
-										<img th:src="@{/static/images/main/card1.jpeg}"
-											class="card-img-top" alt="..."> <img
-											th:src="@{/static/images/main/heart1.png}" width="20" class="heart">
-									</div>
-									<div class="card-body">
+						<li class="nav-item" role="presentation">
+							<button class="nav-link p-3" id="pills-contact-tab"
+								data-bs-toggle="pill" data-bs-target="#pills-QnA" type="button"
+								role="tab" aria-controls="pills-QnA" aria-selected="false">보낸
+								프로젝트 문의</button>
+						</li>
 
-										<div class="writer">
-											<span id="prCategory"><a href="#">[[${pro.qnano}]]</a></span>
-											<span class="division">|</span> 
-											<span id="prCategory"><a href="#">[[${pro.qnacategory}]]</a></span>
-											<span id="prCategory"><a href="#">[[${pro.contents}]]</a></span>
-											<span class="division">|</span> <span><a href="#">[[${pro.writer}]]</a></span>
+						<li class="nav-item" role="presentation">
+							<button class="nav-link p-3" id="pills-contact-tab"
+								data-bs-toggle="pill" data-bs-target="#pills-MyQnA"
+								type="button" role="tab" aria-controls="pills-MyQnA"
+								aria-selected="false">받은 프로젝트 문의</button>
+						</li>
+
+					</ul>
+
+					<hr>
+
+					<div class="tab-content" id="pills-tabContent">
+						<div class="tab-pane fade show active" id="pills-QnA"
+							role="tabpanel" aria-labelledby="pills-QnA-tab">
+							<div class="row" id="main_list"
+								th:if="${not #lists.isEmpty(result2)}">
+
+								<div class="col-12 col-md-6 col-xl-3" th:each="pro:${result2}">
+									<div class="card">
+										<div class="imgDiv">
+											<img th:src="@{/static/images/main/card1.jpeg}"
+												class="card-img-top" alt="...">
 											
 										</div>
-										<div class="pro_title">
-										<!-- 	<a href="#">[[${pro.regDate}]]</a> -->
-										</div>
-										<div class="achi">
-											<span>[[${pro.regDate}]]</span>
+										<div class="card-body">
+
+											<div class="writer">
+												<span id="prCategory"><a href="#">[[${pro.qnano}]]</a></span>
+												<span class="division">|</span> <span class="division">|</span>
+												<span id="prCategory"><a href="#">[[${pro.qnacategory}]]</a></span>
+												<span class="division">|</span> <span id="prCategory"><a
+													href="#">[[${pro.contents}]]</a></span> <span class="division">|</span>
+												<span><a href="#">[[${pro.writer}]]</a></span>
+
+											</div>
+											<div class="pro_title">
+												<!-- 	<a href="#">[[${pro.regDate}]]</a> -->
+											</div>
+											<div class="achi">
+												<span>[[${pro.regDate}]]</span>
+											</div>
+
 										</div>
 
 									</div>
+								</div>
+								<hr>
 
+								<div class="col-12 col-md-6 col-xl-3 float-right">
+
+									<a href="/member/auth/mypage"><input type="button"
+										class="btn-lg btn-primary " id="backBtn" value="뒤로가기"></a>
 								</div>
 							</div>
-										<hr>
-							
-					<div class="col-12 col-md-6 col-xl-3 float-right">
 
-							<a href="/member/auth/mypage"><input type="button" class="btn-lg btn-primary " id="backBtn" value="뒤로가기"></a>
-					</div>
+							<div class="col-12 col-md-6 col-xl-3"
+								th:unless="${not #lists.isEmpty(result)}">
+
+								<span>프로젝트 문의가 없습니다.</span>
+
+							</div>
 						</div>
 
-						<div class="col-12 col-md-6 col-xl-3"
-							th:unless="${not #lists.isEmpty(result)}">
 
-							<span>프로젝트 문의가 없습니다.</span>
+						<div class="tab-pane fade" id="pills-MyQnA" role="tabpanel"
+							aria-labelledby="pills-MyQnA-tab">
+							<div class="row" id="main_list"
+								th:if="${not #lists.isEmpty(result)}">
 
+								<div class="col-12 col-md-6 col-xl-3" th:each="pro:${result}">
+									<div class="card">
+										<div class="imgDiv">
+											<img th:src="@{/static/images/main/card1.jpeg}"
+												class="card-img-top" alt="..."> 
+										</div>
+										<div class="card-body">
+
+											<div class="writer">
+												<span id="prCategory" class="originQnaNo"><a href="#">[[${pro.qnano}]]</a></span>
+												<span class="division">|</span><span id="prCategory"><a href="#">[[${pro.qnacategory}]]</a></span>
+												<span class="modalUp" id="prCategory"><a href="#">[[${pro.contents}]]</a></span>
+												<span class="division">|</span> <span class="writergo">[[${pro.writer}]]</span>
+
+											</div>
+											<div class="pro_title">
+												<!-- 	<a href="#">[[${pro.regDate}]]</a> -->
+											</div>
+											<div class="achi">
+												<span>[[${pro.regDate}]]</span>
+												<button class="btn btn-primary modalUp" type="button"
+													data-bs-toggle="modal" data-bs-target="#qna_modal">답장보내기</button>
+											</div>
+
+										</div>
+
+									</div>
+								</div>
+								<hr>
+
+								<div class="col-12 col-md-6 col-xl-3 float-right">
+
+									<a href="/member/auth/mypage"><input type="button"
+										class="btn-lg btn-primary" id="backBtn" value="뒤로가기"></a>
+								</div>
+							</div>
+
+							<div class="col-12 col-md-6 col-xl-3"
+								th:unless="${not #lists.isEmpty(result)}">
+
+								<span>프로젝트 문의가 없습니다.</span>
+
+							</div>
 						</div>
 					</div>
+
+
+
 				</div>
-
-
-
-
-
 			</div>
 		</div>
 
+
+		<div class="modal fade" id="qna_modal" data-bs-backdrop="static"
+			data-bs-keyboard="false" tabindex="-1" aria-hidden="true"
+			th:fragment="qna_modal">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">문의답변</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal"
+							aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<dl>
+							<dt>받는사람</dt>
+							<dd>
+								<input type="text" class="form-control" name="re" id="receiver"
+									readonly>
+								<!-- th:value="${vo.prWriter}" -->
+							</dd>
+							<dt>문의내용</dt>
+							<dd>
+								<select class="form-select" id="qna_category">
+									<option value="">문의유형</option>
+									<option value="선물/후원">선물/후원</option>
+									<option value="프로젝트">프로젝트</option>
+									<option value="수령자 정보">수령자 정보</option>
+									<option value="배송">배송</option>
+									<option value="기타">기타</option>
+								</select>
+							</dd>
+						</dl>
+						<textarea class="form-control" id="qna_contents" rows="5" col="20"
+							placeholder="프로젝트 진행자에게 문의하고 싶은 내용을 적어주세요."></textarea>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary"
+							data-bs-dismiss="modal">닫기</button>
+						<button type="button" class="btn btn-primary" id="addQnaBtn">답장하기</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		<!-- Wrap 닫기 -->
 	</div>
 
+<script>
 
+$(function(){
+	//답장보내기 버튼눌렀을때 이름 적기
+	$(".modalUp").on('click',function(){
+		
+	let taker=$(this).parents().closest(".card").find(".writergo").text();
+	let QnaNo=$(this).parents().closest(".card").find(".originQnaNo").text();	
+		
+		console.log(taker);
+
+	$("#receiver").val(taker);
+	
+	$("#addQnaBtn").on('click', function(){
+		let category = $("#qna_category option:selected").val();
+		let contents = $("#qna_contents").val();		
+		let receiver = $("#receiver").val();
+		console.log("receiver : " + receiver);
+		console.log("category : " + category);
+		console.log("contents : " + contents);
+		
+		let obj = {contents: contents,qnacategory:category, member:receiver,receiver:receiver};
+	  	console.log(JSON.stringify(obj));
+	  	let url = '/member/' + obj.receiver;
+	 	console.log(url);
+	 	
+			$.ajax({
+				type:'post',
+	  		url: decodeURI(url),
+		  	data : JSON.stringify(obj),
+		  	dataType:'json',
+		  	contentType: "application/json",
+		  	beforeSend: function (jqXHR, settings) {
+	       		let header = $("meta[name='_csrf_header']").attr("content");
+	       		let token = $("meta[name='_csrf']").attr("content");
+	       		jqXHR.setRequestHeader(header, token);
+			}
+			}).done(function(){
+				console.log("성공");
+				$('#qna_modal').modal('hide');
+			})
+			
+		
+	})
+	
+	
+	});
+	
+	
+
+});
+
+
+
+
+
+</script>
 
 
 
