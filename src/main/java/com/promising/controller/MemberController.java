@@ -166,7 +166,7 @@ public class MemberController {
 				}
 			   try 
 		        {
-		            Thread.sleep(1500);
+		            Thread.sleep(2500);
 		        }
 		        catch(InterruptedException e) 
 		        {
@@ -187,17 +187,7 @@ public class MemberController {
 		
 		System.out.println("브이오내용"+vo);
 //		System.out.println(writer); 출력잘됨
-<<<<<<< HEAD
-//		 List<ProjectVO> result = repoProject.selectCheckingPro(writer);
-//		 List<ProjectVO> result2 = repoProject.selectProceedingPro(writer);
-//		 List<ProjectVO> result3 = repoProject.selectFinishedPro(writer);
-//		 System.out.println(result);
-//		
-//		
-//			 model.addAttribute("result", result);
-//			 model.addAttribute("result2", result2);
-//			 model.addAttribute("result3", result3);
-=======
+
 		 List<ProjectVO> result = repoProject.selectCheckingPro(vo.getUname());
 		 List<ProjectVO> result2 = repoProject.selectProceedingPro(vo.getUname());
 		 List<ProjectVO> result3 = repoProject.selectFinishedPro(vo.getUname());
@@ -207,7 +197,7 @@ public class MemberController {
 			 model.addAttribute("result", result);
 			 model.addAttribute("result2", result2);
 			 model.addAttribute("result3", result3);
->>>>>>> f057f116f19de01a348526036a320995e14164f7
+
 
 		
 		
