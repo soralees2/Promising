@@ -79,7 +79,7 @@ public class MemberController {
 		return "redirect:/member/login";
 	}
 	
-	@GetMapping("/mypage")
+	@GetMapping("/auth/mypage")
 	public void mypage(Model model,Principal principal) {
 	String userName =principal.getName();
 		
@@ -90,7 +90,7 @@ public class MemberController {
 	
 	
 
-	@GetMapping("/infoUpdate")
+	@GetMapping("/auth/infoUpdate")
 	public void infoUpdate(Model model,Principal principal) {
 		String userName =principal.getName();
 		
@@ -103,7 +103,7 @@ public class MemberController {
 		}
 	
 	
-	@RequestMapping(value="/infoUpdate/{uname}",method = RequestMethod.POST)
+	@RequestMapping(value="/auth/infoUpdate/{uname}",method = RequestMethod.POST)
 	@ResponseBody
 	public void nameUpdate(@PathVariable("uname") String uname,@RequestBody MemberVO mvo,Model model,Principal principal) {
 		System.out.println("10시");
@@ -125,7 +125,7 @@ public class MemberController {
 			}
 
 	
-	@RequestMapping(value="/uphoneUpdate/{modifyContact}",method = RequestMethod.POST)
+	@RequestMapping(value="/auth/uphoneUpdate/{modifyContact}",method = RequestMethod.POST)
 	@ResponseBody
 	public void emailUpdate(@PathVariable("modifyContact") String modifyContact,Model model,Principal principal) {
 		System.out.println("10시");
@@ -140,7 +140,7 @@ public class MemberController {
 		
 			}
 	
-	@PostMapping("/profileAttach")
+	@PostMapping("/auth/profileAttach")
 	public String profileUpload(MemberVO vo,MultipartFile[] file,Principal principal,HttpServletRequest request) throws Exception {
 		vo = repo.findByUsername(principal.getName()).get();
 
@@ -171,26 +171,30 @@ public class MemberController {
 }
 	
 	
-	@GetMapping("/myProjectGoing")
+	@GetMapping("/auth/myProjectGoing")
 	public void myProjectGoing(Model model,Principal principal) {
-		String writer =principal.getName();		
+		String writer =principal.getName();
+		System.out.println(writer);
+		MemberVO vo= repo.findByUsername(writer).get();
+		
+		System.out.println("브이오내용"+vo);
 //		System.out.println(writer); 출력잘됨
-//		 List<ProjectVO> result = repoProject.selectCheckingPro(writer);
-//		 List<ProjectVO> result2 = repoProject.selectProceedingPro(writer);
-//		 List<ProjectVO> result3 = repoProject.selectFinishedPro(writer);
-//		 System.out.println(result);
-//		
-//		
-//			 model.addAttribute("result", result);
-//			 model.addAttribute("result2", result2);
-//			 model.addAttribute("result3", result3);
+		 List<ProjectVO> result = repoProject.selectCheckingPro(vo.getUname());
+		 List<ProjectVO> result2 = repoProject.selectProceedingPro(vo.getUname());
+		 List<ProjectVO> result3 = repoProject.selectFinishedPro(vo.getUname());
+		 System.out.println(result);
+		 System.out.println(result2);
+		 System.out.println(result3);
+			 model.addAttribute("result", result);
+			 model.addAttribute("result2", result2);
+			 model.addAttribute("result3", result3);
 
 		
 		
 		
 		}
 	
-	@GetMapping("/qna")
+	@GetMapping("/auth/qna")
 	public void qna(Model model, Principal principal) {
 		String writer =principal.getName();
 		System.out.println(writer);
@@ -224,7 +228,7 @@ public class MemberController {
 	}
 
 	
-	@RequestMapping(value="/pwModify",method = RequestMethod.POST)
+	@RequestMapping(value="/auth/pwModify",method = RequestMethod.POST)
 
 	public String pwUpdate(@RequestBody Map<String,Object> param,Model model,Principal principal) {
 		
@@ -264,7 +268,7 @@ MemberVO vo=repo.findByUsername(originName).get(); //찐
 		
 	}
 		
-		@RequestMapping(value="/addressUpdate",method = RequestMethod.POST)
+		@RequestMapping(value="/auth/addressUpdate",method = RequestMethod.POST)
 
 		public String addressUpdate(@RequestBody Map<String,Object> param,Model model,Principal principal) {
 			

@@ -55,7 +55,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 		</div>
 		<div class="payment _02">
 			<h4>결제하기</h4>
-			<p class="money"><strong id="payment_money">+1000</strong></p>
+			<p class="money"><strong id="payment_money">+<span th:text="${vo.prPresentPrice}"></span></strong></p>
 			<p>수량 선택</p>
 			<!-- <input type="text" id="add_money" class="form-control" placeholder="0"> -->
 	
