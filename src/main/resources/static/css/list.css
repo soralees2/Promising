@@ -131,7 +131,7 @@
   font-size: 17px;
 }
 .hei{
-	height:160px;
+	height:155px;
 }
 .progress-small {
   margin-bottom: 5px;
@@ -139,9 +139,6 @@
 }
 .price {
   font-size: 18px;
-}
-.percent {
-  color: #e15488;
 }
 .period {
   float: right;
