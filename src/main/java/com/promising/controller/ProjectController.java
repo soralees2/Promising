@@ -47,17 +47,6 @@ public class ProjectController {
 	@Autowired
 	private CommunityRepository comrepo;
 
-	//@GetMapping("/detail")
-	//	public void detail(Model model) {
-	//		model.addAttribute("hello", "안녕하세요, 반갑습니다!");
-
-
-	@GetMapping("/detail/{pno}")
-	public String detail(@PathVariable("pno") Long pno,Model model) {
-
-		return "project/detail";
-	}
-
 	@GetMapping("/story/{pno}")
 	public String projectStory(@PathVariable("pno") Long pno,Model model) {
 		ProjectVO vo= repo.findById(pno).get();
@@ -88,19 +77,6 @@ public class ProjectController {
 		return "project/notice";
 
 	}
-//	
-//	@GetMapping("/detail/{pno}")
-//	public String detail(@PathVariable("pno") Long pno,Model model) {
-//		System.out.println("프로젝트 넘  : " + pno);
-//		ProjectVO vo= repo.findById(pno).get();
-//		//CommunityVO qvo= repo.findByCmt(pno).get();
-//
-//		model.addAttribute("vo",vo);
-//		
-//		return "project/detail";
-//		
-//
-//	}
 
 	@GetMapping("/payment")
 	public void payment(Model model) {

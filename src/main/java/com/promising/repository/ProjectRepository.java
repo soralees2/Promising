@@ -122,19 +122,19 @@ public interface ProjectRepository extends JpaRepository<ProjectVO, Long>, Query
 			builder.and(project.prCategory.like("%"+keyword+"%"));
 			break;
 		case "1000" :
-			builder.and(project.prCurrentMoney.
+			builder.and(project.prCurrentMoney.between(keyword, keyword2));
 			break;
 		case "1000001" :
-			builder.and(project.prCategory.like("%"+keyword+"%"));
+			builder.and(project.prCurrentMoney.between(keyword, keyword2));
 			break;
 		case "10000001" :
-			builder.and(project.prCategory.like("%"+keyword+"%"));
+			builder.and(project.prCurrentMoney.between(keyword, keyword2));
 			break;
 		case "50000001" :
-			builder.and(project.prCategory.like("%"+keyword+"%"));
+			builder.and(project.prCurrentMoney.between(keyword, keyword2));
 			break;
 		case "100000001" :
-			builder.and(project.prCategory.like("%"+keyword+"%"));
+			builder.and(project.prCurrentMoney.between(keyword, keyword2));
 			break;
 		}
 

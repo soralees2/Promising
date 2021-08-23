@@ -40,6 +40,9 @@ public class QnaVO {
 	@Column(nullable=false, length=100)
 	private String writer;
 	
+	@Column(nullable=false, length=100)
+	private String receiver;
+	
 	@Column(nullable=false, length=4000)
 	private String contents;
 	
@@ -51,5 +54,4 @@ public class QnaVO {
 	@JsonIgnore
 	@ManyToOne(fetch=FetchType.LAZY)
 	private MemberVO member;
-	// 얘네 왜 안들어왔었지.. 
 }
