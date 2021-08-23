@@ -78,3 +78,20 @@ margin-top: 100px;
 nav-pills button {
   font-weight: 700px;
 }
+
+
+
+
+
+.mypagewrap{
+	    position: relative;
+    display: block;
+    width: 100%;
+    -webkit-box-flex: 1;
+    flex-grow: 1;
+    background: rgb(255, 255, 255);
+}
+
+
+
+

@@ -100,13 +100,19 @@
 
 
 								<!-- <img id="profile" th:src="@{'/src/main/resources/static/images/'+[[${result.sysName}]]}" class="w-100 h-100"> -->
-								<img id="profile"
-									th:src="@{'/static/images/profileUpload/'+${result.sysName}}"
-									class="w-200 h-200">
+								<div id="origin" th:if="${result.sysName} !=''">
+									<img id="profile"
+										th:src="@{'/static/images/profileUpload/'+${result.sysName}}"
+										class="w-100 h-100">
+								</div>
+
+								<div th:unless="${result.sysName} ==''">
+									<img id="imgsrc" class="w-200 h-200">
+								</div>
 								<!-- <img id="profile" th:src="@/[[${result.sysName}]]" class="w-100 h-100">  -->
 								<!-- /src/main/resources/ -->
 
-								<form th:action="@{/member/profileAttach}" method="post"
+								<form th:action="@{/member/auth/profileAttach}" method="post"
 									enctype="multipart/form-data">
 									<input type="hidden" th:name="${_csrf.parameterName}"
 										th:value="${_csrf.token}">
@@ -115,7 +121,7 @@
 
 										<label class="btn btn-outline-secondary btn-file"
 											id="btn-fileUp"> 파일추가 <input type="file" name="file"
-											accept=".gif, .jpeg, .png" autofocus="autofocus"
+											accept=".gif, .jpeg, .png,.jpg" autofocus="autofocus"
 											style="display: none;" id="filebtn" maxlength="10" required>
 											<!--숨기기-->
 										</label>
@@ -130,9 +136,7 @@
 
 							</div>
 						</div>
-						<br>
-						<br>
-						<br>
+						<br> <br> <br>
 						<div>
 							<hr>
 						</div>
@@ -149,7 +153,7 @@
 							<br>
 							<div id="nameNBlank">
 								<input type="text" class="blank form-control-lg" id="userName"
-									placeholder="이름을 입력하세요." required>
+									placeholder="닉네임을 입력하세요." required>
 								<div class="col-sm-4 col-md-4 uploadcomment">
 									<button class="btn btn-dark" type="button" id="Namesavebutton">저장</button>
 								</div>
@@ -162,34 +166,6 @@
 							</div>
 						</div>
 
-
-
-
-						<!-- 이메일 시작 -->
-						<div class='col-sm-4 col-md-4 emailnavi'>
-
-							<div class="UserEmail">
-								<div class="modifyScroll">
-									<span><a href="javascript:;" id="emailModifyScroll">변경</a></span>
-								</div>
-								<h3>이메일</h3>
-								<h5>[[${result.username}]]</h5>
-								<br>
-								<div id="emailblankNButton">
-									<input type="text" class="blank form-control-lg"
-										placeholder="이메일을 입력하세요." id="userEmail">
-
-									<div class="col-sm-4 col-md-4 uploadcomment">
-										<button class="btn btn-dark " type="button"
-											id="emailSavebutton">인증메일 전송</button>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<div>
-							<hr>
-						</div>
 						<!-- 비밀번호 시작 -->
 						<div class='col-sm-4 col-md-4 pwnavi'>
 
@@ -208,9 +184,7 @@
 								<input type="text" class="blank form-control-lg"
 									placeholder="현재 비밀번호" id="currPw" name="currPw"> <br>
 
-								<h6>비밀번호가 기억나지 않나요?</h6>
 
-								<button class="btn btn-link" id="pwResetBtn">비밀번호 초기화</button>
 							</div>
 							<div class="pwReset">
 								<h6>변경할 비밀번호</h6>
@@ -428,6 +402,7 @@
 
 
 
+	
 	<script>
 					$(function() {
 						$("#Namesavebutton")
@@ -470,7 +445,7 @@
 															},
 															success : function(data) {
 																alert("갱신 성공");
-																console.log(data);
+																
 																location.reload();
 	
 															},
@@ -525,11 +500,9 @@
 															},
 															success : function(data) {
 	
-																console
-																		.log("갱신 성공");
 																alert("갱신 성공");
-	
-															},
+																location.reload();}
+															,
 															error : function(
 																	request,
 																	status, error) {
@@ -583,12 +556,10 @@
 																				token);
 															},
 															success : function(data) {
-	
-																console
-																		.log("갱신 성공");
 																alert("갱신 성공");
+																location.reload();}	
 	
-															},
+															,
 															error : function(error) {
 																alert("갱신실패"); // 실패 시 처리
 																
@@ -649,13 +620,28 @@ $("#searchAddress").on("click",function(){
 											
 											})
 											
-											
+											function readInputFile(input) {
+												if (input.files && input.files[0]) {
+													var reader = new FileReader();
+													reader.onload = function(e) {
+														$('#imgsrc').attr("src", e.target.result);
+													}
+													reader.readAsDataURL(input.files[0]);
+												}
+											}
+
+											$("#filebtn").on('change', function() {
+												$("#origin").hide();
+												
+												readInputFile(this);
+											});
 										})
 										
 										
 										
 				
 				</script>
+	
 </body>
 
 </html>

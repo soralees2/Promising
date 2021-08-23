@@ -27,18 +27,18 @@
 </div>
 <div class="buttons">
 <button type="button" class="btn btn-primary btn-lg" id="main">메인으로</button>
-<button type="button" class="btn btn-secondary btn-lg" id="ask">문의하기</button>
+<button type="button" class="btn btn-secondary btn-lg" id="back">이전으로</button>
 </div>
 </div>
 <script>
 $(function(){
 	$("#main").on("click",function(){
-		
 		location.href="/";
 	})
-	 $("#ask").on("click", function(){
-	                let popup = window.open('${pageContext.request.contextPath}/kh/inquired/popup.jsp', 'inquire', 'width=550px,height=600px,left=500,top=300,scrollbars=no,resizable=no');
-	            })
+	$("#back").on("click",function(){
+		history.back();
+	})
+	 
 })
 </script>
 </body>
