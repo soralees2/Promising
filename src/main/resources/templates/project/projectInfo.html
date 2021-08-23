@@ -67,6 +67,17 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 			<button type="button" class="btn btn-primary w-100" id="btn_payment"><strong class="result_money">1000</strong>원 결제하기</button>
 		</div>
 	</div>
-	
+	<script>
+		$(function(){
+			
+			// 결제하기 
+			$("#btn_payment").on("click", function(){
+				let payMoney = $("#payment_money").text();
+				let pno = $("#pno").val();
+				location.href="/project/payment/"+pno+"/"+payMoney;
+			});
+			
+		})
+	</script>
 </body>
 </html>
