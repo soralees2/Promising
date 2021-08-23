@@ -20,9 +20,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.promising.repository.CommentRepository;
 import com.promising.repository.CommunityRepository;
+import com.promising.repository.MemberRepository;
 import com.promising.repository.ProjectRepository;
 import com.promising.vo.CommentVO;
 import com.promising.vo.CommunityVO;
+import com.promising.vo.MemberVO;
 import com.promising.vo.PageVO;
 
 @Controller
@@ -37,6 +39,9 @@ public class CommunityController {
 	
 	@Autowired
 	private CommentRepository crepo;
+	
+	@Autowired
+	private MemberRepository mrepo;
 
 	
 	// 커뮤니티 글 작성 
@@ -51,7 +56,7 @@ public class CommunityController {
 	
 	// 커뮤니티 글 수정
 	@PostMapping("/modify/{pno}")
-	public String modifyPost(CommunityVO vo, @PathVariable("pno") Long pno, RedirectAttributes rttr ){
+	public String modifyPost(CommunityVO vo, @PathVariable("pno") Long pno ){
 		
 		repo.findById(vo.getCommunityno()).ifPresent( origin ->{
 			System.out.println(vo.getCommunityno());
@@ -79,12 +84,12 @@ public class CommunityController {
 	//댓글 추가
 	@Transactional
 	@PostMapping("/cmtadd/{communityno}")
-	public ResponseEntity<List<CommentVO>> addReply(@PathVariable("communityno")Long cno, @RequestBody CommentVO cmt){
+	public ResponseEntity<List<CommentVO>> addReply(@PathVariable("communityno")Long cno, @RequestBody CommentVO cmt, Principal principal){
 
 		CommunityVO vo = new CommunityVO();
 		vo.setCommunityno(cno);
 		cmt.setCommunity(vo);
-		
+		cmt.setWriter(principal.getName());
 		crepo.save(cmt);		
 		
 		return new ResponseEntity<>(getListByCommunity(vo), HttpStatus.CREATED);
@@ -105,7 +110,6 @@ public class CommunityController {
 	private List<CommentVO> getListByCommunity(CommunityVO cmt)throws RuntimeException{
 		return crepo.getCommentsOfCommunities(cmt);
 	}
-	
 
 	
 }

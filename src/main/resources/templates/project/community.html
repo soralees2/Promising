@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://thymeleaf.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<html lang="ko" xmlns:th="http://thymeleaf.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,7 +9,6 @@
 	<th:block th:replace="fragments/commonHead"></th:block>
 	<link th:href="@{/static/css/project_detail.css}" rel="stylesheet">
 	<script type="text/javascript" th:src="@{/static/js/community.js}"></script>
-	<script th:inline="javascript" th:src="@{/static/js/payment.js}"></script>
 </head>
 
 <body>
@@ -26,7 +25,8 @@
 						<div class="col-12 col-md-8 project_content">
 							<div id="community" style="display:block;">
 								<div class="community_contents">
-									<button type="button" class="btn btn-dark btn-addComt" id="btn-addComt" data-bs-toggle="modal" data-bs-target="#community_modal">커뮤니티 글 작성하기</button>
+									<button type="button" class="btn btn-dark btn-addComt" id="btn-addComt" data-bs-toggle="modal" data-bs-target="#community_modal" sec:authorize="isAuthenticated()">커뮤니티 글 작성하기</button>
+									<button type="button" class="btn btn-dark btn-addComt loginCheck" sec:authorize="!isAuthenticated()">커뮤니티 글 작성하기</button>
 									<div th:switch="${com.size}">
 										<div class="no_data" th:case=0>
 											<i class="far fa-meh"></i>
@@ -37,16 +37,19 @@
 												<div class="pf_wrap">
 													<div class="pf_img" style="background:url(../images/atom02.png) 50% 50% no-repeat;background-size:cover;"></div>
 													<div class="pf_link">
-														<a href="#">
+														<span class="name">[[${com.writer}]]</span>
+														<i class="fas fa-angle-right"></i>
+														<!-- <a href="#">
 															<span class="name" >[[${com.writer}]]</span>
 															<i class="fas fa-angle-right"></i>
-														</a>
+														</a> -->
 														<span class="date">[[${com.regDate}]]</span>
 													</div>
+<!-- 													<form id="delForm" method="post" th:with="uid=${#authentication.principal} eq 'anonymousUser' ? 'Guest': ${authentication.principal.member.uid}">		 -->
 													<form id="delForm" method="post">		
 														<ul class="btn_wrap">
-															<li><button type="button" class="btn_modify" data-bs-toggle="modal" data-bs-target="#community_modal">수정</button></li>
-															<li><button type="button" class="btn_del">삭제</button></li>													
+															<li><button type="button" class="btn_modify" data-bs-toggle="modal" data-bs-target="#community_modal" sec:authorize="isAuthenticated()">수정</button></li>
+															<li><button type="button" class="btn_del" sec:authorize="isAuthenticated()">삭제</button></li>													
 														</ul>
 														<input type="hidden" name="communityno" th:value=${com.communityno} class="cno">
 														<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
@@ -58,7 +61,7 @@
 												<div class="amount_wrap">
 													<a href="javascript:;" class="ic" data-bs-toggle="tooltip" data-bs-placement="right" title="눌러서 댓글 보기"><i class="far fa-comments"></i><b>2</b></a>
 													<p class="txt"><b>0</b>개의 댓글이 있습니다.</p>
-													<button type="button" class="btn btn-sm btn-outline-secondary addCmt">댓글작성</button>
+													<button type="button" class="btn btn-sm btn-outline-secondary addCmt" sec:authorize="isAuthenticated()">댓글작성</button>
 													<div class="addCmt_wrap">
 														<form id="cmtForm" method="post">
 															<textarea class="form-control" name="contents" placeholder="댓글 내용을 작성해주세요."></textarea>
@@ -86,14 +89,19 @@
 		<div th:replace="project/modal.html :: qna_modal"></div>
 		<div th:replace="project/modal.html :: community_modal"></div>
 		<input type="hidden" id="pno" name="project" th:value="${vo.pno}">
+ 		<span sec:authorize="isAuthenticated()"><span id="user" sec:authentication="principal.username"></span></span>
 	</div>
 	<script>
 	$(function(){
-
+		
 		let pno = $("#pno").val();				// 해당 페이지의 프로젝트 넘버
 		let cmModal = $("#community_modal");	// 커뮤니티 모달 
 		let communityForm = $("#comForm"); 		// 커뮤니티 모달 폼 
 		let cmtForm = $("#cmtForm");			// 댓글 작성 폼
+		
+		let userName = $(".post .pf_link .name").text();
+		let cmtName = $(".cmt").find(".name").text();
+		let loginUser = $("#user").text();
 	
 		// 커뮤니티 modal open
 		$("#btn-addComt").on("click", function(){
@@ -170,7 +178,7 @@
 			cmtNum = post.find(".cno").val(); // 부모 번호
 			let cmt_wrap = post.find(".cmt_wrap");
 			let txt = post.find("textarea").val();
-			let obj = {writer:"sorazzang", contents: txt, communityno: cmtNum, community: cmtNum};
+			let obj = {contents: txt, communityno: cmtNum, community: cmtNum};
 			
 			let check = confirm("댓글을 등록 하시겠습니까?");
 			if(check){
@@ -211,9 +219,8 @@
 			for (let i=0; i<list.length; i++){
 				comObj = list[i];
 				let date = comObj.regDate;
-				
 				let imgUrl = "../images/atom02.png";
-				let link = "#";
+				let link = "javascript:;";
 				let cmt = $("<div class=cmt>");
 				let pf_wrap =$("<div class=pf_wrap>");
 				let pf_img =$("<div class=pf_img style='background:url(" + imgUrl + ") 50% 50% no-repeat;background-size:cover;'>");
@@ -233,6 +240,15 @@
 				content.append(rmBtn);
 
 				div.append(cmt);
+			}
+			
+			for(let i=0;i<$(".cmt").length;i++){
+				let post = $(".cmt").eq(i).find(".pf_link .name").text();
+				let btn = $(".cmt").eq(i).find(".pf_wrap").siblings(".txt").children(".btnCmtremove");
+				
+				if (loginUser == post){
+					btn.show();
+				}else{btn.hide();}
 			}
 		}
 		
@@ -265,6 +281,24 @@
 		
 		$(".tab_menu").children().removeClass("active");
 		$(".tab_02").addClass("active")
+		
+		
+		if(cmtName == loginUser){
+			$("btnCmtremove").show();
+		}else{
+			$("btnCmtremove").hide();
+		} 
+		
+		for(let i=0;i<$(".post").length;i++){
+			let post = $(".post").eq(i).find(".pf_link .name").text();
+			console.log(post);	
+			if (loginUser == post){
+				$(".post").eq(i).children().find(".pf_link").siblings("form").show();
+			}else{
+				$(".post").eq(i).children().find(".pf_link").siblings("form").hide();
+			}
+		}
+		
 	})
 	</script>
 </body>

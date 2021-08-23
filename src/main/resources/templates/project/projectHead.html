@@ -13,34 +13,39 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
 <body>
 	<div class="container" th:fragment="project_head">
-		<input type="hidden" id="pno" name="pno" th:value="${vo.pno}">
+<!-- 		<input type="hidden" id="pno" name="pno" th:value="${vo.pno}"> -->
+		<input type="hidden" id="status" th:value="${vo.prStatus}">
 		<div class="project_title">
 			<span class="pj_tag" th:text="${vo.prCategory}"></span>
 			<h2 th:text="${vo.prTitle}"></h2>
-			<div class="writer">
+			<!-- <div class="writer">
 				<div class="profile_img" style="background:url(../images/atom02.png) 50% 50% no-repeat;background-size:cover;"></div>
 				<a href="#" th:text="${vo.prWriter}"></a>
-			</div>
+			</div> -->
 		</div>
 		<div class="row">
 			<div class="col-12 col-md-8">
-				<img src="../images/temp/pj_img.jpg">
+				<img th:src="@{'/static/images/projectuploading/'+${vo.prSysName}}">
 			</div>
 			<div class="col-12 col-md-4">
 				<div class="pj_state">
 					<dl>
 						<dt>모인금액</dt>
 						<dd>
-							<strong th:text="${vo.prCurrentMoney}"></strong>원 &nbsp;&nbsp;/&nbsp;&nbsp; 달성률 <b>58%</b>
+							<strong th:text="${vo.prCurrentMoney}"></strong>원 &nbsp;&nbsp;/&nbsp;&nbsp; 달성률 <b id="percent">58%</b>
+							<input type="hidden" th:value="${vo.prTargetMoney}" id="tgMoney">
+							<input type="hidden" th:value="${vo.prCurrentMoney}" id="crMoney">
 						</dd>
 						<dt>남은시간</dt>
-						<dd>
+						<dd id="limitedDate">
+							<input type="hidden" th:value="${vo.prStartdate}" id="startDate">
+							<input type="hidden" th:value="${vo.prEnddate}" id="endDate">
 							<strong>10</strong>일
 						</dd>
-						<dt>후원자</dt>
+						<!-- <dt>후원자</dt>
 						<dd>
 							<strong>69</strong>명
-						</dd>
+						</dd> -->
 					</dl>
 				</div>
 				<div class="help_box">
@@ -53,6 +58,34 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 						<!-- <i class="fas fa-heart"></i> -->
 					</button>
 					<a href="#payment" class="btn btn-primary btn_sponsor">이 프로젝트 후원하기</a>
+				</div>
+				<div class="writer_profile">
+					<h4>창작자 소개</h4>
+					<div class="writer">
+						<div class="pf_wrap">
+							<div class="pf_img" th:style="'background:url('+ @{/static/images/profileUpload/}+${vo.prSysName} +')50% 50% no-repeat;background-size:cover;' "></div>
+							<div class="pf_link">
+								<a href="#">
+									<span class="name" th:text="${vo.prWriter}"></span>
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="info">
+						<p class="txt" th:text="${vo.prWriterintro}"></p>
+						<!-- <dl>
+							<dt>진행한 프로젝트</dt>
+							<dd><em>15</em></dd>
+							<dt>후원한 프로젝트</dt>
+							<dd><em>115</em></dd>
+						</dl> -->
+						<button type="button" class="btn btn-outline-secondary w-100 btn-qna" data-bs-toggle="modal" data-bs-target="#qna_modal" sec:authorize="isAuthenticated()">
+							<i class="far fa-envelope"></i> 문의하기
+						</button>
+						<button type="button" class="btn btn-outline-secondary w-100 btn-qna loginCheck"sec:authorize="!isAuthenticated()" >
+							<i class="far fa-envelope"></i> 문의하기
+						</button>
+					</div>
 				</div>
 			</div>
 		</div>
