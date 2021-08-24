@@ -196,7 +196,7 @@ public class ProjectController {
 
 		vo.setPrStartdate(prStartdate);
 		vo.setPrEnddate(prEnddate);
-		vo.setPrCheck("N");
+		vo.setPrStatus("N");
 		vo.setPrStatus("I");
 		System.out.println(targetmoney+" "+presentprice);
 		vo.setPrTargetMoney(Integer.parseInt(targetmoney));
