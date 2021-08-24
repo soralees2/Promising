@@ -32,7 +32,7 @@
 }
 
 input, button, select {
-	font-size: 0.9rem !important;
+	font-size: 0.9rem important;
 }
 
 div[class*="col-"] span {
