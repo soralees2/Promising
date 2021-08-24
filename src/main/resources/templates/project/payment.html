@@ -186,7 +186,7 @@ $("#btn_pay").on("click", function(){
 			if (rsp.success) {
 				alert('결제가 완료되었습니다.');
 				status = "Y"
-	 			location.href="/project/paycomplete";
+	 			location.href="/project/completepay";
 			} else {
 				var msg = '결제에 실패하였습니다.';
 				msg += '에러내용 : ' + rsp.error_msg;
