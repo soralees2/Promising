@@ -16,6 +16,12 @@
 	cursor: pointer;
 }
 
+#replyBtn{
+	margin-top:10px;
+	margin-left:28px;
+}
+
+
 .nameline {
 	font-size: 35px;
 	font-weight: 600;
