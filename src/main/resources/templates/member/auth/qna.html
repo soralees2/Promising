@@ -9,7 +9,8 @@
 <meta name="_csrf_header" th:content="${_csrf.headerName}">
 <th:block th:replace="fragments/commonHead"></th:block>
 <link rel="stylesheet" type="text/css" th:href="@{/static/css/qna.css}">
-<script type="text/javascript" th:src="@{/static/js/qna.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/mypageQna.js}"></script>
+
 </head>
 <body>
 	<div class="wrap">
@@ -59,7 +60,7 @@
 										</div>
 										<div class="item card-body">
 											<span class="cate">분류 : [[${pro.qnacategory}]]</span>
-											<div class="pro">프로젝트 제목~~</div>
+											<div class="pro">프로젝트 제목</div>
 											<div class="writer">수신 : [[${pro.receiver}]]</div>
 											<div class="date">[[${#dates.format(pro.regDate, ' yy년 MM월 dd일  HH:mm:ss')}]]</div>
 										</div>
@@ -84,8 +85,8 @@
 										</div>
 										<div class="item card-body">
 											<span class="cate">분류 : [[${pro.qnacategory}]]</span>
-											<div class="pro">프로젝트 제목~~</div>
-											<div class="writer">발신 : [[${pro.writer}]]</div>
+											<div class="pro">프로젝트 제목</div>
+											<div class="writer">발신 : <span id="writergo">[[${pro.writer}]]</span></div>
 											<div class="date">[[${#dates.format(pro.regDate, ' yy년 MM월 dd일  HH:mm:ss')}]]</div>
 										</div>
 										<div class="item card-body contents">[[${pro.contents}]]</div>

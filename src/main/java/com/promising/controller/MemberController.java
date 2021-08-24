@@ -184,20 +184,20 @@ public class MemberController {
 		String writer =principal.getName();
 		System.out.println(writer);
 		MemberVO vo= repo.findByUsername(writer).get();
-
+		
 		System.out.println("브이오내용"+vo);
 		//		System.out.println(writer); 출력잘됨
 
-		List<ProjectVO> result = repoProject.selectCheckingPro(vo.getUname());
-		List<ProjectVO> result2 = repoProject.selectProceedingPro(vo.getUname());
-		List<ProjectVO> result3 = repoProject.selectFinishedPro(vo.getUname());
+		List<ProjectVO> result = repoProject.selectCheckingPro(vo.getUname()); // username으로 조회해야할듯..
+		List<ProjectVO> result2 = repoProject.selectProceedingPro(vo.getUname());//username으로 조회해야할듯..
+		List<ProjectVO> result3 = repoProject.selectFinishedPro(vo.getUname());//username으로 조회해야할듯..
+		
 		System.out.println(result);
 		System.out.println(result2);
 		System.out.println(result3);
 		model.addAttribute("result", result);
 		model.addAttribute("result2", result2);
 		model.addAttribute("result3", result3);
-
 	}
 
 	@GetMapping("/auth/qna")
@@ -207,7 +207,7 @@ public class MemberController {
 		System.out.println(writer);
 
 		List<QnaVO> result = qnaRepo.selectQnaTome(writer);
-		List<QnaVO> send = qnaRepo.selectQnaToOthers(vo.getUname());
+		List<QnaVO> send = qnaRepo.selectQnaToOthers(writer);
 		System.out.println("이것이 내가 받은 문의"+result);
 		System.out.println("이것이 다른사람에게 보낸 문의"+send);
 		model.addAttribute("result", result);
