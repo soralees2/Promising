@@ -208,7 +208,7 @@ public class MemberController {
 		MemberVO vo = repo.findByUsername(writer).get();
 		System.out.println(writer);
 		 List<QnaVO> result = qnaRepo.selectQnaTome(writer);
-		 List<QnaVO> send = qnaRepo.selectQnaToOthers(vo.getUname());
+		 List<QnaVO> send = qnaRepo.selectQnaToOthers(vo.getUsername());
 		 System.out.println("이것이 내가 받은 문의"+result);
 		 System.out.println("이것이 다른사람에게 보낸 문의"+send);
 		 model.addAttribute("result", result);

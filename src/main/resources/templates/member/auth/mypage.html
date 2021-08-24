@@ -1,104 +1,135 @@
 <!DOCTYPE html>
-<html lang="ko"  xmlns:th="http://thymeleaf.org">
-
+<html lang="ko" xmlns:th="http://thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   	<th:block th:replace="fragments/commonHead"></th:block>
-    <link rel="stylesheet" href="/static/fonts/material-design-iconic-font.min.css">
-    <link rel="stylesheet" type="text/css" th:href="@{/static/fonts/material-design-iconic-font.min.css}">
-
-    <link rel="stylesheet" type="text/css" th:href="@{/static/css/common_style.css}">
-    <meta name="_csrf" th:content="${_csrf.token}">
-	<meta name="_csrf_header" th:content="${_csrf.headerName}">
-    <th:block th:replace="fragments/commonHead"></th:block>
-   
-	<link rel="stylesheet" type="text/css" th:href="@{/static/css/mypage.css}">
-    <link rel="stylesheet" type="text/css" th:href="@{/static/js/mypage.js}">
-    
-
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="_csrf" th:content="${_csrf.token}">
+<meta name="_csrf_header" th:content="${_csrf.headerName}">
+<th:block th:replace="fragments/commonHead"></th:block>
+<link rel="stylesheet" href="/static/fonts/material-design-iconic-font.min.css">
+<link rel="stylesheet" type="text/css" th:href="@{/static/fonts/material-design-iconic-font.min.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/static/css/mypage.css}">
+<script type="text/javascript" th:src="@{/static/js/mypage.js}"></script>
 </head>
-
 <body>
-    <div class="wrap">
-     
-             <header th:replace="fragments/header.html :: fg-header"></header>
+	<div class="wrap">
+		<header th:replace="fragments/header.html :: fg-header"></header>
 
-	
-            <!-- 해당 페이지 클래스명을 적어주세요-->
-            <div class="container mx-7">
-            <div class="mypagewrap">
-                <div class="row profileLine">
-                    <div class='col-12 namennavi'>
-                    
-    
-                        <div class='nameline'>
-                            <span>[[${result.uname}]]</span>
+		<!-- 해당 페이지 클래스명을 적어주세요-->
+		<div class="container mx-7">
+			<div class="mypagewrap">
+				<div class="row profileLine">
+					<div class='col-12 namennavi'>
+						<div class='nameline'>
+							<span>[[${result.uname}]]</span>
+						</div>
+						<div class="modifyIcon">
+							<a href="#" th:href="@{/member/auth/infoUpdate}"class="py-2 d-block">
+								<i class="zmdi zmdi-edit zmdi-hc-2x"></i>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="container">
+				<div class=" row tabline">
+					<ul class="nav nav-pills" id="pills-tab" role="tablist">
+						<li class="nav-item" role="presentation">
+							<button class="nav-link p-3 active" id="pills-home-tab"
+								data-bs-toggle="pill" data-bs-target="#pills-home" type="button"
+								role="tab" aria-controls="pills-home" aria-selected="true">소개</button>
+						</li>
+						<li class="nav-item" role="presentation">
+							<button class="nav-link p-3" id="pills-donated-tab"
+								data-bs-toggle="pill" data-bs-target="#pills-donated"
+								type="button" role="tab" aria-controls="pills-donated"
+								aria-selected="false">후원한 프로젝트</button>
+						</li>
+						<li class="nav-item" role="presentation"><a href="#"
+							th:href="@{/member/auth/myProjectGoing}" class="py-2 d-block"><button
+									class="nav-link p-3" id="pills-qna-tab" data-bs-toggle="pill"
+									data-bs-target="#pills-myProjectGoing" type="button" role="tab"
+									aria-controls="pills-myProjectGoing" aria-selected="false">내가
+									올린 프로젝트</button></a></li>
+						<li class="nav-item" role="presentation"><a href="#"
+							th:href="@{/member/auth/qna}" class="py-2 d-block"><button
+									class="nav-link navlinkQ p-3" id="pills-qna-tab"
+									data-bs-toggle="pill" data-bs-target="#pills-QnA" type="button"
+									role="tab" aria-controls="pills-QnA" aria-selected="false">프로젝트
+									문의</button></a></li>
+					</ul>
+					<hr>
+					<div class="tab-content" id="pills-tabContent">
+						<div class="tab-pane fade show active" id="pills-home"
+							role="tabpanel" aria-labelledby="pills-home-tab">
+							<span>등록된 소개가 없습니다.</span>
+						</div>
+						<div class="tab-pane fade" id="pills-donated" role="tabpanel"
+							aria-labelledby="pill-donated-tab">
+							<span>0개의 프로젝트가 있습니다.</span>
+						</div>
+					</div>
+				</div>
+				<!--텝라인 div닫기 -->
+			</div>
+		</div>
+		<!-- container end -->
+		
+		<div class="lookaround">
+            <div id="searchHeader">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-2">
+                            <button id="search_close">검색창 닫기</button>
                         </div>
-                        <div class="modifyIcon">    
-                        <a href="#" th:href="@{/member/auth/infoUpdate}" class="py-2 d-block"><i class="zmdi zmdi-edit zmdi-hc-2x"></i></a>
-                    
+                        <div class="col-8">
+                            <h2 class="search_title">프로젝트 둘러보기</h2>
+                        </div>
+                        <div class="col-2"></div>
                     </div>
-                    </div>
-
-             </div>
+                </div>
             </div>
-                   
-                        <div class="container">
-                                <div class=" row tabline">
-                                    <ul class="nav nav-pills" id="pills-tab" role="tablist">
-                                        <li class="nav-item" role="presentation">
-                                            <button class="nav-link p-3 active" id="pills-home-tab" data-bs-toggle="pill"
-                                                data-bs-target="#pills-home" type="button" role="tab"
-                                                aria-controls="pills-home" aria-selected="true">소개</button>
-                                        </li>
-                                        <li class="nav-item" role="presentation">
-                                            <button class="nav-link p-3" id="pills-donated-tab" data-bs-toggle="pill"
-                                                data-bs-target="#pills-donated" type="button" role="tab"
-                                                aria-controls="pills-donated" aria-selected="false">후원한 프로젝트</button>
-                                        </li>
-                                        <li class="nav-item" role="presentation">
-                                         <a href="#" th:href="@{/member/auth/myProjectGoing}" class="py-2 d-block"><button class="nav-link p-3" id="pills-qna-tab" data-bs-toggle="pill"
-                                                data-bs-target="#pills-myProjectGoing" type="button" role="tab"
-                                                aria-controls="pills-myProjectGoing" aria-selected="false">내가 올린 프로젝트</button></a>
-
-                                        </li>
-                                         <li class="nav-item" role="presentation">
-                                         
-                                        <a href="#" th:href="@{/member/auth/qna}" class="py-2 d-block"><button class="nav-link navlinkQ p-3" id="pills-qna-tab" data-bs-toggle="pill"
-                                                data-bs-target="#pills-QnA" type="button" role="tab"
-                                                aria-controls="pills-QnA" aria-selected="false">프로젝트 문의</button></a>
-                                        </li>
-                                        
-                                        
-                                        
-                                    </ul>
-                       
-                        <hr>
-                       
-                                <div class="tab-content" id="pills-tabContent">
-                                    <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
-                                        aria-labelledby="pills-home-tab">
-                                        <span>등록된 소개가 없습니다.</span>
-                                    </div>
-                                    <div class="tab-pane fade" id="pills-donated" role="tabpanel"
-                                        aria-labelledby="pill-donated-tab">
-                                        <span>0개의 프로젝트가 있습니다.</span>
-                                    </div>
-                               <!--      <div class="tab-pane fade" id="pills-contact" role="tabpanel"
-                                        aria-labelledby="pills-contact-tab">
-                                        <span>0개의 프로젝트가 있습니다.</span>
-                                    </div> -->
-                                    
-                                </div>
-
-
-                            </div> <!--텝라인 div닫기 -->
+            <div class="search_wrap">
+                <div class="container">
+                	<div class="project">
+                        <div class="shortcut">
+                            <h4><a href="/project/list">모든 프로젝트</a></h4>
                         </div>
-             
+                        <div class="shortcut">
+                            <h4><a href="#" id="popularPro">인기 프로젝트</a></h4>
+                        </div>
+                        <div class="shortcut">
+                            <h4><a href="#" id="newPro">신규 프로젝트</a></h4>
+                        </div>
+                        <div class="shortcut">
+                            <h4><a href="#" id="closePro">성공 임박 프로젝트</a></h4>
+                        </div>
+                        
+                        <form id="f1" th:action="@{../../project/popular}" method="get"></form>
+                        <form id="f2" th:action="@{../../project/newest}" method="get"></form>
+                        <form id="f3" th:action="@{../../project/close}" method="get"></form>
+                        
                     </div>
-</div>
-        </body>
-
+                    <hr>
+                    <div class="tag">
+                        <h6>태그</h6>
+                    </div>
+                    <div class="btn_wrap">
+                        <button type="button" class="btn btn-primary" id="game">게임</button>
+                        <button type="button" class="btn btn-secondary" id="perfume">향수</button>
+                        <button type="button" class="btn btn-success" id="design">디자인</button>
+                        <button type="button" class="btn btn-danger" id="knowledge">지식</button>
+                        <button type="button" class="btn btn-warning" id="trend">트렌드</button>
+                        <button type="button" class="btn btn-info" id="publishing">출판</button>
+                        <button type="button" class="btn btn-light" id="media">미디어</button>
+                        <button type="button" class="btn btn-dark" id="animal">애완</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- lookaround end -->
+	</div>
+</body>
 </html>

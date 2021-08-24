@@ -1,9 +1,4 @@
-$(function () {
-	
-	$(".navlinkQ").on("click",function(){
-		
-	})
-	
+$(function(){
 	$("#popularPro").on("click",function(){
 		$("#f1").submit();
 	})
@@ -47,5 +42,4 @@ $(function () {
 	$("#animal").on("click",function(){
 		location.href="http://localhost/project/list?page=1&size=12&type=애완&keyword=애완";
 	})
-	
 })

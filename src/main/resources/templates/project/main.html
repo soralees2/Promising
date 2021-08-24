@@ -6,15 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="_csrf" th:content="${_csrf.token}">
-      <meta name="_csrf_header" th:content="${_csrf.headerName}">
+    <meta name="_csrf_header" th:content="${_csrf.headerName}">
     <th:block th:replace="fragments/commonHead"></th:block>
-
-    <title>Promising</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" type="text/css" th:href="@{/static/css/common_style.css}">
-
-
     <link rel="stylesheet" type="text/css" th:href="@{/static/css/main.css}">
     <script type="text/javascript" th:src="@{/static/js/main.js}"></script>
 </head>
@@ -80,7 +73,7 @@
                            </div>
                            <div class="card-body">
                                <div class="writer">
-                                   <span id="prCategory">[[${pro.prCategory}]]</span>
+                                   <span>[[${pro.prCategory}]]</span>
                                    <span class="division">|</span>
                                    <span>[[${pro.prWriter}]]</span>
                                </div>
