@@ -76,6 +76,7 @@ public class MemberController {
 		role.setRoleName("BASIC");
 		vo.setRoles(Arrays.asList(role));
 		vo.setPassword(pwEncoder.encode(vo.getPassword()));
+		vo.setSysName("basicprofile.png");
 		repo.save(vo);
 		return "redirect:/member/login";
 	}
