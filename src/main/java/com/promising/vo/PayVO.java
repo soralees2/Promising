@@ -23,7 +23,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @Entity
-@ToString(exclude="project")
+@ToString
 @SequenceGenerator(name="PAY_SEQ_GENERATOR",sequenceName = "PAY_SEQ" ,initialValue = 1,allocationSize = 1)
 @Table(name="PR_PAY")
 public class PayVO {
@@ -40,10 +40,10 @@ public class PayVO {
 	@Column(nullable=false , length= 1000)
 	private String price; // 결제 금액
 	@Column(nullable=false , length= 500)
-	private String username; // 결제자 아이디 
+	private String orderEmail; // 결제자 아이디 
 	@Column( length=300)
 	private String orderName;
-	@Column(unique =true,nullable=false , length= 20)
+	@Column(nullable=false , length= 20)
 	private String orderPhone;
 	@Column(nullable=false , length=10)
 	private String orderPostcode;

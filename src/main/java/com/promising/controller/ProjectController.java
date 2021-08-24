@@ -101,26 +101,35 @@ public class ProjectController {
 	}
 	
 	@RequestMapping("/completepay/{project}")
-//	public String paycomplete(PayVO vo) {
 	public String paycomplete(@ModelAttribute("vo") PayVO vo, @PathVariable("project") Long pno) {
-		System.out.println("============= 들어옴 ");
-		System.out.println("vo.getPno() : " + vo.getPno());
-		System.out.println("vo.getAmount() : " + vo.getAmount());
-		System.out.println("vo.getUsername() : " + vo.getUsername());
-		System.out.println("vo.getPrice() : " + vo.getPrice());
-		System.out.println("vo.getProject() : " + vo.getProject());
+
+//		vo.setProject(pno);
+		System.out.println("===================================");
+		System.out.println(pno);
+		System.out.println(vo.getPayno());
+		System.out.println(vo.getPresent());
+		System.out.println(vo.getAmount());
+		System.out.println(vo.getPrice());
+		System.out.println(vo.getOrderEmail());
+		System.out.println(vo.getOrderName());
+		System.out.println(vo.getOrderPhone());
+		System.out.println(vo.getOrderPostcode());
+		System.out.println(vo.getAddress1());
+		System.out.println(vo.getAddress2());
+		System.out.println(vo.getRegDate());
+
+//		CommunityVO vo = new CommunityVO();
+//		vo.setCommunityno(cno);
+//		cmt.setCommunity(vo);
+//		cmt.setWriter(principal.getName());
+//		crepo.save(cmt);	
+//		
+//		repo.findById(pno);
+//		vo.getPrice();
 		
-//		vo.setProject(vo.getPayno());
 		
-////		String userName = principal.getName();
-//		vo.setWriter(userName);
-//		repo.save(vo);
-		
-//		ProjectVO pvo = new ProjectVO();
-//		pvo.setPno(vo.getPno());
-//		vo.setProject(pvo);
+		System.out.println("===================================");
 		prepo.save(vo);
-		
 		return "project/paycomplete";
 	}
 	
