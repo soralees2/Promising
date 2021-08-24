@@ -178,40 +178,352 @@ hr:not([size]) {
 	font-size: 17px;
 	margin-bottom: 20px;
 }
-.namenavi{
-	    font-size: 13px;
-    line-height: 20px;
-    letter-spacing: -0.015em;
-    position: relative;
-    width: 100%;
-    color: rgb(109, 109, 109);
-    display: flex;
-    -webkit-box-pack: start;
-    justify-content: flex-start;
-    flex-direction: column;
-    min-height: 80px;
-        min-height: 120px;
-    flex-direction: row;
+
+* {
+	box-sizing: border-box;
 }
-.namebox{
-	    position: relative;
-    display: flex;
+
+.setting span {
+	font-size: xx-large;
 }
-.picbox{
-	    width: 120px;
-    height: 120px;
+
+.nav-item .nav-link:after {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	display: none;
+	content: "";
+	width: 100%;
+	height: 3px;
 }
-.picbox2{
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    overflow: hidden;
-    position: relative;
-    box-shadow: rgb(208 208 208) 0px 0px 1px 0px inset, rgb(208 208 208) 0px 0px 1px 0px;
+
+.nav-item #pills-home-tab {
+	margin-right: 20px;
 }
-.picbox2>img{
-	    width: 100%;
-    height: 100%;
-    position: relative;
-    z-index: 2;
+
+.nav-item .nav-link.active:after {
+	display: block;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+	background-color: transparent;
+	color: #333;
+	font-weight: 600;
+}
+
+#btn-fileUp {
+	position: absolute;
+	margin-left: 200px;
+	margin-top: -150px;
+}
+
+/* 프로필 라인 */
+.fileUploadClass {
+	display: none;
+}
+
+#uploadDesc {
+	position: relative;
+}
+
+#uploadDesc span {
+	position: absolute;
+	top: 320px;
+	width: 800px;
+	margin-top: -400px;
+}
+
+#uploadDesc span, #profileSaveBtn {
+	display: none;
+	margin-left: 0px;
+}
+
+#profileSaveBtn {
+	margin-top: 40px; height : 50px;
+	width: 110px;
+	height: 50px;
+}
+
+#uploadDesc span {
+	margin-left: 200px;
+}
+
+.nav-item #pills-home-tab:hover::after {
+	margin-top: 10px;
+	display: block;
+	content: "";
+	width: 100%;
+	height: 3px;
+}
+
+.nav-item #pills-profile-tab:hover::after {
+	margin-top: 10px;
+	display: block;
+	content: "";
+	width: 100%;
+	height: 3px;
+	margin-right: 20px;
+}
+
+/* .UserEmail .form-control{
+display: none;
+} */
+/* .uploadcomment .Namesavebutton{
+  display:none;
+
+} */
+.nav-item #pills-contact-tab:hover::after {
+	margin-top: 10px;
+	display: block;
+	content: "";
+	width: 100%;
+	height: 3px;
+	background-color: #333;
+	margin-right: 20px;
+}
+
+.fileUploadClass {
+	position: relative;
+}
+
+.modifyScroll #PromodifyScroll {
+	color: rgb(39, 163, 255)
+}
+
+.modifyScroll #pwModifyScroll {
+	color: rgb(39, 163, 255)
+}
+
+.cwYHpD {
+	margin: 28px 0px 0px;
+	padding: 18px 16px;
+	border-radius: 4px;
+	border: 1px solid rgb(230, 230, 230);
+	width: 270px;
+	position: absolute;
+	margin-left: 900px;
+	margin-top: -50px;
+}
+
+.modifyScroll #nameModifyScroll {
+	color: rgb(39, 163, 255)
+}
+
+.fnt-st-bd {
+	font-weight: bold;
+}
+
+.tbb-clr-gray-80 {
+	color: #3D3D3D;
+}
+
+#nameNBlank {
+	display: none;
+	
+}
+
+#nameNBlank #userName{
+	  border-color: #F1F1F1;
+	
+}
+
+#Namesavebutton {
+	height: 50px;
+	width: 110px;
+	margin-top: 20px
+}
+
+.modifyScroll #emailModifyScroll {
+	color: rgb(39, 163, 255)
+}
+
+#emailblankNButton {
+	display: none;
+}
+
+
+
+.fnt-p1 {
+	font-size: 16px;
+	line-height: 27px;
+	letter-spacing: -0.020em;
+}
+
+
+.uploadcomment span {
+	float: left;
+	position: relative;
+	width: 600px;
+	height: 50px;
+	margin-left: 160px;
+	margin-top: -80px;
+}
+
+.modifyScroll {
+	margin-left: 800px;
+	text-decoration-line: none;
+	width: 50px;
+}
+
+#modifyScroll {
+	width: 30px;
+	text-decoration: none;
+}
+
+.modifyScroll #contactModifyScroll {
+	color: rgb(39, 163, 255)
+}
+
+.contactmodi input{
+	 border-color: #F1F1F1;
+	
+}
+
+#pwblankNButton {
+	display: none;
+}
+
+#pwblankNButton #pwSaveBtn {
+	margin-left: 0px;
+}
+
+#pwblankNButton h6{
+margin-top:10px;
+}
+.rememberPw #pwResetBtn{
+	margin-top:-44px;
+	margin-left:180px;
+	
+}
+
+.pwReset #pw{
+	margin-top:10px;
+}
+
+.pwReset input{
+	 border-color: #F1F1F1;
+}
+
+#pwRestBtn{
+	background-color:none;
+	
+}
+.pwReset #repw1{
+	margin-top:30px;
+}
+
+.pwReset #repw2{
+margin-top:20px;
+}
+
+
+#pwSaveBtn {
+	height: 50px;
+	width: 110px;
+	margin-top: 40px;
+}
+
+#pwSaveBtn h6{
+	height: 50px;
+	width: 110px;
+	margin-top: 40px;
+}
+
+
+#contactblankNButton {
+	display: none;
+}
+
+#contactVertify {
+	margin-top: 40px; height : 50px;
+	width: 120px;
+	height: 50px;
+}
+
+.savebutton {
+	width: 130px;
+	height: 40px;
+	margin-left: 30px;
+	margin-bottom: 30px;
+	margin-top: 20px;
+}
+
+.blank {
+	margin-bottom: 10px;
+	width: 300px;
+}
+
+.blankLine {
+	margin-top: 10px;
+}
+
+.shippingModify {
+	position: relative;
+}
+
+.shippingModify #addressModifyBtn {
+	position: absolute;
+	margin-top: 0px;
+	margin-left: 900px;
+	font: dodger-blue;
+	font-style: none;
+}
+
+#addressModify {
+	position: absolute;
+	margin-left: 600px;
+	margin-top: -20px;
+}
+
+.zmdi-hc-2x{
+	margin-top:-20px;
+}
+
+
+.ckzBmr {
+	border-style: solid;
+	margin-top: 45px;
+	margin-left: 0px;
+	margin-right: 0px;
+	width: 1000px;
+	min-height: 400px;
+	display: flex;
+	color: rgb(189, 189, 189);
+	font-size: 16px;
+	line-height: 27px;
+	letter-spacing: -0.02em;
+	margin-left: 0px;
+}
+
+.modal.modal-center {
+	text-align: left;
+}
+
+@media screen {
+	.modal.modal-center:before {
+		display: inline-block;
+		vertical-align: middle;
+		content: " ";
+		height: 20%;
+	}
+}
+/* 우편번호 조회 버튼 시작*/
+#shippingTitle h5 {
+	font-weight: 900em;
+	font-size: 2em;
+}
+
+#searchAddress {
+	position: absolute;
+	margin-left: 430px;
+	margin-top: -140px;
+}
+
+#addressPart2 {
+	margin-top: -120px;
+}
+.profilebox{
+	    border-bottom: 1px solid rgb(230, 230, 230);
+    margin: 0px 0px 16px;
+
 }
