@@ -197,6 +197,7 @@ public class ProjectController {
 		vo.setPrStartdate(prStartdate);
 		vo.setPrEnddate(prEnddate);
 		vo.setPrStatus("N");
+		vo.setPrTargetMoney(Integer.parseInt(targetmoney));
 		vo.setPrPresentPrice(Integer.parseInt(presentprice));
 
 		File filesPath = new File("src"+File.separator+"main"+File.separator+"resources"+File.separator +"static"+File.separator+"images"+File.separator+"projectuploading");
