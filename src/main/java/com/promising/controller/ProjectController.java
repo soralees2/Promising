@@ -193,13 +193,9 @@ public class ProjectController {
 		vo.setPrWriter(newvo.getUname());
 		java.sql.Date prStartdate =java.sql.Date.valueOf(prStartday);
 		java.sql.Date prEnddate =java.sql.Date.valueOf(prEndday);
-
 		vo.setPrStartdate(prStartdate);
 		vo.setPrEnddate(prEnddate);
 		vo.setPrStatus("N");
-		vo.setPrStatus("I");
-		System.out.println(targetmoney+" "+presentprice);
-		vo.setPrTargetMoney(Integer.parseInt(targetmoney));
 		vo.setPrPresentPrice(Integer.parseInt(presentprice));
 
 		File filesPath = new File("src"+File.separator+"main"+File.separator+"resources"+File.separator +"static"+File.separator+"images"+File.separator+"projectuploading");

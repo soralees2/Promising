@@ -64,8 +64,10 @@ public class ProjectVO {
 	private String prPresentContents;
 	@Column(nullable=false)
 	private int prPresentPrice;
+	
 	@Column(nullable=false , length= 1)
-	private String prStatus;		// 프로젝트 진행/종료
+
+	private String prStatus;		// 프로젝트 심사/진행/종료 N/I/F
 	@Column( length=300)
 	private String prOriName;
 	@Column( length=300)

@@ -1,6 +1,9 @@
 package com.promising.aop;
 
+import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.Signature;
+import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.slf4j.Logger;
@@ -20,12 +23,16 @@ public class LogAspect {
 			try {
 				result = pjp.proceed();
 			} catch (Throwable e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			Long end = System.currentTimeMillis();
 	        logger.info("finished - " + pjp.getSignature().getDeclaringTypeName() + " / " + pjp.getSignature().getName()+" 소요시간은 "+((end-start)*0.001)+"초 입니다.");
 	        return result;
 	    }
-
+	 @AfterThrowing(value="execution(* com.promising.*.*.*(..))",throwing="e")
+		public void afterThrowing(JoinPoint jp , Exception e) {
+			Signature sign = jp.getSignature();
+			logger.error(sign.getDeclaringTypeName()+" "+ sign.getName()+" 메서드에서 "+ "에러 발생   에러는 : "+e.getClass().getCanonicalName());
+			
+		}
 }
