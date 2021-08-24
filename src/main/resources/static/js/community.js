@@ -188,15 +188,17 @@ $(function(){
 		$("#btn_payment02 .result_money").text(money_txt);
 	});	
 
+	let pno = $("#pno").val();
 	// 후원하기
 	$("#btn_payment01").on("click", function(){
 		let sponsorForm = $("#sponsorForm");
+		alert(pno);
 		let payMoney = sponsorForm.find(".money strong").text();
 		console.log(payMoney);
 		let price = payMoney.substring(1);
 
-		let pno = $("#pno").val();
 		$("#sprice").val(price);
+		
 		
 		sponsorForm.attr("action", "/project/payment/" + pno);
 		sponsorForm.submit();	
@@ -208,7 +210,7 @@ $(function(){
 		let payForm = $("#payForm");
 		let payMoney = $("#payment_money").text().substring(1);;
 		let amount = payForm.find(".count").text();
-		let pno = $("#pno").val();
+		
 		$("#price").val(payMoney);
 		$("#amount").val(amount);
 		payForm.attr("action", "/project/payment/" + pno);
@@ -238,6 +240,8 @@ $(function(){
 	// 달성률 계산
 	let target = $("#tgMoney").val();
 	let current = $("#crMoney").val();
+	console.log(target);
+	console.log(current);
 	let percent =  Math.ceil(current/target * 100);
 	$("#percent").text(percent + "%");	
 	

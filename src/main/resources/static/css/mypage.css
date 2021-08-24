@@ -30,9 +30,7 @@
 	margin-top: 100px;
 }
 
-.profileLine {
-	margin-left: 1px;
-}
+
 
 #origin > #profile{
 	display:hidden;
@@ -42,6 +40,7 @@
 	display: inline-block;
 	vertical-align: middle;
 	margin-left: 30px;
+	text-align:center;
 }
 
 .nameline span {
@@ -182,8 +181,6 @@ hr:not([size]) {
 	font-size: 17px;
 	margin-bottom: 20px;
 }
-
-
 
 * {
 	box-sizing: border-box;
@@ -531,4 +528,52 @@ margin-top:20px;
 .profilebox{
 	    border-bottom: 1px solid rgb(230, 230, 230);
     margin: 0px 0px 16px;
+}
+.picbox{
+	    min-height: 120px;
+    flex-direction: row;
+	    font-size: 13px;
+    line-height: 20px;
+    letter-spacing: -0.015em;
+    position: relative;
+    width: 100%;
+    color: rgb(109, 109, 109);
+    display: flex;
+    -webkit-box-pack: start;
+    justify-content: flex-start;
+    flex-direction: column;
+    min-height: 80px;
+}
+.profileLine {
+	
+	position: relative;
+    display: flex;
+}
+.imgbox{
+	    position: relative;
+    left: 0px;
+    top: 0px;
+    width: 100px;
+    height: 100px;
+    min-width: 60px;
+    min-height: 60px;
+}
+.imgbox2{
+	width: 100%;
+    height: 100%;
+    font-size: 50px;
+    letter-spacing: -1.56px;
+    position: relative;
+        width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    overflow: hidden;
+    position: relative;
+    box-shadow: rgb(208 208 208) 0px 0px 1px 0px inset, rgb(208 208 208) 0px 0px 1px 0px;
+}
+.imgbox2>img{
+	width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 2;
 }
