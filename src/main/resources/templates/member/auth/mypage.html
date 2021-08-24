@@ -105,12 +105,11 @@
                         </div>
                         <div class="shortcut">
                             <h4><a href="#" id="closePro">성공 임박 프로젝트</a></h4>
-                        </div>
+						</div>
                         
                         <form id="f1" th:action="@{../../project/popular}" method="get"></form>
                         <form id="f2" th:action="@{../../project/newest}" method="get"></form>
                         <form id="f3" th:action="@{../../project/close}" method="get"></form>
-                        
                     </div>
                     <hr>
                     <div class="tag">
@@ -132,4 +131,15 @@
         <!-- lookaround end -->
 	</div>
 </body>
+        <script>
+        $(function(){
+        	$("#pills-donated-tab").on("click",function(){
+        		alert("차후 구현예정인 기능입니다.");
+        	})
+        	
+        	
+        	
+        })
+        
+        </script>
 </html>

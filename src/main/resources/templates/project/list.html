@@ -127,23 +127,19 @@
 									</div>
 								</div>
 								<div th:switch="${pro.prStatus}">
+									<div th:case="N">
+										<hr>
+										<span class="etc"><i class="fas fa-exclamation-circle" style="color: #E15488"></i>
+											공개 예정 프로젝트입니다.</span>
+									</div>
 									<div th:case="I">
-										<div th:switch="${pro.prCheck}">
-											<div th:case="Y">
-												<div class="progress-small">
-													<div id="proBar" class="progress-bar bg-danger" role="progressbar"
-														aria-valuemin="0" aria-valuemax="100"></div>
-												</div>
-												<div class="money">
-													<span class="price">[[${pro.prCurrentMoney}]]원</span>
-													<span class="period"><i class="far fa-clock"></i>[[${#dates.format(pro.prEnddate, ' yy/MM/dd ')}]] 종료</span>
-												</div>
-											</div>
-											<div th:case="N">
-												<hr>
-												<span class="etc"><i class="fas fa-exclamation-circle" style="color: #E15488"></i>
-													공개 예정 프로젝트입니다.</span>
-											</div>
+										<div class="progress-small">
+											<div id="proBar" class="progress-bar bg-danger" role="progressbar"
+												aria-valuemin="0" aria-valuemax="100"></div>
+										</div>
+										<div class="money">
+											<span class="price">[[${pro.prCurrentMoney}]]원</span>
+											<span class="period"><i class="far fa-clock"></i>[[${#dates.format(pro.prEnddate, ' yy/MM/dd ')}]] 종료</span>
 										</div>
 									</div>
 									<div th:case="F">

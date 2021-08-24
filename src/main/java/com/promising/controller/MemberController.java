@@ -44,31 +44,31 @@ public class MemberController {
 	private EmailService emailService;
 	@Autowired
 	private SecurityConfig security;
-	
+
 	@Autowired
 	private PasswordEncoder pwEncoder;
-	
+
 	@Autowired
 	private HttpSession session;
-	
+
 	@Autowired
 	private MemberRepository repo;
-	
+
 	@Autowired
 	private ProjectRepository repoProject;
 
 	@Autowired
 	private QnaRepository qnaRepo;
-	
-	
+
+
 	@GetMapping("/login")
 	public void login() {
-		
+
 	}
-	
+
 	@GetMapping("/signup")
 	public void signup() {
-		
+
 	}
 	@PostMapping("/signup")
 	public String join(MemberVO vo) {
@@ -76,156 +76,157 @@ public class MemberController {
 		role.setRoleName("BASIC");
 		vo.setRoles(Arrays.asList(role));
 		vo.setPassword(pwEncoder.encode(vo.getPassword()));
-		vo.setSysName("basicprofile.png");
 		repo.save(vo);
 		return "redirect:/member/login";
 	}
-	
+
 	@GetMapping("/auth/mypage")
 	public void mypage(Model model,Principal principal) {
-	String userName =principal.getName();
-		
+		String userName =principal.getName();
+
 		MemberVO result = repo.findByUsername(userName).get();
-//		model.addAttribute("list",result);
+		//		model.addAttribute("list",result);
 		model.addAttribute("result", result);
-		}
-	
-	
+	}
+
+
 
 	@GetMapping("/auth/infoUpdate")
 	public void infoUpdate(Model model,Principal principal) {
 		String userName =principal.getName();
-		
+
 		MemberVO result = repo.findByUsername(userName).get();
-		
-//		model.addAttribute("list",result);
+
+		//		model.addAttribute("list",result);
 		model.addAttribute("result", result);
 
-		
-		}
-	
-	
+
+	}
+
+
 	@RequestMapping(value="/auth/infoUpdate/{uname}",method = RequestMethod.POST)
 	@ResponseBody
 	public void nameUpdate(@PathVariable("uname") String uname,@RequestBody MemberVO mvo,Model model,Principal principal) {
 		System.out.println("10시");
-		
+
 		String originName =principal.getName();		
 		MemberVO vo=repo.findById(originName).get(); //찐
 		vo.setUname(uname);
-		
+
 		System.out.println("=========================username : " + vo.getUsername());
 		System.out.println("vo getname"+vo.getUname());
 		System.out.println("vo getname"+vo.getAddress1());
 		System.out.println("=========================username : " + mvo.getUsername());
 		System.out.println("mvo uname"+mvo.getUname());
-		
-		repo.save(vo);
-		
-//		return "redirect:/member/infoUpdate";
-		
-			}
 
-	
+		repo.save(vo);
+
+		//		return "redirect:/member/infoUpdate";
+
+	}
+
+
 	@RequestMapping(value="/auth/uphoneUpdate/{modifyContact}",method = RequestMethod.POST)
 	@ResponseBody
 	public void emailUpdate(@PathVariable("modifyContact") String modifyContact,Model model,Principal principal) {
 		System.out.println("10시");
-		
+
 		String originName =principal.getName();		
 		MemberVO vo=repo.findById(originName).get(); //찐
 		vo.setUphone(modifyContact);
-		
+
 		repo.save(vo);
-		
-//		return "redirect:/member/infoUpdate";
-		
-			}
-	
+
+		//		return "redirect:/member/infoUpdate";
+
+	}
+
 	@PostMapping("/auth/profileAttach")
 	public String profileUpload(MemberVO vo,MultipartFile[] file,Principal principal,HttpServletRequest request) throws Exception {
 		vo = repo.findByUsername(principal.getName()).get();
 
-		
-//		String realPath = session.getServletContext().getRealPath("/");
+
+		//		String realPath = session.getServletContext().getRealPath("/");
 
 		String relativePath ="src"+File.separator+"main"+File.separator+"resources"+File.separator +"static"+File.separator+"images"+File.separator+"profileUpload";
 		System.out.println(relativePath+"/ 앞쪽이 리얼패스 ㅇㅇ");
-		 File filesPath = new File(relativePath);
-			if(!filesPath.exists()) {
-				filesPath.mkdir();
-			}
-			for(MultipartFile tmp :file) {
-				if(tmp.getSize()>0) {
+		File filesPath = new File(relativePath);
+		if(!filesPath.exists()) {
+			filesPath.mkdir();
+		}
+		for(MultipartFile tmp :file) {
+			if(tmp.getSize()>0) {
 				String oriName = tmp.getOriginalFilename();
 				String sysName=UUID.randomUUID().toString().replaceAll("-","")+"_"+oriName;
-				 vo.setOriName(oriName);
-				 vo.setSysName(sysName);
+				vo.setOriName(oriName);
+				vo.setSysName(sysName);
 				System.out.println(filesPath.getAbsolutePath()+" "+sysName+" "+oriName);
 				tmp.transferTo(new File(filesPath.getAbsolutePath()+"/"+sysName));
-				
-				}
-				}
-			   try 
-		        {
-		            Thread.sleep(2500);
-		        }
-		        catch(InterruptedException e) 
-		        {
-		            e.printStackTrace();
-		        }
-			System.out.println(vo);
-			repo.save(vo);
-			return "redirect:/member/auth/infoUpdate";
-		
-}
-	
-	
+
+			}
+		}
+		try 
+		{
+			Thread.sleep(2500);
+		}
+		catch(InterruptedException e) 
+		{
+			e.printStackTrace();
+		}
+		System.out.println(vo);
+		repo.save(vo);
+		return "redirect:/member/auth/infoUpdate";
+
+	}
+
+
 	@GetMapping("/auth/myProjectGoing")
 	public void myProjectGoing(Model model,Principal principal) {
 		String writer =principal.getName();
 		System.out.println(writer);
 		MemberVO vo= repo.findByUsername(writer).get();
-		
-		System.out.println("브이오내용"+vo);
-//		System.out.println(writer); 출력잘됨
 
-		 List<ProjectVO> result = repoProject.selectCheckingPro(vo.getUname());
-		 List<ProjectVO> result2 = repoProject.selectProceedingPro(vo.getUname());
-		 List<ProjectVO> result3 = repoProject.selectFinishedPro(vo.getUname());
-		 System.out.println(result);
-		 System.out.println(result2);
-		 System.out.println(result3);
-			 model.addAttribute("result", result);
-			 model.addAttribute("result2", result2);
-			 model.addAttribute("result3", result3);
-		
-		}
-	
+		System.out.println("브이오내용"+vo);
+		//		System.out.println(writer); 출력잘됨
+
+		List<ProjectVO> result = repoProject.selectCheckingPro(vo.getUname());
+		List<ProjectVO> result2 = repoProject.selectProceedingPro(vo.getUname());
+		List<ProjectVO> result3 = repoProject.selectFinishedPro(vo.getUname());
+		System.out.println(result);
+		System.out.println(result2);
+		System.out.println(result3);
+		model.addAttribute("result", result);
+		model.addAttribute("result2", result2);
+		model.addAttribute("result3", result3);
+
+	}
+
 	@GetMapping("/auth/qna")
 	public void qna(Model model, Principal principal) {
 		String writer =principal.getName();
 		MemberVO vo = repo.findByUsername(writer).get();
 		System.out.println(writer);
-		 List<QnaVO> result = qnaRepo.selectQnaTome(writer);
-		 List<QnaVO> send = qnaRepo.selectQnaToOthers(vo.getUsername());
-		 System.out.println("이것이 내가 받은 문의"+result);
-		 System.out.println("이것이 다른사람에게 보낸 문의"+send);
-		 model.addAttribute("result", result);
-		 model.addAttribute("result2", send);
-		}
-	
-	
+
+		List<QnaVO> result = qnaRepo.selectQnaTome(writer);
+		List<QnaVO> send = qnaRepo.selectQnaToOthers(vo.getUname());
+		System.out.println("이것이 내가 받은 문의"+result);
+		System.out.println("이것이 다른사람에게 보낸 문의"+send);
+		model.addAttribute("result", result);
+		model.addAttribute("result2", send);
+	}
+
+
+
 	@PostMapping("/{uname}")
 	public ResponseEntity<List<QnaVO>> VOID(@PathVariable("uname")String uname, @RequestBody QnaVO qvo, Principal principal){
 		String writer=principal.getName();
-		
+
 		System.out.println(qvo.getContents());
 		System.out.println("-----------------" + uname); // 작성자 닉네임
 		MemberVO vo = new MemberVO();
-		
+
 		System.out.println(qvo);
-		
+
 		MemberVO mvo = repo.findByUsername(uname).get();
 		String receiver = mvo.getUsername();
 		vo.setUsername(receiver);
@@ -234,61 +235,61 @@ public class MemberController {
 		qvo.setMember(vo);
 		System.out.println("qvo : "+qvo);
 		qnaRepo.save(qvo);
-		
-//		System.out.println("내가보낸 내용 컨텐츠 :"+qvo.getContents());//잘옴
-//		System.out.println("받는 사람WRITER :" + uname); // 받는 사람 닉네임 작성자 닉네임
-//		System.out.println("보내는사람 :"+writer);
-//		System.out.println("qnao: "+qvo.getQnano());
-//		String contentDetail=qvo.getContents();
-//		System.out.println("qvo출력: "+qvo);
-//		System.out.println("콘텐츠내용 :"+contentDetail);
-//
-//		MemberVO vo = new MemberVO();
-//		MemberVO mvo = repo.findByUname(uname).get();
-////		System.out.println("mvo내용"+mvo);
-////		
-////		String receiver = mvo.getUsername();
-//		System.out.println("principal통해 writer추출 : " + principal.getName());
-//		qvo.setWriter(principal.getName());
-//		
-//		qnaRepo.save(qvo);
-//		
-		
-//		
-//		MemberVO mvo = repo.findByUname(uname).get(); //ans
-//		System.out.println("mvo의 정체는?"+mvo);	
-//		String receiver = mvo.getUsername();
-//		MemberVO vo = new MemberVO();
-//
-//	System.out.println("받는 사람mvo값"+mvo);
-//	
-//		String receiver = mvo.getUname();
-//	System.out.println("메세지 받는사람: "+receiver);
-//		
-//		System.out.println("보내는 사람 유저 ID~: " + principal.getName());
-//		qvo.getQnacategory();
-//		qvo.setMember(vo);
-//		qvo.setContents(contentDetail);
-//		qvo.setReceiver(receiver);
-//		qvo.setWriter(writer);
-//		
-//		System.out.println("qvo출력2:"+qvo);
-//		qvo.setMember(mvo);
-//		qvo.setMember(vo);
-//
-//		qnaRepo.save(qvo);
-//		qnaRepo.save(qvo);
-		
+
+		//		System.out.println("내가보낸 내용 컨텐츠 :"+qvo.getContents());//잘옴
+		//		System.out.println("받는 사람WRITER :" + uname); // 받는 사람 닉네임 작성자 닉네임
+		//		System.out.println("보내는사람 :"+writer);
+		//		System.out.println("qnao: "+qvo.getQnano());
+		//		String contentDetail=qvo.getContents();
+		//		System.out.println("qvo출력: "+qvo);
+		//		System.out.println("콘텐츠내용 :"+contentDetail);
+		//
+		//		MemberVO vo = new MemberVO();
+		//		MemberVO mvo = repo.findByUname(uname).get();
+		////		System.out.println("mvo내용"+mvo);
+		////		
+		////		String receiver = mvo.getUsername();
+		//		System.out.println("principal통해 writer추출 : " + principal.getName());
+		//		qvo.setWriter(principal.getName());
+		//		
+		//		qnaRepo.save(qvo);
+		//		
+
+		//		
+		//		MemberVO mvo = repo.findByUname(uname).get(); //ans
+		//		System.out.println("mvo의 정체는?"+mvo);	
+		//		String receiver = mvo.getUsername();
+		//		MemberVO vo = new MemberVO();
+		//
+		//	System.out.println("받는 사람mvo값"+mvo);
+		//	
+		//		String receiver = mvo.getUname();
+		//	System.out.println("메세지 받는사람: "+receiver);
+		//		
+		//		System.out.println("보내는 사람 유저 ID~: " + principal.getName());
+		//		qvo.getQnacategory();
+		//		qvo.setMember(vo);
+		//		qvo.setContents(contentDetail);
+		//		qvo.setReceiver(receiver);
+		//		qvo.setWriter(writer);
+		//		
+		//		System.out.println("qvo출력2:"+qvo);
+		//		qvo.setMember(mvo);
+		//		qvo.setMember(vo);
+		//
+		//		qnaRepo.save(qvo);
+		//		qnaRepo.save(qvo);
+
 		return new ResponseEntity<>(getListByMember(vo),HttpStatus.CREATED);
 	}
-	
+
 	private List<QnaVO> getListByMember(MemberVO vo) throws RuntimeException{
 		return qnaRepo.getQnaOfMember(vo);
 	}
-	
-	
-	
-	
+
+
+
+
 
 
 	@PostMapping("/idcheck/{username}")
@@ -303,7 +304,7 @@ public class MemberController {
 	@PostMapping("/unamecheck/{uname}")
 	@ResponseBody
 	public String unameCheck(@PathVariable("uname") String uname) {
-	
+
 		if(repo.findByUname(uname).isPresent()) {
 			return "exist";
 		}else {
@@ -311,87 +312,94 @@ public class MemberController {
 		}
 	}
 
-	
+
 	@RequestMapping(value="/auth/pwModify",method = RequestMethod.POST)
 	@ResponseBody
 	public String pwUpdate(@RequestBody Map<String,Object> param,Model model,Principal principal) {
-		
+
 		System.out.println("변경~~start");
 		System.out.println(principal.getName());
 		String originName =principal.getName();		
 
-		
+
 		for(String key : param.keySet()){
-			  System.out.println(key + " : " + param.get(key));
-			}
+			System.out.println(key + " : " + param.get(key));
+		}
 
 		System.out.println(param.toString());
-	
-				//만약에 originName 이 DB에 존재한다면 &안한다면
-				
-	
+
+
+		//만약에 originName 이 DB에 존재한다면 &안한다면
+
+		String nowPw=(String)param.get("currPw");
 		String toNewPw=(String)param.get("modifyPw1");
-	
-	
+
+		System.out.println(nowPw+": 이것은 현재비번");
 		System.out.println(toNewPw+": 이것은 바꾼비번");
 
-		
-	
+
 		MemberVO vo=repo.findByUsername(originName).get(); //찐
-		
-	
+
+
+		vo.setPassword(nowPw);
+
+		if(originName==nowPw) {
 			vo.setPassword(pwEncoder.encode(toNewPw));		
 			repo.save(vo);
 			return "success";
-		
-		
+		}else {
+
+			return "error";
+		}
+
+
 	}
-		
-		@RequestMapping(value="/auth/addressUpdate",method = RequestMethod.POST)
 
-		public String addressUpdate(@RequestBody Map<String,Object> param,Model model,Principal principal) {
-			
-			System.out.println("변경~~start");
-			System.out.println(principal);
-			String originName =principal.getName();		
+	@RequestMapping(value="/auth/addressUpdate",method = RequestMethod.POST)
 
-			
-			for(String key : param.keySet()){
-				  System.out.println(key + " : " + param.get(key));
-				}
+	public String addressUpdate(@RequestBody Map<String,Object> param,Model model,Principal principal) {
 
-			System.out.println(param.toString());
-		
-					//만약에 originName 이 DB에 존재한다면 &안한다면
-					
-			String realName=(String)param.get("realName");
-			String address1=(String)param.get("address1");
-			String address2=(String)param.get("address2");
-			String postcode=(String)param.get("postcode");
-			String uphone=(String)param.get("uphone");
-			
-			
-			System.out.println(realName+": 이것은 진짜이름 ");
-			System.out.println(address1+": 이것은 주소1");
-			System.out.println(address2+": 이것은 주소2");
-			System.out.println(postcode+": 이것은 우편");
-			System.out.println(uphone+": 이것은 핸펀");
-			
-			
-		
-			MemberVO vo=repo.findByUsername(originName).get(); //찐
-			vo.setAddress1(address1);
-			vo.setAddress2(address2);
-			vo.setUpostcode(postcode);
-			vo.setUphone(uphone);
-			vo.setRealname(realName);
-			repo.save(vo);		
-			return "redirect:/member/infoUpdate";
-			}
-	
+		System.out.println("변경~~start");
+		System.out.println(principal);
+		String originName =principal.getName();		
+
+
+		for(String key : param.keySet()){
+			System.out.println(key + " : " + param.get(key));
+		}
+
+		System.out.println(param.toString());
+
+		//만약에 originName 이 DB에 존재한다면 &안한다면
+
+		String realName=(String)param.get("realName");
+		String address1=(String)param.get("address1");
+		String address2=(String)param.get("address2");
+		String postcode=(String)param.get("postcode");
+		String uphone=(String)param.get("uphone");
+
+
+		System.out.println(realName+": 이것은 진짜이름 ");
+		System.out.println(address1+": 이것은 주소1");
+		System.out.println(address2+": 이것은 주소2");
+		System.out.println(postcode+": 이것은 우편");
+		System.out.println(uphone+": 이것은 핸펀");
+
+
+
+		MemberVO vo=repo.findByUsername(originName).get(); //찐
+		vo.setAddress1(address1);
+		vo.setAddress2(address2);
+		vo.setUpostcode(postcode);
+		vo.setUphone(uphone);
+		vo.setRealname(realName);
+		repo.save(vo);		
+		return "redirect:/member/infoUpdate";
+	}
+
 	@GetMapping("/forget")
 	public void forget() {
-		
+
 	}
 	@PostMapping("/forget")
 	public String findPW(String username) throws MessagingException {
@@ -414,37 +422,37 @@ public class MemberController {
 						"		<span style=\"color: #02b875\">임시 비밀번호</span> 발급 안내입니다."																																				+ 
 						"	</h1>\n"																																																+ 
 						"	<p style=\"font-size: 16px; line-height: 26px; margin-top: 50px; padding: 0 5px;\">"																													+ 
-																																																				
-																																																	
+
+
 						"		<p style=\"color:#9083EC\">Promising</p> 계정을 찾아주셔서 진심으로 감사드립니다.<br />"																																						+ 
 						"		아래 <b style=\"color: #02b875\">'임시 비밀번호'</b>를 통해 로그인 후 비밀번호 변경 부탁드립니다.<br />"																													+ 
 						"		감사합니다."																																															+ 
 						"	</p>"																																																	+ 
-																																							
+
 								"<h2>"+secret+"</h2>"+
-						"		<p"																																																	+
-						 
-																																																				 
+								"		<p"																																																	+
+
+
 						"	</a>"																																																	+
 						"	<div style=\"border-top: 1px solid #DDD; padding: 5px;\"></div>"																																		+
 						" </div>"
-		);
+				);
 		emailcontent.append("</body>");
 		emailcontent.append("</html>");
 		emailService.sendMail(username, "Promising 임시 비밀번호 발급 메일입니다.", emailcontent.toString());
-		
+
 		return "redirect:/member/login";
 	}
-	
+
 	@GetMapping("/doublelogin")
 	public void doublelogin() {
-		
+
 	}
-	
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
+
 }
