@@ -32,6 +32,10 @@
 
 
 
+#origin > #profile{
+	display:hidden;
+}
+
 .nameline {
 	display: inline-block;
 	vertical-align: middle;
