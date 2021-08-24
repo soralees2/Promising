@@ -36,40 +36,47 @@
 			<div class="container">
 				<div class=" row tabline">
 					<ul class="nav nav-pills" id="pills-tab" role="tablist">
-						<li class="nav-item" role="presentation">
+						<!-- <li class="nav-item" role="presentation">
 							<button class="nav-link p-3 active" id="pills-home-tab"
 								data-bs-toggle="pill" data-bs-target="#pills-home" type="button"
 								role="tab" aria-controls="pills-home" aria-selected="true">소개</button>
-						</li>
-						<li class="nav-item" role="presentation">
-							<button class="nav-link p-3" id="pills-donated-tab"
-								data-bs-toggle="pill" data-bs-target="#pills-donated"
-								type="button" role="tab" aria-controls="pills-donated"
-								aria-selected="false">후원한 프로젝트</button>
-						</li>
+						</li> -->
 						<li class="nav-item" role="presentation"><a href="#"
 							th:href="@{/member/auth/myProjectGoing}" class="py-2 d-block"><button
-									class="nav-link p-3" id="pills-qna-tab" data-bs-toggle="pill"
+									class="nav-link p-3 active" id="pills-qna-tab" data-bs-toggle="pill"
 									data-bs-target="#pills-myProjectGoing" type="button" role="tab"
 									aria-controls="pills-myProjectGoing" aria-selected="false">내가
 									올린 프로젝트</button></a></li>
+									
 						<li class="nav-item" role="presentation"><a href="#"
 							th:href="@{/member/auth/qna}" class="py-2 d-block"><button
 									class="nav-link navlinkQ p-3" id="pills-qna-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-QnA" type="button"
 									role="tab" aria-controls="pills-QnA" aria-selected="false">프로젝트
 									문의</button></a></li>
+						
+						
+						<li class="nav-item" role="presentation">
+							<button class="nav-link p-3" id="pills-donated-tab"
+								data-bs-toggle="pill" data-bs-target="#pills-donated"
+								type="button" role="tab" aria-controls="pills-donated"
+								aria-selected="false">후원한 프로젝트</button>
+						</li>
+						
+					
 					</ul>
 					<hr>
-					<div class="tab-content" id="pills-tabContent">
+					<!-- <div class="tab-content" id="pills-tabContent">
 						<div class="tab-pane fade show active" id="pills-home"
 							role="tabpanel" aria-labelledby="pills-home-tab">
 							<span>등록된 소개가 없습니다.</span>
-						</div>
-						<div class="tab-pane fade" id="pills-donated" role="tabpanel"
+						</div> -->
+						
+						<!-- <div class="tab-pane fade" id="pills-donated" role="tabpanel"
 							aria-labelledby="pill-donated-tab">
 							<span>0개의 프로젝트가 있습니다.</span>
-						</div>
+						</div> -->
+						
 					</div>
 				</div>
 				<!--텝라인 div닫기 -->
