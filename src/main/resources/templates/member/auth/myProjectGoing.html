@@ -1,266 +1,216 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
-
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<th:block th:replace="fragments/commonHead"></th:block>
 <meta name="_csrf" th:content="${_csrf.token}">
 <meta name="_csrf_header" th:content="${_csrf.headerName}">
+<th:block th:replace="fragments/commonHead"></th:block>
+<link rel="stylesheet" type="text/css" th:href="@{/static/css/myProjectGoing.css}">
+<script type="text/javascript" th:src="@{/static/js/myProjectGoing.js}"></script>
 </head>
-
 
 <body>
 	<div class="wrap">
-		<header id="header" th:fragment="fg-header">
-			<div class="container">
-				<div class="row">
-					<div class="col-4 col-md-5">
-						<ul class="menu">
-							<li class="search" id="search"><img
-								src="../images/ic_search.png" alt=""><span>프로젝트 </span>둘러보기</li>
-							<li class="register"><a href="#">프로젝트 올리기</a></li>
-							<li class="back"><a href="">이전페이지로</a></li>
-						</ul>
-					</div>
-					<div class="col-4 col-md-2">
-						<h1 class="logo">
-							<a href="#">Promising</a>
-						</h1>
-					</div>
-					<div class="col-4 col-md-5">
-						<div class="utils">
-							<a href="#"> <span>회원가입/로그인</span>
-								<div class="pf_wrap">
-									<div class="pf_img"
-										style="background: url(../images/atom02.png) 50% 50% no-repeat; background-size: cover;">
-									</div>
-								</div>
-							</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</header>
-
+		<header th:replace="fragments/header.html :: fg-header"></header>
 
 		<!-- 해당 페이지 클래스명을 적어주세요-->
 		<div class="container mx-7">
 			<div class="row profileLine">
 				<div class='col-12 namennavi'>
-
-
-					<div class='nameline'>
-						<span>내가 올린 프로젝트</span>
+					<div id='nameline'>
+						내가 올린 프로젝트
+						<div class="col-12 col-md-6 col-xl-3 float-right">
+							<a href="/member/auth/mypage"><input type="button"
+								class="btn btn-light btn-sm" id="backBtn" value="뒤로가기"></a>
+						</div>
 					</div>
-
 				</div>
-
 			</div>
 		</div>
 
 		<div class="container">
 			<div class=" row tabline">
+				
 				<ul class="nav nav-pills" id="pills-tab" role="tablist">
 
 					<li class="nav-item" role="presentation">
 						<button class="nav-link p-3" id="pills-underCheckingMyPro-tab"
 							data-bs-toggle="pill" data-bs-target="#pills-underCheckingMyPro"
 							type="button" role="tab" aria-controls="pills-underCheckingMyPro"
-							aria-selected="false">심사중인 내 프로젝트</button>
+							aria-selected="false">심사중인 프로젝트</button>
 					</li>
 
 					<li class="nav-item" role="presentation">
 						<button class="nav-link p-3" id="pills-proceedingMyPro-tab"
 							data-bs-toggle="pill" data-bs-target="#pills-proceedingMyPro"
 							type="button" role="tab" aria-controls="pills-proceedingMyPro"
-							aria-selected="false">진행중인 내 프로젝트</button>
+							aria-selected="false">진행중인 프로젝트</button>
 					</li>
 
 					<li class="nav-item" role="presentation">
 						<button class="nav-link p-3" id="pills-finishedMyPro-tab"
 							data-bs-toggle="pill" data-bs-target="#pills-finishedMyPro"
 							type="button" role="tab" aria-controls="pills-finishedMyPro"
-							aria-selected="false">완료된 내 프로젝트</button>
+							aria-selected="false">완료된 프로젝트</button>
 					</li>
-
 				</ul>
-
 				<hr>
-
 				<div class="tab-content">
-					<div class="tab-pane fade show active"
-						id="pills-underCheckingMyPro" role="tabpanel"
-						aria-labelledby="pills-underCheckingMyPro-tab">
-
+					<div class="tab-pane fade show active" id="pills-underCheckingMyPro" 
+						role="tabpanel" aria-labelledby="pills-underCheckingMyPro-tab">
 						<!-- 심사중인 프로젝트 출력  -->
-						<div class="row" id="main_list"
-							th:if="${not #lists.isEmpty(result)}">
-
+						<div class="row" id="main_list" th:if="${not #lists.isEmpty(result)}">
 							<div class="col-12 col-md-6 col-xl-3" th:each="pro:${result}">
 								<div class="card">
 									<div class="imgDiv">
-										<img th:src="@{/static/images/main/card1.jpeg}"
-											class="card-img-top" alt="..."> <img
-											src="/static/images/main/heart1.png" width="20" class="heart">
+										<a th:href="@{/project/story/} + ${pro.pno}">
+											<img th:src="@{'/static/images/projectuploading/'+${pro.prSysName}}" class="card-img-top">
+										</a>
 									</div>
 									<div class="card-body">
-
 										<div class="writer">
-											<span id="prCategory"><a href="#">[[${pro.pno}]]</a></span>
-											<span class="division">|</span> <span><a href="#">[[${pro.prCategory}]]</a></span>
-											<span class="division">|</span> <span><a href="#">[[${pro.prWriter}]]</a></span>
+											<span>[[${pro.prCategory}]]</span>
+											<span class="division"> | </span>
+											<span>[[${pro.prWriter}]]</span>
 										</div>
-										<div class="pro_">
-										<a th:href="@{/project/story/} + ${pro.pno}">[[${pro.prTitle}]]</a>
+										<div class="pro_title">
+											<a th:href="@{/project/story/} + ${pro.pno}">[[${pro.prTitle}]]</a>
 										</div>
 										<div class="achi">
-											<span>[[${pro.prTargetMoney}]]% 달성</span>
+											<span>[[${pro.prCurrentMoney}]]원</span>
 										</div>
-
 									</div>
-
 								</div>
 							</div>
-							<hr>
-							
-					<div class="col-12 col-md-6 col-xl-3 float-right">
-
-							<a href="/member/auth/mypage"><input type="button" class="btn-lg btn-primary " id="backBtn" value="뒤로가기"></a>
-					</div>
 						</div>
-						
-						<div class="col-12 col-md-6 col-xl-3"
-							th:unless="${not #lists.isEmpty(result)}">
-
-							<span>진행 대기중인 없습니다.</span>
-
+						<div class="col-12 col-md-6 col-xl-3" th:unless="${not #lists.isEmpty(result)}">
+							<span>심사중인 프로젝트가 없습니다.</span>
 						</div>
-					
-
-
-
 					</div>
-
-
 
 					<div class="tab-pane fade" id="pills-proceedingMyPro"
 						role="tabpanel" aria-labelledby="pills-proceedingMyPro-tab">
-
-
-						<!-- 지금 진행중인 프로젝트출력  -->
-						<div class="row" id="main_list"
-							th:if="${not #lists.isEmpty(result2)}">
-
+						<!-- 진행중인 프로젝트 출력  -->
+						<div class="row" id="main_list" th:if="${not #lists.isEmpty(result2)}">
 							<div class="col-12 col-md-6 col-xl-3" th:each="pro:${result2}">
 								<div class="card">
 									<div class="imgDiv">
-										<img th:src="@{/static/images/main/card1.jpeg}"
-											class="card-img-top" alt="..."> <img
-											src="/static/images/main/heart1.png" width="20" class="heart">
+										<a th:href="@{/project/story/} + ${pro.pno}">
+											<img th:src="@{'/static/images/projectuploading/'+${pro.prSysName}}" class="card-img-top">
+										</a>
 									</div>
 									<div class="card-body">
-
 										<div class="writer">
-											<span id="prCategory"><a href="#">[[${pro.prCategory}]]</a></span>
-											<span class="division">|</span> <span><a href="#">[[${pro.prWriter}]]</a></span>
+											<span>[[${pro.prCategory}]]</span>
+											<span class="division"> | </span>
+											<span>[[${pro.prWriter}]]</span>
 										</div>
 										<div class="pro_title">
-										<a th:href="@{/project/story/} + ${pro.pno}">[[${pro.prTitle}]]</a>
+											<a th:href="@{/project/story/} + ${pro.pno}">[[${pro.prTitle}]]</a>
 										</div>
 										<div class="achi">
-											<span>[[${pro.prTargetMoney}]]% 달성</span>
+											<span>[[${pro.prCurrentMoney}]]원</span>
 										</div>
-
 									</div>
-
 								</div>
 							</div>
-										<hr>
-							
-					<div class="col-12 col-md-6 col-xl-3 float-right">
-
-							<a href="/member/auth/mypage"><input type="button" class="btn-lg btn-primary " id="backBtn" value="뒤로가기"></a>
-					</div>
 						</div>
-
-						<div class="col-12 col-md-6 col-xl-3"
-							th:unless="${not #lists.isEmpty(result2)}">
-
+						<div class="col-12 col-md-6 col-xl-3" th:unless="${not #lists.isEmpty(result2)}">
 							<span>진행중인 프로젝트가 없습니다.</span>
-
 						</div>
 					</div>
 
-					<!-- 완료된 내 프로젝트 시작 -->
-
-					<div class="tab-pane fade" id="pills-finishedMyPro" role="tabpanel"
-						aria-labelledby="pills-finishedMyPro-tab">
-
-						<!-- 완료된 내 프로젝트 시작 -->
-
-						<div class="row" id="main_list"
-							th:if="${not #lists.isEmpty(result3)}">
-
+					<div class="tab-pane fade" id="pills-finishedMyPro" 
+						role="tabpanel" aria-labelledby="pills-finishedMyPro-tab">
+						<!-- 완료된 프로젝트 출력 -->
+						<div class="row" id="main_list" th:if="${not #lists.isEmpty(result3)}">
 							<div class="col-12 col-md-6 col-xl-3" th:each="pro:${result3}">
 								<div class="card">
 									<div class="imgDiv">
-										<img th:src="@{/static/images/main/card1.jpeg}"
-											class="card-img-top" alt="..."> <img
-											src="/static/images/main/heart1.png" width="20" class="heart">
+										<a th:href="@{/project/story/} + ${pro.pno}">
+											<img th:src="@{'/static/images/projectuploading/'+${pro.prSysName}}" class="card-img-top">
+										</a>
 									</div>
 									<div class="card-body">
-
 										<div class="writer">
-											<span id="prCategory"><a href="#">[[${pro.prCategory}]]</a></span>
-											<span class="division">|</span> <span><a href="#">[[${pro.prWriter}]]</a></span>
+											<span>[[${pro.prCategory}]]</span>
+											<span class="division"> | </span>
+											<span>[[${pro.prWriter}]]</span>
 										</div>
-
 										<div class="pro_title">
-										<a th:href="@{/project/story/} + ${pro.pno}">[[${pro.prTitle}]]</a>
+											<a th:href="@{/project/story/} + ${pro.pno}">[[${pro.prTitle}]]</a>
 										</div>
-
 										<div class="achi">
-											<span>[[${pro.prTargetMoney}]]% 달성</span>
+											<span>[[${pro.prCurrentMoney}]]원</span>
 										</div>
 									</div>
 								</div>
 							</div>
-										<hr>
-							
-					<div class="col-12 col-md-6 col-xl-3 float-right">
-
-							<a href="/member/auth/mypage"><input type="button" class="btn-lg btn-primary " id="backBtn" value="뒤로가기"></a>
-					</div>
 						</div>
-						<div class="col-12 col-md-6 col-xl-3"
-							th:unless="${not #lists.isEmpty(result3)}">
-
+						<div class="col-12 col-md-6 col-xl-3" th:unless="${not #lists.isEmpty(result3)}">
 							<span>완료된 프로젝트가 없습니다.</span>
-
 						</div>
-
 					</div>
-
-					<!-- 완료된 내 프로젝트 끝 -->
-
-
 				</div>
 			</div>
 		</div>
+		<!-- container end -->
+		<div class="lookaround">
+            <div id="searchHeader">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-2">
+                            <button id="search_close">검색창 닫기</button>
+                        </div>
+                        <div class="col-8">
+                            <h2 class="search_title">프로젝트 둘러보기</h2>
+                        </div>
+                        <div class="col-2"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="search_wrap">
+                <div class="container">
+                	<div class="project">
+                        <div class="shortcut">
+                            <h4><a href="/project/list">모든 프로젝트</a></h4>
+                        </div>
+                        <div class="shortcut">
+                            <h4><a href="#" id="popularPro">인기 프로젝트</a></h4>
+                        </div>
+                        <div class="shortcut">
+                            <h4><a href="#" id="newPro">신규 프로젝트</a></h4>
+                        </div>
+                        <div class="shortcut">
+                            <h4><a href="#" id="closePro">성공 임박 프로젝트</a></h4>
+                        </div>
+                        
+                        <form id="f1" th:action="@{../../project/popular}" method="get"></form>
+                        <form id="f2" th:action="@{../../project/newest}" method="get"></form>
+                        <form id="f3" th:action="@{../../project/close}" method="get"></form>
+                        
+                    </div>
+                    <hr>
+                    <div class="tag">
+                        <h6>태그</h6>
+                    </div>
+                    <div class="btn_wrap">
+                        <button type="button" class="btn btn-primary" id="game">게임</button>
+                        <button type="button" class="btn btn-secondary" id="perfume">향수</button>
+                        <button type="button" class="btn btn-success" id="design">디자인</button>
+                        <button type="button" class="btn btn-danger" id="knowledge">지식</button>
+                        <button type="button" class="btn btn-warning" id="trend">트렌드</button>
+                        <button type="button" class="btn btn-info" id="publishing">출판</button>
+                        <button type="button" class="btn btn-light" id="media">미디어</button>
+                        <button type="button" class="btn btn-dark" id="animal">애완</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- lookaround end -->
 	</div>
-
-	</div>
-
-
-
-
-
-
-
-
-
 </body>
 </html>

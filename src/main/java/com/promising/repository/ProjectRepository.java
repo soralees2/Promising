@@ -1,7 +1,6 @@
 package com.promising.repository;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,17 +17,17 @@ import com.querydsl.core.types.Predicate;
 
 public interface ProjectRepository extends JpaRepository<ProjectVO, Long>, QuerydslPredicateExecutor<ProjectVO>{
 	
-	@Query(value="SELECT * FROM (SELECT A.*, ROWNUM AS RNUM FROM (SELECT * FROM pr_project where pr_check not in ('N') and pr_status not in('F')) A )WHERE RNUM > 0 AND RNUM <= 12", nativeQuery = true)
+	@Query(value="SELECT * FROM (SELECT A.*, ROWNUM AS RNUM FROM (SELECT * FROM pr_project where pr_status in ('Y')) A )WHERE RNUM > 0 AND RNUM <= 12", nativeQuery = true)
 //	@Query("SELECT * FROM (SELECT A.*, ROWNUM AS RNUM FROM (SELECT * FROM pr_project where pr_check not in ('N') and pr_status not in('F')) A )WHERE RNUM > 0 AND RNUM <= 12")
 	List<ProjectVO> selectAll();
 	
-	@Query(value="select * from pr_project where pr_check not in ('N') order by pr_current_money desc", nativeQuery = true)
+	@Query(value="select * from pr_project where pr_status not in ('N') order by pr_current_money desc", nativeQuery = true)
 	Page<ProjectVO> selectPopular(Predicate makePredicate, Pageable page);
 	
-	@Query(value="select * from pr_project where pr_check not in ('N') order by pr_startdate desc", nativeQuery = true)
+	@Query(value="select * from pr_project where pr_status not in ('N') order by pr_startdate desc", nativeQuery = true)
 	Page<ProjectVO> selectNewest(Predicate makePredicate, Pageable page);
 	
-	@Query(value="select * from pr_project where pr_check not in ('N') order by pr_enddate asc", nativeQuery = true)
+	@Query(value="select * from pr_project where pr_status not in ('N') order by pr_enddate asc", nativeQuery = true)
 	Page<ProjectVO> selectClose(Predicate makePredicate, Pageable page);
 	
 	@Transactional
@@ -54,19 +53,19 @@ public interface ProjectRepository extends JpaRepository<ProjectVO, Long>, Query
 		  //내가 올린프로젝트 심사중
 		  
 		  @Query(
-		  value="select * from pr_project where pr_check not in ('Y') and pr_writer=:writer"
+		  value="select * from pr_project where pr_status in ('N') and pr_writer=:writer"
 		  , nativeQuery = true) List<ProjectVO> selectCheckingPro(String writer);
 		 
 		  //내가 진행중인 프로젝트
 		  
 		  @Query(
-		 value="select * from pr_project where pr_status not in ('F') and pr_check not in ('N') and pr_writer=:writer"
+		 value="select * from pr_project where pr_status in ('I') and pr_writer=:writer"
 		  , nativeQuery = true) List<ProjectVO> selectProceedingPro(String writer);
 		  
 		  //내가 올린프로젝트 완료된것
 		  
 		 @Query(
-		  value="select * from pr_project where pr_status not in ('I') and pr_writer=:writer"
+		  value="select * from pr_project where pr_status in ('F') and pr_writer=:writer"
 		  , nativeQuery = true) List<ProjectVO> selectFinishedPro(String writer);
 		 
 
@@ -111,7 +110,7 @@ public interface ProjectRepository extends JpaRepository<ProjectVO, Long>, Query
 			builder.and(project.prStatus.like("%"+keyword+"%"));
 			break;
 		case "N" :
-			builder.and(project.prCheck.like("%"+keyword+"%"));
+			builder.and(project.prStatus.like("%"+keyword+"%"));
 			break;
 		case "F" :
 			builder.and(project.prStatus.like("%"+keyword+"%"));
