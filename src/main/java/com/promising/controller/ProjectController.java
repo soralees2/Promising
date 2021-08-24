@@ -96,9 +96,10 @@ public class ProjectController {
 		return "project/payment";
 	}
 	
-	@GetMapping("/paycomplete")
+	@RequestMapping("/completepay")
 	public String paycomplete() {
-		return "redirect:/project/paycomplete";
+		System.out.println("============= 들어옴 ");
+		return "/project/paycomplete";
 	}
 	
 	@GetMapping("/main")
