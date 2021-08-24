@@ -23,7 +23,6 @@ public class LogAspect {
 			try {
 				result = pjp.proceed();
 			} catch (Throwable e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			Long end = System.currentTimeMillis();
