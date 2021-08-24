@@ -57,9 +57,13 @@ header .menu li a{display:inline-block;width:100%;font-weight:600;}
 header .menu .search img{display:inline-block;width:24px;height:24px;margin-right:6px;}
 header .logo{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);display:inline-block;width:150px;}
 /* header .logo a{display:block;font-size:0;text-indent:-9999px;overflow:hidden;width:100%;background-size:contain !important;} */
+header .utils{text-align:right;}
+header .utils *{display:inline-block;}
 header .utils a{display:block;float:right;}
+header .utils #logout{display:inline-block;margin-right:15px;line-height:65px;font-weight:600;border:none;background-color:#fff;}
 header .utils span{display:inline-block;margin-right:15px;line-height:65px;}
 header .pf_wrap {float:right;margin-top:10px;}
+header .pf_img{display: none;}
 /* header .pf_img.has{background:url(../images/atom02.png) 50% 50% no-repeat;}
 header .pf_img.no{background:url(../images/ic_profile.png) 50% 50% no-repeat;} */
 

@@ -63,7 +63,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 					<h4>창작자 소개</h4>
 					<div class="writer">
 						<div class="pf_wrap">
-							<div class="pf_img" th:style="'background:url('+ @{/static/images/profileUpload/}+${vo.prSysName} +')50% 50% no-repeat;background-size:cover;' "></div>
+							<div class="pf_img" th:style="'background:url('+ @{/static/images/profileUpload/}+${vo.prSysName} +')50% 50% no-repeat;background-size:cover;display:none;'" ></div>
 							<div class="pf_link">
 								<a href="#">
 									<span class="name" th:text="${vo.prWriter}"></span>
