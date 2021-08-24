@@ -97,6 +97,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 				<li class="tab_03"><a th:href="@{/project/notice/} + ${vo.pno}">펀딩안내</a></li>
 			</ul>
 		</div>
+		<div th:replace="fragments/lookaround.html :: fg-lookaround"></div>
 	</div>
 </body>
 </html>

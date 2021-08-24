@@ -8,9 +8,7 @@
 .main {
   margin-top: calc(-10rem + 65px);
 }
-.search:hover {
-  cursor: pointer;
-}
+
 .mainCarousel {
   margin-bottom: 30px;
 }
@@ -144,6 +142,9 @@
 }
 .search_wrap .btn_wrap .btn {
   margin-right: 10px;
+}
+.search:hover {
+  cursor: pointer;
 }
 .project {
   margin-top: 50px;
