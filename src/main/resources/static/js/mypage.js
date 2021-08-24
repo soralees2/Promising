@@ -52,7 +52,14 @@ $(function () {
 	
 })
 
-
+    $(function(){
+        	$("#pills-donated-tab").on("click",function(){
+        		alert("차후 구현예정인 기능입니다.");
+        	})
+        	
+        	
+        	
+        })
 
 
     $("#PromodifyScroll").on("click", function () {
