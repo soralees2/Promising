@@ -19,7 +19,7 @@ public interface CommentRepository extends JpaRepository<CommentVO, Long>{
 	
 	@Query("SELECT r FROM CommentVO r WHERE r.commentno = ?1 AND r.commentno > 0 ORDER BY r.commentno DESC")
 	public CommentVO getCmtOfCommunity(Long commnetno);
-	
-	
+
+
 	
 }

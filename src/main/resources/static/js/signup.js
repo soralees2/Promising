@@ -126,13 +126,13 @@ $("#searchcode").on("click",function(){
             oncomplete: function(data) {
                 let roadAddr = data.roadAddress; // 도로명 주소 변수
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
-               $("#postcode").attr('value', data.zonecode);
-                $("#address1").attr('value',roadAddr);
+	$("#postcode").val(data.zonecode);
+	 $("#address1").val(roadAddr);
+             
                 
             }
         }).open();
-        
-})
+        })
 
 		document.getElementById("send").onclick = function() {
 

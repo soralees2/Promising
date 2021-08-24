@@ -38,11 +38,11 @@ public class MemberVO {
 		private String uname;
 
 		
-		@Column(nullable=false,unique=true , length= 100)
+		@Column(nullable=false, length= 100)
 		private String realname;
 		
 
-		@Column(unique =true,nullable=false , length= 20)
+		@Column(nullable=false , length= 20)
 		private String uphone;
 		
 		@Column(nullable=false , length=10)
@@ -51,7 +51,7 @@ public class MemberVO {
 		@Column(nullable=false , length=300)
 		private String address1;
 		
-		@Column(nullable=false , length=200)
+		@Column( length=200)
 		private String address2;
 		
 		@Column( length=300)
