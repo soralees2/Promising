@@ -5,7 +5,7 @@ $(function(){
 	let taker=$(this).parents().closest(".card").find(".writergo").text();
 	let QnaNo=$(this).parents().closest(".card").find(".originQnaNo").text();	
 		
-		console.log(taker);
+	console.log(taker);
 
 	$("#receiver").val(taker);
 	
