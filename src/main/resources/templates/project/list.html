@@ -138,7 +138,7 @@
 												aria-valuemin="0" aria-valuemax="100"></div>
 										</div>
 										<div class="money">
-											<span class="price">[[${pro.prCurrentMoney}]]원</span>
+											<span class="price">[[${#numbers.formatDecimal(pro.prCurrentMoney, 0, 'COMMA', 0, 'POINT')}]]원</span>
 											<span class="period"><i class="far fa-clock"></i>[[${#dates.format(pro.prEnddate, ' yy/MM/dd ')}]] 종료</span>
 										</div>
 									</div>

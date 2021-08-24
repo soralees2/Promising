@@ -212,16 +212,16 @@ $(function(){
 		$("#price").val(payMoney);
 		$("#amount").val(amount);
 		
-		payForm.attr("action", "/project/payment/" + pno);
-		payForm.submit();	
-	
-		
 	});
 	
 	// 로그인 여부 확인
 	$(".loginCheck").on("click",function(){
-		alert("로그인이 필요한 서비스입니다.");
-		location.href="/member/login";
+	
+		let loginUser = $("#user").text();
+		if(loginUser == ""){
+			alert("로그인이 필요한 서비스입니다.");
+			location.href="/member/login";
+		}
 	})
 	
 	//남은일자 계산
@@ -242,7 +242,7 @@ $(function(){
 	
 	// 오픈예정 프로젝트 결제 비활성화 
 	let prStatus = $("#status").val();
-	if(prStatus == "I"){
+	if(prStatus == "N"){
 		$("#payment button").attr("disabled","disabled");
 		$("#btn_payment02").attr("disabled","disabled");
 	}
