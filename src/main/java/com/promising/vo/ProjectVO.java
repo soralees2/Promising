@@ -85,8 +85,8 @@ public class ProjectVO {
 	@OneToMany(mappedBy="project", fetch=FetchType.LAZY)
 	private List<CommunityVO> community;
 	
-	@JsonIgnore
-	@OneToMany(mappedBy="project", fetch=FetchType.LAZY)
-	private List<PayVO> pay;
+//	@JsonIgnore
+//	@OneToMany(mappedBy="project", fetch=FetchType.LAZY)
+//	private List<PayVO> pay;
 	
 }

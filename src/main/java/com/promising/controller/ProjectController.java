@@ -28,6 +28,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.promising.mapper.ProjectMapper;
 import com.promising.repository.CommunityRepository;
 import com.promising.repository.MemberRepository;
+import com.promising.repository.PayRepository;
 import com.promising.repository.ProjectRepository;
 import com.promising.vo.CommentVO;
 import com.promising.vo.CommunityVO;
@@ -49,6 +50,9 @@ public class ProjectController {
 	private MemberRepository memberrepo;
 	@Autowired
 	private CommunityRepository comrepo;
+	@Autowired
+	private PayRepository prepo;
+
 
 	@GetMapping("/story/{pno}")
 	public String projectStory(@PathVariable("pno") Long pno,Model model) {
@@ -96,10 +100,37 @@ public class ProjectController {
 		return "project/payment";
 	}
 	
-	@RequestMapping("/completepay")
-	public String paycomplete() {
-		System.out.println("============= 들어옴 ");
-		return "/project/paycomplete";
+	@RequestMapping("/completepay/{project}")
+	public String paycomplete(@ModelAttribute("vo") PayVO vo, @PathVariable("project") Long pno) {
+
+//		vo.setProject(pno);
+		System.out.println("===================================");
+		System.out.println(pno);
+		System.out.println(vo.getPayno());
+		System.out.println(vo.getPresent());
+		System.out.println(vo.getAmount());
+		System.out.println(vo.getPrice());
+		System.out.println(vo.getOrderEmail());
+		System.out.println(vo.getOrderName());
+		System.out.println(vo.getOrderPhone());
+		System.out.println(vo.getOrderPostcode());
+		System.out.println(vo.getAddress1());
+		System.out.println(vo.getAddress2());
+		System.out.println(vo.getRegDate());
+
+//		CommunityVO vo = new CommunityVO();
+//		vo.setCommunityno(cno);
+//		cmt.setCommunity(vo);
+//		cmt.setWriter(principal.getName());
+//		crepo.save(cmt);	
+//		
+//		repo.findById(pno);
+//		vo.getPrice();
+		
+		
+		System.out.println("===================================");
+		prepo.save(vo);
+		return "project/paycomplete";
 	}
 	
 	@GetMapping("/main")
