@@ -124,7 +124,7 @@ $('#summernote').summernote({
 							//	$(editor).summernote("insertImage", url);
 							setTimeout(function() {
 								$(editor).summernote("insertImage", "/static/images/summernoteuploading/"+resp);
-							},2000);
+							},3000);
 							
 						})
 					}

@@ -8,12 +8,16 @@ $(function(){
 		location.href="/project/list";
 	})
 	
-	$("#newPro").on("click",function(){
+	$("#popularPro").on("click",function(){
 		$("#f1").submit();
 	})
 	
-	$("#closePro").on("click",function(){
+	$("#newPro").on("click",function(){
 		$("#f2").submit();
+	})
+	
+	$("#closePro").on("click",function(){
+		$("#f3").submit();
 	})
 	
 	$("#del").on("click",function(){
