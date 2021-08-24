@@ -17,7 +17,7 @@ import com.querydsl.core.types.Predicate;
 
 public interface ProjectRepository extends JpaRepository<ProjectVO, Long>, QuerydslPredicateExecutor<ProjectVO>{
 	
-	@Query(value="SELECT * FROM (SELECT A.*, ROWNUM AS RNUM FROM (SELECT * FROM pr_project where pr_status in ('Y')) A )WHERE RNUM > 0 AND RNUM <= 12", nativeQuery = true)
+	@Query(value="SELECT * FROM (SELECT A.*, ROWNUM AS RNUM FROM (SELECT * FROM pr_project where pr_status not in ('N') and pr_status not in ('F')) A )WHERE RNUM > 0 AND RNUM <= 12", nativeQuery = true)
 //	@Query("SELECT * FROM (SELECT A.*, ROWNUM AS RNUM FROM (SELECT * FROM pr_project where pr_check not in ('N') and pr_status not in('F')) A )WHERE RNUM > 0 AND RNUM <= 12")
 	List<ProjectVO> selectAll();
 	

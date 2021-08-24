@@ -65,8 +65,6 @@ public class ProjectVO {
 	@Column(nullable=false)
 	private int prPresentPrice;
 	@Column(nullable=false , length= 1)
-	private String prCheck; 		// 프로젝트 심사중/심사완료
-	@Column(nullable=false , length= 1)
 	private String prStatus;		// 프로젝트 진행/종료
 	@Column( length=300)
 	private String prOriName;
