@@ -76,7 +76,6 @@ public class MemberController {
 		role.setRoleName("BASIC");
 		vo.setRoles(Arrays.asList(role));
 		vo.setPassword(pwEncoder.encode(vo.getPassword()));
-
 		repo.save(vo);
 		return "redirect:/member/login";
 	}
@@ -207,6 +206,7 @@ public class MemberController {
 		String writer =principal.getName();
 		MemberVO vo = repo.findByUsername(writer).get();
 		System.out.println(writer);
+
 		List<QnaVO> result = qnaRepo.selectQnaTome(writer);
 		List<QnaVO> send = qnaRepo.selectQnaToOthers(vo.getUname());
 		System.out.println("이것이 내가 받은 문의"+result);
@@ -214,6 +214,7 @@ public class MemberController {
 		model.addAttribute("result", result);
 		model.addAttribute("result2", send);
 	}
+
 
 
 	@PostMapping("/{uname}")
@@ -313,11 +314,11 @@ public class MemberController {
 
 
 	@RequestMapping(value="/auth/pwModify",method = RequestMethod.POST)
-
+	@ResponseBody
 	public String pwUpdate(@RequestBody Map<String,Object> param,Model model,Principal principal) {
 
 		System.out.println("변경~~start");
-		System.out.println(principal);
+		System.out.println(principal.getName());
 		String originName =principal.getName();		
 
 
@@ -326,6 +327,7 @@ public class MemberController {
 		}
 
 		System.out.println(param.toString());
+
 
 		//만약에 originName 이 DB에 존재한다면 &안한다면
 
@@ -349,6 +351,7 @@ public class MemberController {
 
 			return "error";
 		}
+
 
 	}
 

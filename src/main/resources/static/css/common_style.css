@@ -70,7 +70,7 @@ header .pf_img.no{background:url(../images/ic_profile.png) 50% 50% no-repeat;} *
 .pf_wrap .pf_link{float:left;position:relative;padding-top:6px;}
 .pf_wrap .pf_link span{line-height:1;}
 .pf_wrap .name{display:block;font-weight:600;font-size:16px;}
-.pf_wrap .name:hover{text-decoration:underline;}
+/* .pf_wrap .name:hover{text-decoration:underline;} */
 .pf_wrap .date{display:block;font-weight:300;color:#999;font-size:11px;margin-top:5px;}
 .pf_wrap i{position:absolute;top:50%;right:-15px;transform:translateY(-50%)}
 /* .contents{margin-top:100px;height: 600px;border:1px solid #ddd;text-align: center;}

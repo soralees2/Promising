@@ -5,6 +5,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<th:block th:replace="fragments/commonHead"></th:block>
 	<link th:href="@{/static/css/project_detail.css}" rel="stylesheet">
+	<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 </head>
 
 <body>
@@ -16,14 +17,14 @@
 			<div class="container">
 				<div class="row project_info">
 					<div class="col-12 col-md-3 pj_img">
-						<img src="../images/atom02.png" alt="프로젝트 이미지">
+						<img th:src="@{'/static/images/projectuploading/'+${vo.prSysName}}" alt="프로젝트 이미지">
 					</div>
 					<div class="col-12 col-md-9">
 						<div class="info">
-							<span>팝음악 | 수민 X 슬롬</span>
-							<h2>수민 X 슬롬 첫 정규 앨범</h2>
+ 							<span th:text="${vo.prCategory}">카테고리</span>
+							<h2>[[${vo.prTitle}]]</h2>
 							<div>
-								<strong class="account">27,250,000원</strong>
+								<strong class="account">[[${vo.prCurrentMoney}]]</strong>
 								<span class="achivement">68%</span>
 								<span class="state">9일 남음</span>
 							</div>
@@ -36,41 +37,43 @@
 						<div class="box">
 							<dl>
 								<dt>구성</dt>
-								<dd>수민 X 슬롬 첫 정규 앨범</dd>
+								<dd id="present">[[${vo.prPresentTitle}]]</dd>
 							</dl>
 							<dl>
 								<dt>수량</dt>
-								<dd>1</dd>
+ 								<dd id="amount">[[${amount}]]</dd>
 							</dl>
 							<dl>
 								<dt>결제 금액</dt>
-								<dd>1000원</dd>
+								<dd id="price">[[${price}]]</dd>
 							</dl>
 						</div>
 						<h3 class="title">후원자 정보</h3>
 						<div class="box">
 							<dl>
 								<dt>연락처</dt>
-								<dd>010-1234-1234</dd>
+								<dd id="orderPhone">[[${mvo.uphone}]]</dd> 
 							</dl>
 							<dl>
 								<dt>이메일</dt>
-								<dd>ssss011@gmail.com</dd>
+								<dd id="username">[[${mvo.username}]]</dd>
 							</dl>
 							<p class="s_txt">* 위 연락처와 이메일로 후원 관련 소식이 전달됩니다.<br>* 연락처 및 이메일 변경은 설정 > 계정 설정에서 가능합니다.</p>
 						</div>
-						<h3 class="title">배송지</h3>
-						<div class="box addr_info">
-							<p class="name">홍길동</p>
-							<p>서울시 종로구 블라블라</p>
-							<p>010-1234-1234</p>
-							<button class="btn btn-sm btn-outline-secondary btn_addr">변경</button>
+						<div th:if="${amount}!='-'">
+							<h3 class="title">배송지</h3>
+							<div class="box addr_info">
+								<p class="name" id="orderName">[[${mvo.realname}]]</p>
+								<p><span id="orderPostcode">[[${mvo.upostcode}]]</span> | <span id="address1">[[${mvo.address1}]]</span> | <span id="address2">[[${mvo.address2}]]</span></p>
+								<p>[[${mvo.uphone}]]</p>
+								<button class="btn btn-sm btn-outline-secondary btn_addr" style="display:none;">변경</button>
+							</div>
 						</div>
 					</div>
 					<div class="col-12 col-md-4">
 						<div class="payment_info">
 							<div class="final">
-								<p><em>최종 후원 금액</em> 410,000 원</p>
+								<p><em>최종 후원 금액</em> [[${price}]] 원</p>
 							</div>
 							<p class="noti">프로젝트 성공시, 결제는 2021.08.21 에 진행됩니다. 프로젝트가 무산되거나 중단된 경우, 예약된 결제는 자동으로 취소됩니다.
 							</p>
@@ -101,12 +104,15 @@
 									</ul>
 								</div>
 							</div>
-							<button type="button" class="btn btn-primary w-100">후원하기</button>
+							<form method="post" id="payComplete">
+								<button type="button" class="btn btn-primary w-100" id="btn_pay">후원하기</button>
+							</form>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
+		<input type="hidden" name="pno" th:value="${vo.pno}" id="pno"> 
 
 		<!-- Modal -->
 		<div class="modal fade" id="modal_privacy" tabindex="-1" aria-hidden="true">
@@ -144,15 +150,48 @@
 		</div>
 
 	</div>
-
 </body>
 <script>
-	$(function () {
-		$(".tg_btn").on("click", function () {
-			$(".guide_txt").slideToggle();
-		})
+let obj = { pno: $("#pno").text(), 
+			present: $("#present").text(),
+			amount: $("#amount").text(),
+			price: $("#price").text(), 
+			username: $("#username").text(),
+			orderName: $("#orderName").text(),
+			orderPhone: $("#orderPhone").text(), 
+			orderPostcode: $("#orderPostcode").text(), 
+			address1: $("#address1").text(),
+			address2: $("#address2").text()
+		};
+		
+let status = "N";
 
-	})
+$("#btn_pay").on("click", function(){
+	var IMP = window.IMP;
+	IMP.init('imp76576623');
+	IMP.request_pay({
+		pg: 'inicis',
+		pay_method: 'card',
+		merchant_uid: 'merchant_' + new Date().getTime(),
+		name: $("#present").text(),
+		amount: $("#price").text(),
+		buyer_email: $("#username").text(),
+		buyer_name: $("#orderName").text(),
+		buyer_tel: $("#orderPhone").text(),
+		buyer_addr: $("#address1").text() + " / " + $("#address2").text(),
+		buyer_postcode: $("#orderPostcode").text(),
+	}, function (rsp) {
+		if (rsp.success) {
+			alert('결제가 완료되었습니다.');
+			status = "Y"
+ 			location.href="/project/paycomplete";
+		} else {
+			var msg = '결제에 실패하였습니다.';
+			msg += '에러내용 : ' + rsp.error_msg;
+			alert(msg);
+		}
+	});
+});
+	
 </script>
-
 </html>

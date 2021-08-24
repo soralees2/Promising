@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="_csrf" th:content="${_csrf.token}">
+	<meta name="_csrf_header" th:content="${_csrf.headerName}">
+	<th:block th:replace="fragments/commonHead"></th:block>
+	<link th:href="@{/static/css/project_detail.css}" rel="stylesheet">
+</head>
+
+<body>
+    <div class="wrap">
+        <header th:replace="fragments/header.html :: fg-header"></header>
+
+            <div class="container">
+        <div class="main">
+               <div class="ment">
+                <h2>후원이 완료되었습니다!</h2><br>
+                <p>후원 내역은 마이페이지에서 확인이 가능합니다.</p>
+                <p>문의사항은 해당 프로젝트 커뮤니티 및 창작자에게 문의를 남겨주세요!</p><br>
+                <p>당신의 성공적인 후원을 응원합니다!</p><br>
+                <a href="/"><button type="button" id="toMain">메인 페이지</button></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

@@ -17,9 +17,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -33,6 +35,7 @@ import com.promising.vo.MemberVO;
 
 import com.promising.vo.PageMaker;
 import com.promising.vo.PageVO;
+import com.promising.vo.PayVO;
 import com.promising.vo.ProjectVO;
 
 @Controller
@@ -51,7 +54,7 @@ public class ProjectController {
 	public String projectStory(@PathVariable("pno") Long pno,Model model) {
 		ProjectVO vo= repo.findById(pno).get();
 		model.addAttribute("vo",vo);
-		
+
 		return "project/story";
 	}
 	
@@ -78,15 +81,26 @@ public class ProjectController {
 
 	}
 
-	@GetMapping("/payment/{pno}/{price}")
-	public String payment(@PathVariable("pno") Long pno, @PathVariable("price")int price) {
+	@PostMapping("/payment/{pno}")
+	public String payment(@PathVariable("pno") Long pno, String amount, String price, Model model, Principal pcp) {
 		
-		System.out.println("pno : "+ pno);
-		System.out.println("price : "+ price);
+		MemberVO mvo = new MemberVO();
+		mvo = memberrepo.findByUsername(pcp.getName()).get();
+		ProjectVO vo= repo.findById(pno).get();
+		
+		model.addAttribute("amount",amount); 
+		model.addAttribute("price",price);
+		model.addAttribute("vo",vo); // 프로젝트 정보
+		model.addAttribute("mvo",mvo); // 로그인 계정 정보
 		
 		return "project/payment";
 	}
-
+	
+	@GetMapping("/paycomplete")
+	public String paycomplete() {
+		return "redirect:/project/paycomplete";
+	}
+	
 	@GetMapping("/main")
 	public String main(PageVO pvo, Model model) {
 		List<ProjectVO> result = repo.selectAll();
