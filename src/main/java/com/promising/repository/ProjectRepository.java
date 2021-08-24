@@ -136,7 +136,7 @@ public interface ProjectRepository extends JpaRepository<ProjectVO, Long>, Query
 		}
 		
 		switch(type) {
-		case "1" :
+		case "0" :
 			builder.and(project.prCurrentMoney.between(keyword, keyword2));
 			break;
 		case "1000001" :

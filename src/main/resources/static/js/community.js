@@ -211,7 +211,8 @@ $(function(){
 		let pno = $("#pno").val();
 		$("#price").val(payMoney);
 		$("#amount").val(amount);
-		
+		payForm.attr("action", "/project/payment/" + pno);
+		payForm.submit();	
 	});
 	
 	// 로그인 여부 확인
