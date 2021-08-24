@@ -54,7 +54,7 @@ public class ProjectController {
 	public String projectStory(@PathVariable("pno") Long pno,Model model) {
 		ProjectVO vo= repo.findById(pno).get();
 		model.addAttribute("vo",vo);
-		
+
 		return "project/story";
 	}
 	
@@ -84,12 +84,10 @@ public class ProjectController {
 	@PostMapping("/payment/{pno}")
 	public String payment(@PathVariable("pno") Long pno, String amount, String price, Model model, Principal pcp) {
 		
-		System.out.println("===================상세페이지 접근 ");
 		MemberVO mvo = new MemberVO();
 		mvo = memberrepo.findByUsername(pcp.getName()).get();
 		ProjectVO vo= repo.findById(pno).get();
 		
-		System.out.println("-----------"+vo);
 		model.addAttribute("amount",amount); 
 		model.addAttribute("price",price);
 		model.addAttribute("vo",vo); // 프로젝트 정보
@@ -98,44 +96,10 @@ public class ProjectController {
 		return "project/payment";
 	}
 	
-	@PostMapping("/paycomplete")
-	public void paycomplete(@PathVariable("pno") Long pno, @RequestParam PayVO vo, Principal pcp) {
-		
-		System.out.println("===================결제완료 시작 ");
-		System.out.println(vo.getPrice());
-		System.out.println(vo.getPno());
-		System.out.println(vo.getPresent());
-		System.out.println("===================결제완료 끝 ");
-		
+	@GetMapping("/paycomplete")
+	public String paycomplete() {
+		return "redirect:/project/paycomplete";
 	}
-	
-	@PostMapping("/payInfo")
-	public void paycomplete(@RequestParam PayVO vo, Principal pcp) {
-		
-		System.out.println("===================결제완료 시작 ");
-		System.out.println(vo.getPrice());
-		System.out.println(vo.getPno());
-		System.out.println(vo.getPresent());
-		System.out.println("===================결제완료 끝 ");
-		
-		
-		
-	}
-	
-	
-	// 로그인한 계정 정보 
-	/*
-	@PostMapping("/userInfo")
-	@ResponseBody
-	public String payment(Model model, Principal pcp) {
-		
-		MemberVO mvo = new MemberVO();
-		mvo = memberrepo.findByUname(pcp.getName()).get();
-		model.addAttribute("vo",mvo); // 계정 정보
-		
-		return "project/payment";
-	}
-	*/
 	
 	@GetMapping("/main")
 	public String main(PageVO pvo, Model model) {

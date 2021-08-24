@@ -73,7 +73,7 @@ var commentManager = (function(){
 })();
 
 $(function(){
-	
+
 	// 후원하기 버튼 스크롤 이동
 	$('.btn_sponsor').on("click", function(){
 	    $('html, body').animate({
@@ -131,14 +131,38 @@ $(function(){
 	});
 
 	// 결제 금액 입력
-	$("#add_money").on("keypress", function(){
-		let number = $(".money strong").text().replace(",", "");
-		console.log(number);
-		let money = console.log("수량 : " + count);
-		console.log(money);
-		money = money + parseInt($(this).val());
-		console.log(money);
-		$("._01 .money strong").text(money);
+	$("#add_money").on("keyup", function(e){
+		if ((e.keyCode < 48) || (e.keyCode > 57)){
+			$(this).val("");
+			alert("숫자만 입력해주세요.");
+     	 }
+      
+		let number = parseInt($(".money strong").text().substring(1));
+		let sprice = Number($(this).val());
+		let price = $("._01 .money strong");
+		let total;
+		
+		if($("#pay_01").hasClass("active")){
+			total = 10000+sprice
+		}else if($("#pay_02").hasClass("active")){
+			total = 300000+sprice
+		}else if($("#pay_03").hasClass("active")){
+			total = 500000+sprice;
+		}else if($("#pay_04").hasClass("active")){
+			total = 1000000+sprice;
+		}
+		if(total >= 10000000){
+			alert("최대 후원 가능 금액은 1000 만원 입니다.");
+			$(this).val("");
+			return false;
+		}else{
+			price.text("+" +total);
+		}
+		$("#btn_payment01").text(total +" 원 후원하기");
+	});
+	
+	$(".payment .btn_wrap button").on("click", function(){
+		$(this).addClass("active").siblings().removeClass("active");
 	});
 	
 	// 결제 수량 선택 
@@ -160,10 +184,67 @@ $(function(){
 		++count;
 		let money_txt= (money*count);
 		$(".incremental-input .count").text(count);
-		moneyTxt.text(money_txt);
+		moneyTxt.text("+" +money_txt);
 		$("#btn_payment02 .result_money").text(money_txt);
 	});	
 
+	// 후원하기
+	$("#btn_payment01").on("click", function(){
+		let sponsorForm = $("#sponsorForm");
+		let payMoney = sponsorForm.find(".money strong").text();
+		console.log(payMoney);
+		let price = payMoney.substring(1);
 
-})
+		let pno = $("#pno").val();
+		$("#sprice").val(price);
+		
+		sponsorForm.attr("action", "/project/payment/" + pno);
+		sponsorForm.submit();	
+	
+	});
+	
+	// 결제 하기
+	$("#btn_payment02").on("click", function(){
+		let payForm = $("#payForm");
+		let payMoney = $("#payment_money").text().substring(1);;
+		let amount = payForm.find(".count").text();
+		let pno = $("#pno").val();
+		$("#price").val(payMoney);
+		$("#amount").val(amount);
+		
+		payForm.attr("action", "/project/payment/" + pno);
+		payForm.submit();	
+	
+		
+	});
+	
+	// 로그인 여부 확인
+	$(".loginCheck").on("click",function(){
+		alert("로그인이 필요한 서비스입니다.");
+		location.href="/member/login";
+	})
+	
+	//남은일자 계산
+	let date01 = $("#startDate").val();
+	let date02 = $("#endDate").val();
+	let start = new Date(date01);
+	let end = new Date(date02);
+	let elapsedMSec = end.getTime() - start.getTime();
+	let elapsedDay = elapsedMSec / 1000 / 60 / 60 / 24; // 2
+	$("#limitedDate").find("strong").text(elapsedDay);
+	
+		
+	// 달성률 계산
+	let target = $("#tgMoney").val();
+	let current = $("#crMoney").val();
+	let percent =  Math.ceil(current/target * 100);
+	$("#percent").text(percent + "%");	
+	
+	// 오픈예정 프로젝트 결제 비활성화 
+	let prStatus = $("#status").val();
+	if(prStatus == "I"){
+		$("#payment button").attr("disabled","disabled");
+		$("#btn_payment02").attr("disabled","disabled");
+	}
+});
 

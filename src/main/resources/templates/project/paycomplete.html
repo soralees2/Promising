@@ -1,18 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Promising</title>
- 
-	<link th:href="@{/static/css/complete.css}" rel="stylesheet">
-   <th:block th:replace="fragments/commonHead"></th:block>
-    <script type="text/javascript" th:src="@{/static/js/common.js}"></script>
-    <script type="text/javascript" th:src="@{/static/js/complete.js}"></script>
-       <link rel="stylesheet" type="text/css" th:href="@{/static/css/common_style.css}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="_csrf" th:content="${_csrf.token}">
+	<meta name="_csrf_header" th:content="${_csrf.headerName}">
+	<th:block th:replace="fragments/commonHead"></th:block>
+	<link th:href="@{/static/css/project_detail.css}" rel="stylesheet">
 </head>
 
 <body>
