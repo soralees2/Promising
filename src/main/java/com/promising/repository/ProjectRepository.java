@@ -32,7 +32,7 @@ public interface ProjectRepository extends JpaRepository<ProjectVO, Long>, Query
 	
 	@Transactional
 	@Modifying
-	@Query(value="UPDATE PR_PROJECT P set P.PR_CHECK='Y' WHERE P.PR_CHECK='N'", nativeQuery = true)
+	@Query(value="UPDATE PR_PROJECT P set P.PR_STATUS='I' WHERE P.PR_CHECK='N'", nativeQuery = true)
 	void updatePrCheck();
 
 	
