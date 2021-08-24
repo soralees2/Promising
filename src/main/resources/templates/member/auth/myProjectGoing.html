@@ -14,36 +14,7 @@
 
 <body>
 	<div class="wrap">
-		<header id="header" th:fragment="fg-header">
-			<div class="container">
-				<div class="row">
-					<div class="col-4 col-md-5">
-						<ul class="menu">
-							<li class="search" id="search"><img
-								src="../images/ic_search.png" alt=""><span>프로젝트 </span>둘러보기</li>
-							<li class="register"><a href="#">프로젝트 올리기</a></li>
-							<li class="back"><a href="">이전페이지로</a></li>
-						</ul>
-					</div>
-					<div class="col-4 col-md-2">
-						<h1 class="logo">
-							<a href="#">Promising</a>
-						</h1>
-					</div>
-					<div class="col-4 col-md-5">
-						<div class="utils">
-							<a href="#"> <span>회원가입/로그인</span>
-								<div class="pf_wrap">
-									<div class="pf_img"
-										style="background: url(../images/atom02.png) 50% 50% no-repeat; background-size: cover;">
-									</div>
-								</div>
-							</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</header>
+		<header th:replace="fragments/header.html :: fg-header"></header>
 
 
 		<!-- 해당 페이지 클래스명을 적어주세요-->
