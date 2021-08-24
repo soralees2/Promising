@@ -90,6 +90,22 @@ a.btn-primary{color:#fff;}
 .show>.btn-primary.dropdown-toggle:focus, .btn-check:focus+.btn-primary, .btn-primary:focus{box-shadow:0 0 0 0.25rem rgba(225,84,136, 0.25) !important}
 
 
+/* lookaround */
+.seeMore{text-align:center}
+.seeMore>button{border:1px solid #cfcfcf;background-color:transparent;color:#6d6d6d;border-radius:40px;padding:15px;padding-left:30px;padding-right:30px;font-size:16px}
+.seeMore>button:hover{cursor:pointer;background-color:#f2f2f2}
+.lookaround{display:none;position:fixed;top:0;left:0;width:100%;height:100vh;background-color:#fff;z-index:9999}
+#searchHeader{position:fixed;top:0;left:0;z-index:9999;width:100%;height:65px;box-shadow:rgb(10 10 10 / 10%) 0 1px 2px 0;font-weight:600;background-color:#fff}
+#search_close{width:25px;height:25px;margin-top:20px;background:#fff url(images/main/close.png) 50% 50% no-repeat;border:none;background-size:cover;font-size:0}
+#searchHeader .search_title{font-size:20px;text-align:center;line-height:65px}
+.search_wrap{padding-top:80px}
+.search_wrap .btn_wrap .btn{margin-right:10px}
+.search:hover{cursor:pointer}
+.project{margin-top:50px;margin-bottom:50px}
+.shortcut>h4>a{color:#000;text-decoration:none;font-size:30px;font-weight:700;line-height:45px}
+.shortcut>h4>a:hover{color:gray}
+.tag>h6{font-size:17px;margin-bottom:20px}
+
 
 /* mobile */
 @media (max-width: 768px){
