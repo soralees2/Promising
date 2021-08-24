@@ -1,12 +1,6 @@
 $(function () {
 	
 
-	
-	$("#pills-donated-tab").on("click",function(){
-		
-		alert("구현 예정인 기능입니다.")
-		
-	})
 
 	$(".navlinkQ").on("click",function(){
 		
