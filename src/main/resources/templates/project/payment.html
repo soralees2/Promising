@@ -69,8 +69,8 @@
 									<p>[[${mvo.uphone}]]</p>
 									<button class="btn btn-sm btn-outline-secondary btn_addr" style="display:none;">변경</button>
 								</div>
-  								<input type="hidden" name="pno" th:value="${vo.pno}">
- 								<input type="hidden" name="project" th:value="${vo.pno}" id="pno"> 
+  								<input type="hidden" name="pno" th:value="${pno}" id="pno">
+ 								<input type="hidden" name="project" th:value="${vo.pno}" id="pvo"> 
 								<input type="hidden" name="price" th:value="${price}">
 								<input type="hidden" name="amount" th:value="${amount}">
 								<input type="hidden" name="present" th:value="${vo.prPresentTitle}">
@@ -107,13 +107,11 @@
 										<ul class="guide_txt">
 											<li>후원은 구매가 아닌 창의적인 계획에 자금을 지원하는 일입니다.
 												텀블벅에서의 후원은 아직 실현되지 않은 프로젝트가 실현될 수 있도록 제작비를 후원하는 과정으로, 기존의 상품 또는 용역을 거래의 대상으로
-												하는
-												매매와는 차이가 있습니다. 따라서 전자상거래법상 청약철회 등의 규정이 적용되지 않습니다.
+												하는 매매와는 차이가 있습니다. 따라서 전자상거래법상 청약철회 등의 규정이 적용되지 않습니다.
 											</li>
 											<li>프로젝트는 계획과 달리 진행될 수 있습니다.
 												예상을 뛰어넘는 멋진 결과가 나올 수 있지만 진행 과정에서 계획이 지연, 변경되거나 무산될 수도 있습니다. 본 프로젝트를 완수할 책임과
-												권리는
-												창작자에게 있습니다.</li>
+												권리는 창작자에게 있습니다.</li>
 										</ul>
 									</div>
 								</div>
@@ -178,13 +176,16 @@ $(function(){
 				address2: $("#address2").text()
 			};
 			
+	let ffff = $("#pno").val();
+	let pay = $("#pvo").val();
 	let status = "N";
 	$("#btn_pay").on("click", function(){
-		
 		let payForm = $("#payComplete");
-		let pay = $("#pno").val();
+		let pay3 = $("#pvo").val();
 		payForm.attr("action", "/project/completepay/" +pay);
 	//	payForm.attr("action", "/project/completepay/1");
+
+	alert(pay);
 		payForm.submit();
 
 		

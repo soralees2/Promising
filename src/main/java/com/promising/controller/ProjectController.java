@@ -88,6 +88,8 @@ public class ProjectController {
 	@PostMapping("/payment/{pno}")
 	public String payment(@PathVariable("pno") Long pno, String amount, String price, Model model, Principal pcp) {
 		
+		
+		
 		MemberVO mvo = new MemberVO();
 		mvo = memberrepo.findByUsername(pcp.getName()).get();
 		ProjectVO vo= repo.findById(pno).get();
@@ -96,6 +98,9 @@ public class ProjectController {
 		model.addAttribute("price",price);
 		model.addAttribute("vo",vo); // 프로젝트 정보
 		model.addAttribute("mvo",mvo); // 로그인 계정 정보
+		model.addAttribute("pno",pno); // 로그인 계정 정보
+		
+		System.out.println("====================pno : " +pno);
 		
 		return "project/payment";
 	}
@@ -103,33 +108,12 @@ public class ProjectController {
 	@RequestMapping("/completepay/{project}")
 	public String paycomplete(@ModelAttribute("vo") PayVO vo, @PathVariable("project") Long pno) {
 
-//		vo.setProject(pno);
-		System.out.println("===================================");
-		System.out.println(pno);
-		System.out.println(vo.getPayno());
-		System.out.println(vo.getPresent());
-		System.out.println(vo.getAmount());
-		System.out.println(vo.getPrice());
-		System.out.println(vo.getOrderEmail());
-		System.out.println(vo.getOrderName());
-		System.out.println(vo.getOrderPhone());
-		System.out.println(vo.getOrderPostcode());
-		System.out.println(vo.getAddress1());
-		System.out.println(vo.getAddress2());
-		System.out.println(vo.getRegDate());
-
-//		CommunityVO vo = new CommunityVO();
-//		vo.setCommunityno(cno);
-//		cmt.setCommunity(vo);
-//		cmt.setWriter(principal.getName());
-//		crepo.save(cmt);	
-//		
-//		repo.findById(pno);
-//		vo.getPrice();
-		
-		
-		System.out.println("===================================");
 		prepo.save(vo);
+		ProjectVO pp = repo.findById(pno).get();
+		int price =  pp.getPrCurrentMoney() + Integer.parseInt(vo.getPrice());
+		pp.setPrCurrentMoney(price);
+		repo.save(pp);
+		
 		return "project/paycomplete";
 	}
 	
