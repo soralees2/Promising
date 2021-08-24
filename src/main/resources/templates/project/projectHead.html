@@ -13,11 +13,16 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
 <body>
 	<div class="container" th:fragment="project_head">
+	 		<span sec:authorize="isAuthenticated()" style="display:none;"><span id="user" sec:authentication="principal.username"></span></span>
+	 		<input type="hidden" id="pno" name="project" th:value="${vo.pno}">
 <!-- 		<input type="hidden" id="pno" name="pno" th:value="${vo.pno}"> -->
 		<input type="hidden" id="status" th:value="${vo.prStatus}">
 		<div class="project_title">
 			<span class="pj_tag" th:text="${vo.prCategory}"></span>
 			<h2 th:text="${vo.prTitle}"></h2>
+			<div class="writer" th:switch="${vo.prStatus}">
+				<span style="color:#999;font-weight:600;" th:case="N">오픈 예정인 프로젝트 입니다.</span>
+			</div>
 			<!-- <div class="writer">
 				<div class="profile_img" style="background:url(../images/atom02.png) 50% 50% no-repeat;background-size:cover;"></div>
 				<a href="#" th:text="${vo.prWriter}"></a>

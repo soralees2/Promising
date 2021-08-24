@@ -106,6 +106,10 @@ a.btn-primary{color:#fff;}
 .shortcut>h4>a:hover{color:gray}
 .tag>h6{font-size:17px;margin-bottom:20px}
 
+/* modal */
+#qna_modal dl dd{margin-top: 10px;}
+#qna_modal dl dd+dt{margin-top:20px;}
+#qna_modal #qna_contents{margin-top:10px;}
 
 /* mobile */
 @media (max-width: 768px){

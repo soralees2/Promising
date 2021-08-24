@@ -167,30 +167,38 @@ let obj = { pno: $("#pno").text(),
 let status = "N";
 
 $("#btn_pay").on("click", function(){
-	var IMP = window.IMP;
-	IMP.init('imp76576623');
-	IMP.request_pay({
-		pg: 'inicis',
-		pay_method: 'card',
-		merchant_uid: 'merchant_' + new Date().getTime(),
-		name: $("#present").text(),
-		amount: $("#price").text(),
-		buyer_email: $("#username").text(),
-		buyer_name: $("#orderName").text(),
-		buyer_tel: $("#orderPhone").text(),
-		buyer_addr: $("#address1").text() + " / " + $("#address2").text(),
-		buyer_postcode: $("#orderPostcode").text(),
-	}, function (rsp) {
-		if (rsp.success) {
-			alert('결제가 완료되었습니다.');
-			status = "Y"
- 			location.href="/project/paycomplete";
-		} else {
-			var msg = '결제에 실패하였습니다.';
-			msg += '에러내용 : ' + rsp.error_msg;
-			alert(msg);
-		}
-	});
+	
+	if($('#check01').is(':checked') && $('#check02').is(':checked')){
+		var IMP = window.IMP;
+		IMP.init('imp76576623');
+		IMP.request_pay({
+			pg: 'inicis',
+			pay_method: 'card',
+			merchant_uid: 'merchant_' + new Date().getTime(),
+			name: $("#present").text(),
+			amount: $("#price").text(),
+			buyer_email: $("#username").text(),
+			buyer_name: $("#orderName").text(),
+			buyer_tel: $("#orderPhone").text(),
+			buyer_addr: $("#address1").text() + " / " + $("#address2").text(),
+			buyer_postcode: $("#orderPostcode").text(),
+		}, function (rsp) {
+			if (rsp.success) {
+				alert('결제가 완료되었습니다.');
+				status = "Y"
+	 			location.href="/project/paycomplete";
+			} else {
+				var msg = '결제에 실패하였습니다.';
+				msg += '에러내용 : ' + rsp.error_msg;
+				alert(msg);
+			}
+		});
+	}else{
+		alert("동의여부에 체크 해주세요!");
+		return false;
+	
+	}
+	
 });
 	
 </script>
