@@ -88,8 +88,6 @@ public class ProjectController {
 	@PostMapping("/payment/{pno}")
 	public String payment(@PathVariable("pno") Long pno, String amount, String price, Model model, Principal pcp) {
 		
-		
-		
 		MemberVO mvo = new MemberVO();
 		mvo = memberrepo.findByUsername(pcp.getName()).get();
 		ProjectVO vo= repo.findById(pno).get();
@@ -98,9 +96,7 @@ public class ProjectController {
 		model.addAttribute("price",price);
 		model.addAttribute("vo",vo); // 프로젝트 정보
 		model.addAttribute("mvo",mvo); // 로그인 계정 정보
-		model.addAttribute("pno",pno); // 로그인 계정 정보
-		
-		System.out.println("====================pno : " +pno);
+		model.addAttribute("pno",pno); 
 		
 		return "project/payment";
 	}

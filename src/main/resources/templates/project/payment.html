@@ -6,6 +6,7 @@
 	<th:block th:replace="fragments/commonHead"></th:block>
 	<link th:href="@{/static/css/project_detail.css}" rel="stylesheet">
 	<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+<!-- 	<script type="text/javascript" th:src="@{/static/js/community.js}"></script> -->
 </head>
 
 <body>
@@ -24,9 +25,13 @@
  							<span th:text="${vo.prCategory}">카테고리</span>
 							<h2>[[${vo.prTitle}]]</h2>
 							<div>
-								<strong class="account">[[${vo.prCurrentMoney}]]</strong>
-								<span class="achivement">68%</span>
-								<span class="state">9일 남음</span>
+								<span style="font-weight:300;">누적 후원금 </span><strong class="account"> [[${#numbers.formatDecimal(vo.prCurrentMoney, 0, 'COMMA', 0, 'POINT')}]]원</strong><br>
+								<span style="font-weight:300;">달성률 </span><span class="achivement"></span>
+								
+								
+								<!-- <span class="state">9일 남음</span> -->
+								<input type="hidden" th:value="${vo.prTargetMoney}" id="tgMoney">
+								<input type="hidden" th:value="${vo.prCurrentMoney}" id="crMoney">
 							</div>
 						</div>
 					</div>
@@ -71,7 +76,7 @@
 								</div>
   								<input type="hidden" name="pno" th:value="${pno}" id="pno">
  								<input type="hidden" name="project" th:value="${vo.pno}" id="pvo"> 
-								<input type="hidden" name="price" th:value="${price}">
+								<input type="hidden" name="price" th:value="${price}" id="price">
 								<input type="hidden" name="amount" th:value="${amount}">
 								<input type="hidden" name="present" th:value="${vo.prPresentTitle}">
 								<input type="hidden" name="orderPhone" th:value="${mvo.uphone}">
@@ -163,34 +168,18 @@
 </body>
 <script>
 $(function(){
-	
-	let obj = { pno: $("#pno").text(), 
-				present: $("#present").text(),
-				amount: $("#amount").text(),
-				price: $("#price").text(), 
-				username: $("#username").text(),
-				orderName: $("#orderName").text(),
-				orderPhone: $("#orderPhone").text(), 
-				orderPostcode: $("#orderPostcode").text(), 
-				address1: $("#address1").text(),
-				address2: $("#address2").text()
-			};
-			
-	let ffff = $("#pno").val();
-	let pay = $("#pvo").val();
 	let status = "N";
 	$("#btn_pay").on("click", function(){
+
+/* 		let pay = $("#pno").val();
 		let payForm = $("#payComplete");
-		let pay3 = $("#pvo").val();
+		
 		payForm.attr("action", "/project/completepay/" +pay);
-	//	payForm.attr("action", "/project/completepay/1");
-
-	alert(pay);
 		payForm.submit();
-
+		 */
 		
 		
-/* 		if($('#check01').is(':checked') && $('#check02').is(':checked')){
+ 		if($('#check01').is(':checked') && $('#check02').is(':checked')){
 			var IMP = window.IMP;
 			IMP.init('imp76576623');
 			IMP.request_pay({
@@ -207,13 +196,14 @@ $(function(){
 			}, function (rsp) {
 				if (rsp.success) {
 					alert('결제가 완료되었습니다.');
-					status = "Y" */
-					/* let payForm = $("#payComplete");
+					status = "Y" 
 					let pay = $("#pno").val();
+					let payForm = $("#payComplete");
+					
 					payForm.attr("action", "/project/completepay/" +pay);
-					payForm.submit(); */
-					//location.href="/project/complete";
-	/* 			} else {
+					payForm.submit();
+					
+	 			} else {
 					var msg = '결제에 실패하였습니다.';
 					msg += '에러내용 : ' + rsp.error_msg;
 					alert(msg);
@@ -223,10 +213,8 @@ $(function(){
 			alert("동의여부에 체크 해주세요!");
 			return false;
 		
-		} */
-		
+		} 
 	});
 })
-		
 </script>
 </html>

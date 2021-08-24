@@ -192,18 +192,27 @@ $(function(){
 	// 후원하기
 	$("#btn_payment01").on("click", function(){
 		let sponsorForm = $("#sponsorForm");
-		alert(pno);
 		let payMoney = sponsorForm.find(".money strong").text();
-		console.log(payMoney);
 		let price = payMoney.substring(1);
 
 		$("#sprice").val(price);
 		
-		
 		sponsorForm.attr("action", "/project/payment/" + pno);
 		sponsorForm.submit();	
-	
 	});
+	
+	// 결제 하기
+	/*$("#btn_payment02").on("click", function(){
+		let payForm = $("#payForm");
+		let payMoney = $("#payment_money").text().substring(1);;
+		let amount = payForm.find(".count").text();
+		
+		$("#price").val(payMoney);
+		$("#amount").val(amount);
+		payForm.attr("action", "/project/payment/" + pno);
+		payForm.submit();	
+	});*/
+	
 	
 	// 결제 하기
 	$("#btn_payment02").on("click", function(){
@@ -216,6 +225,7 @@ $(function(){
 		payForm.attr("action", "/project/payment/" + pno);
 		payForm.submit();	
 	});
+	
 	
 	// 로그인 여부 확인
 	$(".loginCheck").on("click",function(){
@@ -240,11 +250,9 @@ $(function(){
 	// 달성률 계산
 	let target = $("#tgMoney").val();
 	let current = $("#crMoney").val();
-	console.log(target);
-	console.log(current);
 	let percent =  Math.ceil(current/target * 100);
 	$("#percent").text(percent + "%");	
-	
+	$(".info .achivement").text(percent + "%");
 	// 오픈예정 프로젝트 결제 비활성화 
 	let prStatus = $("#status").val();
 	if(prStatus == "N"){

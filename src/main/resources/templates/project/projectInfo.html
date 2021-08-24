@@ -59,8 +59,8 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 					<button type="button" id="pay_04" class="btn btn-sm btn-outline-secondary">+ 100만 원</button>
 				</div>
 				<button type="button" class="btn btn-primary w-100 loginCheck" id="btn_payment01">1 만 원 후원하기</button>
+				<input type="hidden" value="후원하기" name="amount" id="samount">
 				<input type="hidden" value="" name="price" id="sprice"> 
-				<input type="hidden" value="-" name="amount" id="samount">
 				<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
 			</form>
 		</div>
