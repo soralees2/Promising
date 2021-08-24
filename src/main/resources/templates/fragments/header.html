@@ -15,10 +15,8 @@
 				<div class="col-4 col-md-5">
 					<ul class="menu">
 						<li class="search" id="search"><img
-							th:src=@{/static/images/ic_search.png} alt=""><span>프로젝트
-						둘러보기</span></li>
-						<li class="register"><a href="#"
-							th:href="@{/project/auth/upload1}">프로젝트 올리기</a></li>
+							th:src=@{/static/images/ic_search.png} alt=""><span>프로젝트 둘러보기</span></li>
+						<li class="register"><a href="#" th:href="@{/project/auth/upload1}">프로젝트 올리기</a></li>
 					</ul>
 				</div>
 				<div class="col-4 col-md-2">
@@ -30,23 +28,19 @@
 				</div>
 				<div class="col-4 col-md-5">
 					<div class="utils">
-						<div class="pf_wrap" sec:authorize="isAnonymous()">
-							<a href="/member/login"> <span>회원가입/로그인</span>
-							</a>
+						<div sec:authorize="isAnonymous()">
+							<a href="/member/login"> <span>회원가입/로그인</span></a>
 						</div>
-						<div class="pf_wrap" sec:authorize="isAuthenticated()">
+						<div sec:authorize="isAuthenticated()">
 							<form action="/logout" method="post">
-								<input type="hidden" th:name="${_csrf.parameterName}"
-									th:value="${_csrf.token}">
-							<a href="#" th:href="@{/member/auth/mypage}"><span>마이페이지</span></a>
-								<button class="btn" id="logout">로그아웃</button>
+								<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+								<button id="logout">로그아웃</button>
+							</form>
+							<a th:href="@{/member/auth/mypage}"><span>마이페이지</span>
 								<div class="pf_img">
 									<img th:src="@{/static/images/atom02.png}">
 								</div> 
-							</form>
-							
-
-								
+							</a>
 						</div>
 					</div>
 				</div>
