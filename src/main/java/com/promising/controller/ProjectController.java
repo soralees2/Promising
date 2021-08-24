@@ -28,6 +28,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.promising.mapper.ProjectMapper;
 import com.promising.repository.CommunityRepository;
 import com.promising.repository.MemberRepository;
+import com.promising.repository.PayRepository;
 import com.promising.repository.ProjectRepository;
 import com.promising.vo.CommentVO;
 import com.promising.vo.CommunityVO;
@@ -49,6 +50,9 @@ public class ProjectController {
 	private MemberRepository memberrepo;
 	@Autowired
 	private CommunityRepository comrepo;
+	@Autowired
+	private PayRepository prepo;
+
 
 	@GetMapping("/story/{pno}")
 	public String projectStory(@PathVariable("pno") Long pno,Model model) {
@@ -96,10 +100,28 @@ public class ProjectController {
 		return "project/payment";
 	}
 	
-	@RequestMapping("/completepay")
-	public String paycomplete() {
+	@RequestMapping("/completepay/{project}")
+//	public String paycomplete(PayVO vo) {
+	public String paycomplete(@ModelAttribute("vo") PayVO vo, @PathVariable("project") Long pno) {
 		System.out.println("============= 들어옴 ");
-		return "/project/paycomplete";
+		System.out.println("vo.getPno() : " + vo.getPno());
+		System.out.println("vo.getAmount() : " + vo.getAmount());
+		System.out.println("vo.getUsername() : " + vo.getUsername());
+		System.out.println("vo.getPrice() : " + vo.getPrice());
+		System.out.println("vo.getProject() : " + vo.getProject());
+		
+//		vo.setProject(vo.getPayno());
+		
+////		String userName = principal.getName();
+//		vo.setWriter(userName);
+//		repo.save(vo);
+		
+//		ProjectVO pvo = new ProjectVO();
+//		pvo.setPno(vo.getPno());
+//		vo.setProject(pvo);
+		prepo.save(vo);
+		
+		return "project/paycomplete";
 	}
 	
 	@GetMapping("/main")
