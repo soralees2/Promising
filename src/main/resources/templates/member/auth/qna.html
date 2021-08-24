@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+   xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,196 +13,145 @@
 
 </head>
 <body>
-	<div class="wrap">
-		<header th:replace="fragments/header.html :: fg-header"></header>
-		<div class="container">
-			<div class="container mx-7">
-				<div class="row profileLine">
-					<div class='col-12 namennavi'>
-						<div class='nameline'>
-							<span>문의사항</span>
-							<div class="col-12 col-md-6 col-xl-3 float-right">
-								<a href="/member/auth/mypage"><input type="button"
-								class="btn btn-light btn-sm" id="backBtn" value="뒤로가기"></a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div class="container">
-				<div class=" row tabline">
-					<ul class="nav nav-pills" id="pills-tab" role="tablist">
-						<li class="nav-item" role="presentation">
-							<button class="nav-link p-3" id="pills-contact-tab"
-								data-bs-toggle="pill" data-bs-target="#pills-QnA" type="button"
-								role="tab" aria-controls="pills-QnA" aria-selected="false">보낸
-								프로젝트 문의</button>
-						</li>
-						<li class="nav-item" role="presentation">
-							<button class="nav-link p-3" id="pills-contact-tab"
-								data-bs-toggle="pill" data-bs-target="#pills-MyQnA"
-								type="button" role="tab" aria-controls="pills-MyQnA"
-								aria-selected="false">받은 프로젝트 문의</button>
-						</li>
-					</ul>
-					<hr>
-					<div class="tab-content" id="pills-tabContent">
-						<!-- 보낸 프로젝트 문의  -->
-						<div class="tab-pane fade show active" id="pills-QnA"
-							role="tabpanel" aria-labelledby="pills-QnA-tab">
-							<div class="row" id="main_list" th:if="${not #lists.isEmpty(result2)}">
-								<div class="col-12" th:each="pro:${result2}">
-									<div class="card">
-										<div class="item imgDiv">
-											<!-- <img th:src="@{'/static/images/projectuploading/'+${pro.prSysName}}" class="card-img-top"> -->
-											<img src="/static/images/atom02.png" width="120px">
-										</div>
-										<div class="item card-body">
-											<span class="cate">분류 : [[${pro.qnacategory}]]</span>
-											<div class="pro">프로젝트 제목</div>
-											<div class="writer">수신 : [[${pro.receiver}]]</div>
-											<div class="date">[[${#dates.format(pro.regDate, ' yy년 MM월 dd일  HH:mm:ss')}]]</div>
-										</div>
-										<div class="item card-body contents">[[${pro.contents}]]</div>
-									</div>
-								</div>
-							</div>
-							<div class="col-12 col-md-6 col-xl-3" th:unless="${not #lists.isEmpty(result)}">
-								<span>보낸 문의가 없습니다.</span>
-							</div>
-						</div>
-						
-						<!-- 받은 프로젝트 문의 -->
-						<div class="tab-pane fade" id="pills-MyQnA" role="tabpanel"
-							aria-labelledby="pills-MyQnA-tab">
-							<div class="row" id="main_list" th:if="${not #lists.isEmpty(result)}">
-								<div class="col-12" th:each="pro:${result}">
-									<div class="card">
-										<div class="item imgDiv">
-											<!-- <img th:src="@{'/static/images/projectuploading/'+${pro.prSysName}}" class="card-img-top"> -->
-											<img src="/static/images/atom02.png" width="120px">
-										</div>
-										<div class="item card-body">
-											<span class="cate">분류 : [[${pro.qnacategory}]]</span>
-											<div class="pro">프로젝트 제목</div>
-											<div class="writer">발신 : <span id="writergo">[[${pro.writer}]]</span></div>
-											<div class="date">[[${#dates.format(pro.regDate, ' yy년 MM월 dd일  HH:mm:ss')}]]</div>
-										</div>
-										<div class="item card-body contents">[[${pro.contents}]]</div>
-										<div class="item ibtn">
-											<button class="btn btn-light modalUp" type="button"
-													data-bs-toggle="modal" data-bs-target="#qna_modal">답장보내기</button>
-										</div>
-									</div>
-								</div>
-								
-							</div>
-
-							<div class="col-12 col-md-6 col-xl-3" th:unless="${not #lists.isEmpty(result)}">
-								<span>받은 문의가 없습니다.</span>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- container end -->
-		<div class="modal fade" id="qna_modal" data-bs-backdrop="static"
-			data-bs-keyboard="false" tabindex="-1" aria-hidden="true"
-			th:fragment="qna_modal">
-			<div class="modal-dialog modal-dialog-centered">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title">문의답변</h5>
-						<button type="button" class="btn-close" data-bs-dismiss="modal"
-							aria-label="Close"></button>
-					</div>
-					<div class="modal-body">
-						<dl>
-							<dt>받는사람</dt>
-							<dd>
-								<input type="text" class="form-control" name="re" id="receiver"
-									readonly>
-								<!-- th:value="${vo.prWriter}" -->
-							</dd>
-							<dt>문의내용</dt>
-							<dd>
-								<select class="form-select" id="qna_category">
-									<option value="">문의유형</option>
-									<option value="선물/후원">선물/후원</option>
-									<option value="프로젝트">프로젝트</option>
-									<option value="수령자 정보">수령자 정보</option>
-									<option value="배송">배송</option>
-									<option value="기타">기타</option>
-								</select>
-							</dd>
-						</dl>
-						<textarea class="form-control" id="qna_contents" rows="5" col="20"
-							placeholder="프로젝트 진행자에게 문의하고 싶은 내용을 적어주세요."></textarea>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary"
-							data-bs-dismiss="modal">닫기</button>
-						<button type="button" class="btn btn-primary" id="addQnaBtn">답장하기</button>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- modal fade end -->
-		<div class="lookaround">
-            <div id="searchHeader">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-2">
-                            <button id="search_close">검색창 닫기</button>
-                        </div>
-                        <div class="col-8">
-                            <h2 class="search_title">프로젝트 둘러보기</h2>
-                        </div>
-                        <div class="col-2"></div>
-                    </div>
-                </div>
+   <div class="wrap">
+      <header th:replace="fragments/header.html :: fg-header"></header>
+      <div class="container">
+         <div class="container mx-7">
+            <div class="row profileLine">
+               <div class='col-12 namennavi'>
+                  <div class='nameline'>
+                     <span>문의사항</span>
+                     <div class="col-12 col-md-6 col-xl-3 float-right">
+                        <a href="/member/auth/mypage"><input type="button"
+                        class="btn btn-light btn-sm" id="backBtn" value="뒤로가기"></a>
+                     </div>
+                  </div>
+               </div>
             </div>
-            <div class="search_wrap">
-                <div class="container">
-                	<div class="project">
-                        <div class="shortcut">
-                            <h4><a href="/project/list">모든 프로젝트</a></h4>
+         </div>
+
+         <div class="container">
+            <div class=" row tabline">
+               <ul class="nav nav-pills" id="pills-tab" role="tablist">
+                  <li class="nav-item" role="presentation">
+                     <button class="nav-link p-3" id="pills-contact-tab"
+                        data-bs-toggle="pill" data-bs-target="#pills-QnA" type="button"
+                        role="tab" aria-controls="pills-QnA" aria-selected="false">보낸
+                        프로젝트 문의</button>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                     <button class="nav-link p-3" id="pills-contact-tab"
+                        data-bs-toggle="pill" data-bs-target="#pills-MyQnA"
+                        type="button" role="tab" aria-controls="pills-MyQnA"
+                        aria-selected="false">받은 프로젝트 문의</button>
+                  </li>
+               </ul>
+               <hr>
+               <div class="tab-content" id="pills-tabContent">
+                  <!-- 보낸 프로젝트 문의  -->
+                  <div class="tab-pane fade show active" id="pills-QnA"
+                     role="tabpanel" aria-labelledby="pills-QnA-tab">
+                     <div class="row" id="main_list" th:if="${not #lists.isEmpty(result2)}">
+                        <div class="col-12" th:each="pro:${result2}">
+                           <div class="card">
+                              <div class="item imgDiv">
+                                 <!-- <img th:src="@{'/static/images/projectuploading/'+${pro.prSysName}}" class="card-img-top"> -->
+                                 <img src="/static/images/atom02.png" width="120px">
+                              </div>
+                              <div class="item card-body">
+                                 <span class="cate">분류 : [[${pro.qnacategory}]]</span>
+                                 <div class="pro">프로젝트 제목</div>
+                                 <div class="writer">수신 : [[${pro.receiver}]]</div>
+                                 <div class="date">[[${#dates.format(pro.regDate, ' yy년 MM월 dd일  HH:mm:ss')}]]</div>
+                              </div>
+                              <div class="item card-body contents">[[${pro.contents}]]</div>
+                           </div>
                         </div>
-                        <div class="shortcut">
-                            <h4><a href="#" id="popularPro">인기 프로젝트</a></h4>
-                        </div>
-                        <div class="shortcut">
-                            <h4><a href="#" id="newPro">신규 프로젝트</a></h4>
-                        </div>
-                        <div class="shortcut">
-                            <h4><a href="#" id="closePro">성공 임박 프로젝트</a></h4>
+                     </div>
+                     <div class="col-12 col-md-6 col-xl-3" th:unless="${not #lists.isEmpty(result)}">
+                        <span>보낸 문의가 없습니다.</span>
+                     </div>
+                  </div>
+                  
+                  <!-- 받은 프로젝트 문의 -->
+                  <div class="tab-pane fade" id="pills-MyQnA" role="tabpanel"
+                     aria-labelledby="pills-MyQnA-tab">
+                     <div class="row" id="main_list" th:if="${not #lists.isEmpty(result)}">
+                        <div class="col-12" th:each="pro:${result}">
+                           <div class="card">
+                              <div class="item imgDiv">
+                                 <!-- <img th:src="@{'/static/images/projectuploading/'+${pro.prSysName}}" class="card-img-top"> -->
+                                 <img src="/static/images/atom02.png" width="120px">
+                              </div>
+                              <div class="item card-body">
+                                 <span class="cate">분류 : [[${pro.qnacategory}]]</span>
+                                 <div class="pro">프로젝트 제목</div>
+                                 <div class="writer">발신 : <span id="writergo">[[${pro.writer}]]</span></div>
+                                 <div class="date">[[${#dates.format(pro.regDate, ' yy년 MM월 dd일  HH:mm:ss')}]]</div>
+                              </div>
+                              <div class="item card-body contents">[[${pro.contents}]]</div>
+                              <div class="item ibtn">
+                                 <button class="btn btn-light modalUp" type="button"
+                                       data-bs-toggle="modal" data-bs-target="#qna_modal">답장보내기</button>
+                              </div>
+                           </div>
                         </div>
                         
-                        <form id="f1" th:action="@{../../project/popular}" method="get"></form>
-                        <form id="f2" th:action="@{../../project/newest}" method="get"></form>
-                        <form id="f3" th:action="@{../../project/close}" method="get"></form>
-                        
-                    </div>
-                    <hr>
-                    <div class="tag">
-                        <h6>태그</h6>
-                    </div>
-                    <div class="btn_wrap">
-                        <button type="button" class="btn btn-primary" id="game">게임</button>
-                        <button type="button" class="btn btn-secondary" id="perfume">향수</button>
-                        <button type="button" class="btn btn-success" id="design">디자인</button>
-                        <button type="button" class="btn btn-danger" id="knowledge">지식</button>
-                        <button type="button" class="btn btn-warning" id="trend">트렌드</button>
-                        <button type="button" class="btn btn-info" id="publishing">출판</button>
-                        <button type="button" class="btn btn-light" id="media">미디어</button>
-                        <button type="button" class="btn btn-dark" id="animal">애완</button>
-                    </div>
-                </div>
+                     </div>
+
+                     <div class="col-12 col-md-6 col-xl-3" th:unless="${not #lists.isEmpty(result)}">
+                        <span>받은 문의가 없습니다.</span>
+                     </div>
+                  </div>
+               </div>
             </div>
-        </div>
-        <!-- lookaround end -->
-	</div>
+         </div>
+      </div>
+      <!-- container end -->
+      <div class="modal fade" id="qna_modal" data-bs-backdrop="static"
+         data-bs-keyboard="false" tabindex="-1" aria-hidden="true"
+         th:fragment="qna_modal">
+         <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h5 class="modal-title">문의답변</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal"
+                     aria-label="Close"></button>
+               </div>
+               <div class="modal-body">
+                  <dl>
+                     <dt>받는사람</dt>
+                     <dd>
+                        <input type="text" class="form-control" name="re" id="receiver"
+                           readonly>
+                        <!-- th:value="${vo.prWriter}" -->
+                     </dd>
+                     <dt>문의내용</dt>
+                     <dd>
+                        <select class="form-select" id="qna_category">
+                           <option value="">문의유형</option>
+                           <option value="선물/후원">선물/후원</option>
+                           <option value="프로젝트">프로젝트</option>
+                           <option value="수령자 정보">수령자 정보</option>
+                           <option value="배송">배송</option>
+                           <option value="기타">기타</option>
+                        </select>
+                     </dd>
+                  </dl>
+                  <textarea class="form-control" id="qna_contents" rows="5" col="20"
+                     placeholder="프로젝트 진행자에게 문의하고 싶은 내용을 적어주세요."></textarea>
+               </div>
+               <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary"
+                     data-bs-dismiss="modal">닫기</button>
+                  <button type="button" class="btn btn-primary" id="addQnaBtn">답장하기</button>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- modal fade end -->
+      <div th:replace="fragments/lookaround.html :: fg-lookaround"></div>
+      <!-- lookaround end -->
+   </div>
 </body>
 </html>
