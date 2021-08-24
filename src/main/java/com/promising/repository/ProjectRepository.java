@@ -21,13 +21,13 @@ public interface ProjectRepository extends JpaRepository<ProjectVO, Long>, Query
 //	@Query("SELECT * FROM (SELECT A.*, ROWNUM AS RNUM FROM (SELECT * FROM pr_project where pr_check not in ('N') and pr_status not in('F')) A )WHERE RNUM > 0 AND RNUM <= 12")
 	List<ProjectVO> selectAll();
 	
-	@Query(value="select * from pr_project where pr_status not in ('N') order by pr_current_money desc", nativeQuery = true)
+	@Query(value="select * from pr_project where pr_status not in ('N') and pr_status not in ('F') order by pr_current_money desc", nativeQuery = true)
 	Page<ProjectVO> selectPopular(Predicate makePredicate, Pageable page);
 	
-	@Query(value="select * from pr_project where pr_status not in ('N') order by pr_startdate desc", nativeQuery = true)
+	@Query(value="select * from pr_project where pr_status not in ('N') and pr_status not in ('F') order by pr_startdate desc", nativeQuery = true)
 	Page<ProjectVO> selectNewest(Predicate makePredicate, Pageable page);
 	
-	@Query(value="select * from pr_project where pr_status not in ('N') order by pr_enddate asc", nativeQuery = true)
+	@Query(value="select * from pr_project where pr_status not in ('N') and pr_status not in ('F') order by pr_enddate asc", nativeQuery = true)
 	Page<ProjectVO> selectClose(Predicate makePredicate, Pageable page);
 	
 	@Transactional

@@ -150,59 +150,8 @@
          </div>
       </div>
       <!-- modal fade end -->
-      <div class="lookaround">
-            <div id="searchHeader">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-2">
-                            <button id="search_close">검색창 닫기</button>
-                        </div>
-                        <div class="col-8">
-                            <h2 class="search_title">프로젝트 둘러보기</h2>
-                        </div>
-                        <div class="col-2"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="search_wrap">
-                <div class="container">
-                   <div class="project">
-                        <div class="shortcut">
-                            <h4><a href="/project/list">모든 프로젝트</a></h4>
-                        </div>
-                        <div class="shortcut">
-                            <h4><a href="#" id="popularPro">인기 프로젝트</a></h4>
-                        </div>
-                        <div class="shortcut">
-                            <h4><a href="#" id="newPro">신규 프로젝트</a></h4>
-                        </div>
-                        <div class="shortcut">
-                            <h4><a href="#" id="closePro">성공 임박 프로젝트</a></h4>
-                        </div>
-                        
-                        <form id="f1" th:action="@{../../project/popular}" method="get"></form>
-                        <form id="f2" th:action="@{../../project/newest}" method="get"></form>
-                        <form id="f3" th:action="@{../../project/close}" method="get"></form>
-                        
-                    </div>
-                    <hr>
-                    <div class="tag">
-                        <h6>태그</h6>
-                    </div>
-                    <div class="btn_wrap">
-                        <button type="button" class="btn btn-primary" id="game">게임</button>
-                        <button type="button" class="btn btn-secondary" id="perfume">향수</button>
-                        <button type="button" class="btn btn-success" id="design">디자인</button>
-                        <button type="button" class="btn btn-danger" id="knowledge">지식</button>
-                        <button type="button" class="btn btn-warning" id="trend">트렌드</button>
-                        <button type="button" class="btn btn-info" id="publishing">출판</button>
-                        <button type="button" class="btn btn-light" id="media">미디어</button>
-                        <button type="button" class="btn btn-dark" id="animal">애완</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- lookaround end -->
+      <div th:replace="fragments/lookaround.html :: fg-lookaround"></div>
+      <!-- lookaround end -->
    </div>
 </body>
 </html>
