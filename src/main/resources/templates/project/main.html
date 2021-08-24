@@ -81,7 +81,8 @@
                                    <a th:href="@{/project/story/} + ${pro.pno}">[[${pro.prTitle}]]</a>
                                </div>
                                <div class="achi">
-                                   <span>[[${pro.prCurrentMoney}]]원</span>
+                               
+                                   <span>[[${#numbers.formatDecimal(pro.prCurrentMoney, 0, 'COMMA', 0, 'POINT')}]]원</span>
                                </div>
                            </div>
                        </div>
