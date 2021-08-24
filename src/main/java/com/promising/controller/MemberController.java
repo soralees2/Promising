@@ -103,7 +103,7 @@ public class MemberController {
 
 
 	}
-	@RequestMapping(value="/auth/infoUpdate/{uname}",method = RequestMethod.POST)
+	@RequestMapping(value="/auth/nameUpdate/{uname}",method = RequestMethod.POST)
 	@ResponseBody
 	public void nameUpdate(@PathVariable("uname") String uname,@RequestBody MemberVO mvo,Model model,Principal principal) {
 		System.out.println("10시");
@@ -174,7 +174,7 @@ public class MemberController {
 		}
 		System.out.println(vo);
 		repo.save(vo);
-		return "redirect:/member/auth/infoUpdate";
+		return "redirect:/member/auth/mypage";
 
 	}
 

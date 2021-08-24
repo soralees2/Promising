@@ -59,8 +59,8 @@
 											<img src="/static/images/atom02.png" width="120px">
 										</div>
 										<div class="item card-body">
-											<span class="cate">분류 : [[${pro.qnacategory}]]</span>
-											<div class="pro">프로젝트 제목</div>
+											<span class="cate pro">분류 : [[${pro.qnacategory}]]</span>
+											<!-- <div class="pro">프로젝트 제목</div> -->
 											<div class="writer">수신 : [[${pro.receiver}]]</div>
 											<div class="date">[[${#dates.format(pro.regDate, ' yy년 MM월 dd일  HH:mm:ss')}]]</div>
 										</div>
@@ -84,14 +84,14 @@
 											<img src="/static/images/atom02.png" width="120px">
 										</div>
 										<div class="item card-body">
-											<span class="cate">분류 : [[${pro.qnacategory}]]</span>
-											<div class="pro">프로젝트 제목</div>
+											<span class="cate pro">분류 : [[${pro.qnacategory}]]</span>
+											<!-- <div class="pro">프로젝트 제목</div> -->
 											<div class="writer">발신 : <span id="writergo">[[${pro.writer}]]</span></div>
 											<div class="date">[[${#dates.format(pro.regDate, ' yy년 MM월 dd일  HH:mm:ss')}]]</div>
 										</div>
 										<div class="item card-body contents">[[${pro.contents}]]</div>
-										<div class="item ibtn">
-											<button class="btn btn-light modalUp" type="button"
+										<div class="item ibtn align-self-center">
+											<button class="btn btn-light modalUp " type="button" id="replyBtn"
 													data-bs-toggle="modal" data-bs-target="#qna_modal">답장보내기</button>
 										</div>
 									</div>
