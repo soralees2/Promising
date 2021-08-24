@@ -193,11 +193,9 @@ public class ProjectController {
 		vo.setPrWriter(newvo.getUname());
 		java.sql.Date prStartdate =java.sql.Date.valueOf(prStartday);
 		java.sql.Date prEnddate =java.sql.Date.valueOf(prEndday);
-
 		vo.setPrStartdate(prStartdate);
 		vo.setPrEnddate(prEnddate);
-		vo.setPrCheck("N");
-		vo.setPrStatus("I");
+		vo.setPrStatus("N");
 		System.out.println(targetmoney+" "+presentprice);
 		vo.setPrTargetMoney(Integer.parseInt(targetmoney));
 		vo.setPrPresentPrice(Integer.parseInt(presentprice));

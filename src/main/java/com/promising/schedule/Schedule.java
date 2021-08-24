@@ -13,7 +13,7 @@ public class Schedule {
 	
 	@Autowired
 	private ProjectRepository repo;
-	@Scheduled(cron = "0 53 23 ? * sat")
+	@Scheduled(cron = "0 0 9-18 ? * *")
 	public void updatePrCheck() {
 		repo.updatePrCheck();
 }

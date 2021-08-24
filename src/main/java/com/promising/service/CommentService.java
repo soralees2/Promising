@@ -35,4 +35,6 @@ public class CommentService {
 	public CommentVO getCmtOfCommunity(Long commnetno) {
 		return repo.getCmtOfCommunity(commnetno);
 	}
-}
+	
+	}
+
