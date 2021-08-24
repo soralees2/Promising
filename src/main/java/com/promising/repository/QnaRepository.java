@@ -15,8 +15,8 @@ public interface QnaRepository  extends JpaRepository<QnaVO, Long> {
 	public List<QnaVO> selectQnaTome(String member_username);
 
 	//내가 보낸 프로젝트 문의
-	@Query(value="select * from pr_qna where writer=:writer", nativeQuery = true)
-	public List<QnaVO> selectQnaToOthers(String writer);
+	@Query(value="select * from pr_qna where writer=:member_username", nativeQuery = true)
+	public List<QnaVO> selectQnaToOthers(String member_username);
 
 	@Query("SELECT q FROM QnaVO q WHERE q.member= ?1 AND q.qnano > 0 ORDER BY q.qnano ASC")
 	public List<QnaVO> getQnaOfMember(MemberVO member);

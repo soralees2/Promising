@@ -71,7 +71,7 @@
 										<div class="imgDiv">
 											<img th:src="@{/static/images/main/card1.jpeg}"
 												class="card-img-top" alt="...">
-											
+
 										</div>
 										<div class="card-body">
 
@@ -122,14 +122,15 @@
 									<div class="card">
 										<div class="imgDiv">
 											<img th:src="@{/static/images/main/card1.jpeg}"
-												class="card-img-top" alt="..."> 
+												class="card-img-top" alt="...">
 										</div>
 										<div class="card-body">
 
 											<div class="writer">
 												<span id="prCategory" class="originQnaNo"><a href="#">[[${pro.qnano}]]</a></span>
-												<span class="division">|</span><span id="prCategory"><a href="#">[[${pro.qnacategory}]]</a></span>
-												<span class="modalUp" id="prCategory"><a href="#">[[${pro.contents}]]</a></span>
+												<span class="division">|</span><span id="prCategory"><a
+													href="#">[[${pro.qnacategory}]]</a></span> <span class="modalUp"
+													id="prCategory"><a href="#">[[${pro.contents}]]</a></span>
 												<span class="division">|</span> <span class="writergo">[[${pro.writer}]]</span>
 
 											</div>
@@ -230,63 +231,59 @@
 		<!-- Wrap 닫기 -->
 	</div>
 
-<script>
+	<script>
+		$(function() {
+			//답장보내기 버튼눌렀을때 이름 적기
+			$(".modalUp").on('click',function() {
 
-$(function(){
-	//답장보내기 버튼눌렀을때 이름 적기
-	$(".modalUp").on('click',function(){
-		
-	let taker=$(this).parents().closest(".card").find(".writergo").text();
-	let QnaNo=$(this).parents().closest(".card").find(".originQnaNo").text();	
-		
-		console.log(taker);
+								let taker = $(this).parents().closest(".card").find(".writergo").text();
+								let QnaNo = $(this).parents().closest(".card").find(".originQnaNo").text();
 
-	$("#receiver").val(taker);
-	
-	$("#addQnaBtn").on('click', function(){
-		let category = $("#qna_category option:selected").val();
-		let contents = $("#qna_contents").val();		
-		let receiver = $("#receiver").val();
-		console.log("receiver : " + receiver);
-		console.log("category : " + category);
-		console.log("contents : " + contents);
-		
-		let obj = {contents: contents,qnacategory:category, member:receiver,receiver:receiver};
-	  	console.log(JSON.stringify(obj));
-	  	let url = '/member/' + obj.receiver;
-	 	console.log(url);
-	 	
-			$.ajax({
-				type:'post',
-	  		url: decodeURI(url),
-		  	data : JSON.stringify(obj),
-		  	dataType:'json',
-		  	contentType: "application/json",
-		  	beforeSend: function (jqXHR, settings) {
-	       		let header = $("meta[name='_csrf_header']").attr("content");
-	       		let token = $("meta[name='_csrf']").attr("content");
-	       		jqXHR.setRequestHeader(header, token);
-			}
-			}).done(function(){
-				console.log("성공");
-				$('#qna_modal').modal('hide');
-			})
-			
-		
-	})
-	
-	
-	});
-	
-	
+								console.log(taker);
 
-});
+								$("#receiver").val(taker);
 
+								$("#addQnaBtn").on('click',function() {
+													let category = $("#qna_category option:selected").val();
+													let contents = $("#qna_contents").val();
+													let receiver = $("#receiver").val();
+													console.log("receiver : "+ receiver);
+													console.log("category : "+ category);
+													console.log("contents : "+ contents);
 
+													let obj = {
+														contents : contents,
+														qnacategory : category,
+														member : receiver,
+														receiver : receiver
+													};
+													console.log(JSON.stringify(obj));
+													let url = '/member/'+ obj.receiver;
+													console.log(url);
+														$.ajax({
+														type : 'post',
+														url : decodeURI(url),
+														data : JSON.stringify(obj),
+														dataType : 'json',
+														contentType : "application/json",
+														beforeSend : function(
+														jqXHR,settings) {
+														let header = $("meta[name='_csrf_header']").attr("content");
+																		let token = $("meta[name='_csrf']").attr("content");
+																			jqXHR.setRequestHeader(header,token);
+																		}
+																	}).done(
+																	function() {
+																		console.log("성공");
+																		$('#qna_modal').modal('hide');
+																	})
 
+												})
 
+							});
 
-</script>
+		});
+	</script>
 
 
 
