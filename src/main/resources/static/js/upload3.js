@@ -99,8 +99,6 @@ $('#summernote').summernote({
 						let form = new FormData();
 						form.append("file", file);
 						
-						console.log(file);
-						
 						$.ajax({
 								data: form,
          						type: "POST",
@@ -114,17 +112,9 @@ $('#summernote').summernote({
 		                     jqXHR.setRequestHeader(header, token);
 				         }
 						}).done(function(resp){
-							let test = $("#urlTest").val();
-							//let urrr = $("#testimg").getAttribute("src");
-							//let url =  /*[[@{/static/images/summernoteuploading/}]]*/ +resp;
-							//alert(urrr);
-							console.log( resp);
-							console.log(editor);
-							//$(editor).summernote("insertImage", urrr+"/"+ resp);
-							//	$(editor).summernote("insertImage", url);
 							setTimeout(function() {
 								$(editor).summernote("insertImage", "/static/images/summernoteuploading/"+resp);
-							},2600);
+							},3200);
 							
 						})
 					}
