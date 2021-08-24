@@ -208,10 +208,12 @@ public class MemberController {
 
 		List<QnaVO> result = qnaRepo.selectQnaTome(writer);
 		List<QnaVO> send = qnaRepo.selectQnaToOthers(writer);
+		List<ProjectVO> project = repoProject.findAll();
 		System.out.println("이것이 내가 받은 문의"+result);
 		System.out.println("이것이 다른사람에게 보낸 문의"+send);
 		model.addAttribute("result", result);
 		model.addAttribute("result2", send);
+		model.addAttribute("project", project);
 	}
 
 
