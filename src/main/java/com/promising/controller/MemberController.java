@@ -103,8 +103,6 @@ public class MemberController {
 
 
 	}
-
-
 	@RequestMapping(value="/auth/infoUpdate/{uname}",method = RequestMethod.POST)
 	@ResponseBody
 	public void nameUpdate(@PathVariable("uname") String uname,@RequestBody MemberVO mvo,Model model,Principal principal) {
@@ -317,77 +315,49 @@ public class MemberController {
 	@RequestMapping(value="/auth/pwModify",method = RequestMethod.POST)
 	@ResponseBody
 	public String pwUpdate(@RequestBody Map<String,Object> param,Model model,Principal principal) {
-
-		System.out.println("변경~~start");
-		System.out.println(principal.getName());
 		String originName =principal.getName();		
-
-
-		for(String key : param.keySet()){
-			System.out.println(key + " : " + param.get(key));
-		}
-
-		System.out.println(param.toString());
-
-
-		//만약에 originName 이 DB에 존재한다면 &안한다면
-
-		String nowPw=(String)param.get("currPw");
 		String toNewPw=(String)param.get("modifyPw1");
-
-		System.out.println(nowPw+": 이것은 현재비번");
-		System.out.println(toNewPw+": 이것은 바꾼비번");
-
-
 		MemberVO vo=repo.findByUsername(originName).get(); //찐
-
-
-		vo.setPassword(nowPw);
-
-		if(originName==nowPw) {
-			vo.setPassword(pwEncoder.encode(toNewPw));		
-			repo.save(vo);
-			return "success";
-		}else {
-
-			return "error";
-		}
-
-
+		vo.setPassword(pwEncoder.encode(toNewPw));		
+		repo.save(vo);
+		return "success";
 	}
-
+	
+	
+	
+	
+	
 	@RequestMapping(value="/auth/addressUpdate",method = RequestMethod.POST)
-
 	public String addressUpdate(@RequestBody Map<String,Object> param,Model model,Principal principal) {
-
+		
 		System.out.println("변경~~start");
 		System.out.println(principal);
 		String originName =principal.getName();		
-
-
+		
+		
 		for(String key : param.keySet()){
 			System.out.println(key + " : " + param.get(key));
 		}
-
+		
 		System.out.println(param.toString());
-
+		
 		//만약에 originName 이 DB에 존재한다면 &안한다면
-
+		
 		String realName=(String)param.get("realName");
 		String address1=(String)param.get("address1");
 		String address2=(String)param.get("address2");
 		String postcode=(String)param.get("postcode");
 		String uphone=(String)param.get("uphone");
-
-
+		
+		
 		System.out.println(realName+": 이것은 진짜이름 ");
 		System.out.println(address1+": 이것은 주소1");
 		System.out.println(address2+": 이것은 주소2");
 		System.out.println(postcode+": 이것은 우편");
 		System.out.println(uphone+": 이것은 핸펀");
-
-
-
+		
+		
+		
 		MemberVO vo=repo.findByUsername(originName).get(); //찐
 		vo.setAddress1(address1);
 		vo.setAddress2(address2);
@@ -397,10 +367,10 @@ public class MemberController {
 		repo.save(vo);		
 		return "redirect:/member/infoUpdate";
 	}
-
+	
 	@GetMapping("/forget")
 	public void forget() {
-
+		
 	}
 	@PostMapping("/forget")
 	public String findPW(String username) throws MessagingException {
@@ -423,17 +393,17 @@ public class MemberController {
 						"		<span style=\"color: #02b875\">임시 비밀번호</span> 발급 안내입니다."																																				+ 
 						"	</h1>\n"																																																+ 
 						"	<p style=\"font-size: 16px; line-height: 26px; margin-top: 50px; padding: 0 5px;\">"																													+ 
-
-
+						
+						
 						"		<p style=\"color:#9083EC\">Promising</p> 계정을 찾아주셔서 진심으로 감사드립니다.<br />"																																						+ 
 						"		아래 <b style=\"color: #02b875\">'임시 비밀번호'</b>를 통해 로그인 후 비밀번호 변경 부탁드립니다.<br />"																													+ 
 						"		감사합니다."																																															+ 
 						"	</p>"																																																	+ 
-
+						
 								"<h2>"+secret+"</h2>"+
 								"		<p"																																																	+
-
-
+								
+						
 						"	</a>"																																																	+
 						"	<div style=\"border-top: 1px solid #DDD; padding: 5px;\"></div>"																																		+
 						" </div>"
@@ -441,19 +411,20 @@ public class MemberController {
 		emailcontent.append("</body>");
 		emailcontent.append("</html>");
 		emailService.sendMail(username, "Promising 임시 비밀번호 발급 메일입니다.", emailcontent.toString());
-
+		
 		return "redirect:/member/login";
 	}
-
+	
 	@GetMapping("/doublelogin")
 	public void doublelogin() {
-
+		
 	}
-
-
-
-
-
-
-
+	
+	
+	
+	
+	
+	
+	
 }
+		
