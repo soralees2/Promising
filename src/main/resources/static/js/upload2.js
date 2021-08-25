@@ -42,36 +42,76 @@ $(function () {
 		$("#f3").submit();
 	})
 
-	$("#game").on("click",function(){
-		location.href="http://localhost/project/list?page=1&size=12&type=게임&keyword=게임";
+		$("#game").on("click",function(){
+		typeStr = $(this).text();
+		keywordStr = $(this).text();
+		
+		$("#f5").find("[name='type']").val(typeStr);
+		$("#f5").find("[name='keyword']").val(keywordStr);
+		$("#f5").submit();
 	})
 	
 	$("#perfume").on("click",function(){
-		location.href="http://localhost/project/list?page=1&size=12&type=향수&keyword=향수";
+		typeStr = $(this).text();
+		keywordStr = $(this).text();
+		
+		$("#f5").find("[name='type']").val(typeStr);
+		$("#f5").find("[name='keyword']").val(keywordStr);
+		$("#f5").submit();
 	})
 	
 	$("#design").on("click",function(){
-		location.href="http://localhost/project/list?page=1&size=12&type=디자인&keyword=디자인";
+		typeStr = $(this).text();
+		keywordStr = $(this).text();
+		
+		$("#f5").find("[name='type']").val(typeStr);
+		$("#f5").find("[name='keyword']").val(keywordStr);
+		$("#f5").submit();
 	})
 	
 	$("#knowledge").on("click",function(){
-		location.href="http://localhost/project/list?page=1&size=12&type=지식&keyword=지식";
+		typeStr = $(this).text();
+		keywordStr = $(this).text();
+		
+		$("#f5").find("[name='type']").val(typeStr);
+		$("#f5").find("[name='keyword']").val(keywordStr);
+		$("#f5").submit();
 	})
 	
 	$("#trend").on("click",function(){
-		location.href="http://localhost/project/list?page=1&size=12&type=트렌드&keyword=트렌드";
+		typeStr = $(this).text();
+		keywordStr = $(this).text();
+		
+		$("#f5").find("[name='type']").val(typeStr);
+		$("#f5").find("[name='keyword']").val(keywordStr);
+		$("#f5").submit();
 	})
 	
 	$("#publishing").on("click",function(){
-		location.href="http://localhost/project/list?page=1&size=12&type=출판&keyword=출판";
+		typeStr = $(this).text();
+		keywordStr = $(this).text();
+		
+		$("#f5").find("[name='type']").val(typeStr);
+		$("#f5").find("[name='keyword']").val(keywordStr);
+		$("#f5").submit();
 	})
 	
 	$("#media").on("click",function(){
-		location.href="http://localhost/project/list?page=1&size=12&type=미디어&keyword=미디어";
+		typeStr = $(this).text();
+		keywordStr = $(this).text();
+		
+		$("#f5").find("[name='type']").val(typeStr);
+		$("#f5").find("[name='keyword']").val(keywordStr);
+		$("#f5").submit();
 	})
 	
 	$("#animal").on("click",function(){
-		location.href="http://localhost/project/list?page=1&size=12&type=애완&keyword=애완";
+		typeStr = $(this).text();
+		keywordStr = $(this).text();
+		
+		$("#f5").find("[name='type']").val(typeStr);
+		$("#f5").find("[name='keyword']").val(keywordStr);
+		$("#f5").submit();
 	})
 
 });

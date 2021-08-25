@@ -59,6 +59,14 @@
                        <button type="button" class="btn btn-light" id="media">미디어</button>
                        <button type="button" class="btn btn-dark" id="animal">애완</button>
                    </div>
+                   
+                   <form id="f5" th:action="@{../../project/list}" method="get">
+	                  <input type="hidden" name="page" th:value="1">
+	                  <input type="hidden" name="size" th:value="12">
+	                  <input type="hidden" name="type">
+	                  <input type="hidden" name="keyword">
+	               </form>
+                   
                </div>
            </div>
        </div>
