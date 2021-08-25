@@ -45,7 +45,7 @@
 .writer_profile .btn-qna i{color:#6c757d;transition:color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out}
 .writer_profile .btn-qna:hover i{color:#fff;}
 
-.payment{background-color:#fff;padding:2rem;box-shadow:rgb(10 10 10 / 10%) 0px 1px 2px 0px;margin-top:20px;}
+.payment{background-color:#fff;padding:2rem;box-shadow:rgb(10 10 10 / 10%) 0px 1px 2px 0px;}
 .payment h4{font-size:14px;font-weight:600;margin-bottom:15px;}
 .payment .money{font-size:30px;font-weight:600;margin-bottom:15px;border-bottom:1px solid #ddd;padding-bottom:10px;}
 .payment .money+p{margin-bottom:5px;}

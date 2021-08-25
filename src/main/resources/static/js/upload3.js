@@ -43,16 +43,15 @@ var minday=new Date();
 	$("#back").on("click", function () {
     history.back();
   });  
+
+
 $("#next").on("click",function(){
 	var startdate =getFormatDate(startday);
 	$("#prStartday").attr("value",startdate);
 	startday.setDate(startday.getDate()+parseInt(howlong));
 	var enddate = getFormatDate(startday);
 	$("#prEndday").attr("value",enddate);
-		var check = confirm("프로젝트 심사가 시작되면 수정할 수 없습니다. 프로젝트 작성을 완료하시겠습니까?");
-		if(check){
-			$("#projectform").submit();
-		}
+	
 })
 var token = $("meta[name='_csrf']").attr("content");
 var header = $("meta[name='_csrf_header']").attr("content");
@@ -68,9 +67,7 @@ function readInputFile(input) {
     }
 }
  
-$("#imgform").on('change', function(){
-    readInputFile(this);
-});
+
 
 
 $('#summernote').summernote({
@@ -119,6 +116,15 @@ $('#summernote').summernote({
 					}
 				}
 				});
+				
+				$("#imgform").on("change",function(){
+					if (this.files && this.files[0].size > (10 * 1024 * 1024)) {
+        			alert("10MB 이하의 파일을 업로드 해주세요!");
+       				 this.value = null;
+    				}else{
+	 					readInputFile(this);
+}
+				})
 
 
 	$("#popularPro").on("click",function(){
@@ -133,36 +139,76 @@ $('#summernote').summernote({
 		$("#f3").submit();
 	})
 
-	$("#game").on("click",function(){
-		location.href="http://localhost/project/list?page=1&size=12&type=게임&keyword=게임";
+		$("#game").on("click",function(){
+		typeStr = $(this).text();
+		keywordStr = $(this).text();
+		
+		$("#f5").find("[name='type']").val(typeStr);
+		$("#f5").find("[name='keyword']").val(keywordStr);
+		$("#f5").submit();
 	})
 	
 	$("#perfume").on("click",function(){
-		location.href="http://localhost/project/list?page=1&size=12&type=향수&keyword=향수";
+		typeStr = $(this).text();
+		keywordStr = $(this).text();
+		
+		$("#f5").find("[name='type']").val(typeStr);
+		$("#f5").find("[name='keyword']").val(keywordStr);
+		$("#f5").submit();
 	})
 	
 	$("#design").on("click",function(){
-		location.href="http://localhost/project/list?page=1&size=12&type=디자인&keyword=디자인";
+		typeStr = $(this).text();
+		keywordStr = $(this).text();
+		
+		$("#f5").find("[name='type']").val(typeStr);
+		$("#f5").find("[name='keyword']").val(keywordStr);
+		$("#f5").submit();
 	})
 	
 	$("#knowledge").on("click",function(){
-		location.href="http://localhost/project/list?page=1&size=12&type=지식&keyword=지식";
+		typeStr = $(this).text();
+		keywordStr = $(this).text();
+		
+		$("#f5").find("[name='type']").val(typeStr);
+		$("#f5").find("[name='keyword']").val(keywordStr);
+		$("#f5").submit();
 	})
 	
 	$("#trend").on("click",function(){
-		location.href="http://localhost/project/list?page=1&size=12&type=트렌드&keyword=트렌드";
+		typeStr = $(this).text();
+		keywordStr = $(this).text();
+		
+		$("#f5").find("[name='type']").val(typeStr);
+		$("#f5").find("[name='keyword']").val(keywordStr);
+		$("#f5").submit();
 	})
 	
 	$("#publishing").on("click",function(){
-		location.href="http://localhost/project/list?page=1&size=12&type=출판&keyword=출판";
+		typeStr = $(this).text();
+		keywordStr = $(this).text();
+		
+		$("#f5").find("[name='type']").val(typeStr);
+		$("#f5").find("[name='keyword']").val(keywordStr);
+		$("#f5").submit();
 	})
 	
 	$("#media").on("click",function(){
-		location.href="http://localhost/project/list?page=1&size=12&type=미디어&keyword=미디어";
+		typeStr = $(this).text();
+		keywordStr = $(this).text();
+		
+		$("#f5").find("[name='type']").val(typeStr);
+		$("#f5").find("[name='keyword']").val(keywordStr);
+		$("#f5").submit();
 	})
 	
 	$("#animal").on("click",function(){
-		location.href="http://localhost/project/list?page=1&size=12&type=애완&keyword=애완";
+		typeStr = $(this).text();
+		keywordStr = $(this).text();
+		
+		$("#f5").find("[name='type']").val(typeStr);
+		$("#f5").find("[name='keyword']").val(keywordStr);
+		$("#f5").submit();
 	})
 
 })

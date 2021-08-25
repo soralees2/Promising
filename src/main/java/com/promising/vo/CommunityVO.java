@@ -3,6 +3,7 @@ package com.promising.vo;
 import java.sql.Timestamp;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -52,7 +53,7 @@ public class CommunityVO {
 	private ProjectVO project;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy="community", fetch=FetchType.LAZY)
+	@OneToMany(mappedBy="community", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	private List<CommentVO> comment;
 	
 }
