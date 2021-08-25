@@ -54,19 +54,18 @@
                   <div class="tab-pane fade show active" id="pills-QnA"
                      role="tabpanel" aria-labelledby="pills-QnA-tab">
                      <div class="row" id="main_list" th:if="${not #lists.isEmpty(result2)}">
-                        <div class="col-12" th:each="pro:${result2}">
+                        <div class="col-sm-12 col-12 " th:each="pro:${result2}">
                            <div class="card">
                               <div class="item imgDiv">
                                  <!-- <img th:src="@{'/static/images/projectuploading/'+${pro.prSysName}}" class="card-img-top"> -->
-                                 <img src="/static/images/atom02.png" width="120px">
+                                 <!-- <img src="/static/images/atom02.png" width="120px"> -->
                               </div>
-                              <div class="item card-body">
-                                 <span class="cate">분류 : [[${pro.qnacategory}]]</span>
-                                 <div class="pro">프로젝트 제목</div>
-                                 <div class="writer">수신 : [[${pro.receiver}]]</div>
-                                 <div class="date">[[${#dates.format(pro.regDate, ' yy년 MM월 dd일  HH:mm:ss')}]]</div>
+                              <div class=" row item card-body">
+                                 <div class="col-sm-12 col-md-12"><span class="cate pro">분류 : [[${pro.qnacategory}]]</span></div>
+                                 <div class="col-sm-12 col-md-12 writer">수신 : [[${pro.receiver}]]</div>
+                                 <div class="col-sm-12 col-md-12 date">[[${#dates.format(pro.regDate, ' yy년 MM월 dd일  HH:mm:ss')}]]</div>
                               </div>
-                              <div class="item card-body contents">[[${pro.contents}]]</div>
+                              <div class="item card-body contents" id="contentsDetail3"><textarea id=contentsDetail4 readonly>[[${pro.contents}]]</textarea></div>
                            </div>
                         </div>
                      </div>
@@ -83,18 +82,17 @@
                            <div class="card">
                               <div class="item imgDiv">
                                  <!-- <img th:src="@{'/static/images/projectuploading/'+${pro.prSysName}}" class="card-img-top"> -->
-                                 <img src="/static/images/atom02.png" width="120px">
+                                <!--  <img src="/static/images/atom02.png" width="120px"> -->
                               </div>
                               <div class="item card-body">
-                                 <span class="cate">분류 : [[${pro.qnacategory}]]</span>
-                                 <div class="pro">프로젝트 제목</div>
+                                 <span class="cate pro">분류 : [[${pro.qnacategory}]]</span>
                                  <div class="writer">발신 : <span id="writergo">[[${pro.writer}]]</span></div>
                                  <div class="date">[[${#dates.format(pro.regDate, ' yy년 MM월 dd일  HH:mm:ss')}]]</div>
                               </div>
-                              <div class="item card-body contents">[[${pro.contents}]]</div>
+                              <div class="item card-body contents" id="contentsDetail"><textarea id=contentsDetail2 readonly>[[${pro.contents}]]</textarea></div>
                               <div class="item ibtn">
                                  <button class="btn btn-light modalUp" type="button"
-                                       data-bs-toggle="modal" data-bs-target="#qna_modal">답장보내기</button>
+                                       data-bs-toggle="modal" data-bs-target="#qna_modal" id="replyBtn">답장보내기</button>
                               </div>
                            </div>
                         </div>
@@ -130,8 +128,8 @@
                      </dd>
                      <dt>문의내용</dt>
                      <dd>
-                        <select class="form-select" id="qna_category">
-                           <option value="">문의유형</option>
+                        <select class="form-select" id="qna_category" required="required">
+                           <option value="#">문의유형</option>
                            <option value="선물/후원">선물/후원</option>
                            <option value="프로젝트">프로젝트</option>
                            <option value="수령자 정보">수령자 정보</option>
@@ -141,7 +139,7 @@
                      </dd>
                   </dl>
                   <textarea class="form-control" id="qna_contents" rows="5" col="20"
-                     placeholder="프로젝트 진행자에게 문의하고 싶은 내용을 적어주세요."></textarea>
+                     placeholder="프로젝트 진행자에게 문의하고 싶은 내용을 적어주세요." required></textarea>
                </div>
                <div class="modal-footer">
                   <button type="button" class="btn btn-secondary"

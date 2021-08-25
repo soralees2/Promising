@@ -17,8 +17,10 @@
 }
 
 #replyBtn{
-	margin-top:10px;
+	margin-top:-40px;
 	margin-left:28px;
+	 border:1px solid gray;
+	 position:relative;
 }
 
 
@@ -54,6 +56,34 @@
 	height:150px;
 	padding:10px;
 }
+
+#contentsDetail{
+height:120px;}
+
+#contentsDetail2{width:650px;
+height:110px;
+margin-left:-40px;
+border:none;
+overflow-y:auto;
+
+}
+
+#contentsDetail3{
+height:120px;}
+
+#contentsDetail4{width:650px;
+height:110px;
+margin-left:-40px;
+border:none;
+overflow-y:auto;
+
+
+}
+
+
+
+
+
 .item{
 	float:left;
 }
