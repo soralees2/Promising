@@ -26,6 +26,7 @@ import com.promising.vo.CommentVO;
 import com.promising.vo.CommunityVO;
 import com.promising.vo.MemberVO;
 import com.promising.vo.PageVO;
+import com.promising.vo.ProjectVO;
 
 @Controller
 @RequestMapping("/com")
@@ -47,6 +48,7 @@ public class CommunityController {
 	// 커뮤니티 글 작성 
 	@PostMapping("/insert/{project}")
 	public String registerPost(@ModelAttribute("vo")CommunityVO vo, @PathVariable("project") Long pno, Principal principal) {
+		
 		String userName = principal.getName();
 		vo.setWriter(userName);
 		repo.save(vo);
@@ -80,6 +82,7 @@ public class CommunityController {
 		vo.setCommunityno(cno);
 		return new ResponseEntity<>(getListByCommunity(vo),HttpStatus.OK);
 	}
+	
 	
 	//댓글 추가
 	@Transactional
