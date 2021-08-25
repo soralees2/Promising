@@ -18,7 +18,10 @@
 
 #replyBtn {
 	border: 1px solid gray;
-	margin-top: 40px;
+	position:absolute;
+	top:20%;
+	right:20px;
+	transform:translate(-50%,-50%);
 }
 
 .nameline {
@@ -61,14 +64,18 @@
 	height: 120px;
 }
 
+
+#boxbox{
+	max-height:100px;	
+}
+
 #contentsDetail3 {
-	width: 650px;
-	border: none;
 	
 }
 
 #contentsDetail3 > p{
 	overflow-y: auto;
+	width:100%; 
 	max-height:100px;
 }
 
@@ -77,13 +84,10 @@
 }
 
 .card-body {
-	width: 30%;
+	
 	font-size: 16px;
 }
 
-.contents {
-	width: 50%;
-}
 
 .imgDiv img {
 	padding: 10px;
