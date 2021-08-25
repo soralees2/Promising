@@ -55,21 +55,21 @@
                      role="tabpanel" aria-labelledby="pills-QnA-tab">
                      <div id="main_list" th:if="${not #lists.isEmpty(result2)}">
                         <div th:each="pro:${result2}">
-                           <div class="row card">
+                           <div class="row  card">
                               <!-- <div class="item imgDiv">
                                  <img th:src="@{'/static/images/projectuploading/'+${pro.prSysName}}" class="card-img-top">
                                  <img src="/static/images/atom02.png" width="120px">
                               </div> -->
-                              <div class="col-sm-12 col-md-4 item card-body">
+                              <div class="  col-12 col-md-4   item card-body" id="boxbox">
                                  <div><span class="cate pro">분류 : [[${pro.qnacategory}]]</span></div>
                                  <div class="writer">수신 : [[${pro.receiver}]]</div>
                                  <div class="date">[[${#dates.format(pro.regDate, ' yy년 MM월 dd일  HH:mm:ss')}]]</div>
                               </div>
-                              <div class="col-sm-12 col-md-8 item card-body contents" id="contentsDetail3"><p>[[${pro.contents}]]</p></div>
+                              <div class="  col-12 col-md-8   item card-body contents" id="contentsDetail3"><p>[[${pro.contents}]]</p></div>
                            </div>
                         </div>
                      </div>
-                     <div class="col-12 col-md-6 col-xl-3" th:unless="${not #lists.isEmpty(result)}">
+                     <div class="d-lg-block col-lg-12" th:unless="${not #lists.isEmpty(result)}">
                         <span>보낸 문의가 없습니다.</span>
                      </div>
                   </div>
@@ -84,18 +84,16 @@
                                  <img th:src="@{'/static/images/projectuploading/'+${pro.prSysName}}" class="card-img-top">
                                  <img src="/static/images/atom02.png" width="120px">
                               </div> -->
-                              <div class="col-sm-1 col-md-1 col-1 item card-body">
-                              	<div class="row">
+                              <div class="col-12 col-md-12 item card-body">
+                              	<div class="">
                               		<div class="col-8"><span class="cate pro">분류 : [[${pro.qnacategory}]]</span></div>
 	                                <div class="col-8 writer">발신 : [[${pro.writer}]]</div>
 	                                <div class="col-8 date">[[${#dates.format(pro.regDate, ' yy년 MM월 dd일  HH:mm:ss')}]]</div>	
-                              	</div>
-                              </div>
-                              <div class="col-sm-7 col-md-7 col-7 item card-body contents" id="contentsDetail3"><p>[[${pro.contents}]]</p></div>
-                              <div class="col-sm-2 col-md-2 col-2 item ibtn">
                                  <button class="btn btn-light modalUp" type="button"
                                        data-bs-toggle="modal" data-bs-target="#qna_modal" id="replyBtn">답장보내기</button>
+                              	</div>
                               </div>
+                              <div class="col-12 col-md-12 item card-body contents" id="contentsDetail3"><p>[[${pro.contents}]]</p></div>
                            </div>
                         </div>
                         
