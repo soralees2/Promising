@@ -53,19 +53,19 @@ public interface ProjectRepository extends JpaRepository<ProjectVO, Long>, Query
 		  //내가 올린프로젝트 심사중
 		  
 		  @Query(
-		  value="select * from pr_project where pr_status in ('N') and pr_writer=:writer"
+		  value="select * from pr_project where pr_status in ('N') and pr_writer=:writer order by reg_date desc"
 		  , nativeQuery = true) List<ProjectVO> selectCheckingPro(String writer);
 		 
 		  //내가 진행중인 프로젝트
 		  
 		  @Query(
-		 value="select * from pr_project where pr_status in ('I') and pr_writer=:writer"
+		 value="select * from pr_project where pr_status in ('I') and pr_writer=:writer order by reg_date desc"
 		  , nativeQuery = true) List<ProjectVO> selectProceedingPro(String writer);
 		  
 		  //내가 올린프로젝트 완료된것
 		  
 		 @Query(
-		  value="select * from pr_project where pr_status in ('F') and pr_writer=:writer"
+		  value="select * from pr_project where pr_status in ('F') and pr_writer=:writer order by reg_date desc"
 		  , nativeQuery = true) List<ProjectVO> selectFinishedPro(String writer);
 		 
 
