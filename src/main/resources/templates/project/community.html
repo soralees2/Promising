@@ -56,7 +56,7 @@
 													</form>
 												</div>
 												<div class="txt">
-													<p>[[${com.contents}]]</p>
+													<p class="comt">[[${com.contents}]]</p>
 												</div>
 												<div class="amount_wrap">
 													<a href="javascript:;" class="ic" data-bs-toggle="tooltip" data-bs-placement="right" title="눌러서 댓글 보기"><i class="far fa-comments"></i><b>2</b></a>
@@ -112,12 +112,14 @@
 		
 		// 커뮤니티 수정 modal open
 		$(".btn_modify").on("click", function(){
-			let contents = $(this).closest(".post").find(".txt p").text();
+			let contents = $(this).closest(".post").children().find(".comt").text();
 			let cno = $(this).closest(".post").find(".cno").val();
-
+			
 			cmModal.find(".modal-title").text("커뮤니티 게시글 수정");
 			cmModal.addClass("modify");
 			cmModal.find(".cno").val(cno); 
+
+			alert(contents);
 			$("#addCommunityBtn").text("수정하기");
 			$("#com_contents").text(contents);
 			
@@ -195,7 +197,7 @@
 					});	
 				}
 			}else{
-				txt.val("");
+				txt.val('');
 				return false;
 			}
 		})
