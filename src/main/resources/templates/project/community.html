@@ -33,7 +33,7 @@
 											<p>게시글이 없습니다.</p>
 										</div>
 										<div class="post_list" th:case="*">
-											<div class="post" th:each="com :${com}">
+											<div class="post" th:each="com:${com}" >
 												<div class="pf_wrap">
 <!--  														<div class="pf_img" th:style="'background:url(' + @{/static/images/profileUpload/}+${com.profile} + ') 50% 50% no-repeat;background-size:cover!important'"></div> -->
 													<div class="pf_link">
@@ -55,7 +55,8 @@
 													</form>
 												</div>
 												<div class="txt">
-													<p class="comt">[[${com.contents}]]</p>
+													<p class="comt" th:utext="${com.contents}">[[${com.contents}]]</p>
+													<input type="hidden" th:value="${com.contents}" id="brText">
 												</div>
 												<div class="amount_wrap">
 													<a href="javascript:;" class="ic" data-bs-toggle="tooltip" data-bs-placement="right" title="눌러서 댓글 보기"><i class="far fa-comments"></i><b>2</b></a>
@@ -111,16 +112,18 @@
 		
 		// 커뮤니티 수정 modal open
 		$(".btn_modify").on("click", function(){
-			let contents = $(this).closest(".post").children().find(".comt").text();
+			let contents =$(this).closest(".post").children().find("#brText").val();
 			let cno = $(this).closest(".post").find(".cno").val();
 			
 			cmModal.find(".modal-title").text("커뮤니티 게시글 수정");
 			cmModal.addClass("modify");
 			cmModal.find(".cno").val(cno); 
 
-			alert(contents);
 			$("#addCommunityBtn").text("수정하기");
 			$("#com_contents").text(contents);
+
+			var brText = contents.split('<br>').join("\r\n")
+			$("#com_contents").text(brText);
 			
 	 	}); 
 		
@@ -130,6 +133,7 @@
 			if(cmModal.hasClass("modify")){ 
 				check = confirm("글을 수정 하시겠습니까?");
 				if(check){
+					getHtml();
 					communityForm.attr("action", "/com/modify/" + pno);
 					communityForm.submit();
 					cmModal.removeClass("modify");
@@ -140,6 +144,7 @@
 			}else{ 
 				check = confirm("글을 등록 하시겠습니까?");
 				if(check){
+					getHtml();
 					communityForm.attr("action", "/com/insert/" + pno);
 					communityForm.submit();					
 				}else{
@@ -231,7 +236,7 @@
 				let rmBtn = $("<button class='btn btn-sm btn-outline-danger btnCmtremove'>삭제</button>");
 				let cmo = $("<input type=hidden name=commentno value=" + comObj.commentno + ">");
 				cmo.addClass("cmtNo");
-/* 				pf_wrap.append(pf_img); */
+				/*pf_wrap.append(pf_img); */
 				pf_wrap.append(pf_link);
 				pf_link.append(regdate);
 				cmt.append(pf_wrap);
@@ -298,23 +303,12 @@
 			}
 		}
 		
+		function getHtml(){
+			var html = $("#com_contents").val().replace(/(?:\r\n|\r|\n)/g, '<br>');
+			$("#com_contents").val(html);
+		}
 		
-		
-		// 프로필사진 가져오기
-	/* 	$.ajax({
-  			type:'get',
-	  		url: '/com/profile/' + pno,
-		  	data : pno,
-		  	dataType:'json',
-		  	contentType: "application/json",
-		  	beforeSend: function (jqXHR, settings) {
-           		let header = $("meta[name='_csrf_header']").attr("content");
-           		let token = $("meta[name='_csrf']").attr("content");
-           		jqXHR.setRequestHeader(header, token);
-			}
-  		}).done(function(resp){
-  			console.log("성공");
-		}) */
+	
 		
 	})
 	</script>
