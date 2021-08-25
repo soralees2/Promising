@@ -113,24 +113,27 @@ $(function(){
 	 
 	 
 	 // 후원 금액 선택 
-	$("#pay_01").on("click", function(){
-		$("#btn_payment01").text("1 만 원 후원하기");
-		$("._01 .money strong").text("+10000");
+	$("#payment .btn_wrap button").on("click", function(){
+		if($(this).hasClass("pay_01")){
+			moneyPlus(5000);
+		}else if($(this).hasClass("pay_02")){
+			moneyPlus(10000);
+		}else if($(this).hasClass("pay_03")){
+			moneyPlus(30000);
+		}else if($(this).hasClass("pay_04")){
+			moneyPlus(50000);
+		}
 	});
-	$("#pay_02").on("click", function(){
-		$("#btn_payment01").text("30 만 원 후원하기");
-		$("._01 .money strong").text("+300000");
-	});
-	$("#pay_03").on("click", function(){
-		$("#btn_payment01").text("50 만 원 후원하기");
-		$("._01 .money strong").text("+500000");
-	});
-	$("#pay_04").on("click", function(){
-		$("#btn_payment01").text("100 만 원 후원하기");
-		$("._01 .money strong").text("+1000000");
-	});
+	function moneyPlus(m){
+		let paymoney = $("._01 .money strong");
+		let total = Number(paymoney.text().substring(1));
+		total += m;
+		paymoney.text("+" + total);
+		$("#btn_payment01").text(total + "원 후원하기");
+	}
 
 	// 결제 금액 입력
+	/*
 	$("#add_money").on("keyup", function(e){
 		if ((e.keyCode < 48) || (e.keyCode > 57)){
 			$(this).val("");
@@ -160,6 +163,7 @@ $(function(){
 		}
 		$("#btn_payment01").text(total +" 원 후원하기");
 	});
+	*/
 	
 	$(".payment .btn_wrap button").on("click", function(){
 		$(this).addClass("active").siblings().removeClass("active");
@@ -194,25 +198,11 @@ $(function(){
 		let sponsorForm = $("#sponsorForm");
 		let payMoney = sponsorForm.find(".money strong").text();
 		let price = payMoney.substring(1);
-
 		$("#sprice").val(price);
 		
 		sponsorForm.attr("action", "/project/payment/" + pno);
 		sponsorForm.submit();	
 	});
-	
-	// 결제 하기
-	/*$("#btn_payment02").on("click", function(){
-		let payForm = $("#payForm");
-		let payMoney = $("#payment_money").text().substring(1);;
-		let amount = payForm.find(".count").text();
-		
-		$("#price").val(payMoney);
-		$("#amount").val(amount);
-		payForm.attr("action", "/project/payment/" + pno);
-		payForm.submit();	
-	});*/
-	
 	
 	// 결제 하기
 	$("#btn_payment02").on("click", function(){
