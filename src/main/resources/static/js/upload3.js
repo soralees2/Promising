@@ -43,16 +43,15 @@ var minday=new Date();
 	$("#back").on("click", function () {
     history.back();
   });  
+
+
 $("#next").on("click",function(){
 	var startdate =getFormatDate(startday);
 	$("#prStartday").attr("value",startdate);
 	startday.setDate(startday.getDate()+parseInt(howlong));
 	var enddate = getFormatDate(startday);
 	$("#prEndday").attr("value",enddate);
-		var check = confirm("프로젝트 심사가 시작되면 수정할 수 없습니다. 프로젝트 작성을 완료하시겠습니까?");
-		if(check){
-			$("#projectform").submit();
-		}
+	
 })
 var token = $("meta[name='_csrf']").attr("content");
 var header = $("meta[name='_csrf_header']").attr("content");
@@ -68,9 +67,7 @@ function readInputFile(input) {
     }
 }
  
-$("#imgform").on('change', function(){
-    readInputFile(this);
-});
+
 
 
 $('#summernote').summernote({
@@ -119,6 +116,15 @@ $('#summernote').summernote({
 					}
 				}
 				});
+				
+				$("#imgform").on("change",function(){
+					if (this.files && this.files[0].size > (10 * 1024 * 1024)) {
+        			alert("10MB 이하의 파일을 업로드 해주세요!");
+       				 this.value = null;
+    				}else{
+	 					readInputFile(this);
+}
+				})
 
 
 	$("#popularPro").on("click",function(){

@@ -137,10 +137,10 @@
 
 
                               <div class="mb-3">
-                                 <label for="address" class="form-label">우편번호</label><br>
+                                 <label for="postCode" class="form-label">우편번호</label><br>
                                  <div class=combination id="addressBoxnIcon">
                                     <input type="text" name="postCode" class="form-control"
-                                       id="addressScope" th:value="${result.upostcode}" required>
+                                       id="postCode" th:value="${result.upostcode}" readonly required>
                                     <div class="modifyIcon">
                                        <a href="javacript:;" class="py-2 d-block"><i
                                           class="zmdi zmdi-search zmdi-hc-2x" id=searchAddress></i></a>
@@ -151,9 +151,9 @@
 
                         <div id="addressPart2">
                               <div class="mb-3">
-                                 <label for="postCode" class="form-label">주소</label><br>
+                                 <label for="address" class="form-label">주소</label><br>
                                  <input type="text" name="address1" class="form-control"
-                                    id="postCode" required th:value="${result.address1}">
+                                    id="addressScope" required th:value="${result.address1}">
                               </div>
 
 

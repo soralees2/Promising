@@ -43,7 +43,7 @@
 		<div class="container">
 			<div class="makingproject">
 				<div class="makingcontents">
-					<form th:action="@{/project/auth/upload3}" id="projectform"
+					<form th:action="@{/project/auth/upload3}" id="projectform" onsubmit="return confirm('프로젝트 심사가 시작되면 수정할 수 없습니다. 프로젝트 작성을 완료하시겠습니까?')"
 						method="post" enctype="multipart/form-data">
 						<input type="hidden" th:name="${_csrf.parameterName}"
 							th:value="${_csrf.token}">
@@ -82,8 +82,8 @@
 							</dl>
 							<div class="explain">
 								<div class="titlebox">
-									<input type="text" class="form-control w-100" name="prTitle"
-										placeholder="제목을 입력해주세요." required>
+									<input type="text" required class="form-control w-100" name="prTitle" id="prTitle"
+										placeholder="제목을 입력해주세요."  maxlength="150" >
 								</div>
 							</div>
 						</div>
@@ -99,8 +99,8 @@
 							</dl>
 							<div class="summary">
 								<div class="summarybox">
-									<textarea placeholder="프로젝트 요약" cols="90" rows="5"
-										name="prIntro" required></textarea>
+									<textarea required placeholder="프로젝트 요약" cols="90" rows="5"
+										name="prIntro" ></textarea>
 								</div>
 							</div>
 						</div>
@@ -119,7 +119,7 @@
 									<div class="imageup">
 										<img id="img"> <span>이미지 업로드</span> <input type="file"
 											class="form-control" id="imgform" name="file"
-											accept=".jpg, .jpeg, .png">
+											accept=".jpg, .jpeg, .png" >
 									</div>
 								</div>
 							</div>
@@ -216,31 +216,31 @@
 										선물 만들기
 										<div class="imp"></div>
 									</dt>
-									<dd class="itemdd">선물은 후원자에게 프로젝트의 가치를 전달하는 수단입니다. 다양한
-										금액대로 여러 개의 선물을 만들어주세요. 펀딩 성공률이 높아지고, 더 많은 후원 금액을 모금할 수 있어요.</dd>
+									<dd class="itemdd">리워딩은 후원자에게 프로젝트의 가치를 전달하는 수단입니다. 다양한
+										금액대로 리워딩을 만들어주세요. 펀딩 성공률이 높아지고, 더 많은 후원 금액을 모금할 수 있어요.</dd>
 								</dl>
 							</div>
 							<div class="col-12 col-md-7 presentcontainer">
 								<div class="presentcontents">
 									<div class="presenttitle">
-										<p>선물 제목</p>
+										<p>리워딩 제목</p>
 										<div>
 											<input type="text" name="prPresentTitle" class="form-control"
-												placeholder="선물 제목" required>
+												placeholder="리워딩 제목" required>
 										</div>
 									</div>
 									<div class="presentdetail">
-										<p>선물 설명</p>
+										<p>리워딩 설명</p>
 										<div>
-											<textarea placeholder="선물 설명" name="prPresentContents"
+											<textarea placeholder="리워딩 설명" name="prPresentContents"
 												cols="70" rows="5" required></textarea>
 										</div>
 									</div>
 									<div class="presentprice">
-										<p>선물 가격</p>
+										<p>리워딩 가격</p>
 										<div>
 											<input type="number" name="presentprice" class="form-control"
-												placeholder="선물 가격" min=0 max=9999999999 required>
+												placeholder="리워딩 가격" min=0 max=9999999999 required>
 										</div>
 									</div>
 								</div>
@@ -281,7 +281,7 @@
 						</div>
 						<div class="twobtn">
 							<button type="button" id="back" class="btn btn-dark">뒤로가기</button>
-							<button type="button" id="next" class="btn btn-sm btn-primary">시작하기</button>
+							<button type="submit" id="next" class="btn btn-sm btn-primary">시작하기</button>
 						</div>
 					</form>
 				</div>
@@ -290,7 +290,9 @@
 		
 	</div>
 <div th:replace="fragments/lookaround.html :: fg-lookaround"></div>
+<script>
 
+</script>
 </body>
 
 </html>
