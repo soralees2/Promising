@@ -7,366 +7,360 @@
 <meta name="_csrf" th:content="${_csrf.token}">
 <meta name="_csrf_header" th:content="${_csrf.headerName}">
 <th:block th:replace="fragments/commonHead"></th:block>
-<link rel="stylesheet"
-	href="/static/fonts/material-design-iconic-font.min.css">
-<link rel="stylesheet" type="text/css"
-	th:href="@{/static/fonts/material-design-iconic-font.min.css}">
-<link rel="stylesheet" type="text/css"
-	th:href="@{/static/css/mypage.css}">
+<link rel="stylesheet" href="/static/fonts/material-design-iconic-font.min.css">
+<link rel="stylesheet" type="text/css" th:href="@{/static/fonts/material-design-iconic-font.min.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/static/css/mypage.css}">
 <script type="text/javascript" th:src="@{/static/js/mypage.js}"></script>
 <script type="text/javascript" th:src="@{/static/js/infoUpdate.js}"></script>
 <link rel="stylesheet"
-	href="/static/fonts/material-design-iconic-font.min.css">
+   href="/static/fonts/material-design-iconic-font.min.css">
 
 <script
-	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+   src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 <script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+   src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 <script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+   src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
 
 </head>
 <body>
-	<div class="wrap">
-		<header th:replace="fragments/header.html :: fg-header"></header>
-
-		<!-- 해당 페이지 클래스명을 적어주세요-->
-		<div class="container mx-7">
-
-
-			<div class="mypagewrap">
-				<div class="picbox">
-					<div class="profileLine">
-						<div class="imgbox">
-							<div class="imgbox2">
-								<img id="profile"
-									th:src="@{'/static/images/profileUpload/'+${result.sysName}}"
-									class="w-100 h-100">
-							</div>
-						</div>
-						<div class='namennavi'>
-							<div class='nameline'>
-								<span>[[${result.uname}]]</span>
-							</div>
-
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div class="container">
-				<div class=" row tabline">
-					<ul class="nav nav-pills" id="pills-tab" role="tablist">
-						<li class="nav-item" role="presentation">
-							<button class="nav-link p-3 active" id="pills-home-tab"
-								data-bs-toggle="pill" data-bs-target="#pills-home" type="button"
-								role="tab" aria-controls="pills-home" aria-selected="true">회원정보</button>
-						</li>
-
-						<li class="nav-item" role="presentation">
-							<button class=" nav-link p-3 " id="addressModifyBtn"
-								type="button" data-bs-toggle="modal"
-								data-bs-target="#example-modal">주소변경</button>
-						</li>
-
-						<li class="nav-item" role="presentation"><a href="#"
-							th:href="@{/member/auth/qna}" class="py-2 d-block"><button
-									class="nav-link navlinkQ p-3" id="pills-qna-tab"
-									data-bs-toggle="pill" data-bs-target="#pills-QnA" type="button"
-									role="tab" aria-controls="pills-QnA" aria-selected="false">프로젝트
-									문의</button></a></li>
-
-
-						<li class="nav-item" role="presentation"><a href="#"
-							th:href="@{/member/auth/qna}" class="py-2 d-block"><button
-									class="nav-link navlinkQ p-3" id="pills-qna-tab"
-									data-bs-toggle="pill" data-bs-target="#pills-QnA" type="button"
-									role="tab" aria-controls="pills-QnA" aria-selected="false">프로젝트
-									문의</button></a></li>
-
-						<li class="nav-item" role="presentation">
-							<button class="nav-link p-3" id="pills-donated-tab"
-								data-bs-toggle="pill" data-bs-target="#pills-donated"
-								type="button" role="tab" aria-controls="pills-donated"
-								aria-selected="false">후원한 프로젝트</button>
-						</li>
-					</ul>
-
-					<hr>
-
-					<!-- <li class="nav-item" role="presentation">
-						<button class="nav-link p-3 active" id="addressModifyBtn"
-							type="button" data-toggle="modal" data-target="#example-modal">주소변경</button>
-					</li> -->
-
-					<!--  주소변경 모달  -->
-
-
-					<div class="modal modal-center fade" id="example-modal"
-						aria-labelledby="exampleModalLabel" data-target="#example-modal"
-						aria-hidden="true">
-						<div class="modal-dialog">
-							<div class="modal-content">
-								<div class="modal-header" id="shippingTitle">
-									<h5>배송지 수정</h5>
-
-									<button type="button" class="close btn" data-bs-dismiss="modal"
-										aria-label="Close">
-										<span aria-hidden="true">&times;</span>
-									</button>
-								</div>
-
-								<div class="modal-body">
-
-									<form>
-										<div class="mb-3">
-											<label for="exampleInputEmail1" class="form-label">받는
-												사람</label><br> <input type="text" name="name"
-												class="form-control" aria-label=".form-control-lg example"
-												id="inputReceiverName" th:value="${result.realname}"
-												required>
-
-										</div>
-
-										<div class="mb-3">
-											<label for="exampleInputPassword1" class="form-label">받는
-												사람 휴대폰 번호</label><br> <input type="text" name="contact"
-												class="form-control" th:value="${result.uphone}"
-												id="inputReceiverContact" required>
-										</div>
-
-
-										<div class="mb-3">
-											<label for="address" class="form-label">우편번호</label><br>
-											<div class=combination id="addressBoxnIcon">
-												<input type="text" name="postCode" class="form-control"
-													id="addressScope" th:value="${result.upostcode}" required>
-												<div class="modifyIcon">
-													<a href="javacript:;" class="py-2 d-block"><i
-														class="zmdi zmdi-search zmdi-hc-2x" id=searchAddress></i></a>
-
-												</div>
-											</div>
-										</div>
-
-										<div id="addressPart2">
-											<div class="mb-3">
-												<label for="postCode" class="form-label">주소</label><br>
-												<input type="text" name="address1" class="form-control"
-													id="postCode" required th:value="${result.address1}">
-											</div>
-
-
-
-
-											<div class="mb-3">
-												<label for="addressDetail" class="form-label">상세주소</label><br>
-												<input type="text" name="address2" class="form-control"
-													id="addressDetail" th:value="${result.address2}" required>
-											</div>
-
-
-										</div>
-
-										<div class="modal-footer">
-											<button type="button" class="btn btn-primary center col-12"
-												id="modifyComp" name="modifyComp">수정하기</button>
-
-										</div>
-
-									</form>
-								</div>
-
-							</div>
-						</div>
-					</div>
-
-					<div class="container">
-
-						<div class=" row tabline"></div>
-
-
-
-
-						<div class="tab-content" id="pills-tabContent">
-							<div class="tab-pane fade show active" id="pills-home"
-								role="tabpanel" aria-labelledby="pills-home-tab">
-
-								<div class="profilebox">
-									<h3>프로필 이미지</h3>
-									<div class="modifyScroll">
-										<span><a href="javascript:;" id="PromodifyScroll">변경</a></span>
-									</div>
-									<div class='col-sm-4 col-md-4 namennavi' id="nameNaviBlock">
-										<div class='col-sm-4 col-md-4 namennavi'>
-
-
-
-											<!-- <img id="profile" th:src="@{'/src/main/resources/static/images/'+[[${result.sysName}]]}" class="w-100 h-100"> -->
-											<div id="origin" th:if="${result.sysName} !=''">
-												<img id="profile"
-													th:src="@{'/static/images/profileUpload/'+${result.sysName}}"
-													class="w-100 h-100">
-											</div>
-
-											<div th:unless="${result.sysName} ==''">
-												<img id="imgsrc" class="w-200 h-200">
-											</div>
-											<!-- <img id="profile" th:src="@/[[${result.sysName}]]" class="w-100 h-100">  -->
-											<!-- /src/main/resources/ -->
-
-											<form th:action="@{/member/auth/profileAttach}" method="post"
-												enctype="multipart/form-data">
-												<input type="hidden" th:name="${_csrf.parameterName}"
-													th:value="${_csrf.token}">
-												<!-- 프로필사진 전송 Form -->
-												<div class="fileUploadClass">
-
-													<label class="btn btn-outline-secondary btn-file"
-														id="btn-fileUp"> 파일추가 <input type="file"
-														name="file" accept=".gif, .jpeg, .png,.jpg"
-														autofocus="autofocus" style="display: none;" id="filebtn"
-														maxlength="10" required> <!--숨기기-->
-													</label>
-												</div>
-												<div class="col-sm-4 col-md-4 " id="uploadDesc">
-													<span> 250X250 픽셀에 최적화 되어있으며, 10Mb 이하의 JPG,GIF,PNG
-														파일을 지원합니다.</span>
-													<button class="btn btn-primary savebutton" type="submit"
-														id="profileSaveBtn">저장</button>
-												</div>
-											</form>
-
-										</div>
-									</div>
-								</div>
-
-
-
-								<div class="UserName">
-									<div class="modifyScroll">
-										<span><a href="javascript:;" id="nameModifyScroll">변경</a></span>
-
-									</div>
-
-									<div class="profilebox">
-										<h3>닉네임</h3>
-
-
-										<div id="nameNBlank">
-											<input type="text" class="blank form-control-lg"
-												id="userName" placeholder="닉네임을 입력하세요."
-												th:value="${result.uname}" required>
-											<div class="col-sm-4 col-md-4 uploadcomment">
-												<button class="btn btn-primary" type="button"
-													id="Namesavebutton">저장</button>
-											</div>
-										</div>
-
-										<div class="container blankLine"></div>
-									</div>
-								</div>
-								<!-- 비밀번호 시작 -->
-								<div class="profilebox">
-									<div class='col-sm-4 col-md-4 pwnavi'>
-
-										<div class="UserPw">
-											<div class="modifyScroll">
-												<span><a href="javascript:;" id="pwModifyScroll">변경</a></span>
-											</div>
-											<h3>비밀번호</h3>
-											<br>
-										</div>
-									</div>
-
-									<div class="pwReset" id=pwblankNButton>
-
-										<div class="pwReset">
-											<h6>변경할 비밀번호</h6>
-											<input type="password" class="blank form-control-lg"
-												placeholder="변경할 비밀번호" id="repw1" name="repw1"><br>
-											<input type="password" class="blank form-control-lg"
-												placeholder="변경할 비밀번호 확인" id="repw2" name="repw2">
-
-										</div>
-
-										<div class="col-sm-4 col-md-4 uploadcomment">
-											<button class="btn btn-primary savebutton" type="button"
-												id="pwSaveBtn">저장</button>
-										</div>
-									</div>
-								</div>
-
-
-								<!--연락처 시작 -->
-								<div class="profilebox">
-									<div class="modifyScroll">
-										<span><a href="javascript:;" id="contactModifyScroll">변경</a></span>
-									</div>
-
-									<h3>전화번호</h3>
-									<br>
-									<div class="contactmodi" id="contactblankNButton">
-
-										<input type="text" class="form-control-lg"
-											th:value="${result.uphone}" name="uphone" id="contact">
-
-
-										<div class="col-sm-4 col-md-4 uploadcomment">
-											<button class="btn btn-primary" type="button"
-												id="contactVertify">전화번호 변경</button>
-										</div>
-
-										<div></div>
-									</div>
-								</div>
-
-							</div>
-						</div>
-					</div>
-					<!--첫번째 계정 컨텐츠 들어 끝나는지점-->
-
-				</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-			</div>
-
-			<!--  <div class="tab-pane fade" id="pills-donated" role="tabpanel"
-							aria-labelledby="pill-donated-tab">
-							<span>0개의 프로젝트가 있습니다.</span>
-						</div>
-						 -->
-		</div>
-	</div>
-	<!--텝라인 div닫기 -->
-
-	<!-- container end -->
-
-
-	<!-- lookaround end -->
-
-	<div th:replace="fragments/lookaround.html :: fg-lookaround"></div>
-
+   <div class="wrap">
+      <header th:replace="fragments/header.html :: fg-header"></header>
+
+      <!-- 해당 페이지 클래스명을 적어주세요-->
+      <div class="container mx-7">
+         
+         
+         <div class="mypagewrap">
+         <div class="picbox">
+            <div class="profileLine">
+            <div class="imgbox">
+            <div class="imgbox2">
+            <img id="profile" th:src="@{'/static/images/profileUpload/'+${result.sysName}}" class="w-100 h-100">
+            </div>
+            </div>
+               <div class='namennavi'>
+                  <div class='nameline'>
+                     <span>[[${result.uname}]]</span>
+                  </div>
+               
+               </div>
+            </div>
+            </div>
+         </div>
+
+         <div class="container">
+            <div class=" row tabline">
+               <ul class="nav nav-pills" id="pills-tab" role="tablist">
+                  <li class="nav-item" role="presentation">
+                     <button class="nav-link p-3 active" id="pills-home-tab"
+                        data-bs-toggle="pill" data-bs-target="#pills-home" type="button"
+                        role="tab" aria-controls="pills-home" aria-selected="true">회원정보</button>
+                  </li> 
+                  
+                  <li class="nav-item" role="presentation">
+                  <button class=" nav-link p-3 " id="addressModifyBtn"
+                     type="button" data-bs-toggle="modal" data-bs-target="#example-modal">주소변경</button>
+                  </li> 
+                           
+                  <li class="nav-item" role="presentation"><a href="#"
+                     th:href="@{/member/auth/myProjectGoing}" class="py-2 d-block"><button
+                           class="nav-link navlinkQ p-3" id="pills-qna-tab"
+                           data-bs-toggle="pill" data-bs-target="#pills-QnA" type="button"
+                           role="tab" aria-controls="pills-QnA" aria-selected="false">올린 프로젝트
+                           </button></a></li>         
+                           
+                           
+                  <li class="nav-item" role="presentation"><a href="#"
+                     th:href="@{/member/auth/qna}" class="py-2 d-block"><button
+                           class="nav-link navlinkQ p-3" id="pills-qna-tab"
+                           data-bs-toggle="pill" data-bs-target="#pills-QnA" type="button"
+                           role="tab" aria-controls="pills-QnA" aria-selected="false">프로젝트
+                           문의</button></a></li>
+                  
+                  <li class="nav-item" role="presentation">
+                     <button class="nav-link p-3" id="pills-donated-tab"
+                        data-bs-toggle="pill" data-bs-target="#pills-donated"
+                        type="button" role="tab" aria-controls="pills-donated"
+                        aria-selected="false">후원한 프로젝트</button>
+                  </li>
+                  </ul>
+                  
+                  <hr>
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                     <!-- <li class="nav-item" role="presentation">
+                  <button class="nav-link p-3 active" id="addressModifyBtn"
+                     type="button" data-toggle="modal" data-target="#example-modal">주소변경</button>
+               </li> -->
+               
+   <!--  주소변경 모달  -->
+               
+                  
+                  <div class="modal modal-center fade" id="example-modal"  aria-labelledby="exampleModalLabel"  data-target="#example-modal" aria-hidden="true">
+                  <div class="modal-dialog">
+                     <div class="modal-content">
+                        <div class="modal-header" id="shippingTitle">
+                           <h5>배송지 수정</h5>
+
+                           <button type="button" class="close btn" data-bs-dismiss="modal"
+                              aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                           </button>
+                        </div>
+
+                        <div class="modal-body">
+
+                           <form>
+                              <div class="mb-3">
+                                 <label for="exampleInputEmail1" class="form-label">받는
+                                    사람</label><br> <input type="text" name="name"
+                                    class="form-control" aria-label=".form-control-lg example"
+                                    id="inputReceiverName" th:value="${result.realname}"
+                                    required>
+
+                              </div>
+
+                              <div class="mb-3">
+                                 <label for="exampleInputPassword1" class="form-label">받는
+                                    사람 휴대폰 번호</label><br> <input type="text" name="contact"
+                                    class="form-control" th:value="${result.uphone}"
+                                    id="inputReceiverContact" required>
+                              </div>
+
+
+                              <div class="mb-3">
+                                 <label for="address" class="form-label">우편번호</label><br>
+                                 <div class=combination id="addressBoxnIcon">
+                                    <input type="text" name="postCode" class="form-control"
+                                       id="addressScope" th:value="${result.upostcode}" required>
+                                    <div class="modifyIcon">
+                                       <a href="javacript:;" class="py-2 d-block"><i
+                                          class="zmdi zmdi-search zmdi-hc-2x" id=searchAddress></i></a>
+
+                                    </div>
+                                 </div>
+                              </div>
+
+                        <div id="addressPart2">
+                              <div class="mb-3">
+                                 <label for="postCode" class="form-label">주소</label><br>
+                                 <input type="text" name="address1" class="form-control"
+                                    id="postCode" required th:value="${result.address1}">
+                              </div>
+
+
+
+
+                              <div class="mb-3">
+                                 <label for="addressDetail" class="form-label">상세주소</label><br>
+                                 <input type="text" name="address2" class="form-control"
+                                    id="addressDetail" th:value="${result.address2}" required>
+                              </div>
+
+
+                        </div>
+
+                              <div class="modal-footer">
+                                 <button type="button" class="btn btn-primary center col-12"
+                                    id="modifyComp" name="modifyComp">수정하기</button>
+
+                              </div>
+
+                           </form>
+                        </div>
+                        
+                     </div>
+                  </div>
+                  </div>
+               
+<div class="container">
+   
+         <div class=" row tabline">
+         
+               </div>
+         
+
+
+
+            <div class="tab-content" id="pills-tabContent">
+               <div class="tab-pane fade show active" id="pills-home"
+                  role="tabpanel" aria-labelledby="pills-home-tab">
+
+                  <div class="profilebox">
+                     <h3>프로필 이미지</h3>
+                     <div class="modifyScroll">
+                        <span><a href="javascript:;" id="PromodifyScroll">변경</a></span>
+                     </div>
+                     <div class='col-sm-4 col-md-4 namennavi' id="nameNaviBlock">
+                        <div class='col-sm-4 col-md-4 namennavi'>
+
+
+
+                           <!-- <img id="profile" th:src="@{'/src/main/resources/static/images/'+[[${result.sysName}]]}" class="w-100 h-100"> -->
+                           <div id="origin" th:if="${result.sysName} !=''">
+                              <img id="profile2"
+                                 th:src="@{'/static/images/profileUpload/'+${result.sysName}}"
+                                 class="w-100 h-100">
+                           </div>
+
+                           <div th:unless="${result.sysName} ==''">
+                              <img id="imgsrc" class="w-200 h-200">
+                           </div>
+                           <!-- <img id="profile" th:src="@/[[${result.sysName}]]" class="w-100 h-100">  -->
+                           <!-- /src/main/resources/ -->
+
+                           <form th:action="@{/member/auth/profileAttach}" method="post"
+                              enctype="multipart/form-data">
+                              <input type="hidden" th:name="${_csrf.parameterName}"
+                                 th:value="${_csrf.token}">
+                              <!-- 프로필사진 전송 Form -->
+                              <div class="fileUploadClass">
+
+                                 <label class="btn btn-outline-secondary btn-file"
+                                    id="btn-fileUp"> 파일추가 <input type="file" name="file"
+                                    accept=".gif, .jpeg, .png,.jpg" autofocus="autofocus"
+                                    style="display: none;" id="filebtn" maxlength="10" required>
+                                    <!--숨기기-->
+                                 </label>
+                              </div>
+                              <div class="col-sm-4 col-md-4 " id="uploadDesc">
+                                 <span> 250X250 픽셀에 최적화 되어있으며, 10Mb 이하의 JPG,GIF,PNG 파일을
+                                    지원합니다.</span>
+                                 <button class="btn btn-primary savebutton" type="submit"
+                                    id="profileSaveBtn">저장</button>
+                              </div>
+                           </form>
+
+                        </div>
+                     </div>
+                  </div>
+
+
+
+                  <div class="UserName">
+                     <div class="modifyScroll">
+                        <span><a href="javascript:;" id="nameModifyScroll">변경</a></span>
+
+                     </div>
+
+                     <div class="profilebox">
+                        <h3>닉네임</h3>
+
+
+                        <div id="nameNBlank">
+                           <input type="text" class="blank form-control-lg" id="userName"
+                              placeholder="닉네임을 입력하세요." th:value="${result.uname}" required>
+                           <div class="col-sm-4 col-md-4 uploadcomment">
+                              <button class="btn btn-primary" type="button" id="Namesavebutton">저장</button>
+                           </div>
+                        </div>
+
+                        <div class="container blankLine"></div>
+                     </div>
+                  </div>
+                  <!-- 비밀번호 시작 -->
+                  <div class="profilebox">
+                  <div class='col-sm-4 col-md-4 pwnavi'>
+                     
+                        <div class="UserPw">
+                           <div class="modifyScroll">
+                              <span><a href="javascript:;" id="pwModifyScroll">변경</a></span>
+                           </div>
+                           <h3>비밀번호</h3>
+                           <br>
+                        </div>
+                     </div>
+
+                     <div class="pwReset" id=pwblankNButton>
+                        
+                        <div class="pwReset">
+                           <h6>변경할 비밀번호</h6>
+                           <input type="password" class="blank form-control-lg"
+                              placeholder="변경할 비밀번호" id="repw1" name="repw1"><br>
+                           <input type="password" class="blank form-control-lg"
+                              placeholder="변경할 비밀번호 확인" id="repw2" name="repw2">
+
+                        </div>
+
+                        <div class="col-sm-4 col-md-4 uploadcomment">
+                           <button class="btn btn-primary savebutton" type="button"
+                              id="pwSaveBtn">저장</button>
+                        </div>
+                     </div>
+                  </div>
+
+
+                  <!--연락처 시작 -->
+                  <div class="profilebox">
+                  <div class="modifyScroll">
+                     <span><a href="javascript:;" id="contactModifyScroll">변경</a></span>
+                  </div>
+                  
+                  <h3>전화번호</h3>
+                  <br>
+                  <div class="contactmodi" id="contactblankNButton">
+                  
+                     <input type="text" class="form-control-lg"
+                        th:value="${result.uphone}" name="uphone" id="contact">
+
+
+                     <div class="col-sm-4 col-md-4 uploadcomment">
+                        <button class="btn btn-primary" type="button" id="contactVertify">전화번호
+                           변경</button>
+                     </div>
+
+                     <div></div>
+                  </div>
+               </div>
+               
+               </div>
+            </div>
+         </div>
+         <!--첫번째 계정 컨텐츠 들어 끝나는지점-->
+
+      </div>
+                  </div>
+                  
+                  <!--  <div class="tab-pane fade" id="pills-donated" role="tabpanel"
+                     aria-labelledby="pill-donated-tab">
+                     <span>0개의 프로젝트가 있습니다.</span>
+                  </div>
+                   -->
+               </div>
+            </div>
+            <!--텝라인 div닫기 -->
+   
+      <!-- container end -->
+      
+      
+        <!-- lookaround end -->
+   
+   <div th:replace="fragments/lookaround.html :: fg-lookaround"></div>
+   
 </body>
-<script>
-	$(function() {
-		$("#pills-donated-tab").on("click", function() {
-			alert("차후 구현예정인 기능입니다.");
-		})
+        <script>
 
-	})
-</script>
+        
+        </script>
 </html>
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     

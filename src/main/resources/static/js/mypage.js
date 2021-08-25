@@ -72,6 +72,15 @@ $(function () {
                 $(".fileUploadClass").css("display", "none")
             })}
 
+        if($("#origin img").is(":hidden")){
+        $("#origin img").slideDown('fast',function(){
+            $("#origin img").css("display", "inline-block")
+        })}else{
+            $("#origin img").slideUp('fast',function(){
+                $("#origin img").css("display", "none")
+            })}
+
+
          if($("#uploadDesc span").is(":visible")){
             $("#uploadDesc span").slideDown('fast',function(){
             $("#uploadDesc span").css("display", "none");
