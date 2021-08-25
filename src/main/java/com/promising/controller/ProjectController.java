@@ -114,7 +114,7 @@ public class ProjectController {
 	}
 	
 	@GetMapping("/main")
-	public String main(PageVO pvo, Model model) {
+	public String main(Model model) {
 		List<ProjectVO> result = repo.selectAll();
 		model.addAttribute("result", result);
 		return "project/main";
