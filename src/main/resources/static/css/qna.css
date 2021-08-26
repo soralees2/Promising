@@ -11,7 +11,10 @@
 .main {
 	margin-top: calc(-10rem + 65px);
 }
-
+.mppd{
+	padding-bottom: 6rem;
+	min-height: 70vh;
+}
 .search:hover {
 	cursor: pointer;
 }

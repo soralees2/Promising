@@ -4,6 +4,7 @@
 }
 .main {
   margin-top: calc(-10rem + 95px);
+  padding-bottom:6rem;
 }
 .search:hover {
   cursor: pointer;

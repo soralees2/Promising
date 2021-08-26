@@ -50,8 +50,8 @@
                   </li>
                 </ul>
                 <div class="twobtn"> 
-                  <button id="back">뒤로가기</button>
-                  <button type="button" id="next" class="btn btn-sm btn-primary" disabled="disabled">시작하기</button>
+                  <button id="back" class="btn btn-dark">뒤로가기</button>
+                  <button type="button" id="next" class="btn btn-primary" disabled="disabled">시작하기</button>
                   <!-- <button id="next" disabled>시작하기</button> -->
                   <!-- <button id="notnext">시작하기</button> -->
                 </div>
@@ -59,10 +59,12 @@
             </div>
           </div>  
         </div>
+        
 <div th:replace="fragments/lookaround.html :: fg-lookaround"></div>
 
       </div>
     </div>
 </div>
+<footer th:replace="fragments/footer.html :: fg-footer"></footer>
 </body>
 </html>

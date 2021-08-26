@@ -1,3 +1,7 @@
+.logincontainer{
+	min-height:65vh;
+	padding-bottom:6rem;
+}
 .loginBox{
     width: 600px;
    padding: 100px 100px 0px;
