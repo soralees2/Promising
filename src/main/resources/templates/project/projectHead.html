@@ -37,7 +37,8 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 					<dl>
 						<dt>모인금액</dt>
 						<dd>
-							<strong th:text="${vo.prCurrentMoney}"></strong>원 &nbsp;&nbsp;/&nbsp;&nbsp; 달성률 <b id="percent">58%</b>
+							<!-- <strong th:text="${vo.prCurrentMoney}"></strong>원 &nbsp;&nbsp;/&nbsp;&nbsp; 달성률 <b id="percent">58%</b> -->
+							<strong>[[${#numbers.formatDecimal(vo.prCurrentMoney, 0, 'COMMA', 0, 'POINT')}]]원</strong>원 &nbsp;&nbsp;/&nbsp;&nbsp; 달성률 <b id="percent">58%</b>
 							<input type="hidden" th:value="${vo.prTargetMoney}" id="tgMoney">
 							<input type="hidden" th:value="${vo.prCurrentMoney}" id="crMoney">
 						</dd>
