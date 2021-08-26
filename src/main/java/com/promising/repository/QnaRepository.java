@@ -27,6 +27,6 @@ public interface QnaRepository  extends JpaRepository<QnaVO, Long> {
 
 	@Transactional
 	@Modifying
-	@Query(value="update QnaVO set receiver = :newName where receiver = :before",nativeQuery=true)
+	@Query(value="update PR_QNA set receiver = :newName where receiver = :before",nativeQuery=true)
 	void updateQnaReceive(@Param("before") String before, @Param("newName") String newName);
 }
