@@ -227,9 +227,7 @@ public class MemberController {
 		System.out.println(qvo.getContents());
 		System.out.println("-----------------" + uname); // 작성자 닉네임
 		MemberVO vo = new MemberVO();
-
 		System.out.println(qvo);
-
 		MemberVO mvo = repo.findByUsername(uname).get();
 		String receiver = mvo.getUsername();
 		vo.setUsername(receiver);
@@ -238,51 +236,6 @@ public class MemberController {
 		qvo.setMember(vo);
 		System.out.println("qvo : "+qvo);
 		qnaRepo.save(qvo);
-
-		//		System.out.println("내가보낸 내용 컨텐츠 :"+qvo.getContents());//잘옴
-		//		System.out.println("받는 사람WRITER :" + uname); // 받는 사람 닉네임 작성자 닉네임
-		//		System.out.println("보내는사람 :"+writer);
-		//		System.out.println("qnao: "+qvo.getQnano());
-		//		String contentDetail=qvo.getContents();
-		//		System.out.println("qvo출력: "+qvo);
-		//		System.out.println("콘텐츠내용 :"+contentDetail);
-		//
-		//		MemberVO vo = new MemberVO();
-		//		MemberVO mvo = repo.findByUname(uname).get();
-		////		System.out.println("mvo내용"+mvo);
-		////		
-		////		String receiver = mvo.getUsername();
-		//		System.out.println("principal통해 writer추출 : " + principal.getName());
-		//		qvo.setWriter(principal.getName());
-		//		
-		//		qnaRepo.save(qvo);
-		//		
-
-		//		
-		//		MemberVO mvo = repo.findByUname(uname).get(); //ans
-		//		System.out.println("mvo의 정체는?"+mvo);	
-		//		String receiver = mvo.getUsername();
-		//		MemberVO vo = new MemberVO();
-		//
-		//	System.out.println("받는 사람mvo값"+mvo);
-		//	
-		//		String receiver = mvo.getUname();
-		//	System.out.println("메세지 받는사람: "+receiver);
-		//		
-		//		System.out.println("보내는 사람 유저 ID~: " + principal.getName());
-		//		qvo.getQnacategory();
-		//		qvo.setMember(vo);
-		//		qvo.setContents(contentDetail);
-		//		qvo.setReceiver(receiver);
-		//		qvo.setWriter(writer);
-		//		
-		//		System.out.println("qvo출력2:"+qvo);
-		//		qvo.setMember(mvo);
-		//		qvo.setMember(vo);
-		//
-		//		qnaRepo.save(qvo);
-		//		qnaRepo.save(qvo);
-
 		return new ResponseEntity<>(getListByMember(vo),HttpStatus.CREATED);
 	}
 
@@ -338,7 +291,6 @@ public class MemberController {
 		System.out.println(principal);
 		String originName =principal.getName();		
 		
-		
 		for(String key : param.keySet()){
 			System.out.println(key + " : " + param.get(key));
 		}
@@ -352,8 +304,6 @@ public class MemberController {
 		String address2=(String)param.get("address2");
 		String postcode=(String)param.get("postcode");
 		String uphone=(String)param.get("uphone");
-		
-		
 		System.out.println(realName+": 이것은 진짜이름 ");
 		System.out.println(address1+": 이것은 주소1");
 		System.out.println(address2+": 이것은 주소2");

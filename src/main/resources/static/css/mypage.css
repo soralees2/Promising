@@ -6,6 +6,7 @@
 
 .container {
 	margin: auto;
+	
 }
 
 .main {
@@ -23,6 +24,10 @@
 	-webkit-box-flex: 1;
 	flex-grow: 1;
 	background: rgb(255, 255, 255);
+}
+.mppd{
+	padding-bottom: 6rem;
+	min-height: 70vh;
 }
 
 .modifyIcon {
@@ -47,6 +52,9 @@
 	text-align: center;
 	font-size: 40px;
 	font-weight: 700;
+	line-height:1.5;
+	padding-top:20px;
+	display:inline-block;
 }
 
 .zmdi-edit {

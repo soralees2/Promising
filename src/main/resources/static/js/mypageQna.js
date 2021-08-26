@@ -23,10 +23,7 @@ if(category=="#"){
 }else if(contents==""){
 	alert("문의내용을 입력해주세요!")
 	
-	
-	
 }else{
-	
       let obj = {contents: contents,qnacategory:category, member:receiver,receiver:receiver};
         console.log(JSON.stringify(obj));
         let url = '/member/' + obj.receiver;
@@ -52,9 +49,7 @@ if(category=="#"){
 	
 }
 
-
-         
-      
+  
    })
    
    
