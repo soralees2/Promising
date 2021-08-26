@@ -22,7 +22,8 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <body>
 	<div class="wrap">
 	<header th:replace="fragments/header.html :: fg-header"></header>
-		<div class="row logincontainer">
+	
+		<div class="logincontainer">
 			<div class="container loginBox p-4 shadow bg-white rounded">
 				<div class="col-12">
 				<h2 class="mb-5 text-center">로그인</h2>
@@ -64,6 +65,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 		</div>
 	</div>
 	<div th:replace="fragments/lookaround.html :: fg-lookaround"></div>
+	<footer th:replace="fragments/footer.html :: fg-footer"></footer>
 </body>
 </html>
 

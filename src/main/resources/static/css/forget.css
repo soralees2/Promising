@@ -1,7 +1,16 @@
+.forgetcontainer{
+	min-height:70vh;
+	padding-bottom:6rem;
+	position:relative;
+}
+
 .forgetbox{
 	width: 500px;
-    padding: 72px 0px 0px;
     margin: 0px auto 12px;
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
 }
 .forgetwrap{
 	    padding: 32px;
