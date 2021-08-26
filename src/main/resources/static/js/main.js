@@ -16,6 +16,33 @@ $(function(){
 		$("#f3").submit();
 	})
 	
+	$("#carou1").on("click",function(){
+		typeStr = "디자인";
+		keywordStr = "디자인";
+		
+		$("#f5").find("[name='type']").val(typeStr);
+		$("#f5").find("[name='keyword']").val(keywordStr);
+		$("#f5").submit();
+	})
+	
+	$("#carou2").on("click",function(){
+		typeStr = "지식";
+		keywordStr = "지식";
+		
+		$("#f5").find("[name='type']").val(typeStr);
+		$("#f5").find("[name='keyword']").val(keywordStr);
+		$("#f5").submit();
+	})
+	
+	$("#carou3").on("click",function(){
+		typeStr = "트렌드";
+		keywordStr = "트렌드";
+		
+		$("#f5").find("[name='type']").val(typeStr);
+		$("#f5").find("[name='keyword']").val(keywordStr);
+		$("#f5").submit();
+	})
+	
 	
 	$("#game").on("click",function(){
 		typeStr = $(this).text();
