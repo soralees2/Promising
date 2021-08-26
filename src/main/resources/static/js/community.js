@@ -245,7 +245,7 @@ $(function(){
 	$(".info .achivement").text(percent + "%");
 	// 오픈예정 프로젝트 결제 비활성화 
 	let prStatus = $("#status").val();
-	if(prStatus == "N"){
+	if(prStatus == "N" || prStatus == "F"){
 		$("#payment button").attr("disabled","disabled");
 		$("#btn_payment02").attr("disabled","disabled");
 	}
