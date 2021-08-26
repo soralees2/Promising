@@ -79,6 +79,7 @@
 .post_list .cmt:first-of-type{margin-top:10px;}
 .post_list .cmt:last-of-type{margin-bottom:0;}
 .post .addCmt {position:absolute;top:-5px;right:0;font-size:12px;}
+.post .pf_wrap .pf_img{background-color:#fff;}
 
 /* .post_list .post .btn_modify{float:right;} */
 .post {position:relative;}

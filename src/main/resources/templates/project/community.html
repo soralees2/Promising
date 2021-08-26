@@ -22,7 +22,7 @@
 			<div class="container-fluide">
 				<div class="container">
 					<div class="row">
-						<div class="col-md-12 col-lg-7 project_content">
+						<div class="col-md-12 col-lg-8 project_content mb-4">
 							<div id="community" style="display:block;">
 								<div class="community_contents">
 									<button type="button" class="btn btn-dark btn-addComt" id="btn-addComt" data-bs-toggle="modal" data-bs-target="#community_modal" sec:authorize="isAuthenticated()">커뮤니티 글 작성하기</button>
@@ -33,19 +33,18 @@
 											<p>게시글이 없습니다.</p>
 										</div>
 										<div class="post_list" th:case="*">
-											<div class="post" th:each="com :${com}">
+											<div class="post" th:each="com:${com}" >
 												<div class="pf_wrap">
-													<div class="pf_img" style="background:url(../images/atom02.png) 50% 50% no-repeat;background-size:cover;"></div>
+<!--  														<div class="pf_img" th:style="'background:url(' + @{/static/images/profileUpload/}+${com.profile} + ') 50% 50% no-repeat;background-size:cover!important'"></div> -->
 													<div class="pf_link">
 														<span class="name">[[${com.writer}]]</span>
-														<i class="fas fa-angle-right"></i>
+														<!-- <i class="fas fa-angle-right"></i> -->
 														<!-- <a href="#">
 															<span class="name" >[[${com.writer}]]</span>
 															<i class="fas fa-angle-right"></i>
 														</a> -->
 														<span class="date">[[${com.regDate}]]</span>
 													</div>
-<!-- 													<form id="delForm" method="post" th:with="uid=${#authentication.principal} eq 'anonymousUser' ? 'Guest': ${authentication.principal.member.uid}">		 -->
 													<form id="delForm" method="post">		
 														<ul class="btn_wrap">
 															<li><button type="button" class="btn_modify" data-bs-toggle="modal" data-bs-target="#community_modal" sec:authorize="isAuthenticated()">수정</button></li>
@@ -56,7 +55,8 @@
 													</form>
 												</div>
 												<div class="txt">
-													<p class="comt">[[${com.contents}]]</p>
+													<p class="comt" th:utext="${com.contents}">[[${com.contents}]]</p>
+													<input type="hidden" th:value="${com.contents}" id="brText">
 												</div>
 												<div class="amount_wrap">
 													<a href="javascript:;" class="ic" data-bs-toggle="tooltip" data-bs-placement="right" title="눌러서 댓글 보기"><i class="far fa-comments"></i><b>2</b></a>
@@ -112,16 +112,18 @@
 		
 		// 커뮤니티 수정 modal open
 		$(".btn_modify").on("click", function(){
-			let contents = $(this).closest(".post").children().find(".comt").text();
+			let contents =$(this).closest(".post").children().find("#brText").val();
 			let cno = $(this).closest(".post").find(".cno").val();
 			
 			cmModal.find(".modal-title").text("커뮤니티 게시글 수정");
 			cmModal.addClass("modify");
 			cmModal.find(".cno").val(cno); 
 
-			alert(contents);
 			$("#addCommunityBtn").text("수정하기");
 			$("#com_contents").text(contents);
+
+			var brText = contents.split('<br>').join("\r\n")
+			$("#com_contents").text(brText);
 			
 	 	}); 
 		
@@ -131,6 +133,7 @@
 			if(cmModal.hasClass("modify")){ 
 				check = confirm("글을 수정 하시겠습니까?");
 				if(check){
+					getHtml();
 					communityForm.attr("action", "/com/modify/" + pno);
 					communityForm.submit();
 					cmModal.removeClass("modify");
@@ -141,6 +144,7 @@
 			}else{ 
 				check = confirm("글을 등록 하시겠습니까?");
 				if(check){
+					getHtml();
 					communityForm.attr("action", "/com/insert/" + pno);
 					communityForm.submit();					
 				}else{
@@ -226,13 +230,13 @@
 				let pf_wrap =$("<div class=pf_wrap>");
 				let pf_img =$("<div class=pf_img style='background:url(" + imgUrl + ") 50% 50% no-repeat;background-size:cover;'>");
 				let pf_link = $("<div class=pf_link>");
-				pf_link.append($("<a href='" + link + "'><span class=name>" + comObj.writer+ "</span><i class='fas fa-angle-right'></i>"));
+				pf_link.append($("<a href='" + link + "'><span class=name>" + comObj.writer+ "</span>"));
 				let regdate = $("<span class='date'>" + formatDate(date) +"</span>");
 				let content = $("<div class=txt><p>"+ comObj.contents +"</p></div>");
 				let rmBtn = $("<button class='btn btn-sm btn-outline-danger btnCmtremove'>삭제</button>");
 				let cmo = $("<input type=hidden name=commentno value=" + comObj.commentno + ">");
 				cmo.addClass("cmtNo");
-				pf_wrap.append(pf_img);
+				/*pf_wrap.append(pf_img); */
 				pf_wrap.append(pf_link);
 				pf_link.append(regdate);
 				cmt.append(pf_wrap);
@@ -292,13 +296,19 @@
 		
 		for(let i=0;i<$(".post").length;i++){
 			let post = $(".post").eq(i).find(".pf_link .name").text();
-			console.log(post);	
 			if (loginUser == post){
 				$(".post").eq(i).children().find(".pf_link").siblings("form").show();
 			}else{
 				$(".post").eq(i).children().find(".pf_link").siblings("form").hide();
 			}
 		}
+		
+		function getHtml(){
+			var html = $("#com_contents").val().replace(/(?:\r\n|\r|\n)/g, '<br>');
+			$("#com_contents").val(html);
+		}
+		
+	
 		
 	})
 	</script>

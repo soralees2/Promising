@@ -3,6 +3,7 @@ package com.promising.controller;
 import java.io.File;
 import java.io.IOException;
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -57,7 +58,10 @@ public class ProjectController {
 	@GetMapping("/story/{pno}")
 	public String projectStory(@PathVariable("pno") Long pno,Model model) {
 		ProjectVO vo= repo.findById(pno).get();
+		String profile = memberrepo.findByUname(vo.getPrWriter()).get().getSysName();
+		
 		model.addAttribute("vo",vo);
+		model.addAttribute("profile",profile);
 
 		return "project/story";
 	}
@@ -67,9 +71,11 @@ public class ProjectController {
 		System.out.println("프로젝트 넘  : " + pno);
 		ProjectVO vo= repo.findById(pno).get();
 		List<CommunityVO> comList = comrepo.getCommunities(vo);
+		String profile = memberrepo.findByUname(vo.getPrWriter()).get().getSysName();
 		
 		model.addAttribute("vo",vo);
 		model.addAttribute("com", comList);
+		model.addAttribute("profile",profile);
 		
 		return "project/community";
 	}
@@ -79,8 +85,11 @@ public class ProjectController {
 
 		System.out.println("프로젝트 넘  : " + pno);
 		ProjectVO vo= repo.findById(pno).get();
+		String profile = memberrepo.findByUname(vo.getPrWriter()).get().getSysName();
 
 		model.addAttribute("vo",vo);
+		model.addAttribute("profile",profile);
+		
 		return "project/notice";
 
 	}

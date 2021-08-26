@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.promising.config.SecurityConfig;
+import com.promising.repository.CommunityRepository;
 import com.promising.repository.MemberRepository;
 import com.promising.repository.ProjectRepository;
 import com.promising.repository.QnaRepository;
@@ -60,6 +61,8 @@ public class MemberController {
 	@Autowired
 	private QnaRepository qnaRepo;
 
+	@Autowired
+	private CommunityRepository crepo;
 
 	@GetMapping("/login")
 	public void login() {
@@ -143,7 +146,6 @@ public class MemberController {
 	@PostMapping("/auth/profileAttach")
 	public String profileUpload(MemberVO vo,MultipartFile[] file,Principal principal,HttpServletRequest request) throws Exception {
 		vo = repo.findByUsername(principal.getName()).get();
-
 
 		//		String realPath = session.getServletContext().getRealPath("/");
 

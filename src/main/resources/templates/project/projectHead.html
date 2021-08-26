@@ -23,16 +23,16 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 			<div class="writer" th:switch="${vo.prStatus}">
 				<span style="color:#999;font-weight:600;" th:case="N">오픈 예정인 프로젝트 입니다.</span>
 			</div>
-			<!-- <div class="writer">
-				<div class="profile_img" style="background:url(../images/atom02.png) 50% 50% no-repeat;background-size:cover;"></div>
+			<div class="writer">
+				<div class="profile_img" th:style="'background:url('+ @{/static/images/profileUpload/}+${profile} +')50% 50% no-repeat;background-size:cover!important;'"></div>
 				<a href="#" th:text="${vo.prWriter}"></a>
-			</div> -->
+			</div>
 		</div>
 		<div class="row">
-			<div class="col-12 col-md-8">
+			<div class="col-md-12 col-lg-8 mb-3">
 				<img th:src="@{'/static/images/projectuploading/'+${vo.prSysName}}">
 			</div>
-			<div class="col-12 col-md-4">
+			<div class="col-md-12 col-lg-4">
 				<div class="pj_state">
 					<dl>
 						<dt>모인금액</dt>
@@ -68,7 +68,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 					<h4>창작자 소개</h4>
 					<div class="writer">
 						<div class="pf_wrap">
-							<div class="pf_img" th:style="'background:url('+ @{/static/images/profileUpload/}+${vo.prSysName} +')50% 50% no-repeat;background-size:cover;display:none;'" ></div>
+							<div class="pf_img" th:style="'background:url('+ @{/static/images/profileUpload/}+${profile} +')50% 50% no-repeat;background-size:cover!important;'" ></div>
 							<div class="pf_link">
 								<a href="#">
 									<span class="name" th:text="${vo.prWriter}"></span>

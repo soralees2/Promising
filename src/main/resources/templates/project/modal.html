@@ -30,6 +30,15 @@
 								<dt>작성 내용</dt>
 								<dd>
 									<textarea class="form-control" id="com_contents"  name="contents" rows="15" col="20" placeholder="커뮤니티에 작성하실 글을 입력해 주세요."></textarea>
+									<div id="cnt">(0 / 100)</div>
+									<script th:inline="javascript">
+										$('#com_contents').on("keyup", function() {
+									        if($(this).val().length > 2000) {
+									            $(this).val($(this).val().substring(0, 2000));
+									            alert("2000자 까지 작성 가능합니다.");
+									        }
+										})
+									</script>
 								</dd>
 							</dl>
 							<div class="form-check" style="display:none;">
@@ -75,7 +84,15 @@
 								</select>
 							</dd>
 						</dl>
-						<textarea class="form-control" id="qna_contents" rows="5" col="20" placeholder="프로젝트 진행자에게 문의하고 싶은 내용을 적어주세요."></textarea>
+						<textarea class="form-control" id="qna_contents" rows="5" cols="20" placeholder="프로젝트 진행자에게 문의하고 싶은 내용을 적어주세요."></textarea>
+						<script th:inline="javascript">
+							$('#qna_contents').on("keyup", function() {
+						        if($(this).val().length > 2000) {
+						            $(this).val($(this).val().substring(0, 2000));
+						            alert("2000자 까지 작성 가능합니다.");
+						        }
+							})
+						</script>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
