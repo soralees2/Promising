@@ -12,6 +12,9 @@
 .mainCarousel {
   margin-bottom: 30px;
 }
+.carousel-item > img:hover{
+	cursor: pointer;
+}
 .carousel-inner > .item > img {
   top: 0;
   left: 0;
