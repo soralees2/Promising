@@ -23,7 +23,6 @@ public class EmailController {
 	@PostMapping("/send/{username}")
 	@ResponseBody
 	public String sendmail(@PathVariable("username") String username) throws MessagingException {
-		System.out.println(username+"이메일입니다");
 		String secret=emailService.secretKey();
 		StringBuffer emailcontent = new StringBuffer();
 		emailcontent.append("<!DOCTYPE html>");

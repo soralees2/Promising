@@ -46,20 +46,4 @@ public class QnaController {
 		return qnaRepo.getQnaOfMember(vo);
 	}
 	
-	// 커뮤니티 글 작성 
-//	@PostMapping("/{username}")
-//	public void addQna(@PathVariable("username")String uname, Principal principal, @RequestBody QnaVO qvo) {
-//		String userName = principal.getName();
-//
-//		MemberVO result = mRepo.findByUsername(userName).get();
-//		System.out.println(result.getUname());
-//		
-//		
-////		qvo.setMember(result.getUname());
-////		vo.setUsername(uname);
-////		vo.setWriter(userName);
-////		repo.save(vo);
-//		
-////		return "redirect:/project/community/"+pno;
-//	}
 }
