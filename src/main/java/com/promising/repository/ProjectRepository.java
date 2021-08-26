@@ -32,6 +32,8 @@ public interface ProjectRepository extends JpaRepository<ProjectVO, Long>, Query
 	@Query(value="select * from pr_project where pr_status not in ('N') and pr_status not in ('F') order by pr_enddate asc", nativeQuery = true)
 	Page<ProjectVO> selectClose(Predicate makePredicate, Pageable page);
 	
+	
+	
 	@Transactional
 	@Modifying
 	@Query(value="update pr_project set pr_writer = :newName where pr_writer = :before",nativeQuery=true)

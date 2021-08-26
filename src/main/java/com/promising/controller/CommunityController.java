@@ -61,7 +61,6 @@ public class CommunityController {
 	public String modifyPost(CommunityVO vo, @PathVariable("pno") Long pno ){
 		
 		repo.findById(vo.getCommunityno()).ifPresent( origin ->{
-			System.out.println(vo.getCommunityno());
 			origin.setContents(vo.getContents());
 			repo.save(origin);
 		});	
