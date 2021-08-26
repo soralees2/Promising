@@ -34,7 +34,7 @@ public interface ProjectRepository extends JpaRepository<ProjectVO, Long>, Query
 	
 	@Transactional
 	@Modifying
-	@Query(value="update pr_project set uname = :newName where uname = :before",nativeQuery=true)
+	@Query(value="update pr_project set pr_writer = :newName where pr_writer = :before",nativeQuery=true)
 	void updateProjectUname(@Param("before") String before, @Param("newName") String newName);
 	
 	@Transactional

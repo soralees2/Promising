@@ -3,7 +3,10 @@ package com.promising.repository;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.promising.vo.MemberVO;
 import com.promising.vo.QnaVO;
@@ -22,4 +25,8 @@ public interface QnaRepository  extends JpaRepository<QnaVO, Long> {
    public List<QnaVO> getQnaOfMember(MemberVO member);
    
 
+	@Transactional
+	@Modifying
+	@Query(value="update QnaVO set receiver = :newName where receiver = :before",nativeQuery=true)
+	void updateQnaReceive(@Param("before") String before, @Param("newName") String newName);
 }

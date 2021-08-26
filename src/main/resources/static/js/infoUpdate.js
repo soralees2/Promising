@@ -129,9 +129,9 @@ $(function () {
 								.on(
 										"click",
 										function() {
-											alert("차후 구현예정인 기능입니다.")
+										
 											
-											/*
+											
 	
 											let modifyId = $("#userName").val();
 	
@@ -181,7 +181,7 @@ $(function () {
 	
 														})
 	
-											}*/
+											}
 										})
 	
 						$("#contactVertify").on("click",function() {
