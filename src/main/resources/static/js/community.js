@@ -1,21 +1,12 @@
 var commentManager = (function(){
 	
 	var getAll  = function(obj, callback){
-		console.log("get All....");
 		
 		$.getJSON('/com/cmt/'+obj,callback);
 		
 	};
-	
-	var getCount  = function(cno){
-		console.log("get Count...");
-		
-		$.getJSON('/com/cmtnum/'+cno, callback);
-	};
-	
 	var add = function(obj, callback){
 		
-		console.log("add....");
 		
 		$.ajax({
 			type:'post',
@@ -33,7 +24,6 @@ var commentManager = (function(){
 	};
 	
 	var update = function(obj, callback){
-		console.log("update.......");
 		
 		$.ajax({
 			type:'put',
@@ -48,7 +38,6 @@ var commentManager = (function(){
 	
 	var remove = function(obj,callback){
 		
-		console.log("remove........");
 		$.ajax({
 			type:'delete',
 			url: '/com/cmtdel/'+ obj.commentno + '/' + obj.community,
@@ -98,10 +87,8 @@ $(function(){
 		
 		
 	 	let obj = { qnacategory:category, contents: contents, receiver: receiver, member :receiver};
-	  	console.log(JSON.stringify(obj));
 	  	
 	  	let url = '/qna/' + obj.receiver;
-	 	console.log(url);
 	 	
 		$.ajax({
 			type:'post',
@@ -115,7 +102,6 @@ $(function(){
 	       		jqXHR.setRequestHeader(header, token);
 				}
 			}).done(function(){
-				console.log("성공");
 				$('#qna_modal').modal('hide');
 			})
 	 });

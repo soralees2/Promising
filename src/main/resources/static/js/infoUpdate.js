@@ -141,7 +141,6 @@ $(function () {
 	
 											} else {
 	
-												console.log(modifyId);
 												$
 														.ajax({
 															type : 'POST',
@@ -195,7 +194,6 @@ $(function () {
 	
 											} else {
 	
-												console.log(modifyContact);
 												$
 														.ajax({
 															type : 'POST',
@@ -332,7 +330,6 @@ $("#searchAddress").on("click",function(){
 												jqXHR.setRequestHeader(header,token);
 											},success : function(data) {
 												alert("갱신 성공");
-											console.log(data);
 											location.reload();}
 											
 											,error : function(request,status, error) {
