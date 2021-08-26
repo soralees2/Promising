@@ -17,6 +17,16 @@ $(function(){
       console.log("category : " + category);
       console.log("contents : " + contents);
       
+if(category=="#"){
+	alert("문의유형을 선택해주세요!")
+	
+}else if(contents==""){
+	alert("문의내용을 입력해주세요!")
+	
+	
+	
+}else{
+	
       let obj = {contents: contents,qnacategory:category, member:receiver,receiver:receiver};
         console.log(JSON.stringify(obj));
         let url = '/member/' + obj.receiver;
@@ -37,6 +47,12 @@ $(function(){
             console.log("성공");
             $('#qna_modal').modal('hide');
          })
+	
+	
+	
+}
+
+
          
       
    })

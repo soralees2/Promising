@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-* {
+* { 
 	box-sizing: border-box;
 }
 
@@ -292,7 +292,8 @@ display: none;
 }
 
 .modifyScroll #PromodifyScroll {
-	color: rgb(39, 163, 255)
+	color: rgb(39, 163, 255);
+
 }
 
 .modifyScroll #pwModifyScroll {
@@ -365,7 +366,7 @@ display: none;
 }
 
 .modifyScroll {
-	margin-left: 800px;
+	margin-left: 750px;
 	text-decoration-line: none;
 	width: 50px;
 }
