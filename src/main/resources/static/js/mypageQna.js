@@ -5,7 +5,6 @@ $(function(){
    let taker=$(this).parents().closest(".card").find("#writergo").text();
    let QnaNo=$(this).parents().closest(".card").find(".originQnaNo").text();   
       
-      console.log(taker);
 
    $("#receiver").val(taker);
    
@@ -13,9 +12,6 @@ $(function(){
       let category = $("#qna_category option:selected").val();
       let contents = $("#qna_contents").val();      
       let receiver = $("#receiver").val();
-      console.log("receiver : " + receiver);
-      console.log("category : " + category);
-      console.log("contents : " + contents);
       
 if(category=="#"){
 	alert("문의유형을 선택해주세요!")
@@ -25,9 +21,7 @@ if(category=="#"){
 	
 }else{
       let obj = {contents: contents,qnacategory:category, member:receiver,receiver:receiver};
-        console.log(JSON.stringify(obj));
         let url = '/member/' + obj.receiver;
-       console.log(url);
        
          $.ajax({
             type:'post',
@@ -41,7 +35,6 @@ if(category=="#"){
                 jqXHR.setRequestHeader(header, token);
          }
          }).done(function(){
-            console.log("성공");
             $('#qna_modal').modal('hide');
          })
 	
