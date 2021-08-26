@@ -22,8 +22,9 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <body>
 	<div class="wrap">
 	<header th:replace="fragments/header.html :: fg-header"></header>
-		<div class="logincontainer">
+		<div class="row logincontainer">
 			<div class="container loginBox p-4 shadow bg-white rounded">
+				<div class="col-12">
 				<h2 class="mb-5 text-center">로그인</h2>
 						
 				<form method="post">
@@ -59,7 +60,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 				<span class="ifforgot"><a href="/member/forget">혹시 비밀번호를 잊으셨나요?</a></span>
 				</div>
 			</div>
-			
+			</div>
 		</div>
 	</div>
 	<div th:replace="fragments/lookaround.html :: fg-lookaround"></div>
