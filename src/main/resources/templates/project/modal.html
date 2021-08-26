@@ -29,8 +29,7 @@
 								</dd> -->
 								<dt>작성 내용</dt>
 								<dd>
-									<textarea class="form-control" id="com_contents"  name="contents" rows="15" col="20" placeholder="커뮤니티에 작성하실 글을 입력해 주세요."></textarea>
-									<div id="cnt">(0 / 100)</div>
+									<textarea class="form-control" id="com_contents"  name="contents" rows="15" cols="20" placeholder="커뮤니티에 작성하실 글을 입력해 주세요."></textarea>
 									<script th:inline="javascript">
 										$('#com_contents').on("keyup", function() {
 									        if($(this).val().length > 2000) {

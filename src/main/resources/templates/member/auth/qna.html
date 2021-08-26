@@ -80,10 +80,7 @@
                      <div id="main_list" th:if="${not #lists.isEmpty(result)}">
                         <div th:each="pro:${result}">
                            <div class="row card">
-                             <!--  <div class="item imgDiv">
-                                 <img th:src="@{'/static/images/projectuploading/'+${pro.prSysName}}" class="card-img-top">
-                                 <img src="/static/images/atom02.png" width="120px">
-                              </div> -->
+   
                               <div class="col-12 col-md-4 item card-body">
                               	<div class="">
                               		<div class="col-8"><span class="cate pro">분류 : [[${pro.qnacategory}]]</span></div>
@@ -124,7 +121,7 @@
                      <dd>
                         <input type="text" class="form-control" name="re" id="receiver"
                            readonly>
-                        <!-- th:value="${vo.prWriter}" -->
+                      
                      </dd>
                      <dt>문의내용</dt>
                      <dd>
