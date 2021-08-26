@@ -113,7 +113,9 @@ public class MemberController {
 
 		String originName =principal.getName();		
 		MemberVO vo=repo.findById(originName).get(); //찐
-		vo.setUname(uname);
+		String beforeName= vo.getUname();    // 바뀌기 전 닉네임
+		
+		vo.setUname(uname); // 닉네임 변경
 
 		System.out.println("=========================username : " + vo.getUsername());
 		System.out.println("vo getname"+vo.getUname());
