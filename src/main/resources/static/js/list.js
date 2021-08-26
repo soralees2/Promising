@@ -26,8 +26,8 @@ $(function(){
 	
 	$(".pagination a").click(function(e) {
             e.preventDefault();
-            $("#f3").find("[name='page']").val($(this).attr("href"));
-            $("#f3").submit();
+            $("#f6").find("[name='page']").val($(this).attr("href"));
+            $("#f6").submit();
          });
          
      let typeStr;
@@ -89,10 +89,10 @@ $(function(){
     		 alert("검색 조건을 선택하세요.");
     		 return false;
     	 }
-		$("#f3").find("[name='type']").val(typeStr);
-		$("#f3").find("[name='keyword']").val(keywordStr);
-		$("#f3").find("[name='page']").val("1");
-		$("#f3").submit();
+		$("#f6").find("[name='type']").val(typeStr);
+		$("#f6").find("[name='keyword']").val(keywordStr);
+		$("#f6").find("[name='page']").val("1");
+		$("#f6").submit();
 	 });
      
      $("#searchBtn2").on("click", function(){
