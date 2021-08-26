@@ -16,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -106,14 +107,18 @@ public class MemberController {
 
 
 	}
-	@RequestMapping(value="/auth/nameUpdate/{uname}",method = RequestMethod.POST)
+
+	@RequestMapping(value="/auth/infoUpdate/{uname}",method = RequestMethod.POST)
 	@ResponseBody
 	public void nameUpdate(@PathVariable("uname") String uname,@RequestBody MemberVO mvo,Model model,Principal principal) {
-		System.out.println("10시");
+		System.out.println("닉넴바꾸기");
 
 		String originName =principal.getName();		
 		MemberVO vo=repo.findById(originName).get(); //찐
-		vo.setUname(uname);
+		String beforeName= vo.getUname();    // 바뀌기 전 닉네임
+		repoProject.updateProjectUname(beforeName,uname);
+		qnaRepo.updateQnaReceive(beforeName, uname);
+		vo.setUname(uname); // 닉네임 변경
 
 		System.out.println("=========================username : " + vo.getUsername());
 		System.out.println("vo getname"+vo.getUname());

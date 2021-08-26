@@ -8,8 +8,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.querydsl.QuerydslPredicateExecutor;
+import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.promising.vo.MemberVO;
 import com.promising.vo.ProjectVO;
 import com.promising.vo.QProjectVO;
 import com.querydsl.core.BooleanBuilder;
@@ -29,6 +31,11 @@ public interface ProjectRepository extends JpaRepository<ProjectVO, Long>, Query
 	
 	@Query(value="select * from pr_project where pr_status not in ('N') and pr_status not in ('F') order by pr_enddate asc", nativeQuery = true)
 	Page<ProjectVO> selectClose(Predicate makePredicate, Pageable page);
+	
+	@Transactional
+	@Modifying
+	@Query(value="update pr_project set pr_writer = :newName where pr_writer = :before",nativeQuery=true)
+	void updateProjectUname(@Param("before") String before, @Param("newName") String newName);
 	
 	@Transactional
 	@Modifying
