@@ -88,6 +88,15 @@ $(function(){
 		let contents = $("#qna_contents").val();		
 		let receiver = $(".writer .name").text();
 		
+		if(category == ""){
+			alert("문의유형을 선택해주세요.");
+			return false;
+		}else if(contents == ""){
+			alert("내용을 입력해주세요.")
+			return false;
+		}
+		
+		
 	 	let obj = { qnacategory:category, contents: contents, receiver: receiver, member :receiver};
 	  	console.log(JSON.stringify(obj));
 	  	
