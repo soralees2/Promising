@@ -76,7 +76,7 @@
                     <button type="button" class="btn btn-primary" id="searchBtn2">검색</button>
                 </div>
                 
-                <form id="f3" th:action="@{list}" method="get">
+                <form id="f6" th:action="@{list}" method="get">
                   <input type="hidden" name="page" th:value="${result.currentPageNum}">
                   <input type="hidden" name="size" th:value="${result.currentPage.pageSize}">
                   <input type="hidden" name="type" th:value="${pageVO.type}">
