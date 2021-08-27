@@ -26,8 +26,8 @@ $(function(){
 	})
 	
 	$("#carou2").on("click",function(){
-		typeStr = "지식";
-		keywordStr = "지식";
+		typeStr = "제목";
+		keywordStr = "주식";
 		
 		$("#f5").find("[name='type']").val(typeStr);
 		$("#f5").find("[name='keyword']").val(keywordStr);
