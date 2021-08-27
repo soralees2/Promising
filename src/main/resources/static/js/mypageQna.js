@@ -4,12 +4,13 @@ $(function(){
       
    let taker=$(this).parents().closest(".card").find("#writergo").text();
    let QnaNo=$(this).parents().closest(".card").find(".originQnaNo").text();   
-      
+   let category =$(this).parents().closest(".card").find(".category").text();   
+   $("#qna_category").val(category);
 
    $("#receiver").val(taker);
    
    $("#addQnaBtn").on('click', function(){
-      let category = $("#qna_category option:selected").val();
+      let category = $("#qna_category").val();
       let contents = $("#qna_contents").val();      
       let receiver = $("#receiver").val();
       

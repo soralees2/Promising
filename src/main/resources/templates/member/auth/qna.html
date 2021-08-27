@@ -91,7 +91,7 @@
 										<div class="col-12 col-md-4 item card-body">
 											<div class="">
 												<div class="col-8">
-													<span class="cate pro">분류 : [[${pro.qnacategory}]]</span>
+													<span class="cate pro">분류 : <span class="category">[[${pro.qnacategory}]]</span></span>
 												</div>
 												<div class="col-8 writer">
 													발신자:
@@ -142,7 +142,10 @@
 							</dd>
 							<dt>문의내용</dt>
 							<dd>
-								<select class="form-select" id="qna_category"
+							<input type="text" class="form-control" id="qna_category"
+									readonly>
+							
+								<!-- <select class="form-select" id="qna_category"
 									required="required">
 									<option value="#">문의유형</option>
 									<option value="선물/후원">선물/후원</option>
@@ -150,7 +153,7 @@
 									<option value="수령자 정보">수령자 정보</option>
 									<option value="배송">배송</option>
 									<option value="기타">기타</option>
-								</select>
+								</select> -->
 							</dd>
 						</dl>
 						<textarea class="form-control" id="qna_contents" rows="5" col="20"
