@@ -44,7 +44,7 @@
 															<span class="name" >[[${com.writer}]]</span>
 															<i class="fas fa-angle-right"></i>
 														</a> -->
-														<span class="date">[[${com.regDate}]]</span>
+														<span class="date" th:text="${#dates.format(com.regDate, 'yyyy-MM-dd')}">[[${com.regDate}]]</span>
 													</div>
 													<form id="delForm" method="post">		
 														<ul class="btn_wrap">
