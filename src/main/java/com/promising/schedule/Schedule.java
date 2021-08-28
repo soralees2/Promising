@@ -13,8 +13,8 @@ public class Schedule {
 	
 	@Autowired
 	private ProjectRepository repo;
-//	@Scheduled(cron = "0 4 9-18 ? * *")
-//	public void updatePrCheck() {
-//		repo.updatePrCheck();
-//}
+	@Scheduled(cron = "0 45 9-18 ? * *")
+	public void updatePrCheck() {
+		repo.updatePrCheck();
+}
 }

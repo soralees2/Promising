@@ -135,7 +135,7 @@ $("#searchcode").on("click",function(){
         })
 
 		document.getElementById("send").onclick = function() {
-
+			
 		let pwInput = $("#inp_pw01").val();
 		let nameInput = $("#realname").val();
 		let uphoneInput =$("#phone").val();
@@ -155,8 +155,10 @@ $("#searchcode").on("click",function(){
 			let resultPhone= phoneReg.test(uphoneInput);
 
 
-
-		
+			if($("#inp_pw01").val()!=$("#inp_pw02").val()){
+				alert("비밀번호가 일치하지 않습니다.");
+				return;
+			}
 			if (!resultPw) {
 				alert("비밀번호는 8-16자 영문 대,소문자,숫자와 특수기호를 사용하세요.");
 				return;
@@ -179,3 +181,4 @@ $("#searchcode").on("click",function(){
 			check.submit();
 		};
 		})
+			
